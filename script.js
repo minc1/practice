@@ -8,6 +8,10 @@ let revenueChartInstance = null;
 let arChartInstance = null;
 let cashFlowChartInstance = null;
 
+// Determine current page
+const isAnalysisPage = window.location.pathname.includes('analysis.html');
+const isLandingPage = !isAnalysisPage;
+
 // --- Helper Functions ---
 const select = (el, all = false) => {
     el = el.trim();
@@ -172,7 +176,6 @@ const destroyCharts = () => {
 };
 
 // --- UI Interaction Logic (Mobile Menu, Header Scroll, Back to Top) ---
-// (This logic remains largely the same)
 
 // Mobile Menu Toggle
 const mobileMenuButton = select('.mobile-menu');
@@ -198,6 +201,18 @@ if (mobileMenuButton && navLinks && mobileMenuIcon) {
             mobileMenuButton.setAttribute('aria-expanded', 'false');
         }
     }, true);
+}
+
+// Landing page search form handling
+const searchForm = select('.search-form');
+if (searchForm && isLandingPage) {
+    on('submit', '.search-form', function(e) {
+        e.preventDefault();
+        const tickerInput = this.querySelector('input[name="ticker"]');
+        if (tickerInput && tickerInput.value.trim()) {
+            window.location.href = `analysis.html?ticker=${tickerInput.value.trim().toUpperCase()}`;
+        }
+    });
 }
 
 // Header Scroll Effect
@@ -323,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Chart Styling Helper Functions ---
     // (Remain the same as before)
-    const divergenceColor = '#f44336'; // var(--danger)
+    const divergenceColor = '#c5817e'; // var(--danger)
     const primaryColor = '#c5a47e';    // var(--primary)
     const secondaryColor = '#1c2541';  // var(--secondary)
     const mutedColor = '#6c757d';      // var(--muted)
@@ -600,6 +615,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // --- Initial Load ---
-    loadAnalysisData(DEFAULT_TICKER); // Load default ticker data when DOM is ready
+    if (isAnalysisPage) {
+        // Check for ticker in URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const tickerParam = urlParams.get('ticker');
+        
+        // Load ticker from URL or use default
+        loadAnalysisData(tickerParam ? tickerParam.toUpperCase() : DEFAULT_TICKER);
+    }
 
 }); // End DOMContentLoaded Wrapper
