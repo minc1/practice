@@ -323,7 +323,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Chart Styling Helper Functions ---
     // (Remain the same as before)
-    const divergenceColor = '#f44336'; // var(--danger)
+    const divergenceColor = '#ff00ff'; // var(--danger)
     const primaryColor = '#c5a47e';    // var(--primary)
     const secondaryColor = '#1c2541';  // var(--secondary)
     const mutedColor = '#6c757d';      // var(--muted)
