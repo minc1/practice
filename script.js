@@ -1,10 +1,14 @@
-const DEFAULT_TICKER = 'JD';
-const DATA_PATH = 'DATA/';
-let currentTicker = null;
+// script.js
+
+// --- Global Variables & Constants ---
+const DEFAULT_TICKER = 'JD'; // Default ticker to load on page init
+const DATA_PATH = 'DATA/'; // Path to the data directory
+let currentTicker = null; // Keep track of the currently loaded ticker
 let revenueChartInstance = null;
 let arChartInstance = null;
 let cashFlowChartInstance = null;
 
+// --- Helper Functions ---
 const select = (el, all = false) => {
     el = el.trim();
     if (all) {
@@ -30,6 +34,7 @@ const onScroll = (el, listener) => {
     target.addEventListener('scroll', listener);
 };
 
+// Helper function to populate elements safely
 const populateElement = (selector, data, property = 'textContent') => {
     const element = select(selector);
     if (element) {
@@ -40,14 +45,15 @@ const populateElement = (selector, data, property = 'textContent') => {
                 element.textContent = data;
             }
         } else {
-            element[property] = '';
+            element[property] = ''; // Clear if data is missing
             console.warn(`Data not found or null/undefined for selector: ${selector}`);
         }
     } else {
-
+        // console.warn(`Element not found for selector: ${selector}`); // Less noisy
     }
 };
 
+// Helper function to generate cards dynamically
 const generateCards = (containerId, cardData) => {
     const container = select(`#${containerId}`);
     if (!container) {
@@ -59,7 +65,7 @@ const generateCards = (containerId, cardData) => {
         container.innerHTML = '<p class="error-message" style="color: var(--danger); text-align: center;">Error loading card data.</p>';
         return;
     }
-    container.innerHTML = '';
+    container.innerHTML = ''; // Clear placeholder/previous cards
     if (cardData.length === 0) {
         container.innerHTML = '<p style="text-align: center; color: var(--muted);">No card data available.</p>';
         return;
@@ -84,6 +90,7 @@ const generateCards = (containerId, cardData) => {
     });
 };
 
+// Helper function to populate table dynamically
 const populateTable = (tbodyId, tableRowData) => {
     const tbody = select(`#${tbodyId}`);
     if (!tbody) {
@@ -95,7 +102,7 @@ const populateTable = (tbodyId, tableRowData) => {
         tbody.innerHTML = '<tr><td colspan="3" class="error-message" style="color: var(--danger); text-align: center;">Error loading table data.</td></tr>';
         return;
     }
-    tbody.innerHTML = '';
+    tbody.innerHTML = ''; // Clear placeholder
     if (tableRowData.length === 0) {
         tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: var(--muted);">No table data available.</td></tr>';
         return;
@@ -111,6 +118,7 @@ const populateTable = (tbodyId, tableRowData) => {
     });
 };
 
+// Helper function to populate list items dynamically
 const populateList = (ulId, listItems, useInnerHTML = false) => {
     const ul = select(`#${ulId}`);
      if (!ul) {
@@ -122,7 +130,7 @@ const populateList = (ulId, listItems, useInnerHTML = false) => {
         ul.innerHTML = '<li class="error-message" style="color: var(--danger);">Error loading list data.</li>';
         return;
     }
-    ul.innerHTML = '';
+    ul.innerHTML = ''; // Clear placeholder
     if (listItems.length === 0) {
         ul.innerHTML = '<li style="color: var(--muted);">No list items available.</li>';
         return;
@@ -138,22 +146,24 @@ const populateList = (ulId, listItems, useInnerHTML = false) => {
     });
 };
 
+// Helper to show loading/error messages
 const showMessage = (message, type = 'loading') => {
     const messageArea = select('#loading-error-message');
     const mainContent = select('#main-content');
     const messageP = messageArea.querySelector('p');
 
     if (message) {
-        messageP.innerHTML = message;
-        messageArea.className = `message-area ${type}`;
+        messageP.innerHTML = message; // Use innerHTML to allow icons
+        messageArea.className = `message-area ${type}`; // Add class for styling
         messageArea.style.display = 'flex';
-        mainContent.style.display = 'none';
+        mainContent.style.display = 'none'; // Hide main content
     } else {
         messageArea.style.display = 'none';
-        mainContent.style.display = 'block';
+        mainContent.style.display = 'block'; // Show main content
     }
 };
 
+// Helper to destroy existing chart instances
 const destroyCharts = () => {
     if (revenueChartInstance) { revenueChartInstance.destroy(); revenueChartInstance = null; }
     if (arChartInstance) { arChartInstance.destroy(); arChartInstance = null; }
@@ -161,6 +171,10 @@ const destroyCharts = () => {
     console.log("Previous chart instances destroyed.");
 };
 
+// --- UI Interaction Logic (Mobile Menu, Header Scroll, Back to Top) ---
+// (This logic remains largely the same)
+
+// Mobile Menu Toggle
 const mobileMenuButton = select('.mobile-menu');
 const navLinks = select('.nav-links');
 const mobileMenuIcon = select('.mobile-menu i');
@@ -171,7 +185,7 @@ if (mobileMenuButton && navLinks && mobileMenuIcon) {
         mobileMenuIcon.classList.toggle('fa-bars');
         mobileMenuIcon.classList.toggle('fa-times');
         mobileMenuButton.setAttribute('aria-expanded', navLinks.classList.contains('show'));
-
+        // Recalculate top position dynamically in case header wraps
         const headerHeight = select('#header')?.offsetHeight || 61;
         navLinks.style.top = `${headerHeight}px`;
     });
@@ -186,6 +200,7 @@ if (mobileMenuButton && navLinks && mobileMenuIcon) {
     }, true);
 }
 
+// Header Scroll Effect
 const header = select('#header');
 if (header) {
     const headerScrolled = () => {
@@ -199,6 +214,7 @@ if (header) {
     onScroll(window, headerScrolled);
 }
 
+// Back to Top Button
 const backToTopButton = select('.back-to-top');
 if (backToTopButton) {
     const toggleBackToTop = () => {
@@ -217,8 +233,11 @@ if (backToTopButton) {
 }
 
 
+// --- Chart.js Implementation & Data Loading ---
+
 document.addEventListener('DOMContentLoaded', function() {
 
+    // Check if Chart.js and annotation plugin are loaded
     if (typeof Chart === 'undefined') {
         console.error("Chart.js library not loaded.");
         showMessage('<i class="fas fa-exclamation-triangle"></i> Chart library failed to load. Please refresh.', 'error');
@@ -226,9 +245,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     if (typeof ChartAnnotation === 'undefined') {
         console.error("Chartjs-plugin-annotation not loaded.");
-
+        // Annotations might fail, but charts could still work partially
     }
 
+    // Register the annotation plugin
     try {
         if (typeof ChartAnnotation !== 'undefined') {
              Chart.register(ChartAnnotation);
@@ -238,7 +258,8 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error("Error registering Chartjs-plugin-annotation:", error);
     }
 
-
+    // --- Common Chart Configuration ---
+    // (Remains the same as before)
     const commonChartOptions = {
         responsive: true,
         maintainAspectRatio: false,
@@ -300,11 +321,12 @@ document.addEventListener('DOMContentLoaded', function() {
         layout: { padding: { top: 20, right: 20, bottom: 10, left: 10 } }
     };
 
-
-    const divergenceColor = '#ff00ff';
-    const primaryColor = '#c5a47e';
-    const secondaryColor = '#1c2541';
-    const mutedColor = '#6c757d';
+    // --- Chart Styling Helper Functions ---
+    // (Remain the same as before)
+    const divergenceColor = '#c5817e'; // var(--danger)
+    const primaryColor = '#c5a47e';    // var(--primary)
+    const secondaryColor = '#1c2541';  // var(--secondary)
+    const mutedColor = '#6c757d';      // var(--muted)
 
     const createAnnotationLabel = (xVal, yVal, content, yAdj = -15, xAdj = 0) => ({
         type: 'label', xValue: xVal, yValue: yVal, content: content,
@@ -334,6 +356,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
 
+    // --- Core Data Loading and Page Population Function ---
     const loadAnalysisData = async (ticker) => {
         ticker = ticker.trim().toUpperCase();
         if (!ticker) {
@@ -343,7 +366,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         console.log(`Attempting to load data for ticker: ${ticker}`);
         showMessage(`<i class="fas fa-spinner fa-spin"></i> Loading analysis for ${ticker}...`, 'loading');
-        destroyCharts();
+        destroyCharts(); // Destroy previous charts before loading new data
 
         const searchButton = select('#tickerSearchForm button');
         if (searchButton) searchButton.disabled = true;
@@ -361,18 +384,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const data = await response.json();
 
-
+            // --- Data Validation (Basic) ---
             if (!data || typeof data !== 'object') {
                 throw new Error(`Invalid data format received for ticker "${ticker}".`);
             }
-
-
-
+            // Check for essential top-level keys (optional but good practice)
+            // const requiredKeys = ['company', 'trendAnalysis', 'financialMetrics', 'investmentConsiderations', 'conclusion', 'chartData'];
+            // for (const key of requiredKeys) {
+            //     if (!(key in data)) {
+            //         console.warn(`Warning: Missing top-level key "${key}" in data for ${ticker}.`);
+            //     }
+            // }
 
             console.log(`Analysis data for ${ticker} loaded successfully.`);
-            currentTicker = ticker;
+            currentTicker = ticker; // Update current ticker tracker
 
-
+            // --- Populate Static Content Areas ---
             populateElement('[data-dynamic="page-title"]', data.company?.pageTitle || `ForensicFinancials | ${ticker} Analysis`);
             populateElement('[data-dynamic="hero-title"]', `${data.company?.name || ticker} (${data.company?.ticker || ticker})<br>${data.company?.analysisTitle || 'Financial Analysis'}`, 'innerHTML');
             populateElement('[data-dynamic="hero-subtitle"]', data.company?.heroSubtitle || `Analysis details for ${ticker}.`);
@@ -398,11 +425,11 @@ document.addEventListener('DOMContentLoaded', function() {
             populateElement('[data-dynamic="monitoring-title"]', data.conclusion?.monitoringPointsTitle || 'Key Monitoring Points');
             populateList('monitoring-points-list', data.conclusion?.monitoringPoints || [], true);
 
-
+            // --- Initialize Charts with Dynamic Data ---
             const chartData = data.chartData || {};
             const chartLabels = chartData.labels || [];
 
-
+            // 1. Revenue Chart
             const revenueCtx = select('#revenueChart')?.getContext('2d');
             if (revenueCtx) {
                 try {
@@ -425,7 +452,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 } catch (error) { console.error("Error initializing Revenue Chart:", error); }
             } else { console.warn("Canvas element #revenueChart not found."); }
 
-
+            // 2. Accounts Receivable vs Revenue Chart
             const arCtx = select('#arChart')?.getContext('2d');
             if (arCtx) {
                 try {
@@ -457,7 +484,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 } catch (error) { console.error("Error initializing A/R Chart:", error); }
             } else { console.warn("Canvas element #arChart not found."); }
 
-
+            // 3. Operating Cash Flow vs Net Income Chart
             const cashFlowCtx = select('#cashFlowChart')?.getContext('2d');
             if (cashFlowCtx) {
                  try {
@@ -489,55 +516,57 @@ document.addEventListener('DOMContentLoaded', function() {
                 } catch (error) { console.error("Error initializing Cash Flow Chart:", error); }
             } else { console.warn("Canvas element #cashFlowChart not found."); }
 
+            // --- Responsive Chart Adjustments ---
+            handleResize(); // Apply initial responsive settings
 
-            handleResize();
-
-
+            // Hide loading message and show content
             showMessage(null);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top after loading new data
 
         } catch (error) {
             console.error('Failed to load or process analysis data:', error);
             showMessage(`<i class="fas fa-exclamation-triangle"></i> ${error.message}`, 'error');
-            currentTicker = null;
+            currentTicker = null; // Reset current ticker on error
         } finally {
-             if (searchButton) searchButton.disabled = false;
+             if (searchButton) searchButton.disabled = false; // Re-enable search button
         }
     };
 
 
+    // --- Event Listeners ---
 
+    // Ticker Search Form Submission
     const searchForm = select('#tickerSearchForm');
     const tickerInput = select('#tickerInput');
     if (searchForm && tickerInput) {
         searchForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+            e.preventDefault(); // Prevent default form submission
             const ticker = tickerInput.value;
-            if (ticker && ticker.toUpperCase() !== currentTicker) {
+            if (ticker && ticker.toUpperCase() !== currentTicker) { // Only load if ticker is new
                  loadAnalysisData(ticker);
             } else if (!ticker) {
                  showMessage('<i class="fas fa-exclamation-circle"></i> Please enter a ticker symbol.', 'error');
             }
-
+            // Optionally clear input after search: tickerInput.value = '';
         });
     } else {
         console.error("Ticker search form or input element not found.");
     }
 
-
+    // Debounced Resize Handler for Charts
     let resizeTimeout;
     const handleResize = () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
             const isMobile = window.innerWidth <= 768;
-
+            // Use the globally tracked instances
             const chartsToResize = [revenueChartInstance, arChartInstance, cashFlowChartInstance];
 
             chartsToResize.forEach((chart, index) => {
-                if (!chart || !chart.options) return;
+                if (!chart || !chart.options) return; // Skip if chart is not initialized
 
                 try {
-
+                    // Adjust font sizes
                     if (chart.options.plugins?.tooltip?.bodyFont) chart.options.plugins.tooltip.bodyFont.size = isMobile ? 11 : 12;
                     if (chart.options.scales?.x?.ticks?.font) chart.options.scales.x.ticks.font.size = isMobile ? 10 : 12;
                     if (chart.options.scales?.y?.title?.font) chart.options.scales.y.title.font.size = isMobile ? 11 : 12;
@@ -548,7 +577,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         chart.options.plugins.legend.labels.boxHeight = 8;
                     }
 
-
+                    // Adjust annotation label font size
                     if (chart.options.plugins?.annotation?.annotations) {
                         Object.values(chart.options.plugins.annotation.annotations).forEach(anno => {
                             if (anno.type === 'label' && anno.font) {
@@ -557,20 +586,20 @@ document.addEventListener('DOMContentLoaded', function() {
                         });
                     }
 
-
+                    // Resize and update
                     chart.resize();
-                    chart.update('none');
+                    chart.update('none'); // Use 'none' to avoid jerky animations on resize
                 } catch(error) {
                     console.error(`Error resizing/updating chart index ${index}:`, error);
                 }
             });
-             if (chartsToResize.some(c => c)) console.log("Charts resized/updated for responsiveness.");
-        }, 250);
+             if (chartsToResize.some(c => c)) console.log("Charts resized/updated for responsiveness."); // Log only if charts exist
+        }, 250); // Debounce
     };
     window.addEventListener('resize', handleResize);
 
 
+    // --- Initial Load ---
+    loadAnalysisData(DEFAULT_TICKER); // Load default ticker data when DOM is ready
 
-    loadAnalysisData(DEFAULT_TICKER);
-
-});
+}); // End DOMContentLoaded Wrapper
