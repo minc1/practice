@@ -17,8 +17,12 @@
     <header id="header">
         <div class="container">
             <nav>
-                <!-- Logo could also be made dynamic if needed -->
                 <div class="logo">Forensic<span>Financials</span></div>
+                <!-- Search Form Added -->
+                <form class="search-form" id="tickerSearchForm">
+                    <input type="text" id="tickerInput" placeholder="Enter Ticker (e.g., JD)" aria-label="Enter Ticker Symbol" required>
+                    <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
+                </form>
                 <ul class="nav-links">
                     <li><a href="#trends">Trend Analysis</a></li>
                     <li><a href="#financials">Financial Metrics</a></li>
@@ -32,132 +36,139 @@
         </div>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            <!-- Dynamic Hero Content -->
-            <h1 data-dynamic="hero-title">Loading...<br>Loading...</h1>
-            <p data-dynamic="hero-subtitle">Loading analysis details...</p>
-            <div class="hero-separator"></div>
-            <a href="#trends" class="cta-button">Explore Analysis <i class="fas fa-arrow-down"></i></a>
-        </div>
-    </section>
+    <!-- Loading/Error Message Area -->
+    <div id="loading-error-message" class="message-area" style="display: none;">
+        <p></p>
+    </div>
 
-    <section class="section" id="trends">
-        <div class="container">
-            <div class="section-title">
-                <h2>Temporal Pattern Analysis</h2>
-                <!-- Dynamic Subtitle -->
-                <p data-dynamic="trends-subtitle">Loading...</p>
+    <main id="main-content"> <!-- Wrap main sections for easier show/hide -->
+        <section class="hero">
+            <div class="container">
+                <!-- Dynamic Hero Content -->
+                <h1 data-dynamic="hero-title">Loading...<br>Loading...</h1>
+                <p data-dynamic="hero-subtitle">Loading analysis details...</p>
+                <div class="hero-separator"></div>
+                <a href="#trends" class="cta-button">Explore Analysis <i class="fas fa-arrow-down"></i></a>
             </div>
+        </section>
 
-            <div class="chart-container">
-                <div class="chart-header">
-                    <h3>Revenue Growth Trend (Annual)</h3>
-                </div>
-                <div class="chart-wrapper">
-                    <!-- Canvas for Chart.js -->
-                    <canvas id="revenueChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Dynamic Cards Container -->
-            <div class="cards" id="trends-cards-container">
-                <p>Loading trend cards...</p> <!-- Placeholder -->
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="financials">
-        <div class="container">
-            <div class="section-title">
-                <h2>Financial Metrics & Anomalies</h2>
-                 <!-- Dynamic Subtitle -->
-                <p data-dynamic="financials-subtitle">Loading...</p>
-            </div>
-
-            <div class="chart-container">
-                <div class="chart-header">
-                    <h3>Revenue vs. Accounts Receivable Growth (Annual)</h3>
-                </div>
-                <div class="chart-wrapper">
-                     <!-- Canvas for Chart.js -->
-                    <canvas id="arChart"></canvas>
-                </div>
-            </div>
-
-            <div class="chart-container">
-                <div class="chart-header">
-                    <h3>Operating Cash Flow vs. Net Income Growth (Annual)</h3>
-                </div>
-                <div class="chart-wrapper">
-                     <!-- Canvas for Chart.js -->
-                    <canvas id="cashFlowChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Dynamic Cards Container -->
-            <div class="cards" id="financials-cards-container">
-                 <p>Loading financial cards...</p> <!-- Placeholder -->
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="opportunities">
-        <div class="container">
-            <div class="section-title">
-                <h2>Investment Considerations</h2>
-                 <!-- Dynamic Subtitle -->
-                <p data-dynamic="opportunities-subtitle">Loading...</p>
-            </div>
-
-            <div class="insight-list">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Factor</th>
-                            <th>Opportunities</th>
-                            <th>Risks</th>
-                        </tr>
-                    </thead>
-                     <!-- Dynamic Table Body -->
-                    <tbody id="opportunities-table-body">
-                        <tr><td colspan="3">Loading table data...</td></tr> <!-- Placeholder -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <section class="section conclusion" id="conclusion">
-        <div class="container">
-            <div class="section-title">
-                <h2>Final Verdict & Key Takeaways</h2>
-                 <!-- Dynamic Subtitle -->
-                <p data-dynamic="conclusion-subtitle">Loading...</p>
-            </div>
-
-            <div class="verdict-container">
-                <div class="verdict-header">
-                     <!-- Dynamic Verdict Title & Rating -->
-                    <h3 data-dynamic="verdict-title">Loading Verdict...</h3>
-                    <span class="verdict-rating" data-dynamic="verdict-rating">Loading...</span>
+        <section class="section" id="trends">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Temporal Pattern Analysis</h2>
+                    <!-- Dynamic Subtitle -->
+                    <p data-dynamic="trends-subtitle">Loading...</p>
                 </div>
 
-                 <!-- Dynamic Verdict Paragraphs -->
-                <div id="verdict-paragraphs">
-                    <p>Loading conclusion...</p> <!-- Placeholder -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Revenue Growth Trend (Annual)</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <!-- Canvas for Chart.js -->
+                        <canvas id="revenueChart"></canvas>
+                    </div>
                 </div>
 
-                <div class="monitoring-points">
-                     <!-- Dynamic Monitoring Points Title & List -->
-                    <h4 data-dynamic="monitoring-title">Loading...</h4>
-                    <ul id="monitoring-points-list">
-                        <li>Loading...</li> <!-- Placeholder -->
-                    </ul>
+                <!-- Dynamic Cards Container -->
+                <div class="cards" id="trends-cards-container">
+                    <p>Loading trend cards...</p> <!-- Placeholder -->
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section class="section" id="financials">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Financial Metrics & Anomalies</h2>
+                     <!-- Dynamic Subtitle -->
+                    <p data-dynamic="financials-subtitle">Loading...</p>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Revenue vs. Accounts Receivable Growth (Annual)</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                         <!-- Canvas for Chart.js -->
+                        <canvas id="arChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Operating Cash Flow vs. Net Income Growth (Annual)</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                         <!-- Canvas for Chart.js -->
+                        <canvas id="cashFlowChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Dynamic Cards Container -->
+                <div class="cards" id="financials-cards-container">
+                     <p>Loading financial cards...</p> <!-- Placeholder -->
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="opportunities">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Investment Considerations</h2>
+                     <!-- Dynamic Subtitle -->
+                    <p data-dynamic="opportunities-subtitle">Loading...</p>
+                </div>
+
+                <div class="insight-list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>Opportunities</th>
+                                <th>Risks</th>
+                            </tr>
+                        </thead>
+                         <!-- Dynamic Table Body -->
+                        <tbody id="opportunities-table-body">
+                            <tr><td colspan="3">Loading table data...</td></tr> <!-- Placeholder -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="section conclusion" id="conclusion">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Final Verdict & Key Takeaways</h2>
+                     <!-- Dynamic Subtitle -->
+                    <p data-dynamic="conclusion-subtitle">Loading...</p>
+                </div>
+
+                <div class="verdict-container">
+                    <div class="verdict-header">
+                         <!-- Dynamic Verdict Title & Rating -->
+                        <h3 data-dynamic="verdict-title">Loading Verdict...</h3>
+                        <span class="verdict-rating" data-dynamic="verdict-rating">Loading...</span>
+                    </div>
+
+                     <!-- Dynamic Verdict Paragraphs -->
+                    <div id="verdict-paragraphs">
+                        <p>Loading conclusion...</p> <!-- Placeholder -->
+                    </div>
+
+                    <div class="monitoring-points">
+                         <!-- Dynamic Monitoring Points Title & List -->
+                        <h4 data-dynamic="monitoring-title">Loading...</h4>
+                        <ul id="monitoring-points-list">
+                            <li>Loading...</li> <!-- Placeholder -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main> <!-- End main content wrapper -->
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>

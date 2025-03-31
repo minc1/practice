@@ -66,6 +66,7 @@ nav {
     max-width: 1200px; /* Ensure nav content aligns with page content */
     margin: 0 auto;
     padding: 0 16px; /* Match container padding */
+    gap: 16px; /* Add gap between nav items */
 }
 
 .logo {
@@ -74,11 +75,63 @@ nav {
     color: var(--dark); /* Logo text on light header */
     letter-spacing: -0.5px;
     white-space: nowrap;
+    flex-shrink: 0; /* Prevent logo from shrinking */
 }
 
 .logo span {
     color: var(--primary);
 }
+
+/* --- Search Form Styles --- */
+.search-form {
+    display: flex;
+    align-items: center;
+    background-color: #fff; /* White background */
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    overflow: hidden; /* Clip button border radius */
+    flex-grow: 0; /* Don't grow by default */
+    flex-shrink: 1; /* Allow shrinking */
+    max-width: 250px; /* Limit width on larger screens */
+}
+
+.search-form input[type="text"] {
+    border: none;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    outline: none;
+    color: var(--text);
+    flex-grow: 1; /* Allow input to take available space */
+    min-width: 100px; /* Minimum width */
+}
+
+.search-form input[type="text"]::placeholder {
+    color: var(--muted);
+    font-style: italic;
+}
+
+.search-form button {
+    background-color: var(--primary);
+    border: none;
+    color: var(--dark);
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 0.9rem;
+    display: flex; /* Align icon */
+    align-items: center;
+    justify-content: center;
+}
+
+.search-form button:hover {
+    background-color: #d4b483; /* Darker primary */
+}
+
+.search-form button:disabled {
+    background-color: var(--muted);
+    cursor: not-allowed;
+}
+
 
 .nav-links {
     display: none; /* Hidden by default on mobile */
@@ -142,11 +195,48 @@ nav {
     background: none;
     border: none;
     padding: 5px; /* Easier to tap */
+    flex-shrink: 0; /* Prevent shrinking */
+    order: 3; /* Ensure it's last on mobile */
 }
 
 .mobile-menu:hover {
     transform: scale(1.1);
 }
+
+/* --- Loading/Error Message Area --- */
+.message-area {
+    padding: 60px 16px 0; /* Space below fixed header */
+    text-align: center;
+    min-height: calc(100vh - 120px); /* Example height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-area p {
+    background-color: var(--card-bg);
+    color: var(--dark);
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-md);
+    max-width: 500px;
+    font-size: 1.1rem;
+}
+
+.message-area p i {
+    margin-right: 8px;
+}
+
+.message-area.error p {
+    color: var(--danger);
+    border-left: 5px solid var(--danger);
+}
+
+.message-area.loading p {
+    color: var(--primary);
+    border-left: 5px solid var(--primary);
+}
+
 
 .hero {
     padding: 140px 0 60px; /* Adjusted top padding for fixed header */
@@ -669,8 +759,19 @@ footer {
         padding: 16px 0; /* Increase header padding */
     }
 
+    nav {
+        gap: 24px; /* Increase gap */
+    }
+
     .logo {
         font-size: 1.25rem; /* Larger logo */
+    }
+
+    /* Adjust search form position and growth */
+    .search-form {
+        flex-grow: 1; /* Allow search to take more space */
+        max-width: 350px; /* Slightly wider max width */
+        order: 1; /* Position after logo */
     }
 
     .nav-links {
@@ -682,6 +783,8 @@ footer {
         padding: 0;
         width: auto;
         border-top: none;
+        order: 2; /* Position after search */
+        flex-shrink: 0; /* Prevent wrapping */
     }
 
     .nav-links li {
@@ -779,5 +882,31 @@ footer {
 
     .chart-wrapper {
         height: 350px; /* Taller charts on large screens */
+    }
+
+    .search-form {
+        max-width: 400px; /* Allow more width */
+    }
+}
+
+/* Ensure search form doesn't overlap logo on very small screens if needed */
+@media (max-width: 400px) {
+    nav {
+        flex-wrap: wrap; /* Allow items to wrap if needed */
+        justify-content: space-between;
+    }
+    .search-form {
+        order: 2; /* Place search below logo */
+        width: 100%; /* Take full width */
+        max-width: none;
+        margin-top: 8px; /* Add space above */
+    }
+    .mobile-menu {
+        order: 1; /* Keep hamburger top right */
+    }
+    .nav-links {
+         /* Adjust top position if header height changes due to wrapping */
+         /* This might need dynamic calculation in JS if height varies significantly */
+         top: 90px; /* Approximate adjusted value */
     }
 }
