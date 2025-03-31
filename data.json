@@ -13,10 +13,10 @@
           "title": "Revenue Trajectory",
           "iconClass": "fas fa-chart-line neutral",
           "points": [
-            "<strong>Cyclical Swings</strong> - Significant 2020 downturn (-22.4%) due to pandemic, followed by strong recovery in 2021-2023 (+22.1%, +16.6%, +12.8%)",
+            "<strong>Cyclical Swings</strong> - Significant 2020 downturn (-22.4%) due to pandemic, followed by strong recovery in 2021-2023 (+22.1%, +16.6%, +12.8%).",
             "<strong>2024 Moderation</strong> - Revenue declined (-3.4%) indicating a potential cyclical peak passed, driven by lower volumes (dealer inventory changes, end-user demand).",
             "<strong>Price Realization</strong> - Favorable pricing partially offset volume declines in 2024, supporting top-line resilience.",
-            "<strong>Segment Performance</strong> - Varied performance across Construction, Resource Industries, and Energy & Transportation segments influences overall results."
+            "<strong>Quarterly Volatility</strong> - Significant QoQ fluctuations highlight sensitivity to project timing and market conditions."
           ],
           "footer": "Strong cyclical recovery followed by recent moderation; pricing offset some volume decline."
         },
@@ -55,7 +55,7 @@
               "<strong>Inventory Build (2024)</strong> - Inventory grew (+1.6%) despite COGS declining (-5.3%), suggesting potential overstocking or slowing sales velocity. Similar pattern seen in 2020.",
               "<strong>AR vs Revenue (Minor)</strong> - Accounts Receivable flat (+0.1%) while Revenue fell (-3.4%) in 2024, potentially indicating slightly slower collections relative to sales.",
               "<strong>Working Capital Volatility</strong> - Significant swings in working capital contribution to OCF observed during pandemic disruption and recovery.",
-              "<strong>Data Discrepancy Note</strong> - Provided 2024 Balance Sheet data for Debt growth (-70.8%) appears erroneous based on external sources showing stable/slight increase."
+              "<strong>Data Integrity Note</strong> - Provided 2024 Balance Sheet data for Debt growth (-70.8%) appears erroneous based on external sources showing stable/slight increase."
           ],
           "footer": "Notable flags in 2024 OCF vs NI and Inventory growth vs COGS."
         },
@@ -89,10 +89,10 @@
       "sectionSubtitle": "Synthesizing CAT's financial trajectory and investment profile",
       "verdictTitle": "Navigating the Cycle: Profit Resilience Tested by Slowdown and Cash Flow Flags",
       "verdictRating": "Cautious / Medium Risk",
-      "paragraphs": [
-        "Caterpillar demonstrated remarkable resilience navigating the post-pandemic cycle, achieving strong revenue recovery and culminating in <strong>exceptional FY2023 performance</strong> (Net Income +54.1%) driven by record margins and effective pricing strategies. FY2024 marked a transition, with a moderate <strong>revenue decline (-3.4%)</strong> signaling a cyclical slowdown. However, profitability proved surprisingly robust, with Net Income still growing (+4.4%) supported by further <strong>operating margin expansion</strong> (to 20.2%) despite lower sales volumes.",
-        "Key forensic findings temper the positive profit story. The most significant is the <strong>FY2024 divergence between rising Net Income (+4.4%) and falling Operating Cash Flow (-6.6%)</strong>. While external sources suggest this was driven partly by non-core items like higher cash taxes and accrual changes rather than solely working capital deterioration, it still raises concerns about the quality and cash conversion of reported earnings. Additionally, <strong>Inventory grew (+1.6%) despite falling COGS (-5.3%)</strong>, leading to multi-year highs in Days Inventory Outstanding and aligning with external reports of high dealer inventories, posing risks to future margins and production. *(Note: Significant discrepancies in provided 2024 debt data also highlight the need for careful data validation).* ",
-        "Despite these challenges, CAT's <strong>dominant market position, strong brand, extensive dealer network, and growing Services business</strong> provide significant operational advantages. Its history of substantial shareholder returns underscores financial strength, though sustainability depends on navigating the current slowdown effectively. Investors must weigh these strengths against the cyclical headwinds, the flagged OCF/NI divergence, and inventory pressures. A <strong>cautious approach</strong> remains prudent, with close attention to the key monitoring points."
+      "bulletPoints": [
+          "Caterpillar showcased strong post-pandemic recovery, peaking with <strong>record profitability in FY2023</strong> driven by margin expansion. However, FY2024 marked a cyclical slowdown with <strong>revenue declining (-3.4%)</strong>, although cost control and pricing led to continued Net Income growth (+4.4%).",
+          "Significant forensic flags emerged in FY2024, primarily the <strong>divergence between Net Income growth (+4.4%) and Operating Cash Flow decline (-6.6%)</strong>, raising earnings quality concerns. Additionally, <strong>Inventory grew (+1.6%) despite falling COGS (-5.3%)</strong>, indicating potential demand issues or overstocking risks. *(Note: Data integrity issues were also identified, particularly regarding reported 2024 debt figures).* ",
+          "While facing cyclical headwinds and specific financial red flags, CAT retains strengths in its <strong>market leadership, brand, and services business</strong>. However, the combination of slowing growth, OCF/NI divergence, and inventory build warrants a <strong>cautious investment stance</strong>, demanding close monitoring of cash conversion, inventory turnover, and margin sustainability."
       ],
       "monitoringPointsTitle": "Key Monitoring Points",
       "monitoringPoints": [
