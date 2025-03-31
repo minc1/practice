@@ -1,5 +1,3 @@
-/* START OF FILE style.css */
-
 :root {
     --primary: #c5a47e;
     --secondary: #1c2541;
@@ -12,7 +10,7 @@
     --danger: #c5817e;
     --card-bg: #ffffff;
     --header-footer-bg: #ffffff;
-    --body-bg: #1c2541;
+    --body-bg: #1c2541; /* Changed body background */
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
     --shadow-md: 0 4px 8px rgba(0,0,0,0.1);
     --shadow-lg: 0 10px 20px rgba(0,0,0,0.1);
@@ -32,8 +30,8 @@ html {
 }
 
 body {
-    background-color: var(--body-bg);
-    color: var(--light);
+    background-color: var(--body-bg); /* Use variable for body background */
+    color: var(--light); /* Default text color for dark background */
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     font-size: 16px;
@@ -46,7 +44,6 @@ body {
     padding: 0 16px;
 }
 
-/* ========== HEADER ========== */
 header {
     background-color: var(--header-footer-bg);
     position: fixed;
@@ -66,34 +63,37 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 1200px; /* Ensure nav content aligns with page content */
     margin: 0 auto;
-    padding: 0 16px;
-    gap: 16px;
+    padding: 0 16px; /* Match container padding */
+    gap: 16px; /* Add gap between nav items */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
 }
 
 .logo {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--dark);
+    color: var(--dark); /* Logo text on light header */
     letter-spacing: -0.5px;
     white-space: nowrap;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Prevent logo from shrinking */
     text-decoration: none;
     display: inline-block;
+    order: 0; /* Ensure logo is first */
 }
 
 .logo span {
     color: var(--primary);
 }
 
-/* --- New Search Form Styles --- */
+/* --- Header Search Form Styles (Used on both pages) --- */
 .InputContainer {
     /* Flexbox setup */
     display: flex;
     align-items: center;
     /* Sizing & Flexibility (Mobile First) */
     height: 40px; /* Consistent height */
+    width: 100%; /* Default to full width when wrapped */
     max-width: 250px; /* Limit width on mobile */
     flex-grow: 0; /* Don't grow by default */
     flex-shrink: 1; /* Allow shrinking */
@@ -105,7 +105,8 @@ nav {
     box-shadow: var(--shadow-sm);
     transition: box-shadow 0.3s;
     /* Positioning in Nav */
-    order: 1; /* Default order */
+    order: 2; /* Default order (after logo, before hamburger) */
+    margin-top: 8px; /* Add space when wrapped */
 }
 
 .InputContainer:focus-within { /* Subtle effect when input is focused */
@@ -163,54 +164,43 @@ nav {
     cursor: not-allowed;
     color: var(--light);
 }
-/* --- End New Search Form Styles --- */
+/* --- End Header Search Form Styles --- */
 
-/* ========== HERO SECTION ========== */
-.hero {
-    background: linear-gradient(135deg, var(--secondary) 0%, var(--dark) 100%);
-    padding: 180px 0 100px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero .container {
-    position: relative;
-    z-index: 1;
-}
-
-.hero h1 {
-    font-size: 2.8rem;
-    font-weight: 800;
-    line-height: 1.3;
-    margin-bottom: 24px;
-    color: var(--light);
-    padding: 0 8px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.hero p {
-    font-size: 1.2rem;
-    color: rgba(255,255,255,0.9);
-    margin: 0 auto 24px;
-    padding: 0 12px;
-    max-width: 600px;
-}
-
-.hero-separator {
-    width: 80px;
-    height: 4px;
-    background-color: var(--primary);
-    border-radius: 4px;
-    margin: 32px auto;
-}
-
-.hero-cta {
+/* --- Search Form for Landing Page CTA Section --- */
+.search-form {
     display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 40px;
+    max-width: 500px;
+    margin: 32px auto 0;
+    height: 50px;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.search-form input {
+    flex-grow: 1;
+    border: none;
+    padding: 0 20px;
+    font-size: 1rem;
+    outline: none;
+    color: var(--text); /* Ensure text color is visible */
+}
+
+.search-form button {
+    background-color: var(--primary);
+    color: var(--dark);
+    border: none;
+    padding: 0 24px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s;
+}
+
+.search-form button:hover {
+    background-color: #d4b483;
 }
 
 
@@ -228,6 +218,7 @@ nav {
     box-shadow: var(--shadow-md);
     z-index: 99; /* Below header */
     border-top: 1px solid var(--border-color); /* Separator */
+    order: 4; /* Ensure it's last when wrapped */
 }
 
 .nav-links.show {
@@ -248,22 +239,7 @@ nav {
     padding: 8px 0;
 }
 
-.nav-links a.cta-nav {
-    background-color: var(--primary);
-    color: var(--dark);
-    padding: 8px 16px;
-    border-radius: 20px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 600;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.nav-links a.cta-nav:hover {
-    background-color: #d4b483;
-    transform: translateY(-2px);
-}
+/* Removed .cta-nav styles as the element is removed from index.html */
 
 .nav-links a:after { /* Underline effect */
     content: '';
@@ -294,14 +270,15 @@ nav {
     border: none;
     padding: 5px; /* Easier to tap */
     flex-shrink: 0; /* Prevent shrinking */
-    order: 3; /* Ensure it's last on mobile */
+    order: 3; /* Ensure it's last on mobile before nav-links */
+    margin-left: auto; /* Push to the right when items wrap */
 }
 
 .mobile-menu:hover {
     transform: scale(1.1);
 }
 
-/* --- Loading/Error Message Area --- */
+/* --- Loading/Error Message Area (Primarily for analysis.html) --- */
 .message-area {
     padding: 60px 16px 0; /* Space below fixed header */
     text-align: center;
@@ -386,12 +363,12 @@ nav {
     align-items: center;
     justify-content: center;
     background-color: var(--primary);
-    color: var(--dark);
-    padding: 16px 32px;
-    border-radius: 8px;
+    color: var(--dark); /* Text color on primary button */
+    padding: 12px 24px;
+    border-radius: 6px;
     text-decoration: none;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     transition: var(--transition);
     box-shadow: var(--shadow-sm);
 }
@@ -403,14 +380,14 @@ nav {
 }
 
 .cta-button:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     box-shadow: var(--shadow-md);
-    background-color: #d4b483;
+    background-color: #d4b483; /* Slightly darker primary on hover */
 }
 
 .cta-button.secondary:hover {
     background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
 }
 
 .cta-button i {
@@ -423,44 +400,46 @@ nav {
 }
 
 .section {
-    padding: 80px 0;
+    padding: 60px 0;
 }
 
-/* ========== METHODOLOGY SECTION ========== */
+/* --- Methodology Section Styles --- */
 .methodology-steps {
     display: grid;
+    /* Adjust grid to fit 3 items nicely */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-top: 60px;
+    gap: 24px;
+    margin-top: 40px;
+    /* Center items if fewer than max columns */
+    justify-content: center;
 }
 
 .step {
     display: flex;
     align-items: flex-start;
-    gap: 20px;
-    background-color: rgba(255, 255, 255, 0.08);
-    padding: 30px;
-    border-radius: 12px;
+    gap: 16px;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 24px;
+    border-radius: 8px;
     transition: transform 0.3s;
-    border-left: 4px solid var(--primary);
+    max-width: 380px; /* Optional: Limit width of steps */
 }
 
 .step:hover {
-    transform: translateY(-8px);
-    background-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-5px);
 }
 
 .step-number {
     background-color: var(--primary);
     color: var(--dark);
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     flex-shrink: 0;
 }
 
@@ -469,107 +448,107 @@ nav {
 }
 
 .step-content h3 {
-    margin-bottom: 12px;
-    font-size: 1.3rem;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
     color: var(--light);
 }
 
 .step-content p {
-    color: rgba(255,255,255,0.8);
-    font-size: 1rem;
-    line-height: 1.6;
+    color: var(--light);
+    opacity: 0.8;
+    font-size: 0.9rem;
+    line-height: 1.5;
 }
 
-/* ========== CTA SECTION ========== */
+/* --- CTA Section Styles --- */
 .cta-section {
-    background: linear-gradient(135deg, #1c2541 0%, #2a3a5f 100%);
+    background-color: var(--secondary);
     text-align: center;
-    padding: 100px 0;
-    position: relative;
+    padding: 80px 0;
 }
 
 .cta-section h2 {
-    margin-bottom: 30px;
-    font-size: 2.5rem;
+    margin-bottom: 24px;
+    font-size: 2rem;
     color: var(--light);
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 .section-title h2 {
-    font-size: 2.2rem;
-    color: var(--light);
-    margin-bottom: 16px;
+    font-size: 1.7rem;
+    color: var(--light); /* Section titles on dark background */
+    margin-bottom: 12px;
     font-weight: 700;
-    letter-spacing: -0.5px;
     position: relative;
-    display: inline-block;
+    display: inline-block; /* Allows ::after positioning */
 }
 
+/* --- Style for Section Title Separator --- */
 .section-title h2:after {
     content: '';
     position: absolute;
-    bottom: -12px;
+    bottom: -6px; /* Position below the text */
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
+    width: 60px;
+    height: 3px;
     background-color: var(--primary);
-    border-radius: 4px;
+    border-radius: 3px;
 }
 
 .section-title p {
-    color: rgba(255,255,255,0.8);
-    max-width: 600px;
+    color: var(--light); /* Section subtitles on dark background */
+    max-width: 500px;
     margin: 0 auto;
-    font-size: 1.1rem;
-    padding: 0 16px;
+    font-size: 0.95rem;
+    padding: 0 16px; /* Prevent text touching edges */
 }
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 20px;
 }
 
 .card {
-    background-color: var(--card-bg);
-    border-radius: 12px;
+    background-color: var(--card-bg); /* White background for cards */
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: var(--shadow-md);
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: none;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column; /* Ensure footer stays at bottom */
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
 }
 
 .card-header {
-    padding: 24px;
-    background: var(--secondary);
-    color: white;
+    padding: 18px;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .card-header h3 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     margin-bottom: 6px;
     font-weight: 600;
     display: flex;
     align-items: center;
-    color: white;
+    color: var(--dark); /* Card titles on white background */
 }
 
 .card-header h3 i {
-    margin-right: 12px;
-    font-size: 1.5rem;
-    width: 24px;
+    margin-right: 10px;
+    font-size: 0.9rem;
+    width: 20px; /* Consistent icon alignment */
     text-align: center;
-    color: var(--primary);
 }
 
 /* Icon colors */
@@ -945,17 +924,21 @@ footer {
 
     nav {
         gap: 24px; /* Increase gap */
+        flex-wrap: nowrap; /* Prevent wrapping on larger screens */
     }
 
     .logo {
         font-size: 1.25rem; /* Larger logo */
+        order: 0; /* Ensure logo is first */
     }
 
-    /* Adjust search form position and growth */
-    .InputContainer { /* Target new search container */
+    /* Adjust header search form position and growth */
+    .InputContainer {
         flex-grow: 1; /* Allow search to take more space */
         max-width: 350px; /* Slightly wider max width */
         order: 1; /* Position after logo */
+        width: auto; /* Allow shrinking */
+        margin-top: 0; /* Remove margin when not wrapped */
     }
 
     .nav-links {
@@ -969,6 +952,7 @@ footer {
         border-top: none;
         order: 2; /* Position after search */
         flex-shrink: 0; /* Prevent wrapping */
+        margin-left: auto; /* Push links to the right */
     }
 
     .nav-links li {
@@ -1068,76 +1052,38 @@ footer {
         height: 350px; /* Taller charts on large screens */
     }
 
-    .InputContainer { /* Target new search container */
+    .InputContainer { /* Target header search container */
         max-width: 400px; /* Allow more width */
     }
 }
 
-/* Ensure search form doesn't overlap logo on very small screens if needed */
-@media (max-width: 400px) {
+/* Adjust wrapping point for header search if needed */
+@media (max-width: 480px) { /* Example breakpoint */
     nav {
-        flex-wrap: wrap; /* Allow items to wrap if needed */
+        flex-wrap: wrap; /* Ensure wrapping */
         justify-content: space-between;
     }
-    .InputContainer { /* Target new search container */
+    .logo {
+        /* Ensure logo takes appropriate space */
+        flex-basis: auto; /* Adjust as needed */
+    }
+    .InputContainer { /* Target header search container */
         order: 2; /* Place search below logo */
         width: 100%; /* Take full width */
         max-width: none;
         margin-top: 8px; /* Add space above */
+        margin-left: 0; /* Reset margin */
+        margin-right: 0; /* Reset margin */
     }
     .mobile-menu {
         order: 1; /* Keep hamburger top right */
+        margin-left: 0; /* Reset margin */
     }
     .nav-links {
          /* Adjust top position if header height changes due to wrapping */
          /* This might need dynamic calculation in JS if height varies significantly */
-         top: 90px; /* Approximate adjusted value - check actual height */
+         top: 105px; /* Approximate adjusted value - check actual height */
+         order: 3; /* Ensure it's last */
+         width: 100%; /* Full width */
     }
 }
-
-/* ========== LOADING INDICATORS ========== */
-.hero-loading {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    border-top-color: var(--primary);
-    animation: spin 1s ease-in-out infinite;
-    margin-bottom: 15px;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-.message-box {
-    padding: 15px 20px;
-    border-radius: 8px;
-    margin: 10px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 500;
-}
-
-.message-box.loading {
-    background-color: rgba(0, 123, 255, 0.1);
-    color: #0d6efd;
-    border-left: 4px solid #0d6efd;
-}
-
-.message-box.error {
-    background-color: rgba(220, 53, 69, 0.1);
-    color: #dc3545;
-    border-left: 4px solid #dc3545;
-}
-
-/* END OF FILE style.css */

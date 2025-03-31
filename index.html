@@ -13,10 +13,16 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
+                <!-- START: Added Header Search Form -->
+                <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
+                    <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
+                    <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
+                </form>
+                <!-- END: Added Header Search Form -->
                 <ul class="nav-links">
                     <li><a href="#features">Features</a></li>
                     <li><a href="#methodology">Methodology</a></li>
-                    <li><a href="analysis.html" class="cta-nav">Analyze <i class="fas fa-arrow-right"></i></a></li>
+                    <!-- Removed Analyze link: <li><a href="analysis.html" class="cta-nav">Analyze <i class="fas fa-arrow-right"></i></a></li> -->
                 </ul>
                 <button class="mobile-menu" aria-label="Toggle menu">
                     <i class="fas fa-bars"></i>
@@ -39,11 +45,6 @@
                     <a href="#features" class="cta-button secondary">
                         Learn More <i class="fas fa-chevron-down"></i>
                     </a>
-                </div>
-                <!-- Hero Loading Indicator -->
-                <div class="hero-loading" style="display: none;">
-                    <div class="spinner"></div>
-                    <p>Loading financial analysis...</p>
                 </div>
             </div>
         </section>
@@ -69,7 +70,7 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="card">
                         <div class="card-header">
                             <h3><i class="fas fa-balance-scale"></i> Cash Flow Verification</h3>
@@ -82,7 +83,7 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="card">
                         <div class="card-header">
                             <h3><i class="fas fa-search-dollar"></i> Anomaly Detection</h3>
@@ -128,6 +129,7 @@
                             <p>Application of forensic accounting techniques to identify potential red flags</p>
                         </div>
                     </div>
+                    <!-- Removed 4th step:
                     <div class="step">
                         <div class="step-number">4</div>
                         <div class="step-content">
@@ -135,6 +137,7 @@
                             <p>Holistic evaluation of financial health, risks, and investment considerations</p>
                         </div>
                     </div>
+                    -->
                 </div>
             </div>
         </section>
@@ -143,6 +146,7 @@
         <section class="section cta-section">
             <div class="container">
                 <h2>Ready to examine a company?</h2>
+                <!-- This form remains as the main CTA search -->
                 <form class="search-form" action="analysis.html" method="GET">
                     <input type="text" name="ticker" placeholder="Enter ticker (e.g., AAPL)" required
                            aria-label="Stock ticker symbol">
@@ -165,7 +169,7 @@
                 <ul class="footer-links">
                     <li><a href="#features">Features</a></li>
                     <li><a href="#methodology">Methodology</a></li>
-                    <li><a href="analysis.html">Analysis Tool</a></li>
+                    <!-- Removed Analysis Tool link: <li><a href="analysis.html">Analysis Tool</a></li> -->
                 </ul>
             </div>
             <div class="copyright">
