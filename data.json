@@ -96,9 +96,11 @@
     ],
     "monitoringPointsTitle": "Key Monitoring Points",
     "monitoringPoints": [
-      "<strong>Cash Flow Conversion & Earnings Quality:</strong> Monitor the relationship between Net Income and Operating Cash Flow for normalization or continued divergence, assessing the quality and cash realization of reported earnings.",
-      "<strong>Inventory & Working Capital Efficiency:</strong> Track Inventory levels, Turnover, and Days Outstanding relative to sales trends and COGS, including the impact of dealer inventory levels, to gauge demand and operational efficiency.",
-      "<strong>Revenue & Margin Performance:</strong> Assess actual revenue performance against guidance and the sustainability of gross/operating margins amidst the cyclical slowdown and potential volume/pricing pressures."
+      "<strong>Cash Flow Conversion:</strong> Track the relationship between Net Income and Operating Cash Flow for normalization or continued divergence.",
+      "<strong>Inventory Management:</strong> Monitor Inventory levels, Inventory Turnover, and Days Inventory Outstanding relative to sales trends and COGS.",
+      "<strong>Margin Sustainability:</strong> Assess gross and operating margin performance as volume pressures potentially increase.",
+      "<strong>Dealer Inventory Levels:</strong> Understand the pace and impact of dealer destocking on reported sales.",
+      "<strong>Revenue vs. Guidance:</strong> Compare actual revenue performance against company guidance and analyst expectations for signs of stabilization or further decline."
     ]
   },
   "chartData": {
