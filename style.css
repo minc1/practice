@@ -533,6 +533,7 @@ nav {
 .card-header {
     padding: 18px;
     border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0; /* Prevent header from shrinking */
 }
 
 .card-header h3 {
@@ -559,6 +560,9 @@ nav {
 .card-body {
     padding: 18px;
     flex-grow: 1; /* Allow body to expand */
+    /* Added for aspect-ratio cards */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    min-height: 0; /* Needed for flex-grow in some contexts */
 }
 
 .card-body ul {
@@ -594,6 +598,7 @@ nav {
     border-top: 1px solid var(--border-color);
     font-size: 0.8rem;
     color: var(--dark); /* Footer text color */
+    flex-shrink: 0; /* Prevent footer from shrinking */
 }
 
 .chart-container {
@@ -934,12 +939,21 @@ footer {
 
     /* Adjust header search form position and growth */
     .InputContainer {
-        flex-grow: 1; /* Allow search to take more space */
+        /* Default for analysis page: allow growth */
+        flex-grow: 1;
         max-width: 350px; /* Slightly wider max width */
         order: 1; /* Position after logo */
         width: auto; /* Allow shrinking */
         margin-top: 0; /* Remove margin when not wrapped */
     }
+
+    /* --- START CHANGE 1: Landing Page Header Search Spacing --- */
+    /* Override for landing page only: prevent growth */
+    body.landing-page nav .InputContainer {
+        flex-grow: 0; /* Prevent search bar from growing on landing page */
+    }
+    /* --- END CHANGE 1 --- */
+
 
     .nav-links {
         display: flex; /* Show nav links */
@@ -992,6 +1006,23 @@ footer {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 24px; /* Increase gap between cards */
     }
+
+    /* --- START CHANGE 2: Landing Page Feature Card Aspect Ratio --- */
+    /* Apply 1:1 aspect ratio ONLY to feature cards on landing page */
+    .feature-cards .card {
+        aspect-ratio: 1 / 1;
+        /* Ensure flex direction is maintained for content layout */
+        display: flex;
+        flex-direction: column;
+    }
+    /* Ensure card body handles potential overflow within the fixed aspect ratio */
+    .feature-cards .card .card-body {
+        overflow-y: auto; /* Enable vertical scroll if content exceeds height */
+        flex-grow: 1; /* Allow body to take up remaining space */
+        min-height: 0; /* Important for flex item overflow */
+    }
+    /* --- END CHANGE 2 --- */
+
 
     .verdict-container {
         padding: 40px; /* Increase padding */
