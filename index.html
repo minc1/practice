@@ -3,172 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Title will be set dynamically -->
-    <title data-dynamic="page-title">ForensicFinancials | Loading...</title>
-    <!-- External Libraries -->
+    <title>ForensicFinancials | Financial Analysis Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.2.1/chartjs-plugin-annotation.min.js" integrity="sha512-eCD/MhL+Uvj+B89Am2/hMv0Q6dWJjkMv/7G2xMSuvTjYkXOP8zsF5Ec0TrX0V8alM5u0M59fzxBNLCSQ60L3qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Link to External CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header id="header">
         <div class="container">
             <nav>
-                <div class="logo">Forensic<span>Financials</span></div>
-                <!-- Search Form Added -->
-                <form class="search-form" id="tickerSearchForm">
-                    <input type="text" id="tickerInput" placeholder="Enter Ticker (e.g., JD)" aria-label="Enter Ticker Symbol" required>
-                    <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
-                </form>
+                <a href="index.html" class="logo">Forensic<span>Financials</span></a>
                 <ul class="nav-links">
-                    <li><a href="#trends">Trend Analysis</a></li>
-                    <li><a href="#financials">Financial Metrics</a></li>
-                    <li><a href="#opportunities">Investment Considerations</a></li>
-                    <li><a href="#conclusion">Conclusion</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#methodology">Methodology</a></li>
+                    <li><a href="analysis.html" class="cta-nav">Analyze <i class="fas fa-arrow-right"></i></a></li>
                 </ul>
-                <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+                <button class="mobile-menu" aria-label="Toggle menu">
                     <i class="fas fa-bars"></i>
                 </button>
             </nav>
         </div>
     </header>
 
-    <!-- Loading/Error Message Area -->
-    <div id="loading-error-message" class="message-area" style="display: none;">
-        <p></p>
-    </div>
-
-    <main id="main-content"> <!-- Wrap main sections for easier show/hide -->
+    <main>
+        <!-- Hero Section -->
         <section class="hero">
             <div class="container">
-                <!-- Dynamic Hero Content -->
-                <h1 data-dynamic="hero-title">Loading...<br>Loading...</h1>
-                <p data-dynamic="hero-subtitle">Loading analysis details...</p>
+                <h1>Forensic Financial Statement Analysis</h1>
+                <p>Detect accounting anomalies and assess financial health with professional-grade analysis tools</p>
                 <div class="hero-separator"></div>
-                <a href="#trends" class="cta-button">Explore Analysis <i class="fas fa-arrow-down"></i></a>
+                <div class="hero-cta">
+                    <a href="analysis.html" class="cta-button">
+                        Start Analysis <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#features" class="cta-button secondary">
+                        Learn More <i class="fas fa-chevron-down"></i>
+                    </a>
+                </div>
             </div>
         </section>
 
-        <section class="section" id="trends">
+        <!-- Features Section -->
+        <section class="section" id="features">
             <div class="container">
                 <div class="section-title">
-                    <h2>Temporal Pattern Analysis</h2>
-                    <!-- Dynamic Subtitle -->
-                    <p data-dynamic="trends-subtitle">Loading...</p>
+                    <h2>Core Analytical Features</h2>
+                    <p>Professional tools to uncover financial insights</p>
                 </div>
-
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h3>Revenue Growth Trend (Annual)</h3>
+                <div class="cards">
+                    <!-- Feature Cards - Reusing existing card component styles -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-chart-line"></i> Revenue Analysis</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>10-year growth trend visualization</li>
+                                <li>Industry benchmarking</li>
+                                <li>Seasonality detection</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="chart-wrapper">
-                        <!-- Canvas for Chart.js -->
-                        <canvas id="revenueChart"></canvas>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-balance-scale"></i> Cash Flow Verification</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>Operating cash flow vs. net income analysis</li>
+                                <li>Free cash flow assessment</li>
+                                <li>Cash conversion cycle evaluation</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Dynamic Cards Container -->
-                <div class="cards" id="trends-cards-container">
-                    <p>Loading trend cards...</p> <!-- Placeholder -->
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-search-dollar"></i> Anomaly Detection</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>Revenue-receivables divergence analysis</li>
+                                <li>Inventory turnover assessment</li>
+                                <li>Accrual ratio calculation</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="section" id="financials">
+        <!-- Methodology Section -->
+        <section class="section dark-bg" id="methodology">
             <div class="container">
                 <div class="section-title">
-                    <h2>Financial Metrics & Anomalies</h2>
-                     <!-- Dynamic Subtitle -->
-                    <p data-dynamic="financials-subtitle">Loading...</p>
+                    <h2>Analysis Methodology</h2>
+                    <p>Based on established forensic accounting principles</p>
                 </div>
-
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h3>Revenue vs. Accounts Receivable Growth (Annual)</h3>
+                <div class="methodology-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Data Collection</h3>
+                            <p>Comprehensive financial statement data from reliable sources spanning multiple years</p>
+                        </div>
                     </div>
-                    <div class="chart-wrapper">
-                         <!-- Canvas for Chart.js -->
-                        <canvas id="arChart"></canvas>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Trend Analysis</h3>
+                            <p>Identification of growth patterns, seasonality, and long-term performance indicators</p>
+                        </div>
                     </div>
-                </div>
-
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h3>Operating Cash Flow vs. Net Income Growth (Annual)</h3>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Anomaly Detection</h3>
+                            <p>Application of forensic accounting techniques to identify potential red flags</p>
+                        </div>
                     </div>
-                    <div class="chart-wrapper">
-                         <!-- Canvas for Chart.js -->
-                        <canvas id="cashFlowChart"></canvas>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Comprehensive Assessment</h3>
+                            <p>Holistic evaluation of financial health, risks, and investment considerations</p>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Dynamic Cards Container -->
-                <div class="cards" id="financials-cards-container">
-                     <p>Loading financial cards...</p> <!-- Placeholder -->
                 </div>
             </div>
         </section>
 
-        <section class="section" id="opportunities">
+        <!-- CTA Section -->
+        <section class="section cta-section">
             <div class="container">
-                <div class="section-title">
-                    <h2>Investment Considerations</h2>
-                     <!-- Dynamic Subtitle -->
-                    <p data-dynamic="opportunities-subtitle">Loading...</p>
-                </div>
-
-                <div class="insight-list">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Factor</th>
-                                <th>Opportunities</th>
-                                <th>Risks</th>
-                            </tr>
-                        </thead>
-                         <!-- Dynamic Table Body -->
-                        <tbody id="opportunities-table-body">
-                            <tr><td colspan="3">Loading table data...</td></tr> <!-- Placeholder -->
-                        </tbody>
-                    </table>
-                </div>
+                <h2>Ready to examine a company?</h2>
+                <form class="search-form" action="analysis.html" method="GET">
+                    <input type="text" name="ticker" placeholder="Enter ticker (e.g., AAPL)" required
+                           aria-label="Stock ticker symbol">
+                    <button type="submit" aria-label="Analyze">
+                        <i class="fas fa-search"></i> Analyze
+                    </button>
+                </form>
             </div>
         </section>
-
-        <section class="section conclusion" id="conclusion">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Final Verdict & Key Takeaways</h2>
-                     <!-- Dynamic Subtitle -->
-                    <p data-dynamic="conclusion-subtitle">Loading...</p>
-                </div>
-
-                <div class="verdict-container">
-                    <div class="verdict-header">
-                         <!-- Dynamic Verdict Title & Rating -->
-                        <h3 data-dynamic="verdict-title">Loading Verdict...</h3>
-                        <span class="verdict-rating" data-dynamic="verdict-rating">Loading...</span>
-                    </div>
-
-                     <!-- Dynamic Verdict Paragraphs -->
-                    <div id="verdict-paragraphs">
-                        <p>Loading conclusion...</p> <!-- Placeholder -->
-                    </div>
-
-                    <div class="monitoring-points">
-                         <!-- Dynamic Monitoring Points Title & List -->
-                        <h4 data-dynamic="monitoring-title">Loading...</h4>
-                        <ul id="monitoring-points-list">
-                            <li>Loading...</li> <!-- Placeholder -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main> <!-- End main content wrapper -->
+    </main>
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
@@ -177,13 +156,11 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                 <!-- Footer content remains static for this example -->
                 <div class="footer-logo">Forensic<span>Financials</span> by Cho</div>
                 <ul class="footer-links">
-                    <li><a href="#trends">Trend Analysis</a></li>
-                    <li><a href="#financials">Financial Metrics</a></li>
-                    <li><a href="#opportunities">Investment Considerations</a></li>
-                    <li><a href="#conclusion">Conclusion</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#methodology">Methodology</a></li>
+                    <li><a href="analysis.html">Analysis Tool</a></li>
                 </ul>
             </div>
             <div class="copyright">
@@ -192,7 +169,6 @@
         </div>
     </footer>
 
-    <!-- Link to External JavaScript (defer ensures it runs after HTML parsing) -->
-    <script src="script.js" defer></script>
+    <script src="script.js"></script>
 </body>
 </html>
