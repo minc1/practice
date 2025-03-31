@@ -3,34 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title will be set dynamically -->
     <title data-dynamic="page-title">ForensicFinancials | Loading...</title>
-    
-    <!-- External Libraries with SRI -->
-    <!-- Font Awesome (v6.4.0) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    <!-- Google Fonts (Inter) -->
+    <!-- External Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Chart.js (v4.4.1 recommended for annotation v3.1.0) -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" 
-            integrity="sha512-6HrPqAvK+lZElC4dh2bBQewwD7vFCl7AWuWWQKYhOkZ4M4iIJ7qXtY2f4DZG8y/0QKxKundGs1N0nG6A0JGJw==" 
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
-    <!-- Chart.js Annotation Plugin (v3.1.0) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/3.1.0/chartjs-plugin-annotation.min.js" 
-            integrity="sha512-1uGDhRiSslFydlF5W5TdQYzyfecJYQyMbw+/0k7wNw0Yp2iBEYZeZk1ASprG1CTNlqB3hX5QZzJ2nZ+W8W6w==" 
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
-    <!-- Custom CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.2.1/chartjs-plugin-annotation.min.js" integrity="sha512-eCD/MhL+Uvj+B89Am2/hMv0Q6dWJjkMv/7G2xMSuvTjYkXOP8zsF5Ec0TrX0V8alM5u0M59fzxBNLCSQ60L3qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Link to External CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header id="header">
         <div class="container">
             <nav>
+                <!-- Logo could also be made dynamic if needed -->
                 <div class="logo">Forensic<span>Financials</span></div>
                 <ul class="nav-links">
                     <li><a href="#trends">Trend Analysis</a></li>
@@ -47,6 +34,7 @@
 
     <section class="hero">
         <div class="container">
+            <!-- Dynamic Hero Content -->
             <h1 data-dynamic="hero-title">Loading...<br>Loading...</h1>
             <p data-dynamic="hero-subtitle">Loading analysis details...</p>
             <div class="hero-separator"></div>
@@ -58,18 +46,23 @@
         <div class="container">
             <div class="section-title">
                 <h2>Temporal Pattern Analysis</h2>
+                <!-- Dynamic Subtitle -->
                 <p data-dynamic="trends-subtitle">Loading...</p>
             </div>
+
             <div class="chart-container">
                 <div class="chart-header">
                     <h3>Revenue Growth Trend (Annual)</h3>
                 </div>
                 <div class="chart-wrapper">
+                    <!-- Canvas for Chart.js -->
                     <canvas id="revenueChart"></canvas>
                 </div>
             </div>
+
+            <!-- Dynamic Cards Container -->
             <div class="cards" id="trends-cards-container">
-                <p>Loading trend cards...</p>
+                <p>Loading trend cards...</p> <!-- Placeholder -->
             </div>
         </div>
     </section>
@@ -78,26 +71,33 @@
         <div class="container">
             <div class="section-title">
                 <h2>Financial Metrics & Anomalies</h2>
+                 <!-- Dynamic Subtitle -->
                 <p data-dynamic="financials-subtitle">Loading...</p>
             </div>
+
             <div class="chart-container">
                 <div class="chart-header">
                     <h3>Revenue vs. Accounts Receivable Growth (Annual)</h3>
                 </div>
                 <div class="chart-wrapper">
+                     <!-- Canvas for Chart.js -->
                     <canvas id="arChart"></canvas>
                 </div>
             </div>
+
             <div class="chart-container">
                 <div class="chart-header">
                     <h3>Operating Cash Flow vs. Net Income Growth (Annual)</h3>
                 </div>
                 <div class="chart-wrapper">
+                     <!-- Canvas for Chart.js -->
                     <canvas id="cashFlowChart"></canvas>
                 </div>
             </div>
+
+            <!-- Dynamic Cards Container -->
             <div class="cards" id="financials-cards-container">
-                <p>Loading financial cards...</p>
+                 <p>Loading financial cards...</p> <!-- Placeholder -->
             </div>
         </div>
     </section>
@@ -106,8 +106,10 @@
         <div class="container">
             <div class="section-title">
                 <h2>Investment Considerations</h2>
+                 <!-- Dynamic Subtitle -->
                 <p data-dynamic="opportunities-subtitle">Loading...</p>
             </div>
+
             <div class="insight-list">
                 <table>
                     <thead>
@@ -117,8 +119,9 @@
                             <th>Risks</th>
                         </tr>
                     </thead>
+                     <!-- Dynamic Table Body -->
                     <tbody id="opportunities-table-body">
-                        <tr><td colspan="3">Loading table data...</td></tr>
+                        <tr><td colspan="3">Loading table data...</td></tr> <!-- Placeholder -->
                     </tbody>
                 </table>
             </div>
@@ -129,20 +132,27 @@
         <div class="container">
             <div class="section-title">
                 <h2>Final Verdict & Key Takeaways</h2>
+                 <!-- Dynamic Subtitle -->
                 <p data-dynamic="conclusion-subtitle">Loading...</p>
             </div>
+
             <div class="verdict-container">
                 <div class="verdict-header">
+                     <!-- Dynamic Verdict Title & Rating -->
                     <h3 data-dynamic="verdict-title">Loading Verdict...</h3>
                     <span class="verdict-rating" data-dynamic="verdict-rating">Loading...</span>
                 </div>
+
+                 <!-- Dynamic Verdict Paragraphs -->
                 <div id="verdict-paragraphs">
-                    <p>Loading conclusion...</p>
+                    <p>Loading conclusion...</p> <!-- Placeholder -->
                 </div>
+
                 <div class="monitoring-points">
+                     <!-- Dynamic Monitoring Points Title & List -->
                     <h4 data-dynamic="monitoring-title">Loading...</h4>
                     <ul id="monitoring-points-list">
-                        <li>Loading...</li>
+                        <li>Loading...</li> <!-- Placeholder -->
                     </ul>
                 </div>
             </div>
@@ -156,6 +166,7 @@
     <footer>
         <div class="container">
             <div class="footer-content">
+                 <!-- Footer content remains static for this example -->
                 <div class="footer-logo">Forensic<span>Financials</span> by Cho</div>
                 <ul class="footer-links">
                     <li><a href="#trends">Trend Analysis</a></li>
@@ -170,6 +181,7 @@
         </div>
     </footer>
 
+    <!-- Link to External JavaScript (defer ensures it runs after HTML parsing) -->
     <script src="script.js" defer></script>
 </body>
 </html>
