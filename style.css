@@ -1,3 +1,5 @@
+/* START OF FILE style.css */
+
 :root {
     --primary: #c5a47e;
     --secondary: #1c2541;
@@ -82,55 +84,83 @@ nav {
     color: var(--primary);
 }
 
-/* --- Search Form Styles --- */
-.search-form {
+/* --- New Search Form Styles --- */
+.InputContainer {
+    /* Flexbox setup */
     display: flex;
     align-items: center;
-    background-color: #fff; /* White background */
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    overflow: hidden; /* Clip button border radius */
+    /* Sizing & Flexibility (Mobile First) */
+    height: 40px; /* Consistent height */
+    max-width: 250px; /* Limit width on mobile */
     flex-grow: 0; /* Don't grow by default */
     flex-shrink: 1; /* Allow shrinking */
-    max-width: 250px; /* Limit width on larger screens */
+    /* Appearance */
+    background-color: var(--card-bg); /* White background */
+    border: 1px solid var(--border-color);
+    border-radius: 20px; /* Rounded corners (height/2) */
+    overflow: hidden; /* Clip button corners */
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.3s;
+    /* Positioning in Nav */
+    order: 1; /* Default order */
 }
 
-.search-form input[type="text"] {
+.InputContainer:focus-within { /* Subtle effect when input is focused */
+    box-shadow: 0 0 0 2px rgba(197, 164, 126, 0.5); /* Primary color focus ring */
+    border-color: var(--primary);
+}
+
+.InputContainer .input { /* Target input inside container */
+    /* Reset */
     border: none;
-    padding: 6px 10px;
-    font-size: 0.85rem;
     outline: none;
-    color: var(--text);
-    flex-grow: 1; /* Allow input to take available space */
+    /* Sizing */
+    flex-grow: 1; /* Take available space */
+    height: 100%; /* Fill container height */
+    padding: 0 15px; /* Horizontal padding */
     min-width: 100px; /* Minimum width */
+    /* Appearance */
+    background-color: transparent; /* Inherit container background */
+    color: var(--text);
+    font-size: 0.85rem; /* Consistent font size */
+    letter-spacing: 0.5px;
+    caret-color: var(--primary); /* Use theme color for caret */
 }
 
-.search-form input[type="text"]::placeholder {
-    color: var(--muted);
-    font-style: italic;
+.InputContainer .input::placeholder {
+     color: var(--muted);
+     font-style: italic;
 }
 
-.search-form button {
-    background-color: var(--primary);
+.InputContainer button { /* Target button inside container */
+    /* Reset */
     border: none;
-    color: var(--dark);
-    padding: 6px 12px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 0.9rem;
+    /* Sizing & Layout */
+    height: 100%; /* Fill container height */
+    padding: 0 12px;
+    flex-shrink: 0; /* Don't shrink button */
     display: flex; /* Align icon */
     align-items: center;
     justify-content: center;
+    /* Appearance */
+    background-color: var(--primary);
+    color: var(--dark); /* Text color on primary button */
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    /* No border-radius needed due to container's overflow:hidden */
 }
 
-.search-form button:hover {
+.InputContainer button:hover {
     background-color: #d4b483; /* Darker primary */
 }
 
-.search-form button:disabled {
+.InputContainer button:disabled {
     background-color: var(--muted);
     cursor: not-allowed;
+    color: var(--light);
 }
+/* --- End New Search Form Styles --- */
 
 
 .nav-links {
@@ -768,7 +798,7 @@ footer {
     }
 
     /* Adjust search form position and growth */
-    .search-form {
+    .InputContainer { /* Target new search container */
         flex-grow: 1; /* Allow search to take more space */
         max-width: 350px; /* Slightly wider max width */
         order: 1; /* Position after logo */
@@ -884,7 +914,7 @@ footer {
         height: 350px; /* Taller charts on large screens */
     }
 
-    .search-form {
+    .InputContainer { /* Target new search container */
         max-width: 400px; /* Allow more width */
     }
 }
@@ -895,7 +925,7 @@ footer {
         flex-wrap: wrap; /* Allow items to wrap if needed */
         justify-content: space-between;
     }
-    .search-form {
+    .InputContainer { /* Target new search container */
         order: 2; /* Place search below logo */
         width: 100%; /* Take full width */
         max-width: none;
@@ -907,6 +937,7 @@ footer {
     .nav-links {
          /* Adjust top position if header height changes due to wrapping */
          /* This might need dynamic calculation in JS if height varies significantly */
-         top: 90px; /* Approximate adjusted value */
+         top: 90px; /* Approximate adjusted value - check actual height */
     }
 }
+/* END OF FILE style.css */
