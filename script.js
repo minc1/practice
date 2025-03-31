@@ -151,21 +151,19 @@ const populateList = (ulId, listItems, useInnerHTML = false) => {
 };
 
 // Helper to show loading/error messages
-const showMessage = (message, type = 'loading') => {
+function showMessage(message, type = 'loading') {
     const messageArea = select('#loading-error-message');
-    const mainContent = select('#main-content');
-    const messageP = messageArea.querySelector('p');
-
     if (message) {
-        messageP.innerHTML = message; // Use innerHTML to allow icons
-        messageArea.className = `message-area ${type}`; // Add class for styling
+        messageArea.innerHTML = `
+            <div class="message-box ${type}">
+                ${message}
+            </div>
+        `;
         messageArea.style.display = 'flex';
-        mainContent.style.display = 'none'; // Hide main content
     } else {
         messageArea.style.display = 'none';
-        mainContent.style.display = 'block'; // Show main content
     }
-};
+}
 
 // Helper to destroy existing chart instances
 const destroyCharts = () => {
