@@ -1,912 +1,605 @@
-:root {
-    --primary: #c5a47e;
-    --secondary: #1c2541;
-    --dark: #1c2541;
-    --light: #f8f9fa;
-    --text: #495057;
-    --muted: #6c757d;
-    --success: #4caf50;
-    --warning: #ffc107;
-    --danger: #c5817e;
-    --card-bg: #ffffff;
-    --header-footer-bg: #ffffff;
-    --body-bg: #1c2541; /* Changed body background */
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-    --shadow-md: 0 4px 8px rgba(0,0,0,0.1);
-    --shadow-lg: 0 10px 20px rgba(0,0,0,0.1);
-    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    --border-color: rgba(0,0,0,0.08);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background-color: var(--body-bg); /* Use variable for body background */
-    color: var(--light); /* Default text color for dark background */
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    font-size: 16px;
-}
-
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 16px;
-}
-
-header {
-    background-color: var(--header-footer-bg);
-    position: fixed;
-    width: 100%;
-    z-index: 100;
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition);
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border-color);
-}
-
-header.scrolled {
-    box-shadow: var(--shadow-md);
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px; /* Ensure nav content aligns with page content */
-    margin: 0 auto;
-    padding: 0 16px; /* Match container padding */
-    gap: 16px; /* Add gap between nav items */
-}
-
-.logo {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--dark); /* Logo text on light header */
-    letter-spacing: -0.5px;
-    white-space: nowrap;
-    flex-shrink: 0; /* Prevent logo from shrinking */
-}
-
-.logo span {
-    color: var(--primary);
-}
-
-/* --- Search Form Styles --- */
-.search-form {
-    display: flex;
-    align-items: center;
-    background-color: #fff; /* White background */
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    overflow: hidden; /* Clip button border radius */
-    flex-grow: 0; /* Don't grow by default */
-    flex-shrink: 1; /* Allow shrinking */
-    max-width: 250px; /* Limit width on larger screens */
-}
-
-.search-form input[type="text"] {
-    border: none;
-    padding: 6px 10px;
-    font-size: 0.85rem;
-    outline: none;
-    color: var(--text);
-    flex-grow: 1; /* Allow input to take available space */
-    min-width: 100px; /* Minimum width */
-}
-
-.search-form input[type="text"]::placeholder {
-    color: var(--muted);
-    font-style: italic;
-}
-
-.search-form button {
-    background-color: var(--primary);
-    border: none;
-    color: var(--dark);
-    padding: 6px 12px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 0.9rem;
-    display: flex; /* Align icon */
-    align-items: center;
-    justify-content: center;
-}
-
-.search-form button:hover {
-    background-color: #d4b483; /* Darker primary */
-}
-
-.search-form button:disabled {
-    background-color: var(--muted);
-    cursor: not-allowed;
-}
-
-
-.nav-links {
-    display: none; /* Hidden by default on mobile */
-    list-style: none;
-    position: fixed; /* Changed to fixed for overlay effect */
-    top: 61px; /* Adjust based on actual header height after padding */
-    left: 0;
-    width: 100%;
-    background-color: var(--header-footer-bg);
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
-    box-shadow: var(--shadow-md);
-    z-index: 99; /* Below header */
-    border-top: 1px solid var(--border-color); /* Separator */
-}
-
-.nav-links.show {
-    display: flex; /* Show when toggled */
-}
-
-.nav-links li {
-    margin: 12px 0; /* Vertical spacing for mobile */
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: var(--text); /* Link color on light background */
-    font-weight: 500;
-    font-size: 1rem;
-    transition: color 0.3s;
-    position: relative;
-    padding: 8px 0;
-}
-
-.nav-links a:after { /* Underline effect */
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary);
-    transition: width 0.3s ease;
-}
-
-.nav-links a:hover:after {
-    width: 100%;
-}
-
-.nav-links a:hover {
-    color: var(--primary);
-}
-
-.mobile-menu {
-    display: block; /* Show hamburger on mobile */
-    font-size: 1.4rem;
-    cursor: pointer;
-    color: var(--dark); /* Icon color on light header */
-    transition: transform 0.3s;
-    background: none;
-    border: none;
-    padding: 5px; /* Easier to tap */
-    flex-shrink: 0; /* Prevent shrinking */
-    order: 3; /* Ensure it's last on mobile */
-}
-
-.mobile-menu:hover {
-    transform: scale(1.1);
-}
-
-/* --- Loading/Error Message Area --- */
-.message-area {
-    padding: 60px 16px 0; /* Space below fixed header */
-    text-align: center;
-    min-height: calc(100vh - 120px); /* Example height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.message-area p {
-    background-color: var(--card-bg);
-    color: var(--dark);
-    padding: 20px 30px;
-    border-radius: 8px;
-    box-shadow: var(--shadow-md);
-    max-width: 500px;
-    font-size: 1.1rem;
-}
-
-.message-area p i {
-    margin-right: 8px;
-}
-
-.message-area.error p {
-    color: var(--danger);
-    border-left: 5px solid var(--danger);
-}
-
-.message-area.loading p {
-    color: var(--primary);
-    border-left: 5px solid var(--primary);
-}
-
-
-.hero {
-    padding: 140px 0 60px; /* Adjusted top padding for fixed header */
-    text-align: center;
-    position: relative;
-    overflow: hidden; /* Contain potential background effects */
-}
-
-.hero .container {
-    position: relative;
-    z-index: 1; /* Ensure content is above potential background layers */
-}
-
-.hero h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 16px;
-    color: var(--light); /* Text on dark background */
-    line-height: 1.3;
-    padding: 0 8px; /* Prevent text touching edges on small screens */
-}
-
-.hero p {
-    font-size: 0.95rem;
-    color: var(--light); /* Text on dark background */
-    margin: 0 auto 24px;
-    padding: 0 12px; /* Prevent text touching edges */
-    max-width: 500px; /* Control line length */
-}
-
-/* --- Style for Hero Separator --- */
-.hero-separator {
-    width: 60px;
-    height: 3px;
-    background-color: var(--primary);
-    border-radius: 3px;
-    margin: 24px auto; /* Center horizontally and add vertical spacing */
-}
-
-.cta-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--primary);
-    color: var(--dark); /* Text color on primary button */
-    padding: 12px 24px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: var(--transition);
-    box-shadow: var(--shadow-sm);
-}
-
-.cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-    background-color: #d4b483; /* Slightly darker primary on hover */
-}
-
-.cta-button i {
-    margin-left: 8px;
-    transition: transform 0.3s;
-}
-
-.cta-button:hover i {
-    transform: translateX(4px); /* Subtle arrow movement */
-}
-
-.section {
-    padding: 60px 0;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.section-title h2 {
-    font-size: 1.7rem;
-    color: var(--light); /* Section titles on dark background */
-    margin-bottom: 12px;
-    font-weight: 700;
-    position: relative;
-    display: inline-block; /* Allows ::after positioning */
-}
-
-/* --- Style for Section Title Separator --- */
-.section-title h2:after {
-    content: '';
-    position: absolute;
-    bottom: -6px; /* Position below the text */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background-color: var(--primary);
-    border-radius: 3px;
-}
-
-.section-title p {
-    color: var(--light); /* Section subtitles on dark background */
-    max-width: 500px;
-    margin: 0 auto;
-    font-size: 0.95rem;
-    padding: 0 16px; /* Prevent text touching edges */
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: 1fr; /* Single column on mobile */
-    gap: 20px;
-}
-
-.card {
-    background-color: var(--card-bg); /* White background for cards */
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition);
-    border: 1px solid var(--border-color);
-    display: flex;
-    flex-direction: column; /* Ensure footer stays at bottom */
-}
-
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-md);
-}
-
-.card-header {
-    padding: 18px;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.card-header h3 {
-    font-size: 1.1rem;
-    margin-bottom: 6px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    color: var(--dark); /* Card titles on white background */
-}
-
-.card-header h3 i {
-    margin-right: 10px;
-    font-size: 0.9rem;
-    width: 20px; /* Consistent icon alignment */
-    text-align: center;
-}
-
-/* Icon colors */
-.positive { color: var(--success); }
-.negative { color: var(--danger); }
-.neutral { color: var(--warning); }
-
-.card-body {
-    padding: 18px;
-    flex-grow: 1; /* Allow body to expand */
-}
-
-.card-body ul {
-    list-style: none;
-    margin-bottom: 16px; /* Space below list */
-    padding-left: 0; /* Remove default padding */
-}
-
-.card-body li {
-    margin-bottom: 10px;
-    position: relative;
-    padding-left: 20px; /* Space for custom bullet */
-    font-size: 0.9rem;
-    color: var(--text); /* Body text color on white background */
-}
-
-.card-body li:before {
-    content: "•"; /* Custom bullet */
-    position: absolute;
-    left: 6px;
-    color: var(--muted);
-    font-weight: bold;
-}
-
-.card-body li strong {
-    color: var(--dark); /* Emphasized text */
-    font-weight: 600;
-}
-
-.card-footer {
-    padding: 12px 18px;
-    background-color: #f8f9fa; /* Slightly off-white footer */
-    border-top: 1px solid var(--border-color);
-    font-size: 0.8rem;
-    color: var(--dark); /* Footer text color */
-}
-
-.chart-container {
-    background-color: var(--card-bg); /* White background for charts */
-    border-radius: 10px;
-    padding: 18px;
-    box-shadow: var(--shadow-sm);
-    margin-bottom: 20px;
-    border: 1px solid var(--border-color);
-    transition: var(--transition);
-    position: relative; /* Needed for canvas positioning */
-}
-
-.chart-container:hover {
-    box-shadow: var(--shadow-md);
-}
-
-.chart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-}
-
-.chart-header h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--dark); /* Chart titles on white background */
-}
-
-.chart-wrapper {
-    height: 280px; /* Default chart height */
-    position: relative;
-}
-
-canvas {
-    width: 100% !important;
-    height: 100% !important;
-}
-
-.insight-list {
-    background-color: var(--card-bg); /* White background for table container */
-    border-radius: 10px;
-    padding: 18px;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-color);
-    transition: var(--transition);
-    width: 100%;
-    overflow-x: auto; /* Enable horizontal scrolling on small screens */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-}
-
-.insight-list:hover {
-    box-shadow: var(--shadow-md);
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 0;
-    font-size: 0.9rem;
-    border-radius: 6px; /* Apply to container if overflow visible */
-    overflow: hidden; /* Clip content to rounded corners */
-    min-width: 600px; /* Ensure table is scrollable on small screens */
-}
-
-th, td {
-    padding: 12px;
-    text-align: center;
-    border: 1px solid var(--border-color);
-    color: var(--dark); /* Table text on white background */
-}
-
-th {
-    background-color: var(--secondary); /* Dark header background */
-    color: var(--light); /* Light text on dark header */
-    font-weight: 600;
-}
-
-tr:nth-child(even) {
-    background-color: rgba(0,0,0,0.02); /* Subtle striping */
-}
-
-tr:hover {
-    background-color: rgba(0,0,0,0.03); /* Subtle hover effect */
-}
-
-/* Responsive Table Styles */
-@media screen and (max-width: 767px) {
-    table {
-        border: 0;
-        min-width: auto; /* Allow table to shrink */
+// script.js
+
+// --- Global Variables & Constants ---
+const DEFAULT_TICKER = 'JD'; // Default ticker to load on page init
+const DATA_PATH = 'DATA/'; // Path to the data directory
+let currentTicker = null; // Keep track of the currently loaded ticker
+let revenueChartInstance = null;
+let arChartInstance = null;
+let cashFlowChartInstance = null;
+
+// --- Helper Functions ---
+const select = (el, all = false) => {
+    el = el.trim();
+    if (all) {
+        return [...document.querySelectorAll(el)];
+    } else {
+        return document.querySelector(el);
+    }
+};
+
+const on = (type, el, listener, all = false) => {
+    let selectEl = select(el, all);
+    if (selectEl) {
+        if (all) {
+            selectEl.forEach(e => e.addEventListener(type, listener));
+        } else {
+            selectEl.addEventListener(type, listener);
+        }
+    }
+};
+
+const onScroll = (el, listener) => {
+    const target = (el === document || el === window) ? window : el;
+    target.addEventListener('scroll', listener);
+};
+
+// Helper function to populate elements safely
+const populateElement = (selector, data, property = 'textContent') => {
+    const element = select(selector);
+    if (element) {
+        if (data !== undefined && data !== null) {
+            if (property === 'innerHTML') {
+                element.innerHTML = data;
+            } else {
+                element.textContent = data;
+            }
+        } else {
+            element[property] = ''; // Clear if data is missing
+            console.warn(`Data not found or null/undefined for selector: ${selector}`);
+        }
+    } else {
+        // console.warn(`Element not found for selector: ${selector}`); // Less noisy
+    }
+};
+
+// Helper function to generate cards dynamically
+const generateCards = (containerId, cardData) => {
+    const container = select(`#${containerId}`);
+    if (!container) {
+        console.error(`Card container #${containerId} not found.`);
+        return;
+    }
+     if (!Array.isArray(cardData)) {
+        console.error(`Invalid card data for #${containerId}. Expected array.`);
+        container.innerHTML = '<p class="error-message" style="color: var(--danger); text-align: center;">Error loading card data.</p>';
+        return;
+    }
+    container.innerHTML = ''; // Clear placeholder/previous cards
+    if (cardData.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: var(--muted);">No card data available.</p>';
+        return;
+    }
+    cardData.forEach(card => {
+        const cardElement = document.createElement('div');
+        cardElement.className = 'card';
+        cardElement.innerHTML = `
+            <div class="card-header">
+                <h3><i class="${card.iconClass || 'fas fa-question-circle neutral'}"></i> ${card.title || 'Untitled Card'}</h3>
+            </div>
+            <div class="card-body">
+                <ul>
+                    ${(card.points && Array.isArray(card.points)) ? card.points.map(point => `<li>${point}</li>`).join('') : '<li>No points provided.</li>'}
+                </ul>
+            </div>
+            <div class="card-footer">
+                ${card.footer || ''}
+            </div>
+        `;
+        container.appendChild(cardElement);
+    });
+};
+
+// Helper function to populate table dynamically
+const populateTable = (tbodyId, tableRowData) => {
+    const tbody = select(`#${tbodyId}`);
+    if (!tbody) {
+        console.error(`Table body #${tbodyId} not found.`);
+        return;
+    }
+    if (!Array.isArray(tableRowData)) {
+        console.error(`Invalid table data for #${tbodyId}. Expected array.`);
+        tbody.innerHTML = '<tr><td colspan="3" class="error-message" style="color: var(--danger); text-align: center;">Error loading table data.</td></tr>';
+        return;
+    }
+    tbody.innerHTML = ''; // Clear placeholder
+    if (tableRowData.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: var(--muted);">No table data available.</td></tr>';
+        return;
+    }
+    tableRowData.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td data-label="Factor">${row.factor || '-'}</td>
+            <td data-label="Opportunities">${row.opportunities || '-'}</td>
+            <td data-label="Risks">${row.risks || '-'}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+};
+
+// Helper function to populate list items dynamically
+const populateList = (ulId, listItems, useInnerHTML = false) => {
+    const ul = select(`#${ulId}`);
+     if (!ul) {
+        console.error(`List #${ulId} not found.`);
+        return;
+    }
+    if (!Array.isArray(listItems)) {
+        console.error(`Invalid list data for #${ulId}. Expected array.`);
+        ul.innerHTML = '<li class="error-message" style="color: var(--danger);">Error loading list data.</li>';
+        return;
+    }
+    ul.innerHTML = ''; // Clear placeholder
+    if (listItems.length === 0) {
+        ul.innerHTML = '<li style="color: var(--muted);">No list items available.</li>';
+        return;
+    }
+    listItems.forEach(item => {
+        const li = document.createElement('li');
+        if (useInnerHTML) {
+            li.innerHTML = item || '';
+        } else {
+            li.textContent = item || '';
+        }
+        ul.appendChild(li);
+    });
+};
+
+// Helper to show loading/error messages
+const showMessage = (message, type = 'loading') => {
+    const messageArea = select('#loading-error-message');
+    const mainContent = select('#main-content');
+    const messageP = messageArea.querySelector('p');
+
+    if (message) {
+        messageP.innerHTML = message; // Use innerHTML to allow icons
+        messageArea.className = `message-area ${type}`; // Add class for styling
+        messageArea.style.display = 'flex';
+        mainContent.style.display = 'none'; // Hide main content
+    } else {
+        messageArea.style.display = 'none';
+        mainContent.style.display = 'block'; // Show main content
+    }
+};
+
+// Helper to destroy existing chart instances
+const destroyCharts = () => {
+    if (revenueChartInstance) { revenueChartInstance.destroy(); revenueChartInstance = null; }
+    if (arChartInstance) { arChartInstance.destroy(); arChartInstance = null; }
+    if (cashFlowChartInstance) { cashFlowChartInstance.destroy(); cashFlowChartInstance = null; }
+    console.log("Previous chart instances destroyed.");
+};
+
+// --- UI Interaction Logic (Mobile Menu, Header Scroll, Back to Top) ---
+// (This logic remains largely the same)
+
+// Mobile Menu Toggle
+const mobileMenuButton = select('.mobile-menu');
+const navLinks = select('.nav-links');
+const mobileMenuIcon = select('.mobile-menu i');
+
+if (mobileMenuButton && navLinks && mobileMenuIcon) {
+    on('click', '.mobile-menu', function(e) {
+        navLinks.classList.toggle('show');
+        mobileMenuIcon.classList.toggle('fa-bars');
+        mobileMenuIcon.classList.toggle('fa-times');
+        mobileMenuButton.setAttribute('aria-expanded', navLinks.classList.contains('show'));
+        // Recalculate top position dynamically in case header wraps
+        const headerHeight = select('#header')?.offsetHeight || 61;
+        navLinks.style.top = `${headerHeight}px`;
+    });
+
+    on('click', '.nav-links a', function(e) {
+        if (navLinks.classList.contains('show')) {
+            navLinks.classList.remove('show');
+            mobileMenuIcon.classList.remove('fa-times');
+            mobileMenuIcon.classList.add('fa-bars');
+            mobileMenuButton.setAttribute('aria-expanded', 'false');
+        }
+    }, true);
+}
+
+// Header Scroll Effect
+const header = select('#header');
+if (header) {
+    const headerScrolled = () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    };
+    window.addEventListener('load', headerScrolled);
+    onScroll(window, headerScrolled);
+}
+
+// Back to Top Button
+const backToTopButton = select('.back-to-top');
+if (backToTopButton) {
+    const toggleBackToTop = () => {
+        if (window.scrollY > 300) {
+            backToTopButton.classList.add('visible');
+        } else {
+            backToTopButton.classList.remove('visible');
+        }
+    };
+    window.addEventListener('load', toggleBackToTop);
+    onScroll(window, toggleBackToTop);
+
+    on('click', '.back-to-top', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+
+// --- Chart.js Implementation & Data Loading ---
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    // Check if Chart.js and annotation plugin are loaded
+    if (typeof Chart === 'undefined') {
+        console.error("Chart.js library not loaded.");
+        showMessage('<i class="fas fa-exclamation-triangle"></i> Chart library failed to load. Please refresh.', 'error');
+        return;
+    }
+    if (typeof ChartAnnotation === 'undefined') {
+        console.error("Chartjs-plugin-annotation not loaded.");
+        // Annotations might fail, but charts could still work partially
     }
 
-    table thead {
-        display: none; /* Hide table headers */
+    // Register the annotation plugin
+    try {
+        if (typeof ChartAnnotation !== 'undefined') {
+             Chart.register(ChartAnnotation);
+             console.log("Chartjs-plugin-annotation registered successfully.");
+        }
+    } catch (error) {
+        console.error("Error registering Chartjs-plugin-annotation:", error);
     }
 
-    table tr {
-        display: block; /* Stack rows vertically */
-        margin-bottom: .625em;
-        border: 1px solid var(--border-color);
-        border-radius: 6px;
-        box-shadow: var(--shadow-sm);
-        background-color: var(--card-bg); /* Ensure background for stacked rows */
+    // --- Common Chart Configuration ---
+    // (Remains the same as before)
+    const commonChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+                align: 'end',
+                labels: {
+                    boxWidth: 8, boxHeight: 8, padding: 8,
+                    font: { size: 10 }, color: '#6c757d',
+                    usePointStyle: true, pointStyle: 'circle'
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        if (context.dataset.label === 'Divergence') return null;
+                        let label = context.dataset.label || '';
+                        if (label) label += ': ';
+                        if (context.parsed.y !== null) {
+                            label += context.parsed.y.toFixed(1) + '%';
+                        }
+                        return label;
+                    }
+                },
+                bodyFont: { size: window.innerWidth <= 768 ? 11 : 12 },
+                backgroundColor: 'rgba(0,0,0,0.8)',
+                titleFont: { size: 13, weight: 'bold' },
+                padding: 10, cornerRadius: 4, displayColors: false
+            },
+            annotation: {
+                annotations: {}
+            }
+        },
+        scales: {
+            x: {
+                grid: { display: false },
+                ticks: {
+                    font: { size: window.innerWidth <= 768 ? 10 : 12 },
+                    color: '#6c757d'
+                 }
+            },
+            y: {
+                beginAtZero: false,
+                title: {
+                    display: true, text: 'Growth Rate (%)',
+                    font: { size: window.innerWidth <= 768 ? 11 : 12, weight: '500' },
+                    color: '#495057'
+                },
+                ticks: {
+                    callback: function(value) { return value + '%'; },
+                    font: { size: window.innerWidth <= 768 ? 10 : 11 },
+                    color: '#6c757d'
+                },
+                grid: { drawBorder: false, color: 'rgba(0, 0, 0, 0.05)' }
+            }
+        },
+        interaction: { mode: 'index', intersect: false },
+        layout: { padding: { top: 20, right: 20, bottom: 10, left: 10 } }
+    };
+
+    // --- Chart Styling Helper Functions ---
+    // (Remain the same as before)
+    const divergenceColor = '#c5817e'; // var(--danger)
+    const primaryColor = '#c5a47e';    // var(--primary)
+    const secondaryColor = '#1c2541';  // var(--secondary)
+    const mutedColor = '#6c757d';      // var(--muted)
+
+    const createAnnotationLabel = (xVal, yVal, content, yAdj = -15, xAdj = 0) => ({
+        type: 'label', xValue: xVal, yValue: yVal, content: content,
+        color: mutedColor, font: { size: window.innerWidth <= 768 ? 9 : 10, weight: '600' },
+        position: 'start', yAdjust: yAdj, xAdjust: xAdj,
+        backgroundColor: 'rgba(255,255,255,0.85)',
+        padding: { top: 3, bottom: 3, left: 5, right: 5 }, borderRadius: 4,
+        callout: { display: true, position: 'bottom', borderWidth: 1, borderColor: 'rgba(0,0,0,0.1)', margin: 5 }
+    });
+
+    const createDivergenceLegend = () => ({
+        label: 'Divergence', pointStyle: 'rectRot', pointRadius: 5,
+        borderColor: divergenceColor, backgroundColor: divergenceColor,
+        borderWidth: 1, data: []
+    });
+
+    const pointStyleCallback = (indices = [], normalColor, highlightColor) => (context) => {
+        return indices.includes(context.dataIndex) ? highlightColor : normalColor;
+    };
+
+    const pointRadiusCallback = (indices = [], normalRadius = 4, highlightRadius = 6) => (context) => {
+        return indices.includes(context.dataIndex) ? highlightRadius : normalRadius;
+    };
+
+    const pointHoverRadiusCallback = (indices = [], normalRadius = 6, highlightRadius = 8) => (context) => {
+        return indices.includes(context.dataIndex) ? highlightRadius : normalRadius;
+    };
+
+
+    // --- Core Data Loading and Page Population Function ---
+    const loadAnalysisData = async (ticker) => {
+        ticker = ticker.trim().toUpperCase();
+        if (!ticker) {
+            showMessage('<i class="fas fa-exclamation-circle"></i> Please enter a ticker symbol.', 'error');
+            return;
+        }
+
+        console.log(`Attempting to load data for ticker: ${ticker}`);
+        showMessage(`<i class="fas fa-spinner fa-spin"></i> Loading analysis for ${ticker}...`, 'loading');
+        destroyCharts(); // Destroy previous charts before loading new data
+
+        const searchButton = select('#tickerSearchForm button');
+        if (searchButton) searchButton.disabled = true;
+
+        try {
+            const response = await fetch(`${DATA_PATH}${ticker}.json`);
+
+            if (!response.ok) {
+                if (response.status === 404) {
+                    throw new Error(`Analysis data not found for ticker "${ticker}". Please check the symbol or try another.`);
+                } else {
+                    throw new Error(`HTTP error! status: ${response.status} - Could not fetch data for ${ticker}.`);
+                }
+            }
+
+            const data = await response.json();
+
+            // --- Data Validation (Basic) ---
+            if (!data || typeof data !== 'object') {
+                throw new Error(`Invalid data format received for ticker "${ticker}".`);
+            }
+            // Check for essential top-level keys (optional but good practice)
+            // const requiredKeys = ['company', 'trendAnalysis', 'financialMetrics', 'investmentConsiderations', 'conclusion', 'chartData'];
+            // for (const key of requiredKeys) {
+            //     if (!(key in data)) {
+            //         console.warn(`Warning: Missing top-level key "${key}" in data for ${ticker}.`);
+            //     }
+            // }
+
+            console.log(`Analysis data for ${ticker} loaded successfully.`);
+            currentTicker = ticker; // Update current ticker tracker
+
+            // --- Populate Static Content Areas ---
+            populateElement('[data-dynamic="page-title"]', data.company?.pageTitle || `ForensicFinancials | ${ticker} Analysis`);
+            populateElement('[data-dynamic="hero-title"]', `${data.company?.name || ticker} (${data.company?.ticker || ticker})<br>${data.company?.analysisTitle || 'Financial Analysis'}`, 'innerHTML');
+            populateElement('[data-dynamic="hero-subtitle"]', data.company?.heroSubtitle || `Analysis details for ${ticker}.`);
+
+            populateElement('[data-dynamic="trends-subtitle"]', data.trendAnalysis?.sectionSubtitle || '');
+            generateCards('trends-cards-container', data.trendAnalysis?.cards || []);
+
+            populateElement('[data-dynamic="financials-subtitle"]', data.financialMetrics?.sectionSubtitle || '');
+            generateCards('financials-cards-container', data.financialMetrics?.cards || []);
+
+            populateElement('[data-dynamic="opportunities-subtitle"]', data.investmentConsiderations?.sectionSubtitle || '');
+            populateTable('opportunities-table-body', data.investmentConsiderations?.tableData || []);
+
+            populateElement('[data-dynamic="conclusion-subtitle"]', data.conclusion?.sectionSubtitle || '');
+            populateElement('[data-dynamic="verdict-title"]', data.conclusion?.verdictTitle || `Verdict for ${ticker}`);
+            populateElement('[data-dynamic="verdict-rating"]', data.conclusion?.verdictRating || 'N/A');
+            const paragraphsContainer = select('#verdict-paragraphs');
+            if (paragraphsContainer && Array.isArray(data.conclusion?.paragraphs)) {
+                paragraphsContainer.innerHTML = data.conclusion.paragraphs.map(p => `<p>${p || ''}</p>`).join('');
+            } else if (paragraphsContainer) {
+                 paragraphsContainer.innerHTML = '<p>Conclusion details not available.</p>';
+            }
+            populateElement('[data-dynamic="monitoring-title"]', data.conclusion?.monitoringPointsTitle || 'Key Monitoring Points');
+            populateList('monitoring-points-list', data.conclusion?.monitoringPoints || [], true);
+
+            // --- Initialize Charts with Dynamic Data ---
+            const chartData = data.chartData || {};
+            const chartLabels = chartData.labels || [];
+
+            // 1. Revenue Chart
+            const revenueCtx = select('#revenueChart')?.getContext('2d');
+            if (revenueCtx) {
+                try {
+                    revenueChartInstance = new Chart(revenueCtx, {
+                        type: 'line',
+                        data: {
+                            labels: chartLabels,
+                            datasets: [{
+                                label: 'Annual Revenue Growth (%)',
+                                data: chartData.revenueGrowth || [],
+                                borderColor: primaryColor, backgroundColor: 'rgba(197, 164, 126, 0.1)',
+                                borderWidth: 2.5, tension: 0.4, fill: true,
+                                pointBackgroundColor: primaryColor, pointRadius: pointRadiusCallback([]),
+                                pointHoverRadius: pointHoverRadiusCallback([]), pointBorderColor: primaryColor
+                            }]
+                        },
+                        options: JSON.parse(JSON.stringify(commonChartOptions))
+                    });
+                    console.log("Revenue chart initialized.");
+                } catch (error) { console.error("Error initializing Revenue Chart:", error); }
+            } else { console.warn("Canvas element #revenueChart not found."); }
+
+            // 2. Accounts Receivable vs Revenue Chart
+            const arCtx = select('#arChart')?.getContext('2d');
+            if (arCtx) {
+                try {
+                    const arDivergenceIndices = chartData.divergenceIndices?.arChart || [];
+                    const arChartOptions = JSON.parse(JSON.stringify(commonChartOptions));
+                    arChartOptions.plugins.annotation = { annotations: {} };
+                    if (chartData.annotations?.arChart && Array.isArray(chartData.annotations.arChart)) {
+                        chartData.annotations.arChart.forEach((anno, index) => {
+                            if (typeof anno.xVal === 'number' && typeof anno.yVal === 'number' && anno.content) {
+                                arChartOptions.plugins.annotation.annotations[`arLabel${index + 1}`] =
+                                    createAnnotationLabel(anno.xVal, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
+                            } else { console.warn(`Invalid annotation data for arChart at index ${index}`); }
+                        });
+                    }
+
+                    arChartInstance = new Chart(arCtx, {
+                        type: 'line',
+                        data: {
+                            labels: chartLabels,
+                            datasets: [
+                                { label: 'Revenue Growth (%)', data: chartData.revenueGrowth || [], borderColor: primaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointBackgroundColor: primaryColor, pointRadius: pointRadiusCallback([]), pointHoverRadius: pointHoverRadiusCallback([]), pointBorderColor: primaryColor },
+                                { label: 'A/R Growth (%)', data: chartData.arGrowth || [], borderColor: secondaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointBackgroundColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor), pointRadius: pointRadiusCallback(arDivergenceIndices), pointHoverRadius: pointHoverRadiusCallback(arDivergenceIndices), pointBorderColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor) },
+                                createDivergenceLegend()
+                            ]
+                        },
+                        options: arChartOptions
+                    });
+                    console.log("A/R chart initialized.");
+                } catch (error) { console.error("Error initializing A/R Chart:", error); }
+            } else { console.warn("Canvas element #arChart not found."); }
+
+            // 3. Operating Cash Flow vs Net Income Chart
+            const cashFlowCtx = select('#cashFlowChart')?.getContext('2d');
+            if (cashFlowCtx) {
+                 try {
+                    const cfDivergenceIndices = chartData.divergenceIndices?.cashFlowChart || [];
+                    const cashFlowChartOptions = JSON.parse(JSON.stringify(commonChartOptions));
+                    cashFlowChartOptions.plugins.annotation = { annotations: {} };
+                     if (chartData.annotations?.cashFlowChart && Array.isArray(chartData.annotations.cashFlowChart)) {
+                        chartData.annotations.cashFlowChart.forEach((anno, index) => {
+                             if (typeof anno.xVal === 'number' && typeof anno.yVal === 'number' && anno.content) {
+                                cashFlowChartOptions.plugins.annotation.annotations[`cfLabel${index + 1}`] =
+                                    createAnnotationLabel(anno.xVal, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
+                             } else { console.warn(`Invalid annotation data for cashFlowChart at index ${index}`); }
+                        });
+                    }
+
+                    cashFlowChartInstance = new Chart(cashFlowCtx, {
+                        type: 'line',
+                        data: {
+                            labels: chartLabels,
+                            datasets: [
+                                { label: 'Op Cash Flow Growth (%)', data: chartData.cfoGrowth || [], borderColor: primaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointBackgroundColor: primaryColor, pointRadius: pointRadiusCallback([]), pointHoverRadius: pointHoverRadiusCallback([]), pointBorderColor: primaryColor },
+                                { label: 'Net Income Growth (%)', data: chartData.niGrowth || [], borderColor: secondaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointBackgroundColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor), pointRadius: pointRadiusCallback(cfDivergenceIndices), pointHoverRadius: pointHoverRadiusCallback(cfDivergenceIndices), pointBorderColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor) },
+                                createDivergenceLegend()
+                            ]
+                        },
+                        options: cashFlowChartOptions
+                    });
+                    console.log("Cash Flow chart initialized.");
+                } catch (error) { console.error("Error initializing Cash Flow Chart:", error); }
+            } else { console.warn("Canvas element #cashFlowChart not found."); }
+
+            // --- Responsive Chart Adjustments ---
+            handleResize(); // Apply initial responsive settings
+
+            // Hide loading message and show content
+            showMessage(null);
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top after loading new data
+
+        } catch (error) {
+            console.error('Failed to load or process analysis data:', error);
+            showMessage(`<i class="fas fa-exclamation-triangle"></i> ${error.message}`, 'error');
+            currentTicker = null; // Reset current ticker on error
+        } finally {
+             if (searchButton) searchButton.disabled = false; // Re-enable search button
+        }
+    };
+
+
+    // --- Event Listeners ---
+
+    // Ticker Search Form Submission
+    const searchForm = select('#tickerSearchForm');
+    const tickerInput = select('#tickerInput');
+    if (searchForm && tickerInput) {
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent default form submission
+            const ticker = tickerInput.value;
+            if (ticker && ticker.toUpperCase() !== currentTicker) { // Only load if ticker is new
+                 loadAnalysisData(ticker);
+            } else if (!ticker) {
+                 showMessage('<i class="fas fa-exclamation-circle"></i> Please enter a ticker symbol.', 'error');
+            }
+            // Optionally clear input after search: tickerInput.value = '';
+        });
+    } else {
+        console.error("Ticker search form or input element not found.");
     }
 
-    table td {
-        display: block; /* Stack cells vertically */
-        text-align: right; /* Align cell content to the right */
-        font-size: .8em;
-        border-bottom: 1px dotted var(--border-color); /* Separator between cells */
-    }
+    // Debounced Resize Handler for Charts
+    let resizeTimeout;
+    const handleResize = () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            const isMobile = window.innerWidth <= 768;
+            // Use the globally tracked instances
+            const chartsToResize = [revenueChartInstance, arChartInstance, cashFlowChartInstance];
 
-    table td:last-child {
-        border-bottom: 0; /* Remove border from last cell */
-    }
+            chartsToResize.forEach((chart, index) => {
+                if (!chart || !chart.options) return; // Skip if chart is not initialized
 
-    table td::before {
-        content: attr(data-label); /* Use data-label for pseudo-header */
-        float: left; /* Position label to the left */
-        font-weight: bold;
-        text-transform: uppercase;
-        color: var(--dark); /* Label color */
-    }
-}
+                try {
+                    // Adjust font sizes
+                    if (chart.options.plugins?.tooltip?.bodyFont) chart.options.plugins.tooltip.bodyFont.size = isMobile ? 11 : 12;
+                    if (chart.options.scales?.x?.ticks?.font) chart.options.scales.x.ticks.font.size = isMobile ? 10 : 12;
+                    if (chart.options.scales?.y?.title?.font) chart.options.scales.y.title.font.size = isMobile ? 11 : 12;
+                    if (chart.options.scales?.y?.ticks?.font) chart.options.scales.y.ticks.font.size = isMobile ? 10 : 11;
+                    if (chart.options.plugins?.legend?.labels?.font) chart.options.plugins.legend.labels.font.size = 10;
+                    if (chart.options.plugins?.legend?.labels) {
+                        chart.options.plugins.legend.labels.boxWidth = 8;
+                        chart.options.plugins.legend.labels.boxHeight = 8;
+                    }
+
+                    // Adjust annotation label font size
+                    if (chart.options.plugins?.annotation?.annotations) {
+                        Object.values(chart.options.plugins.annotation.annotations).forEach(anno => {
+                            if (anno.type === 'label' && anno.font) {
+                                anno.font.size = isMobile ? 9 : 10;
+                            }
+                        });
+                    }
+
+                    // Resize and update
+                    chart.resize();
+                    chart.update('none'); // Use 'none' to avoid jerky animations on resize
+                } catch(error) {
+                    console.error(`Error resizing/updating chart index ${index}:`, error);
+                }
+            });
+             if (chartsToResize.some(c => c)) console.log("Charts resized/updated for responsiveness."); // Log only if charts exist
+        }, 250); // Debounce
+    };
+    window.addEventListener('resize', handleResize);
 
 
-.conclusion {
-    text-align: center;
-}
+    // --- Initial Load ---
+    loadAnalysisData(DEFAULT_TICKER); // Load default ticker data when DOM is ready
 
-.conclusion .section-title h2 {
-     color: var(--light); /* Title on dark background */
-}
-
-.conclusion .section-title p {
-    color: var(--light); /* Subtitle on dark background */
-}
-
-.verdict-container {
-    background-color: var(--card-bg); /* White background for verdict */
-    border-radius: 10px;
-    padding: 30px;
-    max-width: 750px; /* Control width */
-    margin: 0 auto; /* Center */
-    box-shadow: var(--shadow-md);
-    text-align: left; /* Align text left within container */
-    border: 1px solid var(--border-color);
-}
-
-.verdict-header {
-    display: flex;
-    flex-direction: column; /* Stack title and rating on mobile */
-    align-items: flex-start;
-    margin-bottom: 20px;
-    gap: 8px; /* Space between title and rating */
-}
-
-.verdict-header h3 {
-    font-size: 1.4rem;
-    color: var(--dark); /* Verdict title on white background */
-    font-weight: 700;
-    line-height: 1.3;
-    margin: 0;
-}
-
-.verdict-rating {
-    display: inline-block;
-    background-color: var(--primary);
-    color: var(--dark); /* Text on primary background */
-    padding: 4px 12px;
-    border-radius: 15px; /* Pill shape */
-    font-weight: 600;
-    font-size: 0.8rem;
-    border: 1px solid rgba(0,0,0,0.05);
-    line-height: 1.4;
-}
-
-.verdict-container p {
-    margin-bottom: 16px;
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: var(--text); /* Verdict text on white background */
-}
-
-.verdict-container strong {
-     color: var(--dark); /* Emphasized text */
-     font-weight: 600;
-}
-
-.monitoring-points {
-     margin-top: 24px;
-     padding-top: 16px;
-     border-top: 1px solid var(--border-color); /* Separator */
-}
-
-.monitoring-points h4 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--primary); /* Use primary color for this heading */
-    margin-bottom: 16px;
-}
-
-.monitoring-points ul {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 0;
-}
-
-.monitoring-points li {
-    margin-bottom: 12px;
-    position: relative;
-    padding-left: 20px; /* Space for custom bullet */
-    font-size: 0.9rem;
-    color: var(--text); /* List item text color */
-}
-
-.monitoring-points li::before {
-    content: ''; /* Custom bullet */
-    position: absolute;
-    left: 0;
-    top: 8px; /* Align bullet vertically */
-    width: 6px;
-    height: 6px;
-    background-color: var(--primary);
-    border-radius: 50%;
-}
-
-.back-to-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 44px;
-    height: 44px;
-    background-color: var(--primary);
-    color: var(--dark); /* Icon color */
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    cursor: pointer;
-    opacity: 0; /* Hidden by default */
-    visibility: hidden;
-    transition: var(--transition);
-    box-shadow: var(--shadow-md);
-    z-index: 99;
-    border: none;
-    outline: none;
-}
-
-.back-to-top.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-.back-to-top:hover {
-    background-color: #d4b483; /* Darker primary on hover */
-    transform: translateY(-3px);
-}
-
-footer {
-    background-color: var(--header-footer-bg); /* Light footer background */
-    padding: 24px 0;
-    border-top: 1px solid var(--border-color);
-    margin-top: 60px; /* Space above footer */
-}
-
-.footer-content {
-    display: flex;
-    flex-direction: column; /* Stack elements on mobile */
-    align-items: center;
-    text-align: center;
-}
-
-.footer-logo {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--dark); /* Logo text on light background */
-    letter-spacing: -0.5px;
-    margin-bottom: 16px;
-}
-
-.footer-logo span {
-    color: var(--primary);
-}
-
-.footer-links {
-    display: flex;
-    flex-wrap: wrap; /* Allow links to wrap */
-    justify-content: center;
-    list-style: none;
-    margin: 0 0 16px 0;
-    padding: 0;
-}
-
-.footer-links li {
-    margin: 8px 12px; /* Spacing around links */
-}
-
-.footer-links a {
-    text-decoration: none;
-    color: var(--muted); /* Muted link color */
-    font-size: 0.9rem;
-    transition: color 0.3s;
-}
-
-.footer-links a:hover {
-    color: var(--primary); /* Highlight on hover */
-}
-
-.copyright {
-    color: var(--muted); /* Muted copyright text */
-    font-size: 0.8rem;
-    margin-top: 8px;
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-    body {
-        font-size: 16px; /* Base font size */
-    }
-
-    header {
-        padding: 16px 0; /* Increase header padding */
-    }
-
-    nav {
-        gap: 24px; /* Increase gap */
-    }
-
-    .logo {
-        font-size: 1.25rem; /* Larger logo */
-    }
-
-    /* Adjust search form position and growth */
-    .search-form {
-        flex-grow: 1; /* Allow search to take more space */
-        max-width: 350px; /* Slightly wider max width */
-        order: 1; /* Position after logo */
-    }
-
-    .nav-links {
-        display: flex; /* Show nav links */
-        position: static; /* Reset positioning */
-        flex-direction: row;
-        background: transparent;
-        box-shadow: none;
-        padding: 0;
-        width: auto;
-        border-top: none;
-        order: 2; /* Position after search */
-        flex-shrink: 0; /* Prevent wrapping */
-    }
-
-    .nav-links li {
-        margin: 0 0 0 24px; /* Horizontal spacing */
-    }
-
-    .nav-links a {
-        font-size: 0.95rem;
-    }
-
-    .mobile-menu {
-        display: none; /* Hide hamburger */
-    }
-
-    .hero {
-        padding: 180px 0 80px; /* Increase hero padding */
-    }
-
-    .hero h1 {
-        font-size: 2.2rem; /* Larger hero title */
-    }
-
-    .hero p {
-        font-size: 1rem; /* Larger hero subtitle */
-    }
-
-    .section {
-        padding: 80px 0; /* Increase section padding */
-    }
-
-    .section-title h2 {
-        font-size: 2rem; /* Larger section titles */
-    }
-
-    .cards {
-        /* Responsive grid: fit cards, min 300px wide */
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 24px; /* Increase gap between cards */
-    }
-
-    .verdict-container {
-        padding: 40px; /* Increase padding */
-    }
-    .verdict-header {
-        flex-direction: row; /* Align title and rating side-by-side */
-        justify-content: space-between;
-        align-items: center;
-    }
-     .verdict-header h3 {
-        font-size: 1.6rem; /* Larger verdict title */
-     }
-     .verdict-container p {
-        font-size: 1rem; /* Larger verdict text */
-     }
-     .monitoring-points h4 {
-        font-size: 1.2rem; /* Larger monitoring title */
-     }
-     .monitoring-points li {
-        font-size: 0.95rem; /* Larger monitoring points text */
-     }
-
-    .footer-content {
-        flex-direction: row; /* Align footer items horizontally */
-        justify-content: space-between;
-        align-items: center;
-        text-align: left;
-    }
-
-    .footer-logo {
-        margin-bottom: 0;
-    }
-
-    .footer-links {
-        margin-bottom: 0;
-    }
-
-    .footer-links li {
-        margin: 0 0 0 20px; /* Horizontal spacing for footer links */
-    }
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-    .hero {
-        padding: 200px 0 100px; /* Further increase hero padding */
-    }
-
-    .hero h1 {
-        font-size: 2.6rem; /* Even larger hero title */
-    }
-
-    .section-title h2 {
-        font-size: 2.2rem; /* Even larger section titles */
-    }
-
-    .chart-wrapper {
-        height: 350px; /* Taller charts on large screens */
-    }
-
-    .search-form {
-        max-width: 400px; /* Allow more width */
-    }
-}
-
-/* Ensure search form doesn't overlap logo on very small screens if needed */
-@media (max-width: 400px) {
-    nav {
-        flex-wrap: wrap; /* Allow items to wrap if needed */
-        justify-content: space-between;
-    }
-    .search-form {
-        order: 2; /* Place search below logo */
-        width: 100%; /* Take full width */
-        max-width: none;
-        margin-top: 8px; /* Add space above */
-    }
-    .mobile-menu {
-        order: 1; /* Keep hamburger top right */
-    }
-    .nav-links {
-         /* Adjust top position if header height changes due to wrapping */
-         /* This might need dynamic calculation in JS if height varies significantly */
-         top: 90px; /* Approximate adjusted value */
-    }
-}
+}); // End DOMContentLoaded Wrapper
