@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-dynamic="page-title">ForensicFinancials | Loading...</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.2.1/chartjs-plugin-annotation.min.js" integrity="sha512-eCD/MhL+Uvj+B89Am2/hMv0Q6dWJjkMv/7G2xMSuvTjYkXOP8zsF5Ec0TrX0V8alM5u0M59fzxBNLCSQ60L3qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Forensic<span>Financials</span></a>
+                <form class="InputContainer" id="tickerSearchForm">
+                    <input type="text" class="input" id="tickerInput" placeholder="Enter Ticker (e.g., JD)" aria-label="Enter Ticker Symbol" required>
+                    <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
+                </form>
+                <ul class="nav-links">
+                    <li><a href="#trends">Trend Analysis</a></li>
+                    <li><a href="#financials">Financial Metrics</a></li>
+                    <li><a href="#opportunities">Investment Considerations</a></li>
+                    <li><a href="#conclusion">Conclusion</a></li>
+                </ul>
+                <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div id="loading-error-message" class="message-area" style="display: none;">
+        <p></p>
+    </div>
+
+    <main id="main-content">
+        <section class="hero">
+            <div class="container">
+                <h1 data-dynamic="hero-title">Loading...<br>Loading...</h1>
+                <p data-dynamic="hero-subtitle">Loading analysis details...</p>
+                <div class="hero-separator"></div>
+                <a href="#trends" class="cta-button">Explore Analysis <i class="fas fa-arrow-down"></i></a>
+            </div>
+        </section>
+
+        <section class="section" id="trends">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Temporal Pattern Analysis</h2>
+                    <p data-dynamic="trends-subtitle">Loading...</p>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Revenue Growth Trend (Annual)</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="cards" id="trends-cards-container">
+                    <p>Loading trend cards...</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="financials">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Financial Metrics & Anomalies</h2>
+                    <p data-dynamic="financials-subtitle">Loading...</p>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Revenue vs. Accounts Receivable Growth (Annual)</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="arChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Operating Cash Flow vs. Net Income Growth (Annual)</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="cashFlowChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="cards" id="financials-cards-container">
+                     <p>Loading financial cards...</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="opportunities">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Investment Considerations</h2>
+                    <p data-dynamic="opportunities-subtitle">Loading...</p>
+                </div>
+
+                <div class="insight-list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>Opportunities</th>
+                                <th>Risks</th>
+                            </tr>
+                        </thead>
+                        <tbody id="opportunities-table-body">
+                            <tr><td colspan="3">Loading table data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="section conclusion" id="conclusion">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Final Verdict & Key Takeaways</h2>
+                    <p data-dynamic="conclusion-subtitle">Loading...</p>
+                </div>
+
+                <div class="verdict-container">
+                    <div class="verdict-header">
+                        <h3 data-dynamic="verdict-title">Loading Verdict...</h3>
+                        <span class="verdict-rating" data-dynamic="verdict-rating">Loading...</span>
+                    </div>
+
+                    <div id="verdict-paragraphs">
+                        <p>Loading conclusion...</p>
+                    </div>
+
+                    <div class="monitoring-points">
+                        <h4 data-dynamic="monitoring-title">Loading...</h4>
+                        <ul id="monitoring-points-list">
+                            <li>Loading...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Forensic<span>Financials</span> by Cho</div>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#trends">Trend Analysis</a></li>
+                    <li><a href="#financials">Financial Metrics</a></li>
+                    <li><a href="#opportunities">Investment Considerations</a></li>
+                    <li><a href="#conclusion">Conclusion</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                <p>© 2025 ForensicFinancials. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

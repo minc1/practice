@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForensicFinancials | Financial Analysis Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Forensic<span>Financials</span></a>
+                <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
+                    <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
+                    <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
+                </form>
+                <ul class="nav-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#methodology">Methodology</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <button class="mobile-menu" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="hero">
+            <div class="container">
+                <h1>Forensic Financial Statement Analysis</h1>
+                <p>Detect accounting anomalies and assess financial health with professional-grade analysis tools</p>
+                <div class="hero-separator"></div>
+                <div class="hero-cta">
+                    <a href="analysis.html" class="cta-button">
+                        Start Analysis <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#features" class="cta-button secondary">
+                        Learn More <i class="fas fa-chevron-down"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="features">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Core Analytical Features</h2>
+                    <p>Professional tools to uncover financial insights</p>
+                </div>
+                <div class="cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-chart-line"></i> Revenue Analysis</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>10-year growth trend visualization</li>
+                                <li>Industry benchmarking</li>
+                                <li>Seasonality detection</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-balance-scale"></i> Cash Flow Verification</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>Operating cash flow vs. net income analysis</li>
+                                <li>Free cash flow assessment</li>
+                                <li>Cash conversion cycle evaluation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-search-dollar"></i> Anomaly Detection</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li>Revenue-receivables divergence analysis</li>
+                                <li>Inventory turnover assessment</li>
+                                <li>Accrual ratio calculation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section dark-bg" id="methodology">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Analysis Methodology</h2>
+                    <p>Based on established forensic accounting principles</p>
+                </div>
+                <div class="methodology-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Data Collection</h3>
+                            <p>Comprehensive financial statement data from reliable sources spanning multiple years</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Trend Analysis</h3>
+                            <p>Identification of growth patterns, seasonality, and long-term performance indicators</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Anomaly Detection</h3>
+                            <p>Application of forensic accounting techniques to identify potential red flags</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section cta-section">
+            <div class="container">
+                <h2>Ready to examine a company?</h2>
+                <form class="search-form" action="analysis.html" method="GET">
+                    <input type="text" name="ticker" placeholder="Enter ticker (e.g., AAPL)" required
+                           aria-label="Stock ticker symbol">
+                    <button type="submit" aria-label="Analyze">
+                        <i class="fas fa-search"></i> Analyze
+                    </button>
+                </form>
+            </div>
+        </section>
+        <section class="section" id="about">
+            <div class="container">
+                <div class="section-title">
+                    <h2>About Us</h2>
+                    <p>Empowering Investors with Forensic Financial Insights</p>
+                </div>
+                <div class="about-content">
+                    <p>
+                        At ForensicFinancials, our mission is to empower both institutional and retail investors to make informed decisions. We leverage advanced forensic accounting methodologies and cutting-edge data visualization tools to uncover hidden insights and detect potential financial anomalies.
+                    </p>
+                    <p> <br></p>
+                    <p>
+                        Built on a foundation of transparency, integrity, and rigorous analysis, our platform delivers professional-grade insights that simplify the complex financial landscape. Whether you're evaluating growth trends, comparing financial metrics, or assessing risk factors, our goal is to provide you with the reliable information needed to navigate today's markets confidently.
+                    </p>
+                    <p> <br></p>
+                    <p class="signature">
+                        <em>- The ForensicFinancials Team</em>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Forensic<span>Financials</span> by Cho</div>
+                <ul class="footer-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#methodology">Methodology</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                <p>© 2025 ForensicFinancials. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
