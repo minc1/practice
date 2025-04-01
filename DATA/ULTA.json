@@ -1,0 +1,125 @@
+{
+  "company": {
+    "name": "Ulta Beauty, Inc.",
+    "ticker": "ULTA",
+    "analysisTitle": "Forensic Financial Analysis",
+    "heroSubtitle": "Comprehensive examination of ULTA's transition from high-growth recovery to significant slowdown, focusing on profitability pressures and inventory concerns.",
+    "pageTitle": "ForensicFinancials | Ulta Beauty (ULTA) Analysis"
+  },
+  "trendAnalysis": {
+    "sectionSubtitle": "Examining ULTA's journey: Pandemic disruption, sharp recovery, and recent growth deceleration (FY2020-FY2024)",
+    "cards": [
+      {
+        "title": "Revenue Trajectory",
+        "iconClass": "fas fa-chart-line neutral",
+        "points": [
+          "<strong>Sharp Deceleration</strong> - From strong post-pandemic rebound (+40.3% FY21, +18.3% FY22) to near-flat growth (+0.8% FY24)",
+          "<strong>Pandemic Impact</strong> - Significant downturn in FY20 (-16.8%) followed by V-shaped recovery",
+          "<strong>Market Headwinds</strong> - Slowdown reflects maturing growth, increased competition, and potential macro pressure on discretionary spending",
+          "<strong>Seasonality</strong> - Revenue consistently peaks in Q4 (holiday) and dips in Q1, a key retail characteristic"
+        ],
+        "footer": "Transition from robust recovery to significant growth slowdown phase"
+      },
+      {
+        "title": "Profitability Trends",
+        "iconClass": "fas fa-chart-pie neutral",
+        "points": [
+          "<strong>Post-COVID Recovery</strong> - Dramatic Net Income rebound from FY20 lows, peaking in FY22 (+26.0%)",
+          "<strong>Margin Pressure</strong> - Operating margins expanded post-COVID but contracted in FY23 and FY24",
+          "<strong>FY24 Decline</strong> - Net Income growth turned negative (-7.0%) despite near-flat revenue",
+          "<strong>Slowing Growth Impact</strong> - Profitability struggling to keep pace with decelerating sales"
+        ],
+        "footer": "Strong initial profit recovery followed by recent margin pressure and decline"
+      },
+      {
+        "title": "Cash Flow Generation",
+        "iconClass": "fas fa-chart-bar negative",
+        "points": [
+          "<strong>FY23/FY24 Red Flags</strong> - OCF diverged from NI. FY23: NI +3.9% vs OCF -0.4%; FY24: NI -7.0% vs OCF -9.3%",
+          "<strong>Inventory Impact</strong> - Divergence primarily driven by significant inventory builds negatively impacting working capital",
+          "<strong>Historical Strength</strong> - Strong OCF generation in recovery years (FY21: +30.7%, FY22: +39.9%)",
+          "<strong>Shareholder Returns</strong> - Consistent, large share buybacks ($1B FY24) are a primary use of cash"
+        ],
+        "footer": "Historically strong cash flow strained by recent inventory builds and NI divergence"
+      }
+    ]
+  },
+  "financialMetrics": {
+    "sectionSubtitle": "Investigating cross-statement divergences, forensic flags, and solvency indicators",
+    "cards": [
+       {
+        "title": "Forensic Checks",
+        "iconClass": "fas fa-search negative",
+        "points": [
+            "<strong>Inventory vs. Sales Divergence</strong> - Major FY24 flag: Inventory +13.0% vs COGS +1.2% and Revenue +0.8%. Suggests overstocking/demand issues.",
+            "<strong>OCF vs NI Divergence</strong> - FY23 & FY24 OCF performance lagged/declined more than Net Income, primarily due to inventory build.",
+            "<strong>A/R Growth Spike (FY21)</strong> - Accounts Receivable growth (+86.3%) significantly outpaced Revenue (+40.3%) in FY21.",
+            "<strong>A/R vs Revenue (FY24)</strong> - Minor flag: A/R growth (+7.4%) outpaced Revenue (+0.8%) in FY24, though A/R base is small.",
+            "<strong>G&A Increases (FY22/FY23)</strong> - Notable SG&A growth driven by strategic investments (tech, supply chain) and wage pressures."
+        ],
+        "footer": "Significant flags in inventory management and OCF vs NI divergence"
+      },
+      {
+        "title": "Solvency & Liquidity",
+        "iconClass": "fas fa-balance-scale positive",
+        "points": [
+            "<strong>Minimal Debt</strong> - Very low interest-bearing debt; liabilities primarily operating leases.",
+            "<strong>Strong Balance Sheet</strong> - Conservative financial structure with low leverage (D/E ~0.77 incl. leases).",
+            "<strong>High Coverage</strong> - Strong historical operating income provides very high interest coverage.",
+            "<strong>Internal Funding</strong> - Growth and operations primarily funded by internally generated cash flow (retained earnings).",
+            "<strong>Share Buybacks</strong> - Significant capital returned to shareholders via repurchases impacts capital allocation."
+        ],
+        "footer": "Strong liquidity and low leverage, with significant cash returned via buybacks"
+      }
+    ]
+  },
+  "investmentConsiderations": {
+    "sectionSubtitle": "Balancing ULTA's brand strength against slowing growth and operational challenges",
+    "tableData": [
+      { "factor": "<strong>Market Position</strong>", "opportunities": "Leading specialty beauty retailer, strong brand loyalty (44M+ members)", "risks": "Intensifying competition (Sephora, online, mass market), potential market share pressure" },
+      { "factor": "<strong>Revenue</strong>", "opportunities": "Strategic initiatives (wellness, international), digital growth, potential market stabilization", "risks": "Significant growth deceleration (FY24: +0.8%), weak FY25 guidance (0-1% comp), consumer discretionary spending sensitivity" },
+      { "factor": "<strong>Profitability</strong>", "opportunities": "Cost optimization programs ($200M target), potential benefits from strategic initiatives", "risks": "Margin contraction (FY23/FY24), further pressure expected (FY25), impact of promotions/inventory clearance" },
+      { "factor": "<strong>Cash Flow</strong>", "opportunities": "Historically strong cash generation potential if inventory managed", "risks": "OCF pressure from inventory build (FY23/FY24), OCF vs NI divergence raises quality concerns" },
+      { "factor": "<strong>Financial Health</strong>", "opportunities": "Strong balance sheet provides resilience and investment flexibility", "risks": "Slowing profit growth limits internal funding capacity for large investments/returns" },
+      { "factor": "<strong>Shareholder Returns</strong>", "opportunities": "Consistent track record of share repurchases", "risks": "Sustainability of buyback levels if OCF remains pressured" },
+      { "factor": "<strong>Inventory Management</strong>", "opportunities": "Potential to improve efficiency and align stock with demand", "risks": "Current inventory build requires discounting/write-offs, ties up cash, reflects demand forecasting challenges" }
+    ]
+  },
+  "conclusion": {
+    "sectionSubtitle": "Synthesizing ULTA Beauty's financial trajectory and investment profile",
+    "verdictTitle": "Growth Stalls: Profitability & Cash Flow Tested by Inventory Buildup",
+    "verdictRating": "Cautious / Medium-High Risk",
+    "paragraphs": [
+      "ULTA Beauty has transitioned rapidly from a strong post-pandemic recovery phase to a period of <strong>significant growth deceleration</strong>, with revenue nearly flat in FY2024 (+0.8%). While the company demonstrated impressive profit recovery initially, margins have come under pressure, leading to a <strong>Net Income decline (-7.0%)</strong> in FY2024.",
+      "The most critical forensic finding is the <strong>substantial inventory build-up</strong>, particularly in FY2024 (Inventory +13.0% vs. COGS +1.2%). This has directly contributed to a concerning <strong>divergence between Net Income and Operating Cash Flow</strong> in both FY2023 and FY2024, straining cash generation and raising questions about demand forecasting and potential future margin pressure from discounting or write-offs.",
+      "Despite these challenges, ULTA retains strengths in its <strong>leading market position, strong brand loyalty, and conservative balance sheet</strong> with minimal debt. However, the combination of slowing growth, contracting margins, and significant inventory/cash flow red flags warrants a <strong>cautious investment stance</strong>. Management's ability to navigate this 'transitional' period and effectively manage inventory will be crucial."
+    ],
+    "monitoringPointsTitle": "Key Monitoring Points",
+    "monitoringPoints": [
+      "<strong>Inventory Levels & Turnover:</strong> Track inventory growth relative to sales/COGS for signs of normalization or continued imbalance.",
+      "<strong>Cash Flow Conversion:</strong> Monitor the OCF vs. Net Income relationship for alignment and improvement in working capital efficiency.",
+      "<strong>Margin Performance:</strong> Assess gross and operating margins for stabilization or further erosion amidst competitive and cost pressures.",
+      "<strong>Comparable Sales Growth:</strong> Evaluate performance against guidance and competitor trends to gauge market share and demand."
+    ]
+  },
+  "chartData": {
+    "labels": ["FY2020", "FY2021", "FY2022", "FY2023", "FY2024"],
+    "revenueGrowth": [-16.8, 40.3, 18.3, 9.8, 0.8],
+    "arGrowth": [38.6, 86.3, -14.7, 4.3, 7.4],
+    "cfoGrowth": [-26.4, 30.7, 39.9, -0.4, -9.3],
+    "niGrowth": [-75.1, 4.6, 26.0, 3.9, -7.0],
+    "annotations": {
+        "arChart": [
+            { "xVal": 1, "yVal": 86.3, "content": ["A/R Spike", "(FY21)"], "yAdj": -20, "xAdj": 0 }
+        ],
+        "cashFlowChart": [
+             { "xVal": 3, "yVal": -0.4, "content": ["OCF Stalls", "(FY23)"], "yAdj": 25, "xAdj": 0 },
+             { "xVal": 4, "yVal": -9.3, "content": ["OCF Decline", "(FY24)"], "yAdj": 25, "xAdj": 0 }
+        ]
+    },
+    "divergenceIndices": {
+        "arChart": [1, 4],
+        "cashFlowChart": [3, 4]
+    }
+  }
+}
