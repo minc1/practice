@@ -7,7 +7,7 @@
     --muted: #6c757d;
     --success: #4caf50;
     --warning: #ffc107;
-    --danger: #f44336;
+    --danger: #c5817e;
     --card-bg: #ffffff;
     --header-footer-bg: #ffffff;
     --body-bg: #1c2541; /* Changed body background */
@@ -67,6 +67,7 @@ nav {
     margin: 0 auto;
     padding: 0 16px; /* Match container padding */
     gap: 16px; /* Add gap between nav items */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
 }
 
 .logo {
@@ -76,60 +77,130 @@ nav {
     letter-spacing: -0.5px;
     white-space: nowrap;
     flex-shrink: 0; /* Prevent logo from shrinking */
+    text-decoration: none;
+    display: inline-block;
+    order: 0; /* Ensure logo is first */
 }
 
 .logo span {
     color: var(--primary);
 }
 
-/* --- Search Form Styles --- */
-.search-form {
+/* --- Header Search Form Styles (Used on both pages) --- */
+.InputContainer {
+    /* Flexbox setup */
     display: flex;
     align-items: center;
-    background-color: #fff; /* White background */
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    overflow: hidden; /* Clip button border radius */
+    /* Sizing & Flexibility (Mobile First) */
+    height: 40px; /* Consistent height */
+    width: 100%; /* Default to full width when wrapped */
+    max-width: 250px; /* Limit width on mobile */
     flex-grow: 0; /* Don't grow by default */
     flex-shrink: 1; /* Allow shrinking */
-    max-width: 250px; /* Limit width on larger screens */
+    /* Appearance */
+    background-color: var(--card-bg); /* White background */
+    border: 1px solid var(--border-color);
+    border-radius: 20px; /* Rounded corners (height/2) */
+    overflow: hidden; /* Clip button corners */
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.3s;
+    /* Positioning in Nav */
+    order: 2; /* Default order (after logo, before hamburger) */
+    margin-top: 8px; /* Add space when wrapped */
 }
 
-.search-form input[type="text"] {
+.InputContainer:focus-within { /* Subtle effect when input is focused */
+    box-shadow: 0 0 0 2px rgba(197, 164, 126, 0.5); /* Primary color focus ring */
+    border-color: var(--primary);
+}
+
+.InputContainer .input { /* Target input inside container */
+    /* Reset */
     border: none;
-    padding: 6px 10px;
-    font-size: 0.85rem;
     outline: none;
-    color: var(--text);
-    flex-grow: 1; /* Allow input to take available space */
+    /* Sizing */
+    flex-grow: 1; /* Take available space */
+    height: 100%; /* Fill container height */
+    padding: 0 15px; /* Horizontal padding */
     min-width: 100px; /* Minimum width */
+    /* Appearance */
+    background-color: transparent; /* Inherit container background */
+    color: var(--text);
+    font-size: 0.85rem; /* Consistent font size */
+    letter-spacing: 0.5px;
+    caret-color: var(--primary); /* Use theme color for caret */
 }
 
-.search-form input[type="text"]::placeholder {
-    color: var(--muted);
-    font-style: italic;
+.InputContainer .input::placeholder {
+     color: var(--muted);
+     font-style: italic;
+}
+
+.InputContainer button { /* Target button inside container */
+    /* Reset */
+    border: none;
+    /* Sizing & Layout */
+    height: 100%; /* Fill container height */
+    padding: 0 12px;
+    flex-shrink: 0; /* Don't shrink button */
+    display: flex; /* Align icon */
+    align-items: center;
+    justify-content: center;
+    /* Appearance */
+    background-color: var(--primary);
+    color: var(--dark); /* Text color on primary button */
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    /* No border-radius needed due to container's overflow:hidden */
+}
+
+.InputContainer button:hover {
+    background-color: #d4b483; /* Darker primary */
+}
+
+.InputContainer button:disabled {
+    background-color: var(--muted);
+    cursor: not-allowed;
+    color: var(--light);
+}
+/* --- End Header Search Form Styles --- */
+
+/* --- Search Form for Landing Page CTA Section --- */
+.search-form {
+    display: flex;
+    max-width: 500px;
+    margin: 32px auto 0;
+    height: 50px;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.search-form input {
+    flex-grow: 1;
+    border: none;
+    padding: 0 20px;
+    font-size: 1rem;
+    outline: none;
+    color: var(--text); /* Ensure text color is visible */
 }
 
 .search-form button {
     background-color: var(--primary);
-    border: none;
     color: var(--dark);
-    padding: 6px 12px;
+    border: none;
+    padding: 0 24px;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 0.9rem;
-    display: flex; /* Align icon */
+    display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.3s;
 }
 
 .search-form button:hover {
-    background-color: #d4b483; /* Darker primary */
-}
-
-.search-form button:disabled {
-    background-color: var(--muted);
-    cursor: not-allowed;
+    background-color: #d4b483;
 }
 
 
@@ -147,6 +218,7 @@ nav {
     box-shadow: var(--shadow-md);
     z-index: 99; /* Below header */
     border-top: 1px solid var(--border-color); /* Separator */
+    order: 4; /* Ensure it's last when wrapped */
 }
 
 .nav-links.show {
@@ -166,6 +238,8 @@ nav {
     position: relative;
     padding: 8px 0;
 }
+
+/* Removed .cta-nav styles as the element is removed from index.html */
 
 .nav-links a:after { /* Underline effect */
     content: '';
@@ -196,14 +270,15 @@ nav {
     border: none;
     padding: 5px; /* Easier to tap */
     flex-shrink: 0; /* Prevent shrinking */
-    order: 3; /* Ensure it's last on mobile */
+    order: 3; /* Ensure it's last on mobile before nav-links */
+    margin-left: auto; /* Push to the right when items wrap */
 }
 
 .mobile-menu:hover {
     transform: scale(1.1);
 }
 
-/* --- Loading/Error Message Area --- */
+/* --- Loading/Error Message Area (Primarily for analysis.html) --- */
 .message-area {
     padding: 60px 16px 0; /* Space below fixed header */
     text-align: center;
@@ -276,6 +351,13 @@ nav {
     margin: 24px auto; /* Center horizontally and add vertical spacing */
 }
 
+.hero-cta {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 .cta-button {
     display: inline-flex;
     align-items: center;
@@ -291,10 +373,21 @@ nav {
     box-shadow: var(--shadow-sm);
 }
 
+.cta-button.secondary {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--light);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 .cta-button:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
     background-color: #d4b483; /* Slightly darker primary on hover */
+}
+
+.cta-button.secondary:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
 }
 
 .cta-button i {
@@ -308,6 +401,76 @@ nav {
 
 .section {
     padding: 60px 0;
+}
+
+/* --- Methodology Section Styles --- */
+.methodology-steps {
+    display: grid;
+    /* Adjust grid to fit 3 items nicely */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+    /* Center items if fewer than max columns */
+    justify-content: center;
+}
+
+.step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 24px;
+    border-radius: 8px;
+    transition: transform 0.3s;
+    max-width: 380px; /* Optional: Limit width of steps */
+}
+
+.step:hover {
+    transform: translateY(-5px);
+}
+
+.step-number {
+    background-color: var(--primary);
+    color: var(--dark);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex-grow: 1;
+}
+
+.step-content h3 {
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    color: var(--light);
+}
+
+.step-content p {
+    color: var(--light);
+    opacity: 0.8;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* --- CTA Section Styles --- */
+.cta-section {
+    background-color: var(--secondary);
+    text-align: center;
+    padding: 80px 0;
+}
+
+.cta-section h2 {
+    margin-bottom: 24px;
+    font-size: 2rem;
+    color: var(--light);
 }
 
 .section-title {
@@ -370,6 +533,7 @@ nav {
 .card-header {
     padding: 18px;
     border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0; /* Prevent header from shrinking */
 }
 
 .card-header h3 {
@@ -396,6 +560,9 @@ nav {
 .card-body {
     padding: 18px;
     flex-grow: 1; /* Allow body to expand */
+    /* Added for aspect-ratio cards */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    min-height: 0; /* Needed for flex-grow in some contexts */
 }
 
 .card-body ul {
@@ -431,6 +598,7 @@ nav {
     border-top: 1px solid var(--border-color);
     font-size: 0.8rem;
     color: var(--dark); /* Footer text color */
+    flex-shrink: 0; /* Prevent footer from shrinking */
 }
 
 .chart-container {
@@ -761,18 +929,31 @@ footer {
 
     nav {
         gap: 24px; /* Increase gap */
+        flex-wrap: nowrap; /* Prevent wrapping on larger screens */
     }
 
     .logo {
         font-size: 1.25rem; /* Larger logo */
+        order: 0; /* Ensure logo is first */
     }
 
-    /* Adjust search form position and growth */
-    .search-form {
-        flex-grow: 1; /* Allow search to take more space */
+    /* Adjust header search form position and growth */
+    .InputContainer {
+        /* Default for analysis page: allow growth */
+        flex-grow: 1;
         max-width: 350px; /* Slightly wider max width */
         order: 1; /* Position after logo */
+        width: auto; /* Allow shrinking */
+        margin-top: 0; /* Remove margin when not wrapped */
     }
+
+    /* --- START CHANGE 1: Landing Page Header Search Spacing --- */
+    /* Override for landing page only: prevent growth */
+    body.landing-page nav .InputContainer {
+        flex-grow: 0; /* Prevent search bar from growing on landing page */
+    }
+    /* --- END CHANGE 1 --- */
+
 
     .nav-links {
         display: flex; /* Show nav links */
@@ -785,6 +966,7 @@ footer {
         border-top: none;
         order: 2; /* Position after search */
         flex-shrink: 0; /* Prevent wrapping */
+        margin-left: auto; /* Push links to the right */
     }
 
     .nav-links li {
@@ -824,6 +1006,23 @@ footer {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 24px; /* Increase gap between cards */
     }
+
+    /* --- START CHANGE 2: Landing Page Feature Card Aspect Ratio --- */
+    /* Apply 1:1 aspect ratio ONLY to feature cards on landing page */
+    .feature-cards .card {
+        aspect-ratio: 1 / 1;
+        /* Ensure flex direction is maintained for content layout */
+        display: flex;
+        flex-direction: column;
+    }
+    /* Ensure card body handles potential overflow within the fixed aspect ratio */
+    .feature-cards .card .card-body {
+        overflow-y: auto; /* Enable vertical scroll if content exceeds height */
+        flex-grow: 1; /* Allow body to take up remaining space */
+        min-height: 0; /* Important for flex item overflow */
+    }
+    /* --- END CHANGE 2 --- */
+
 
     .verdict-container {
         padding: 40px; /* Increase padding */
@@ -884,29 +1083,38 @@ footer {
         height: 350px; /* Taller charts on large screens */
     }
 
-    .search-form {
+    .InputContainer { /* Target header search container */
         max-width: 400px; /* Allow more width */
     }
 }
 
-/* Ensure search form doesn't overlap logo on very small screens if needed */
-@media (max-width: 400px) {
+/* Adjust wrapping point for header search if needed */
+@media (max-width: 480px) { /* Example breakpoint */
     nav {
-        flex-wrap: wrap; /* Allow items to wrap if needed */
+        flex-wrap: wrap; /* Ensure wrapping */
         justify-content: space-between;
     }
-    .search-form {
+    .logo {
+        /* Ensure logo takes appropriate space */
+        flex-basis: auto; /* Adjust as needed */
+    }
+    .InputContainer { /* Target header search container */
         order: 2; /* Place search below logo */
         width: 100%; /* Take full width */
         max-width: none;
         margin-top: 8px; /* Add space above */
+        margin-left: 0; /* Reset margin */
+        margin-right: 0; /* Reset margin */
     }
     .mobile-menu {
         order: 1; /* Keep hamburger top right */
+        margin-left: 0; /* Reset margin */
     }
     .nav-links {
          /* Adjust top position if header height changes due to wrapping */
          /* This might need dynamic calculation in JS if height varies significantly */
-         top: 90px; /* Approximate adjusted value */
+         top: 105px; /* Approximate adjusted value - check actual height */
+         order: 3; /* Ensure it's last */
+         width: 100%; /* Full width */
     }
 }
