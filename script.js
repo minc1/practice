@@ -405,7 +405,7 @@ if (isAnalysisPage) {
             callout: { display: true, position: 'bottom', borderWidth: 1, borderColor: 'rgba(0,0,0,0.1)', margin: 5 }
         });
 
-        // Legend entry for divergence explanation
+        // Legend entry for divergence explanation (NO LONGER USED FOR DISPLAY, but kept for reference if needed)
         const createDivergenceLegend = () => ({
             label: 'Divergence', pointStyle: 'rectRot', pointRadius: 5,
             borderColor: divergenceColor, backgroundColor: divergenceColor,
@@ -577,9 +577,9 @@ if (isAnalysisPage) {
                                         pointBackgroundColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor),
                                         pointRadius: pointRadiusCallback(arDivergenceIndices),
                                         pointHoverRadius: pointHoverRadiusCallback(arDivergenceIndices),
-                                        pointBorderColor: secondaryColor // *** FIX: Keep point border consistent ***
-                                    },
-                                    createDivergenceLegend() // Keep the legend entry
+                                        pointBorderColor: secondaryColor // Keep point border consistent
+                                    }
+                                    // createDivergenceLegend() // <-- REMOVED
                                 ]
                             },
                             options: arChartOptions
@@ -623,9 +623,9 @@ if (isAnalysisPage) {
                                         pointBackgroundColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor),
                                         pointRadius: pointRadiusCallback(cfDivergenceIndices),
                                         pointHoverRadius: pointHoverRadiusCallback(cfDivergenceIndices),
-                                        pointBorderColor: secondaryColor // *** FIX: Keep point border consistent ***
-                                    },
-                                    createDivergenceLegend() // Keep the legend entry
+                                        pointBorderColor: secondaryColor // Keep point border consistent
+                                    }
+                                    // createDivergenceLegend() // <-- REMOVED
                                 ]
                             },
                             options: cashFlowChartOptions
