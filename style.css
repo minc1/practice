@@ -314,7 +314,7 @@ nav {
 
 
 .hero {
-    padding: 180px 0 100px; /* Increased padding for better spacing */
+    padding: 140px 0 60px; /* Adjusted top padding for fixed header */
     text-align: center;
     position: relative;
     overflow: hidden; /* Contain potential background effects */
