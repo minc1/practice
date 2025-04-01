@@ -337,7 +337,7 @@ if (isAnalysisPage) {
                     labels: {
                         boxWidth: 8, boxHeight: 8, padding: 8,
                         font: { size: 10 }, color: '#6c757d',
-                        usePointStyle: true, pointStyle: 'circle'
+                        usePointStyle: true, pointStyle: 'circle' // Default legend point style
                     }
                 },
                 tooltip: {
@@ -403,13 +403,6 @@ if (isAnalysisPage) {
             backgroundColor: 'rgba(255,255,255,0.85)',
             padding: { top: 3, bottom: 3, left: 5, right: 5 }, borderRadius: 4,
             callout: { display: true, position: 'bottom', borderWidth: 1, borderColor: 'rgba(0,0,0,0.1)', margin: 5 }
-        });
-
-        // Legend entry for divergence explanation (NO LONGER USED FOR DISPLAY, but kept for reference if needed)
-        const createDivergenceLegend = () => ({
-            label: 'Divergence', pointStyle: 'rectRot', pointRadius: 5,
-            borderColor: divergenceColor, backgroundColor: divergenceColor,
-            borderWidth: 1, data: [] // No data to plot
         });
 
         // Callbacks for dynamic point styling based on calculated indices
@@ -578,8 +571,19 @@ if (isAnalysisPage) {
                                         pointRadius: pointRadiusCallback(arDivergenceIndices),
                                         pointHoverRadius: pointHoverRadiusCallback(arDivergenceIndices),
                                         pointBorderColor: secondaryColor // Keep point border consistent
+                                    },
+                                    // START: Added Divergence Legend Dataset
+                                    {
+                                        label: 'Divergence',
+                                        data: [], // No actual data points to plot
+                                        borderColor: divergenceColor,
+                                        backgroundColor: divergenceColor, // Makes the legend point solid
+                                        pointStyle: 'circle', // Ensure circle style
+                                        pointRadius: 5,       // Control legend point size
+                                        borderWidth: 1,
+                                        showLine: false       // Explicitly hide any line
                                     }
-                                    // createDivergenceLegend() // <-- REMOVED
+                                    // END: Added Divergence Legend Dataset
                                 ]
                             },
                             options: arChartOptions
@@ -624,8 +628,19 @@ if (isAnalysisPage) {
                                         pointRadius: pointRadiusCallback(cfDivergenceIndices),
                                         pointHoverRadius: pointHoverRadiusCallback(cfDivergenceIndices),
                                         pointBorderColor: secondaryColor // Keep point border consistent
+                                    },
+                                    // START: Added Divergence Legend Dataset
+                                    {
+                                        label: 'Divergence',
+                                        data: [], // No actual data points to plot
+                                        borderColor: divergenceColor,
+                                        backgroundColor: divergenceColor, // Makes the legend point solid
+                                        pointStyle: 'circle', // Ensure circle style
+                                        pointRadius: 5,       // Control legend point size
+                                        borderWidth: 1,
+                                        showLine: false       // Explicitly hide any line
                                     }
-                                    // createDivergenceLegend() // <-- REMOVED
+                                    // END: Added Divergence Legend Dataset
                                 ]
                             },
                             options: cashFlowChartOptions
