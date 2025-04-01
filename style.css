@@ -314,7 +314,7 @@ nav {
 
 
 .hero {
-    padding: 140px 0 60px; /* Adjusted top padding for fixed header */
+    padding: 180px 0 100px; /* Increased padding for better spacing */
     text-align: center;
     position: relative;
     overflow: hidden; /* Contain potential background effects */
@@ -400,8 +400,7 @@ nav {
 }
 
 .section {
-    padding: 80px 0;
-    margin-bottom: 20px;
+    padding: 60px 0;
 }
 
 /* --- Methodology Section Styles --- */
@@ -981,8 +980,7 @@ footer {
     }
 
     .section {
-        padding: 100px 0; /* Increase section padding */
-        margin-bottom: 30px;
+        padding: 80px 0; /* Increase section padding */
     }
 
     .section-title h2 {
