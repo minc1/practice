@@ -8,8 +8,8 @@ let cashFlowChartInstance = null;
 
 // *** NEW: Define Divergence Calculation Thresholds ***
 // Threshold (in percentage points) for growth difference to be considered a divergence
-const AR_REVENUE_DIVERGENCE_THRESHOLD = 15.0; // A/R growth > Revenue growth by 5%
-const NI_CFO_DIVERGENCE_THRESHOLD = 25.0;   // Net Income growth > CFO growth by 10%
+const AR_REVENUE_DIVERGENCE_THRESHOLD = 15.0; // A/R growth > Revenue growth by 15%
+const NI_CFO_DIVERGENCE_THRESHOLD = 25.0;   // Net Income growth > CFO growth by 25%
 
 // Determine current page
 const isAnalysisPage = window.location.pathname.includes('analysis.html');
@@ -577,7 +577,7 @@ if (isAnalysisPage) {
                                         pointBackgroundColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor),
                                         pointRadius: pointRadiusCallback(arDivergenceIndices),
                                         pointHoverRadius: pointHoverRadiusCallback(arDivergenceIndices),
-                                        pointBorderColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor)
+                                        pointBorderColor: secondaryColor // *** FIX: Keep point border consistent ***
                                     },
                                     createDivergenceLegend() // Keep the legend entry
                                 ]
@@ -623,7 +623,7 @@ if (isAnalysisPage) {
                                         pointBackgroundColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor),
                                         pointRadius: pointRadiusCallback(cfDivergenceIndices),
                                         pointHoverRadius: pointHoverRadiusCallback(cfDivergenceIndices),
-                                        pointBorderColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor)
+                                        pointBorderColor: secondaryColor // *** FIX: Keep point border consistent ***
                                     },
                                     createDivergenceLegend() // Keep the legend entry
                                 ]
