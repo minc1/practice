@@ -1,125 +1,169 @@
 {
     "company": {
-      "name": "Costco Wholesale Corporation",
-      "ticker": "COST",
-      "analysisTitle": "Forensic Financial Analysis",
-      "heroSubtitle": "Comprehensive examination of COST's resilient performance, moderating growth, working capital dynamics, and key risks for the membership warehouse leader.",
-      "pageTitle": "ForensicFinancials | Costco Wholesale (COST) Analysis"
+        "name": "Costco Wholesale Corporation",
+        "ticker": "COST",
+        "analysisTitle": "Forensic Financial Analysis",
+        "heroSubtitle": "Comprehensive examination of COST's resilient performance, moderating growth, working capital dynamics, and key risks for the membership warehouse leader.",
+        "pageTitle": "ForensicFinancials | Costco Wholesale (COST) Analysis"
     },
     "trendAnalysis": {
-      "sectionSubtitle": "Examining COST's journey from pandemic boost to growth moderation (FY2020-FY2024)",
-      "cards": [
-        {
-          "title": "Revenue Trajectory",
-          "iconClass": "fas fa-chart-line neutral",
-          "points": [
-            "<strong>Growth Moderation</strong> - Peak growth post-pandemic (+17.5% FY21, +15.8% FY22) slowed to +6.8% (FY23) and +5.0% (FY24).",
-            "<strong>Resilient Comps</strong> - Underlying comparable sales growth remains positive, supported by strong membership model and value proposition.",
-            "<strong>Strong Seasonality</strong> - Revenue consistently peaks in Q4 (holiday season) and troughs in Q1, leading to significant quarterly volatility.",
-            "<strong>FY23 Week Impact</strong> - FY23 had 53 weeks vs 52 in FY24, slightly dampening FY24 reported growth rate."
-          ],
-          "footer": "Post-pandemic growth normalization with strong seasonality patterns."
-        },
-        {
-          "title": "Profitability Trends",
-          "iconClass": "fas fa-chart-pie positive",
-          "points": [
-            "<strong>Stronger NI Growth</strong> - Net Income growth (+17.1% FY24) outpaced revenue growth (+5.0% FY24), suggesting margin improvement/cost control.",
-            "<strong>Membership Fee Benefit</strong> - High-margin membership fees contribute significantly to operating income.",
-            "<strong>Consistent Performance</strong> - Generally positive Operating Income and Net Income growth throughout the period, though rates moderated post-FY21/FY22 peaks.",
-            "<strong>Gross Margin Stability</strong> - Gross Profit growth largely tracked revenue, with Gross Profit Ratio improving slightly in FY24."
-          ],
-          "footer": "Resilient profitability, outpacing recent revenue growth."
-        },
-        {
-          "title": "Cash Flow Generation",
-          "iconClass": "fas fa-chart-bar negative",
-          "points": [
-            "<strong>OCF Volatility</strong> - Operating Cash Flow (OCF) growth highly volatile (+39.4% FY20, +1.1% FY21, -17.5% FY22, +49.7% FY23, +2.4% FY24).",
-            "<strong>NI vs OCF Divergence</strong> - Significant divergences observed (e.g., FY24: NI +17.1% vs OCF +2.4%; FY22: NI +16.7% vs OCF -17.5%).",
-            "<strong>Working Capital Driver</strong> - Fluctuations driven primarily by large swings in working capital changes, inherent to Costco's high-turnover, negative working capital model.",
-            "<strong>Strong Underlying Generation</strong> - Despite volatility, Costco consistently generates substantial operating cash flow."
-          ],
-          "footer": "Strong but highly volatile OCF due to working capital dynamics."
-        }
-      ]
+        "sectionSubtitle": "Examining COST's journey from pandemic boost to growth moderation (FY2020-FY2024)",
+        "cards": [
+            {
+                "title": "Revenue Trajectory",
+                "iconClass": "fas fa-chart-line neutral",
+                "points": [
+                    "<strong>Growth Moderation</strong> - Peak growth post-pandemic (+17.5% FY21, +15.8% FY22) slowed to +6.8% (FY23) and +5.0% (FY24).",
+                    "<strong>Resilient Comps</strong> - Underlying comparable sales growth remains positive, supported by strong membership model and value proposition.",
+                    "<strong>Strong Seasonality</strong> - Revenue consistently peaks in Q4 (holiday season) and troughs in Q1, leading to significant quarterly volatility.",
+                    "<strong>FY23 Week Impact</strong> - FY23 had 53 weeks vs 52 in FY24, slightly dampening FY24 reported growth rate."
+                ],
+                "footer": "Post-pandemic growth normalization with strong seasonality patterns."
+            },
+            {
+                "title": "Profitability Trends",
+                "iconClass": "fas fa-chart-pie positive",
+                "points": [
+                    "<strong>Stronger NI Growth</strong> - Net Income growth (+17.1% FY24) outpaced revenue growth (+5.0% FY24), suggesting margin improvement/cost control.",
+                    "<strong>Membership Fee Benefit</strong> - High-margin membership fees contribute significantly to operating income.",
+                    "<strong>Consistent Performance</strong> - Generally positive Operating Income and Net Income growth throughout the period, though rates moderated post-FY21/FY22 peaks.",
+                    "<strong>Gross Margin Stability</strong> - Gross Profit growth largely tracked revenue, with Gross Profit Ratio improving slightly in FY24."
+                ],
+                "footer": "Resilient profitability, outpacing recent revenue growth."
+            },
+            {
+                "title": "Cash Flow Generation",
+                "iconClass": "fas fa-chart-bar negative",
+                "points": [
+                    "<strong>OCF Volatility</strong> - Operating Cash Flow (OCF) growth highly volatile (+39.4% FY20, +1.1% FY21, -17.5% FY22, +49.7% FY23, +2.4% FY24).",
+                    "<strong>NI vs OCF Divergence</strong> - Significant divergences observed (e.g., FY24: NI +17.1% vs OCF +2.4%; FY22: NI +16.7% vs OCF -17.5%).",
+                    "<strong>Working Capital Driver</strong> - Fluctuations driven primarily by large swings in working capital changes, inherent to Costco's high-turnover, negative working capital model.",
+                    "<strong>Strong Underlying Generation</strong> - Despite volatility, Costco consistently generates substantial operating cash flow."
+                ],
+                "footer": "Strong but highly volatile OCF due to working capital dynamics."
+            }
+        ]
     },
     "financialMetrics": {
-      "sectionSubtitle": "Investigating cross-statement divergences, forensic flags, and solvency indicators",
-      "cards": [
-         {
-          "title": "Forensic Checks",
-          "iconClass": "fas fa-search negative",
-          "points": [
-              "<strong>OCF vs NI Divergence</strong> - Recurring significant gaps between Net Income and OCF growth (FY21, FY22, FY24), mainly due to working capital swings.",
-              "<strong>Inventory Growth (FY24)</strong> - Inventory grew (+12.0%) significantly faster than COGS (+4.6%) and Revenue (+5.0%), a potential flag for efficiency or overstocking.",
-              "<strong>A/R Growth (FY24)</strong> - Accounts Receivable grew (+19.1%) much faster than Revenue (+5.0%), warranting scrutiny of collection efficiency or terms.",
-              "<strong>Working Capital Volatility</strong> - Large, unpredictable swings in `growthChangeInWorkingCapital` impact OCF reliability quarter-to-quarter.",
-              "<strong>Data Note</strong> - Provided Q2 FY25 data appears inconsistent with external reports and should be disregarded for trend analysis."
-          ],
-          "footer": "Key flags in FY24 Inventory/AR growth and persistent OCF volatility."
-        },
-        {
-          "title": "Solvency & Liquidity",
-          "iconClass": "fas fa-balance-scale positive",
-          "points": [
-              "<strong>Conservative Leverage</strong> - Maintains low debt levels relative to equity and cash flow, supported by strong credit ratings (S&P upgrade cited).",
-              "<strong>Strong Cash Position</strong> - Consistently holds significant cash and equivalents.",
-              "<strong>Debt Management</strong> - Pattern of paying down short-term debt; overall debt levels stable or declining in recent years (except FY20).",
-              "<strong>Healthy Coverage</strong> - Strong operating income growth generally supports robust interest coverage.",
-              "<strong>Shareholder Returns</strong> - Consistent dividend payments (including special dividends) and share repurchases funded by strong cash generation."
-          ],
-          "footer": "Strong balance sheet, conservative debt policy, and ample liquidity."
-        }
-      ]
+        "sectionSubtitle": "Investigating cross-statement divergences, forensic flags, and solvency indicators",
+        "cards": [
+            {
+                "title": "Forensic Checks",
+                "iconClass": "fas fa-search negative",
+                "points": [
+                    "<strong>OCF vs NI Divergence</strong> - Recurring significant gaps between Net Income and OCF growth (FY21, FY22, FY24), mainly due to working capital swings.",
+                    "<strong>Inventory Growth (FY24)</strong> - Inventory grew (+12.0%) significantly faster than COGS (+4.6%) and Revenue (+5.0%), a potential flag for efficiency or overstocking.",
+                    "<strong>A/R Growth (FY24)</strong> - Accounts Receivable grew (+19.1%) much faster than Revenue (+5.0%), warranting scrutiny of collection efficiency or terms.",
+                    "<strong>Working Capital Volatility</strong> - Large, unpredictable swings in `growthChangeInWorkingCapital` impact OCF reliability quarter-to-quarter.",
+                    "<strong>Data Note</strong> - Provided Q2 FY25 data appears inconsistent with external reports and should be disregarded for trend analysis."
+                ],
+                "footer": "Key flags in FY24 Inventory/AR growth and persistent OCF volatility."
+            },
+            {
+                "title": "Solvency & Liquidity",
+                "iconClass": "fas fa-balance-scale positive",
+                "points": [
+                    "<strong>Conservative Leverage</strong> - Maintains low debt levels relative to equity and cash flow, supported by strong credit ratings (S&P upgrade cited).",
+                    "<strong>Strong Cash Position</strong> - Consistently holds significant cash and equivalents.",
+                    "<strong>Debt Management</strong> - Pattern of paying down short-term debt; overall debt levels stable or declining in recent years (except FY20).",
+                    "<strong>Healthy Coverage</strong> - Strong operating income growth generally supports robust interest coverage.",
+                    "<strong>Shareholder Returns</strong> - Consistent dividend payments (including special dividends) and share repurchases funded by strong cash generation."
+                ],
+                "footer": "Strong balance sheet, conservative debt policy, and ample liquidity."
+            }
+        ]
     },
     "investmentConsiderations": {
-      "sectionSubtitle": "Balancing COST's operational strengths against moderating growth and financial flags",
-      "tableData": [
-        { "factor": "<strong>Membership Model</strong>", "opportunities": "Stable, high-margin recurring revenue stream, drives loyalty, potential for fee increases", "risks": "Maintaining high renewal rates, sensitivity to consumer spending for renewals" },
-        { "factor": "<strong>Revenue</strong>", "opportunities": "Resilient comparable sales, growth in e-commerce and international markets", "risks": "Growth moderation post-pandemic, intense retail competition, macroeconomic headwinds" },
-        { "factor": "<strong>Profitability</strong>", "opportunities": "Effective cost controls, benefits from membership fees, strong brand pricing power", "risks": "Margin pressure from inflation or competition, managing SG&A growth" },
-        { "factor": "<strong>Cash Flow</strong>", "opportunities": "Strong underlying cash generation supports returns and investment", "risks": "High OCF volatility due to working capital swings, FY24 NI vs OCF divergence" },
-        { "factor": "<strong>Financial Health</strong>", "opportunities": "Conservative balance sheet, low debt, strong credit rating provides stability", "risks": "Managing large working capital fluctuations effectively" },
-        { "factor": "<strong>Working Capital</strong>", "opportunities": "Efficient negative working capital cycle funds operations", "risks": "FY24 spikes in Inventory and A/R growth relative to sales need monitoring" },
-        { "factor": "<strong>Valuation</strong>", "opportunities": "Premium valuation reflects strong fundamentals and investor confidence", "risks": "High P/E multiple may limit upside or increase downside volatility" }
-      ]
+        "sectionSubtitle": "Balancing COST's operational strengths against moderating growth and financial flags",
+        "tableData": [
+            {
+                "factor": "<strong>Membership Model</strong>",
+                "opportunities": "Stable, high-margin recurring revenue stream, drives loyalty, potential for fee increases",
+                "risks": "Maintaining high renewal rates, sensitivity to consumer spending for renewals"
+            },
+            {
+                "factor": "<strong>Revenue</strong>",
+                "opportunities": "Resilient comparable sales, growth in e-commerce and international markets",
+                "risks": "Growth moderation post-pandemic, intense retail competition, macroeconomic headwinds"
+            },
+            {
+                "factor": "<strong>Profitability</strong>",
+                "opportunities": "Effective cost controls, benefits from membership fees, strong brand pricing power",
+                "risks": "Margin pressure from inflation or competition, managing SG&A growth"
+            },
+            {
+                "factor": "<strong>Cash Flow</strong>",
+                "opportunities": "Strong underlying cash generation supports returns and investment",
+                "risks": "High OCF volatility due to working capital swings, FY24 NI vs OCF divergence"
+            },
+            {
+                "factor": "<strong>Financial Health</strong>",
+                "opportunities": "Conservative balance sheet, low debt, strong credit rating provides stability",
+                "risks": "Managing large working capital fluctuations effectively"
+            },
+            {
+                "factor": "<strong>Working Capital</strong>",
+                "opportunities": "Efficient negative working capital cycle funds operations",
+                "risks": "FY24 spikes in Inventory and A/R growth relative to sales need monitoring"
+            },
+            {
+                "factor": "<strong>Valuation</strong>",
+                "opportunities": "Premium valuation reflects strong fundamentals and investor confidence",
+                "risks": "High P/E multiple may limit upside or increase downside volatility"
+            }
+        ]
     },
     "conclusion": {
-      "sectionSubtitle": "Synthesizing COST's financial trajectory and investment profile",
-      "verdictTitle": "Resilient Retailer Navigating Moderation: Strong Model Tempered by Flags",
-      "verdictRating": "Stable / Low-Medium Risk",
-      "paragraphs": [
-          "Costco demonstrates remarkable resilience, leveraging its powerful <strong>membership model and strong value proposition</strong> to navigate a period of growth moderation following pandemic-era highs. While revenue growth slowed in FY23-FY24, profitability remained robust, with Net Income growth outpacing sales in FY24, highlighting effective cost management and the benefit of high-margin membership fees.",
-          "Forensic analysis reveals key areas for monitoring despite the overall financial strength. The most notable are the <strong>significant volatility in Operating Cash Flow</strong>, driven by large swings in working capital inherent to Costco's efficient model, and specific flags in FY2024 where <strong>Inventory (+12.0%) and Accounts Receivable (+19.1%) grew substantially faster than Revenue (+5.0%)</strong>. These divergences require scrutiny regarding operational efficiency and asset management.",
-          "Despite these flags, Costco's <strong>conservative financial policies, low debt, strong balance sheet, and consistent cash generation</strong> provide significant stability. The company presents a profile of a high-quality, mature retailer, but investors should monitor working capital efficiency and be mindful of the stock's typically high valuation. A <strong>stable outlook</strong> is appropriate, contingent on effective management of inventory and receivables."
-      ],
-      "monitoringPointsTitle": "Key Monitoring Points",
-      "monitoringPoints": [
-        "<strong>Inventory & A/R Turnover:</strong> Track Days Sales Outstanding (DSO) and Inventory Turnover/Days Inventory Outstanding (DIO) for normalization relative to sales.",
-        "<strong>Working Capital Efficiency:</strong> Monitor components (Inventory, Payables, Deferred Revenue) and their impact on the cash conversion cycle.",
-        "<strong>Cash Flow Conversion:</strong> Assess the relationship between Net Income and Operating Cash Flow for continued divergence or alignment."
-      ]
+        "sectionSubtitle": "Synthesizing COST's financial trajectory and investment profile",
+        "verdictTitle": "Resilient Retailer Navigating Moderation: Strong Model Tempered by Flags",
+        "verdictRating": "Stable / Low-Medium Risk",
+        "paragraphs": [
+            "Costco demonstrates remarkable resilience, leveraging its powerful <strong>membership model and strong value proposition</strong> to navigate a period of growth moderation following pandemic-era highs. While revenue growth slowed in FY23-FY24, profitability remained robust, with Net Income growth outpacing sales in FY24, highlighting effective cost management and the benefit of high-margin membership fees.",
+            "Forensic analysis reveals key areas for monitoring despite the overall financial strength. The most notable are the <strong>significant volatility in Operating Cash Flow</strong>, driven by large swings in working capital inherent to Costco's efficient model, and specific flags in FY2024 where <strong>Inventory (+12.0%) and Accounts Receivable (+19.1%) grew substantially faster than Revenue (+5.0%)</strong>. These divergences require scrutiny regarding operational efficiency and asset management.",
+            "Despite these flags, Costco's <strong>conservative financial policies, low debt, strong balance sheet, and consistent cash generation</strong> provide significant stability. The company presents a profile of a high-quality, mature retailer, but investors should monitor working capital efficiency and be mindful of the stock's typically high valuation. A <strong>stable outlook</strong> is appropriate, contingent on effective management of inventory and receivables."
+        ],
+        "monitoringPointsTitle": "Key Monitoring Points",
+        "monitoringPoints": [
+            "<strong>Inventory & A/R Turnover:</strong> Track Days Sales Outstanding (DSO) and Inventory Turnover/Days Inventory Outstanding (DIO) for normalization relative to sales.",
+            "<strong>Working Capital Efficiency:</strong> Monitor components (Inventory, Payables, Deferred Revenue) and their impact on the cash conversion cycle.",
+            "<strong>Cash Flow Conversion:</strong> Assess the relationship between Net Income and Operating Cash Flow for continued divergence or alignment."
+        ]
     },
     "chartData": {
-      "labels": ["FY2020", "FY2021", "FY2022", "FY2023", "FY2024"],
-      "revenueGrowth": [9.2, 17.5, 15.8, 6.8, 5.0],
-      "arGrowth": [0.0, 0.0, 24.3, -1.7, 19.1],
-      "cfoGrowth": [39.4, 1.1, -17.5, 49.7, 2.4],
-      "niGrowth": [9.4, 25.1, 16.7, 7.7, 17.1],
-      "annotations": {
-          "arChart": [
-               { "xVal": 2, "yVal": 24.3, "content": ["A/R Spike", "(FY22)"], "yAdj": -15, "xAdj": 0 },
-               { "xVal": 4, "yVal": 19.1, "content": ["A/R Spike", "(FY24)"], "yAdj": -15, "xAdj": 0 }
-          ],
-          "cashFlowChart": [
-               { "xVal": 2, "yVal": -17.5, "content": ["OCF Dip", "(FY22)"], "yAdj": 25, "xAdj": 0 },
-               { "xVal": 4, "yVal": 2.4, "content": ["OCF Slowdown", "(FY24)"], "yAdj": 25, "xAdj": 0 }
-          ]
-      },
-      "divergenceIndices": {
-          "arChart": [2, 4],
-          "cashFlowChart": [1, 2, 4]
-      }
+        "labels": [
+            "FY2020",
+            "FY2021",
+            "FY2022",
+            "FY2023",
+            "FY2024"
+        ],
+        "revenueGrowth": [
+            9.2,
+            17.5,
+            15.8,
+            6.8,
+            5.0
+        ],
+        "arGrowth": [
+            0.0,
+            0.0,
+            24.3,
+            -1.7,
+            19.1
+        ],
+        "cfoGrowth": [
+            39.4,
+            1.1,
+            -17.5,
+            49.7,
+            2.4
+        ],
+        "niGrowth": [
+            9.4,
+            25.1,
+            16.7,
+            7.7,
+            17.1
+        ]
     }
-  }
+}
