@@ -1,0 +1,126 @@
+{
+  "company": {
+    "name": "e.l.f. Beauty, Inc.",
+    "ticker": "ELF",
+    "analysisTitle": "Forensic Financial Analysis",
+    "heroSubtitle": "Comprehensive examination of ELF's explosive growth trajectory, profitability dynamics, and critical cash flow considerations amid rapid expansion.",
+    "pageTitle": "ForensicFinancials | e.l.f. Beauty (ELF) Analysis"
+  },
+  "trendAnalysis": {
+    "sectionSubtitle": "Examining ELF's hyper-growth phase and operational dynamics (FY2020-FY2024)",
+    "cards": [
+      {
+        "title": "Revenue Trajectory",
+        "iconClass": "fas fa-chart-line positive",
+        "points": [
+          "<strong>Explosive Acceleration</strong> - Revenue growth surged from +5.8% (FY20) to +47.6% (FY23) and +76.9% (FY24)",
+          "<strong>Market Share Gains</strong> - Growth significantly outpaces the industry, driven by strong brand momentum and product strategy",
+          "<strong>Acquisition Boost</strong> - FY24 growth includes contribution from the Naturium acquisition (Oct 2023)",
+          "<strong>Quarterly Volatility</strong> - Sequential growth fluctuates, with potential seasonality (Q3/Q4 stronger)"
+        ],
+        "footer": "Exceptional, accelerating revenue growth driven by organic gains and acquisition"
+      },
+      {
+        "title": "Profitability Trends",
+        "iconClass": "fas fa-chart-pie neutral",
+        "points": [
+          "<strong>Strong Recent Growth</strong> - Net Income surged +182.6% (FY23) and +107.5% (FY24)",
+          "<strong>Historical Volatility</strong> - Significant dip in FY21 (-65.2%) despite revenue growth, indicating past margin pressures",
+          "<strong>Operating Leverage</strong> - Recent profit acceleration suggests benefits of scale, though SG&A investments remain high",
+          "<strong>Gross Margin Strength</strong> - Gross Profit growth generally tracked or exceeded revenue growth, indicating stable/improving margins"
+        ],
+        "footer": "Volatile history but strong recent net income growth; operating leverage emerging"
+      },
+      {
+        "title": "Cash Flow Generation",
+        "iconClass": "fas fa-chart-bar negative",
+        "points": [
+          "<strong>Major Red Flag (FY24)</strong> - Net Income +107.5% but Operating Cash Flow (OCF) *declined* -30.2%",
+          "<strong>Working Capital Strain</strong> - Divergence driven by significant cash consumed by working capital, especially receivables growth (+82.2%)",
+          "<strong>Recurring Pattern</strong> - OCF growth lagged NI growth significantly in FY23 (+4.2% vs +182.6%) and FY22 (-33.8% vs +249.3%)",
+          "<strong>Growth Funding Needs</strong> - Rapid expansion requires substantial investment in working capital, pressuring OCF"
+        ],
+        "footer": "Significant, recurring divergence between Net Income and OCF due to working capital demands"
+      }
+    ]
+  },
+  "financialMetrics": {
+    "sectionSubtitle": "Investigating cross-statement divergences, forensic flags, and solvency indicators",
+    "cards": [
+       {
+        "title": "Forensic Checks",
+        "iconClass": "fas fa-search negative",
+        "points": [
+            "<strong>OCF vs NI Divergence</strong> - Persistent and significant gap (FY22, FY23, FY24) raises earnings quality/cash conversion questions.",
+            "<strong>A/R vs Revenue</strong> - Receivables growth slightly outpaced revenue growth in FY24 (+82.2% vs +76.9%) and significantly in FY21 (+35.2% vs +12.5%).",
+            "<strong>Inventory Efficiency</strong> - Positive sign: Inventory growth significantly lagged COGS growth in FY23/FY24, suggesting improved turns.",
+            "<strong>Goodwill Spike (FY24)</strong> - +98.5% increase clearly linked to the Naturium acquisition (~$169M Goodwill added).",
+            "<strong>Working Capital Volatility</strong> - Large swings in working capital components significantly impact OCF period-over-period."
+        ],
+        "footer": "Major OCF vs NI divergence flag; improved inventory management noted"
+      },
+      {
+        "title": "Solvency & Liquidity",
+        "iconClass": "fas fa-balance-scale positive",
+        "points": [
+            "<strong>Decreasing Leverage</strong> - Debt/Equity ratio has trended down significantly over 5 years (now ~33%).",
+            "<strong>Strong Interest Coverage</strong> - EBIT covers interest expense comfortably (reported ~7-12x recently).",
+            "<strong>Internal Funding Focus</strong> - Growth primarily funded by retained earnings and equity issuance.",
+            "<strong>Acquisition Financing</strong> - Naturium deal funded via cash-on-hand, stock issuance, and potentially credit facilities.",
+            "<strong>Cash Conversion Challenge</strong> - While solvent, weak OCF relative to debt and growth needs requires monitoring."
+        ],
+        "footer": "Healthy balance sheet and coverage, but OCF generation lags growth needs"
+      }
+    ]
+  },
+  "investmentConsiderations": {
+    "sectionSubtitle": "Balancing ELF's phenomenal growth against cash flow conversion challenges",
+    "tableData": [
+      { "factor": "<strong>Market Position</strong>", "opportunities": "Rapidly growing market share, strong brand loyalty, effective digital strategy", "risks": "Intense competition, maintaining momentum in trend-driven industry" },
+      { "factor": "<strong>Revenue</strong>", "opportunities": "Continued organic growth potential, international expansion, Naturium contribution", "risks": "Sustainability of extreme growth rates, potential market saturation/slowdown" },
+      { "factor": "<strong>Profitability</strong>", "opportunities": "Operating leverage potential with scale, strong gross margins", "risks": "Volatile net income history, high marketing spend requirements, integration costs" },
+      { "factor": "<strong>Cash Flow</strong>", "opportunities": "Potential for improved cash conversion as growth moderates or WC managed better", "risks": "Persistent OCF lag vs NI, high working capital needs straining cash, weak OCF-to-debt coverage" },
+      { "factor": "<strong>Financial Health</strong>", "opportunities": "Strong balance sheet, declining leverage provides flexibility", "risks": "Cash flow generation needs to catch up to support sustained high growth/investments" },
+      { "factor": "<strong>Acquisition Strategy</strong>", "opportunities": "Naturium expands skincare presence, potential for cross-selling and synergies", "risks": "Integration execution risk, achieving ROI on acquisition price" },
+      { "factor": "<strong>Inventory Management</strong>", "opportunities": "Recent efficiency gains suggest strong operational control", "risks": "Maintaining efficiency without stockouts during high growth, potential for future build-up if demand slows" }
+    ]
+  },
+  "conclusion": {
+    "sectionSubtitle": "Synthesizing e.l.f. Beauty's financial trajectory and investment profile",
+    "verdictTitle": "Hyper-Growth Meets Cash Conversion Test",
+    "verdictRating": "Cautious / Medium-High Risk",
+    "paragraphs": [
+      "e.l.f. Beauty stands out for its <strong>phenomenal revenue acceleration</strong>, achieving an exceptional +76.9% growth in FY2024, driven by strong organic market share gains and the Naturium acquisition. This top-line success has translated into impressive recent <strong>Net Income growth</strong> (+107.5% in FY24), supported by healthy gross margins and emerging operating leverage.",
+      "However, the forensic analysis reveals a critical counterpoint: <strong>persistently weak Operating Cash Flow (OCF) conversion</strong>. The stark divergence in FY2024 (NI +107.5% vs. OCF -30.2%), echoing similar gaps in prior years, is a major red flag. This is primarily driven by the substantial investment required in <strong>working capital (especially receivables)</strong> to fuel hyper-growth, raising questions about the quality and cash realization of reported earnings.",
+      "While ELF boasts a <strong>strong balance sheet</strong> with declining leverage and efficient inventory management recently, the sustainability of its trajectory hinges on improving cash generation. Investors must weigh the allure of explosive growth against the risks associated with volatile OCF and high working capital demands. A <strong>cautious approach</strong> is warranted, focusing on cash flow dynamics."
+    ],
+    "monitoringPointsTitle": "Key Monitoring Points",
+    "monitoringPoints": [
+      "<strong>Cash Flow Conversion:</strong> Track the OCF-to-Net Income ratio for signs of improvement and alignment.",
+      "<strong>Working Capital Management:</strong> Monitor Days Sales Outstanding (DSO) and overall working capital levels relative to revenue growth.",
+      "<strong>Growth Sustainability:</strong> Assess whether revenue growth rates are moderating towards more sustainable levels.",
+      "<strong>Naturium Integration:</strong> Evaluate progress on integrating the acquisition and its contribution to growth and profitability."
+    ]
+  },
+  "chartData": {
+    "labels": ["FY2020", "FY2021", "FY2022", "FY2023", "FY2024"],
+    "revenueGrowth": [5.8, 12.5, 23.3, 47.6, 76.9],
+    "arGrowth": [-19.1, 35.2, 13.4, 49.1, 82.2],
+    "cfoGrowth": [-20.3, -33.5, -33.8, 4.2, -30.2],
+    "niGrowth": [15.2, -65.2, 249.3, 182.6, 107.5],
+    "annotations": {
+        "arChart": [
+             { "xVal": 1, "yVal": 35.2, "content": ["A/R Spike", "(FY21)"], "yAdj": -20, "xAdj": 0 },
+             { "xVal": 4, "yVal": 82.2, "content": ["A/R > Rev", "(FY24)"], "yAdj": -20, "xAdj": 0 }
+        ],
+        "cashFlowChart": [
+             { "xVal": 2, "yVal": -33.8, "content": ["OCF Decline", "(FY22)"], "yAdj": 25, "xAdj": 0 },
+             { "xVal": 4, "yVal": -30.2, "content": ["OCF Decline", "(FY24)"], "yAdj": 25, "xAdj": 0 }
+        ]
+    },
+    "divergenceIndices": {
+        "arChart": [1, 4],
+        "cashFlowChart": [2, 3, 4]
+    }
+  }
+}
