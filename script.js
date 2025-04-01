@@ -1,3 +1,4 @@
+// --- Global Variables & Constants ---
 const DEFAULT_TICKER = 'JD'; // Default ticker to load on page init
 const DATA_PATH = 'DATA/'; // Path to the data directory
 let currentTicker = null; // Keep track of the currently loaded ticker
@@ -5,10 +6,9 @@ let revenueChartInstance = null;
 let arChartInstance = null;
 let cashFlowChartInstance = null;
 
-// Determine current page using body class or pathname
-const isLandingPage = document.body.classList.contains('landing-page');
+// Determine current page
 const isAnalysisPage = window.location.pathname.includes('analysis.html');
-
+const isLandingPage = !isAnalysisPage;
 
 // --- Helper Functions ---
 const select = (el, all = false) => {
@@ -148,15 +148,11 @@ const populateList = (ulId, listItems, useInnerHTML = false) => {
 
 // Helper to show loading/error messages (Primarily for analysis page)
 const showMessage = (message, type = 'loading') => {
-    // Only run this function on the analysis page
-    if (!isAnalysisPage) return;
-
     const messageArea = select('#loading-error-message');
     const mainContent = select('#main-content');
-    if (!messageArea || !mainContent) return;
+    if (!messageArea || !mainContent) return; // Only run on analysis page
 
     const messageP = messageArea.querySelector('p');
-    if (!messageP) return; // Ensure paragraph exists
 
     if (message) {
         messageP.innerHTML = message; // Use innerHTML to allow icons

@@ -8,8 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<!-- Added body class for landing page specific styles -->
-<body class="landing-page">
+<body>
     <header id="header">
         <div class="container">
             <nav>
@@ -21,9 +20,10 @@
                 </form>
                 <!-- END: Added Header Search Form -->
                 <ul class="nav-links">
+                    <li><a href="#hero">Home</a></li>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#methodology">Methodology</a></li>
-                    <!-- Removed Analyze link: <li><a href="analysis.html" class="cta-nav">Analyze <i class="fas fa-arrow-right"></i></a></li> -->
+                    <li><a href="#about">About</a></li>
                 </ul>
                 <button class="mobile-menu" aria-label="Toggle menu">
                     <i class="fas fa-bars"></i>
@@ -34,7 +34,7 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="hero">
+        <section class="hero" id="hero">
             <div class="container">
                 <h1>Forensic Financial Statement Analysis</h1>
                 <p>Detect accounting anomalies and assess financial health with professional-grade analysis tools</p>
@@ -57,8 +57,7 @@
                     <h2>Core Analytical Features</h2>
                     <p>Professional tools to uncover financial insights</p>
                 </div>
-                <!-- Added class "feature-cards" for specific styling -->
-                <div class="cards feature-cards">
+                <div class="cards">
                     <!-- Feature Cards - Reusing existing card component styles -->
                     <div class="card">
                         <div class="card-header">
@@ -158,6 +157,19 @@
                 </form>
             </div>
         </section>
+        <!-- About Section (Placeholder) -->
+        <section class="section" id="about">
+            <div class="container">
+                <div class="section-title">
+                    <h2>About Us</h2>
+                    <p>Coming soon</p>
+                </div>
+                <!-- Placeholder content -->
+                <div class="about-content">
+                    <p>This section is currently under development.</p>
+                </div>
+            </div>
+        </section>
     </main>
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
@@ -169,9 +181,10 @@
             <div class="footer-content">
                 <div class="footer-logo">Forensic<span>Financials</span> by Cho</div>
                 <ul class="footer-links">
+                    <li><a href="#hero">Home</a></li>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#methodology">Methodology</a></li>
-                    <!-- Removed Analysis Tool link: <li><a href="analysis.html">Analysis Tool</a></li> -->
+                    <li><a href="#about">About</a></li>
                 </ul>
             </div>
             <div class="copyright">
