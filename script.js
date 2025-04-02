@@ -1,5 +1,8 @@
 const DEFAULT_TICKER = 'AAPL';
 const DATA_PATH = 'DATA/';
+const AR_REVENUE_DIVERGENCE_THRESHOLD = 15; // Threshold in percentage points
+const NI_OCF_DIVERGENCE_THRESHOLD = 30;   // Threshold in percentage points
+
 let currentTicker = null;
 let revenueChartInstance = null;
 let arChartInstance = null;
@@ -8,7 +11,6 @@ let cashFlowChartInstance = null;
 const isAnalysisPage = window.location.pathname.includes('analysis.html');
 const isLandingPage = !isAnalysisPage;
 
-// --- Helper Functions (select, on, onScroll, populateElement, etc. - unchanged) ---
 const select = (el, all = false) => {
     el = el.trim();
     if (all) {
@@ -48,7 +50,7 @@ const populateElement = (selector, data, property = 'textContent') => {
             console.warn(`Data not found or null/undefined for selector: ${selector}`);
         }
     } else {
-        // console.warn(`Element with selector "${selector}" not found.`); // Optional: Less verbose logging
+        // console.warn(`Element not found for selector: ${selector}`); // Optional: uncomment for debugging
     }
 };
 
@@ -165,7 +167,6 @@ const destroyCharts = () => {
     console.log("Previous chart instances destroyed.");
 };
 
-// --- Event Listeners (Mobile Menu, Search Forms, Header Scroll, Back to Top - unchanged) ---
 const mobileMenuButton = select('.mobile-menu');
 const navLinks = select('.nav-links');
 const mobileMenuIcon = select('.mobile-menu i');
@@ -242,11 +243,9 @@ if (backToTopButton) {
     });
 }
 
-// --- Analysis Page Logic ---
 if (isAnalysisPage) {
     document.addEventListener('DOMContentLoaded', function() {
 
-        // --- Chart.js and Plugin Checks (unchanged) ---
         if (typeof Chart === 'undefined') {
             console.error("Chart.js library not loaded.");
             showMessage('<i class="fas fa-exclamation-triangle"></i> Chart library failed to load. Please refresh.', 'error');
@@ -265,7 +264,6 @@ if (isAnalysisPage) {
             console.error("Error registering Chartjs-plugin-annotation:", error);
         }
 
-        // --- Chart Configuration (unchanged) ---
         const commonChartOptions = {
             responsive: true,
             maintainAspectRatio: false,
@@ -282,7 +280,8 @@ if (isAnalysisPage) {
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            if (context.dataset.label === 'Divergence') return null; // Hide tooltip for the dummy legend item
+                            // Hide tooltip for the 'Divergence' legend item
+                            if (context.dataset.label === 'Divergence') return null;
                             let label = context.dataset.label || '';
                             if (label) label += ': ';
                             if (context.parsed.y !== null) {
@@ -296,8 +295,8 @@ if (isAnalysisPage) {
                     titleFont: { size: 13, weight: 'bold' },
                     padding: 10, cornerRadius: 4, displayColors: false
                 },
-                annotation: { // Default annotation object
-                    annotations: {}
+                annotation: {
+                    annotations: {} // Initialize empty annotations object
                 }
             },
             scales: {
@@ -328,11 +327,11 @@ if (isAnalysisPage) {
         };
 
         const divergenceColor = '#c5817e'; // Danger color for divergence
-        const primaryColor = '#c5a47e';
-        const secondaryColor = '#1c2541';
-        const mutedColor = '#6c757d';
+        const primaryColor = '#c5a47e';    // Primary color
+        const secondaryColor = '#1c2541';  // Secondary color
+        const mutedColor = '#6c757d';      // Muted color for annotations
 
-        // --- Chart Helper Functions (unchanged) ---
+        // Helper function to create annotation labels
         const createAnnotationLabel = (xVal, yVal, content, yAdj = -15, xAdj = 0) => ({
             type: 'label', xValue: xVal, yValue: yVal, content: content,
             color: mutedColor, font: { size: window.innerWidth <= 768 ? 9 : 10, weight: '600' },
@@ -342,25 +341,32 @@ if (isAnalysisPage) {
             callout: { display: true, position: 'bottom', borderWidth: 1, borderColor: 'rgba(0,0,0,0.1)', margin: 5 }
         });
 
+        // Helper function to create the dummy dataset for the divergence legend
         const createDivergenceLegend = () => ({
-            label: 'Divergence', pointStyle: 'rectRot', pointRadius: 5,
-            borderColor: divergenceColor, backgroundColor: divergenceColor,
-            borderWidth: 1, data: [] // Dummy data, just for legend
+            label: 'Divergence', // This label will appear in the legend
+            pointStyle: 'rectRot', // Style for the legend marker
+            pointRadius: 5,
+            borderColor: divergenceColor,
+            backgroundColor: divergenceColor,
+            borderWidth: 1,
+            data: [] // No actual data needed, just for the legend entry
         });
 
+        // Callback function for point background color based on divergence indices
         const pointStyleCallback = (indices = [], normalColor, highlightColor) => (context) => {
             return indices.includes(context.dataIndex) ? highlightColor : normalColor;
         };
 
+        // Callback function for point radius based on divergence indices
         const pointRadiusCallback = (indices = [], normalRadius = 4, highlightRadius = 6) => (context) => {
             return indices.includes(context.dataIndex) ? highlightRadius : normalRadius;
         };
 
+        // Callback function for point hover radius based on divergence indices
         const pointHoverRadiusCallback = (indices = [], normalRadius = 6, highlightRadius = 8) => (context) => {
             return indices.includes(context.dataIndex) ? highlightRadius : normalRadius;
         };
 
-        // --- Main Data Loading and Processing Function ---
         const loadAnalysisData = async (ticker) => {
             ticker = ticker.trim().toUpperCase();
             if (!ticker) {
@@ -393,18 +399,22 @@ if (isAnalysisPage) {
                 }
 
                 console.log(`Analysis data for ${ticker} loaded successfully.`);
-                currentTicker = ticker;
+                currentTicker = ticker; // Update current ticker
 
-                // --- Populate Static Page Elements (unchanged) ---
+                // --- Populate UI Elements ---
                 populateElement('[data-dynamic="page-title"]', data.company?.pageTitle || `ForensicFinancials | ${ticker} Analysis`);
                 populateElement('[data-dynamic="hero-title"]', `${data.company?.name || ticker} (${data.company?.ticker || ticker})<br>${data.company?.analysisTitle || 'Financial Analysis'}`, 'innerHTML');
                 populateElement('[data-dynamic="hero-subtitle"]', data.company?.heroSubtitle || `Analysis details for ${ticker}.`);
+
                 populateElement('[data-dynamic="trends-subtitle"]', data.trendAnalysis?.sectionSubtitle || '');
                 generateCards('trends-cards-container', data.trendAnalysis?.cards || []);
+
                 populateElement('[data-dynamic="financials-subtitle"]', data.financialMetrics?.sectionSubtitle || '');
                 generateCards('financials-cards-container', data.financialMetrics?.cards || []);
+
                 populateElement('[data-dynamic="opportunities-subtitle"]', data.investmentConsiderations?.sectionSubtitle || '');
                 populateTable('opportunities-table-body', data.investmentConsiderations?.tableData || []);
+
                 populateElement('[data-dynamic="conclusion-subtitle"]', data.conclusion?.sectionSubtitle || '');
                 populateElement('[data-dynamic="verdict-title"]', data.conclusion?.verdictTitle || `Verdict for ${ticker}`);
                 populateElement('[data-dynamic="verdict-rating"]', data.conclusion?.verdictRating || 'N/A');
@@ -415,9 +425,9 @@ if (isAnalysisPage) {
                      paragraphsContainer.innerHTML = '<p>Conclusion details not available.</p>';
                 }
                 populateElement('[data-dynamic="monitoring-title"]', data.conclusion?.monitoringPointsTitle || 'Key Monitoring Points');
-                populateList('monitoring-points-list', data.conclusion?.monitoringPoints || [], true);
+                populateList('monitoring-points-list', data.conclusion?.monitoringPoints || [], true); // Use innerHTML for list items
 
-                // --- Chart Data Preparation ---
+                // --- Chart Data Processing ---
                 const chartData = data.chartData || {};
                 const chartLabels = chartData.labels || [];
                 const revenueGrowth = chartData.revenueGrowth || [];
@@ -425,54 +435,34 @@ if (isAnalysisPage) {
                 const cfoGrowth = chartData.cfoGrowth || [];
                 const niGrowth = chartData.niGrowth || [];
 
-                // --- *** NEW: Divergence Calculation *** ---
-                const AR_DIVERGENCE_THRESHOLD = 15.0;
-                const NI_CFO_DIVERGENCE_THRESHOLD = 30.0;
-
-                let arDivergenceIndices = [];
-                let arAnnotations = {};
-                let cfDivergenceIndices = [];
-                let cfAnnotations = {};
-
-                chartLabels.forEach((year, index) => {
-                    // A/R vs Revenue Divergence Check
-                    if (revenueGrowth[index] !== undefined && arGrowth[index] !== undefined) {
-                        const diff = Math.abs(arGrowth[index] - revenueGrowth[index]);
-                        if (diff >= AR_DIVERGENCE_THRESHOLD) {
-                            arDivergenceIndices.push(index);
-                            // Create annotation for this divergence point
-                            arAnnotations[`arDiv${index}`] = createAnnotationLabel(
-                                index, // xValue (index)
-                                arGrowth[index], // yValue (A/R growth rate)
-                                [`A/R Divergence`, `(${year})`], // Content
-                                -20 // yAdjust slightly more
-                            );
-                            console.log(`A/R Divergence detected for ${year} (Index ${index}): AR ${arGrowth[index]}%, Rev ${revenueGrowth[index]}%, Diff ${diff.toFixed(1)}%`);
+                // --- Calculate Divergence Indices ---
+                let calculatedArDivergenceIndices = [];
+                if (Array.isArray(revenueGrowth) && Array.isArray(arGrowth) && revenueGrowth.length === arGrowth.length) {
+                    for (let i = 0; i < revenueGrowth.length; i++) {
+                        if (Math.abs(revenueGrowth[i] - arGrowth[i]) >= AR_REVENUE_DIVERGENCE_THRESHOLD) {
+                            calculatedArDivergenceIndices.push(i);
                         }
                     }
+                    console.log("Calculated AR/Revenue Divergence Indices:", calculatedArDivergenceIndices);
+                } else {
+                    console.warn("Revenue or A/R growth data missing or mismatched for divergence calculation.");
+                }
 
-                    // NI vs CFO Divergence Check
-                    if (niGrowth[index] !== undefined && cfoGrowth[index] !== undefined) {
-                        const diff = Math.abs(niGrowth[index] - cfoGrowth[index]);
-                        if (diff >= NI_CFO_DIVERGENCE_THRESHOLD) {
-                            cfDivergenceIndices.push(index);
-                            // Create annotation for this divergence point
-                            cfAnnotations[`cfDiv${index}`] = createAnnotationLabel(
-                                index, // xValue (index)
-                                niGrowth[index], // yValue (NI growth rate)
-                                [`NI/CFO Divergence`, `(${year})`], // Content
-                                -20 // yAdjust slightly more
-                            );
-                             console.log(`NI/CFO Divergence detected for ${year} (Index ${index}): NI ${niGrowth[index]}%, CFO ${cfoGrowth[index]}%, Diff ${diff.toFixed(1)}%`);
+                let calculatedCfDivergenceIndices = [];
+                if (Array.isArray(niGrowth) && Array.isArray(cfoGrowth) && niGrowth.length === cfoGrowth.length) {
+                    for (let i = 0; i < niGrowth.length; i++) {
+                        if (Math.abs(niGrowth[i] - cfoGrowth[i]) >= NI_OCF_DIVERGENCE_THRESHOLD) {
+                            calculatedCfDivergenceIndices.push(i);
                         }
                     }
-                });
-                // --- *** End of Divergence Calculation *** ---
+                     console.log("Calculated NI/OCF Divergence Indices:", calculatedCfDivergenceIndices);
+                } else {
+                     console.warn("Net Income or CFO growth data missing or mismatched for divergence calculation.");
+                }
 
+                // --- Initialize Charts ---
 
-                // --- Chart Initialization ---
-
-                // Revenue Chart (No divergence logic needed here)
+                // Revenue Chart
                 const revenueCtx = select('#revenueChart')?.getContext('2d');
                 if (revenueCtx) {
                     try {
@@ -482,26 +472,38 @@ if (isAnalysisPage) {
                                 labels: chartLabels,
                                 datasets: [{
                                     label: 'Annual Revenue Growth (%)',
-                                    data: revenueGrowth, // Use extracted data
+                                    data: revenueGrowth,
                                     borderColor: primaryColor, backgroundColor: 'rgba(197, 164, 126, 0.1)',
                                     borderWidth: 2.5, tension: 0.4, fill: true,
-                                    pointBackgroundColor: primaryColor, pointRadius: pointRadiusCallback([]), // No special highlighting
-                                    pointHoverRadius: pointHoverRadiusCallback([]), pointBorderColor: primaryColor
+                                    pointBackgroundColor: primaryColor,
+                                    pointRadius: pointRadiusCallback([]), // No divergence highlighting needed here
+                                    pointHoverRadius: pointHoverRadiusCallback([]),
+                                    pointBorderColor: primaryColor
                                 }]
                             },
-                            options: JSON.parse(JSON.stringify(commonChartOptions)) // Use deep copy
+                            options: JSON.parse(JSON.stringify(commonChartOptions)) // Deep copy options
                         });
                         console.log("Revenue chart initialized.");
                     } catch (error) { console.error("Error initializing Revenue Chart:", error); }
                 } else { console.warn("Canvas element #revenueChart not found."); }
 
-                // A/R Chart (with calculated divergence)
+                // AR vs Revenue Chart
                 const arCtx = select('#arChart')?.getContext('2d');
                 if (arCtx) {
                     try {
-                        // Create a deep copy of common options and add calculated annotations
+                        // Deep copy and customize options for AR chart
                         const arChartOptions = JSON.parse(JSON.stringify(commonChartOptions));
-                        arChartOptions.plugins.annotation = { annotations: arAnnotations }; // Add calculated annotations
+                        arChartOptions.plugins.annotation = { annotations: {} }; // Ensure fresh annotations object
+
+                        // Add annotations if they exist in the data
+                        if (chartData.annotations?.arChart && Array.isArray(chartData.annotations.arChart)) {
+                            chartData.annotations.arChart.forEach((anno, index) => {
+                                if (typeof anno.xVal === 'number' && typeof anno.yVal === 'number' && anno.content) {
+                                    arChartOptions.plugins.annotation.annotations[`arLabel${index + 1}`] =
+                                        createAnnotationLabel(anno.xVal, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
+                                } else { console.warn(`Invalid annotation data for arChart at index ${index}`); }
+                            });
+                        }
 
                         arChartInstance = new Chart(arCtx, {
                             type: 'line',
@@ -516,28 +518,38 @@ if (isAnalysisPage) {
                                         backgroundColor: 'transparent',
                                         borderWidth: 2,
                                         tension: 0.4,
-                                        // *** Apply calculated divergence highlighting ***
-                                        pointBackgroundColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor),
-                                        pointRadius: pointRadiusCallback(arDivergenceIndices),
-                                        pointHoverRadius: pointHoverRadiusCallback(arDivergenceIndices),
-                                        pointBorderColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor)
+                                        // Use calculated indices for styling
+                                        pointBackgroundColor: pointStyleCallback(calculatedArDivergenceIndices, secondaryColor, divergenceColor),
+                                        pointRadius: pointRadiusCallback(calculatedArDivergenceIndices),
+                                        pointHoverRadius: pointHoverRadiusCallback(calculatedArDivergenceIndices),
+                                        pointBorderColor: pointStyleCallback(calculatedArDivergenceIndices, secondaryColor, divergenceColor)
                                     },
-                                    createDivergenceLegend() // Add the legend item for 'Divergence'
+                                    createDivergenceLegend() // Add dummy dataset for legend
                                 ]
                             },
-                            options: arChartOptions // Use the options with annotations
+                            options: arChartOptions // Use the customized options
                         });
-                        console.log("A/R chart initialized with calculated divergence.");
+                        console.log("A/R chart initialized.");
                     } catch (error) { console.error("Error initializing A/R Chart:", error); }
                 } else { console.warn("Canvas element #arChart not found."); }
 
-                // Cash Flow Chart (with calculated divergence)
-                const cashFlowCtx = select('#cashFlowChart')?.getContext('d');
+                // Cash Flow vs Net Income Chart
+                const cashFlowCtx = select('#cashFlowChart')?.getContext('2d');
                 if (cashFlowCtx) {
                      try {
-                        // Create a deep copy of common options and add calculated annotations
+                        // Deep copy and customize options for Cash Flow chart
                         const cashFlowChartOptions = JSON.parse(JSON.stringify(commonChartOptions));
-                        cashFlowChartOptions.plugins.annotation = { annotations: cfAnnotations }; // Add calculated annotations
+                        cashFlowChartOptions.plugins.annotation = { annotations: {} }; // Ensure fresh annotations object
+
+                         // Add annotations if they exist in the data
+                         if (chartData.annotations?.cashFlowChart && Array.isArray(chartData.annotations.cashFlowChart)) {
+                            chartData.annotations.cashFlowChart.forEach((anno, index) => {
+                                 if (typeof anno.xVal === 'number' && typeof anno.yVal === 'number' && anno.content) {
+                                    cashFlowChartOptions.plugins.annotation.annotations[`cfLabel${index + 1}`] =
+                                        createAnnotationLabel(anno.xVal, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
+                                 } else { console.warn(`Invalid annotation data for cashFlowChart at index ${index}`); }
+                            });
+                        }
 
                         cashFlowChartInstance = new Chart(cashFlowCtx, {
                             type: 'line',
@@ -552,36 +564,36 @@ if (isAnalysisPage) {
                                         backgroundColor: 'transparent',
                                         borderWidth: 2,
                                         tension: 0.4,
-                                        // *** Apply calculated divergence highlighting ***
-                                        pointBackgroundColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor),
-                                        pointRadius: pointRadiusCallback(cfDivergenceIndices),
-                                        pointHoverRadius: pointHoverRadiusCallback(cfDivergenceIndices),
-                                        pointBorderColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor)
+                                        // Use calculated indices for styling
+                                        pointBackgroundColor: pointStyleCallback(calculatedCfDivergenceIndices, secondaryColor, divergenceColor),
+                                        pointRadius: pointRadiusCallback(calculatedCfDivergenceIndices),
+                                        pointHoverRadius: pointHoverRadiusCallback(calculatedCfDivergenceIndices),
+                                        pointBorderColor: pointStyleCallback(calculatedCfDivergenceIndices, secondaryColor, divergenceColor)
                                     },
-                                    createDivergenceLegend() // Add the legend item for 'Divergence'
+                                    createDivergenceLegend() // Add dummy dataset for legend
                                 ]
                             },
-                            options: cashFlowChartOptions // Use the options with annotations
+                            options: cashFlowChartOptions // Use the customized options
                         });
-                        console.log("Cash Flow chart initialized with calculated divergence.");
+                        console.log("Cash Flow chart initialized.");
                     } catch (error) { console.error("Error initializing Cash Flow Chart:", error); }
                 } else { console.warn("Canvas element #cashFlowChart not found."); }
 
-                // --- Final Steps (unchanged) ---
-                handleResize(); // Adjust chart sizes after creation
-                showMessage(null); // Hide loading message
+                handleResize(); // Adjust chart sizes after initialization
+
+                showMessage(null); // Hide loading/error message
                 window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
 
             } catch (error) {
                 console.error('Failed to load or process analysis data:', error);
                 showMessage(`<i class="fas fa-exclamation-triangle"></i> ${error.message}`, 'error');
-                currentTicker = null;
+                currentTicker = null; // Reset current ticker on error
             } finally {
                  if (searchButton) searchButton.disabled = false; // Re-enable search button
             }
         };
 
-        // --- Analysis Page Event Listeners (Search Form, Resize - unchanged) ---
+        // --- Event Listeners ---
         const analysisHeaderSearchForm = select('#tickerSearchForm');
         const tickerInput = select('#tickerInput');
         if (analysisHeaderSearchForm && tickerInput) {
@@ -601,6 +613,19 @@ if (isAnalysisPage) {
             console.error("Analysis page ticker search form or input element not found.");
         }
 
+        // Handle browser back/forward navigation
+        window.addEventListener('popstate', (event) => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tickerParam = urlParams.get('ticker');
+            const targetTicker = tickerParam ? tickerParam.toUpperCase() : DEFAULT_TICKER;
+            if (tickerInput) tickerInput.value = targetTicker; // Update input field
+            if (targetTicker !== currentTicker) {
+                loadAnalysisData(targetTicker);
+            }
+        });
+
+
+        // Responsive chart resizing
         let resizeTimeout;
         const handleResize = () => {
             clearTimeout(resizeTimeout);
@@ -612,13 +637,13 @@ if (isAnalysisPage) {
                     if (!chart || !chart.options) return;
 
                     try {
-                        // Adjust font sizes based on screen width
+                        // Adjust font sizes and other responsive elements
                         if (chart.options.plugins?.tooltip?.bodyFont) chart.options.plugins.tooltip.bodyFont.size = isMobile ? 11 : 12;
                         if (chart.options.scales?.x?.ticks?.font) chart.options.scales.x.ticks.font.size = isMobile ? 10 : 12;
                         if (chart.options.scales?.y?.title?.font) chart.options.scales.y.title.font.size = isMobile ? 11 : 12;
                         if (chart.options.scales?.y?.ticks?.font) chart.options.scales.y.ticks.font.size = isMobile ? 10 : 11;
                         if (chart.options.plugins?.legend?.labels?.font) chart.options.plugins.legend.labels.font.size = 10; // Keep legend font size consistent
-                        if (chart.options.plugins?.legend?.labels) { // Keep legend box size consistent
+                        if (chart.options.plugins?.legend?.labels) {
                             chart.options.plugins.legend.labels.boxWidth = 8;
                             chart.options.plugins.legend.labels.boxHeight = 8;
                         }
@@ -632,8 +657,8 @@ if (isAnalysisPage) {
                             });
                         }
 
-                        chart.resize(); // Resize canvas
-                        chart.update('none'); // Update chart without animation
+                        chart.resize();
+                        chart.update('none'); // Update without animation for resize
                     } catch(error) {
                         console.error(`Error resizing/updating chart index ${index}:`, error);
                     }
@@ -647,13 +672,15 @@ if (isAnalysisPage) {
         const urlParams = new URLSearchParams(window.location.search);
         const tickerParam = urlParams.get('ticker');
 
-        // Pre-fill search input if ticker is in URL
+        // Set initial ticker in input field
         if (tickerParam && tickerInput) {
             tickerInput.value = tickerParam.toUpperCase();
+        } else if (tickerInput) {
+            tickerInput.value = DEFAULT_TICKER; // Use default if no param
         }
 
-        // Load data for the ticker in URL or default
+        // Load data for the ticker found in URL or the default
         loadAnalysisData(tickerParam ? tickerParam.toUpperCase() : DEFAULT_TICKER);
 
     }); // End DOMContentLoaded
-} // End isAnalysisPage
+} // End isAnalysisPage check
