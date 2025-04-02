@@ -13,10 +13,12 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
+                <!-- START: Added Header Search Form -->
                 <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
                     <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
                     <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
                 </form>
+                <!-- END: Added Header Search Form -->
                 <ul class="nav-links">
                     <li><a href="#hero">Home</a></li>
                     <li><a href="#features">Features</a></li>
@@ -31,6 +33,7 @@
     </header>
 
     <main>
+        <!-- Hero Section -->
         <section class="hero" id="hero">
             <div class="container">
                 <h1>Forensic Financial Statement Analysis</h1>
@@ -47,6 +50,7 @@
             </div>
         </section>
 
+        <!-- Features Section -->
         <section class="section" id="features">
             <div class="container">
                 <div class="section-title">
@@ -54,6 +58,7 @@
                     <p>Professional tools to uncover financial insights</p>
                 </div>
                 <div class="cards">
+                    <!-- Feature Cards - Reusing existing card component styles -->
                     <div class="card">
                         <div class="card-header">
                             <h3><i class="fas fa-chart-line"></i> Revenue Analysis</h3>
@@ -96,6 +101,7 @@
             </div>
         </section>
 
+        <!-- Methodology Section -->
         <section class="section dark-bg" id="methodology">
             <div class="container">
                 <div class="section-title">
@@ -124,13 +130,24 @@
                             <p>Application of forensic accounting techniques to identify potential red flags</p>
                         </div>
                     </div>
+                    <!-- Removed 4th step:
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Comprehensive Assessment</h3>
+                            <p>Holistic evaluation of financial health, risks, and investment considerations</p>
+                        </div>
+                    </div>
+                    -->
                 </div>
             </div>
         </section>
 
+        <!-- CTA Section -->
         <section class="section cta-section">
             <div class="container">
                 <h2>Ready to examine a company?</h2>
+                <!-- This form remains as the main CTA search -->
                 <form class="search-form" action="analysis.html" method="GET">
                     <input type="text" name="ticker" placeholder="Enter ticker (e.g., AAPL)" required
                            aria-label="Stock ticker symbol">
@@ -140,6 +157,7 @@
                 </form>
             </div>
         </section>
+        <!-- About Section -->
         <section class="section" id="about">
             <div class="container">
                 <div class="section-title">

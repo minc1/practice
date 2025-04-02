@@ -10,7 +10,7 @@
     --danger: #c5817e;
     --card-bg: #ffffff;
     --header-footer-bg: #ffffff;
-    --body-bg: #1c2541;
+    --body-bg: #1c2541; /* Changed body background */
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
     --shadow-md: 0 4px 8px rgba(0,0,0,0.1);
     --shadow-lg: 0 10px 20px rgba(0,0,0,0.1);
@@ -30,8 +30,8 @@ html {
 }
 
 body {
-    background-color: var(--body-bg);
-    color: var(--light);
+    background-color: var(--body-bg); /* Use variable for body background */
+    color: var(--light); /* Default text color for dark background */
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     font-size: 16px;
@@ -63,64 +63,72 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 1200px; /* Ensure nav content aligns with page content */
     margin: 0 auto;
-    padding: 0 16px;
-    gap: 16px;
-    flex-wrap: wrap;
+    padding: 0 16px; /* Match container padding */
+    gap: 16px; /* Add gap between nav items */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
 }
 
 .logo {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--dark);
+    color: var(--dark); /* Logo text on light header */
     letter-spacing: -0.5px;
     white-space: nowrap;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Prevent logo from shrinking */
     text-decoration: none;
     display: inline-block;
-    order: 0;
+    order: 0; /* Ensure logo is first */
 }
 
 .logo span {
     color: var(--primary);
 }
 
+/* --- Header Search Form Styles (Used on both pages) --- */
 .InputContainer {
+    /* Flexbox setup */
     display: flex;
     align-items: center;
-    height: 40px;
-    width: 100%;
-    max-width: 250px;
-    flex-grow: 0;
-    flex-shrink: 1;
-    background-color: var(--card-bg);
+    /* Sizing & Flexibility (Mobile First) */
+    height: 40px; /* Consistent height */
+    width: 100%; /* Default to full width when wrapped */
+    max-width: 250px; /* Limit width on mobile */
+    flex-grow: 0; /* Don't grow by default */
+    flex-shrink: 1; /* Allow shrinking */
+    /* Appearance */
+    background-color: var(--card-bg); /* White background */
     border: 1px solid var(--border-color);
-    border-radius: 20px;
-    overflow: hidden;
+    border-radius: 20px; /* Rounded corners (height/2) */
+    overflow: hidden; /* Clip button corners */
     box-shadow: var(--shadow-sm);
     transition: box-shadow 0.3s;
-    order: 2;
-    margin-top: 8px;
+    /* Positioning in Nav */
+    order: 2; /* Default order (after logo, before hamburger) */
+    margin-top: 8px; /* Add space when wrapped */
 }
 
-.InputContainer:focus-within {
-    box-shadow: 0 0 0 2px rgba(197, 164, 126, 0.5);
+.InputContainer:focus-within { /* Subtle effect when input is focused */
+    box-shadow: 0 0 0 2px rgba(197, 164, 126, 0.5); /* Primary color focus ring */
     border-color: var(--primary);
 }
 
-.InputContainer .input {
+.InputContainer .input { /* Target input inside container */
+    /* Reset */
     border: none;
     outline: none;
-    flex-grow: 1;
-    height: 100%;
-    padding: 0 15px;
-    min-width: 100px;
-    background-color: transparent;
+    /* Sizing */
+    flex-grow: 1; /* Take available space */
+    height: 100%; /* Fill container height */
+    padding: 0 15px; /* Horizontal padding */
+    min-width: 100px; /* Minimum width */
+    /* Appearance */
+    background-color: transparent; /* Inherit container background */
     color: var(--text);
-    font-size: 0.85rem;
+    font-size: 0.85rem; /* Consistent font size */
     letter-spacing: 0.5px;
-    caret-color: var(--primary);
+    caret-color: var(--primary); /* Use theme color for caret */
 }
 
 .InputContainer .input::placeholder {
@@ -128,23 +136,27 @@ nav {
      font-style: italic;
 }
 
-.InputContainer button {
+.InputContainer button { /* Target button inside container */
+    /* Reset */
     border: none;
-    height: 100%;
+    /* Sizing & Layout */
+    height: 100%; /* Fill container height */
     padding: 0 12px;
-    flex-shrink: 0;
-    display: flex;
+    flex-shrink: 0; /* Don't shrink button */
+    display: flex; /* Align icon */
     align-items: center;
     justify-content: center;
+    /* Appearance */
     background-color: var(--primary);
-    color: var(--dark);
+    color: var(--dark); /* Text color on primary button */
     font-size: 0.9rem;
     cursor: pointer;
     transition: background-color 0.3s;
+    /* No border-radius needed due to container's overflow:hidden */
 }
 
 .InputContainer button:hover {
-    background-color: #d4b483;
+    background-color: #d4b483; /* Darker primary */
 }
 
 .InputContainer button:disabled {
@@ -152,7 +164,9 @@ nav {
     cursor: not-allowed;
     color: var(--light);
 }
+/* --- End Header Search Form Styles --- */
 
+/* --- Search Form for Landing Page CTA Section --- */
 .search-form {
     display: flex;
     max-width: 500px;
@@ -169,7 +183,7 @@ nav {
     padding: 0 20px;
     font-size: 1rem;
     outline: none;
-    color: var(--text);
+    color: var(--text); /* Ensure text color is visible */
 }
 
 .search-form button {
@@ -191,10 +205,10 @@ nav {
 
 
 .nav-links {
-    display: none;
+    display: none; /* Hidden by default on mobile */
     list-style: none;
-    position: fixed;
-    top: 61px;
+    position: fixed; /* Changed to fixed for overlay effect */
+    top: 61px; /* Adjust based on actual header height after padding */
     left: 0;
     width: 100%;
     background-color: var(--header-footer-bg);
@@ -202,22 +216,22 @@ nav {
     align-items: center;
     padding: 20px 0;
     box-shadow: var(--shadow-md);
-    z-index: 99;
-    border-top: 1px solid var(--border-color);
-    order: 4;
+    z-index: 99; /* Below header */
+    border-top: 1px solid var(--border-color); /* Separator */
+    order: 4; /* Ensure it's last when wrapped */
 }
 
 .nav-links.show {
-    display: flex;
+    display: flex; /* Show when toggled */
 }
 
 .nav-links li {
-    margin: 12px 0;
+    margin: 12px 0; /* Vertical spacing for mobile */
 }
 
 .nav-links a {
     text-decoration: none;
-    color: var(--text);
+    color: var(--text); /* Link color on light background */
     font-weight: 500;
     font-size: 1rem;
     transition: color 0.3s;
@@ -225,7 +239,9 @@ nav {
     padding: 8px 0;
 }
 
-.nav-links a:after {
+/* Removed .cta-nav styles as the element is removed from index.html */
+
+.nav-links a:after { /* Underline effect */
     content: '';
     position: absolute;
     bottom: 0;
@@ -245,27 +261,28 @@ nav {
 }
 
 .mobile-menu {
-    display: block;
+    display: block; /* Show hamburger on mobile */
     font-size: 1.4rem;
     cursor: pointer;
-    color: var(--dark);
+    color: var(--dark); /* Icon color on light header */
     transition: transform 0.3s;
     background: none;
     border: none;
-    padding: 5px;
-    flex-shrink: 0;
-    order: 3;
-    margin-left: auto;
+    padding: 5px; /* Easier to tap */
+    flex-shrink: 0; /* Prevent shrinking */
+    order: 3; /* Ensure it's last on mobile before nav-links */
+    margin-left: auto; /* Push to the right when items wrap */
 }
 
 .mobile-menu:hover {
     transform: scale(1.1);
 }
 
+/* --- Loading/Error Message Area (Primarily for analysis.html) --- */
 .message-area {
-    padding: 60px 16px 0;
+    padding: 60px 16px 0; /* Space below fixed header */
     text-align: center;
-    min-height: calc(100vh - 120px);
+    min-height: calc(100vh - 120px); /* Example height */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -297,40 +314,41 @@ nav {
 
 
 .hero {
-    padding: 140px 0 60px;
+    padding: 140px 0 60px; /* Adjusted top padding for fixed header */
     text-align: center;
     position: relative;
-    overflow: hidden;
+    overflow: hidden; /* Contain potential background effects */
 }
 
 .hero .container {
     position: relative;
-    z-index: 1;
+    z-index: 1; /* Ensure content is above potential background layers */
 }
 
 .hero h1 {
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 16px;
-    color: var(--light);
+    color: var(--light); /* Text on dark background */
     line-height: 1.3;
-    padding: 0 8px;
+    padding: 0 8px; /* Prevent text touching edges on small screens */
 }
 
 .hero p {
     font-size: 0.95rem;
-    color: var(--light);
+    color: var(--light); /* Text on dark background */
     margin: 0 auto 24px;
-    padding: 0 12px;
-    max-width: 500px;
+    padding: 0 12px; /* Prevent text touching edges */
+    max-width: 500px; /* Control line length */
 }
 
+/* --- Style for Hero Separator --- */
 .hero-separator {
     width: 60px;
     height: 3px;
     background-color: var(--primary);
     border-radius: 3px;
-    margin: 24px auto;
+    margin: 24px auto; /* Center horizontally and add vertical spacing */
 }
 
 .hero-cta {
@@ -345,7 +363,7 @@ nav {
     align-items: center;
     justify-content: center;
     background-color: var(--primary);
-    color: var(--dark);
+    color: var(--dark); /* Text color on primary button */
     padding: 12px 24px;
     border-radius: 6px;
     text-decoration: none;
@@ -364,7 +382,7 @@ nav {
 .cta-button:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
-    background-color: #d4b483;
+    background-color: #d4b483; /* Slightly darker primary on hover */
 }
 
 .cta-button.secondary:hover {
@@ -378,18 +396,21 @@ nav {
 }
 
 .cta-button:hover i {
-    transform: translateX(4px);
+    transform: translateX(4px); /* Subtle arrow movement */
 }
 
 .section {
     padding: 60px 0;
 }
 
+/* --- Methodology Section Styles --- */
 .methodology-steps {
     display: grid;
+    /* Adjust grid to fit 3 items nicely */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 24px;
     margin-top: 40px;
+    /* Center items if fewer than max columns */
     justify-content: center;
 }
 
@@ -401,7 +422,7 @@ nav {
     padding: 24px;
     border-radius: 8px;
     transition: transform 0.3s;
-    max-width: 380px;
+    max-width: 380px; /* Optional: Limit width of steps */
 }
 
 .step:hover {
@@ -439,6 +460,7 @@ nav {
     line-height: 1.5;
 }
 
+/* --- CTA Section Styles --- */
 .cta-section {
     background-color: var(--secondary);
     text-align: center;
@@ -458,17 +480,18 @@ nav {
 
 .section-title h2 {
     font-size: 1.7rem;
-    color: var(--light);
+    color: var(--light); /* Section titles on dark background */
     margin-bottom: 12px;
     font-weight: 700;
     position: relative;
-    display: inline-block;
+    display: inline-block; /* Allows ::after positioning */
 }
 
+/* --- Style for Section Title Separator --- */
 .section-title h2:after {
     content: '';
     position: absolute;
-    bottom: -6px;
+    bottom: -6px; /* Position below the text */
     left: 50%;
     transform: translateX(-50%);
     width: 60px;
@@ -478,28 +501,28 @@ nav {
 }
 
 .section-title p {
-    color: var(--light);
+    color: var(--light); /* Section subtitles on dark background */
     max-width: 500px;
     margin: 0 auto;
     font-size: 0.95rem;
-    padding: 0 16px;
+    padding: 0 16px; /* Prevent text touching edges */
 }
 
 .cards {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Single column on mobile */
     gap: 20px;
 }
 
 .card {
-    background-color: var(--card-bg);
+    background-color: var(--card-bg); /* White background for cards */
     border-radius: 10px;
     overflow: hidden;
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
     border: 1px solid var(--border-color);
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Ensure footer stays at bottom */
 }
 
 .card:hover {
@@ -518,41 +541,42 @@ nav {
     font-weight: 600;
     display: flex;
     align-items: center;
-    color: var(--dark);
+    color: var(--dark); /* Card titles on white background */
 }
 
 .card-header h3 i {
     margin-right: 10px;
     font-size: 0.9rem;
-    width: 20px;
+    width: 20px; /* Consistent icon alignment */
     text-align: center;
 }
 
+/* Icon colors */
 .positive { color: var(--success); }
 .negative { color: var(--danger); }
 .neutral { color: var(--warning); }
 
 .card-body {
     padding: 18px;
-    flex-grow: 1;
+    flex-grow: 1; /* Allow body to expand */
 }
 
 .card-body ul {
     list-style: none;
-    margin-bottom: 16px;
-    padding-left: 0;
+    margin-bottom: 16px; /* Space below list */
+    padding-left: 0; /* Remove default padding */
 }
 
 .card-body li {
     margin-bottom: 10px;
     position: relative;
-    padding-left: 20px;
+    padding-left: 20px; /* Space for custom bullet */
     font-size: 0.9rem;
-    color: var(--text);
+    color: var(--text); /* Body text color on white background */
 }
 
 .card-body li:before {
-    content: "•";
+    content: "•"; /* Custom bullet */
     position: absolute;
     left: 6px;
     color: var(--muted);
@@ -560,27 +584,27 @@ nav {
 }
 
 .card-body li strong {
-    color: var(--dark);
+    color: var(--dark); /* Emphasized text */
     font-weight: 600;
 }
 
 .card-footer {
     padding: 12px 18px;
-    background-color: #f8f9fa;
+    background-color: #f8f9fa; /* Slightly off-white footer */
     border-top: 1px solid var(--border-color);
     font-size: 0.8rem;
-    color: var(--dark);
+    color: var(--dark); /* Footer text color */
 }
 
 .chart-container {
-    background-color: var(--card-bg);
+    background-color: var(--card-bg); /* White background for charts */
     border-radius: 10px;
     padding: 18px;
     box-shadow: var(--shadow-sm);
     margin-bottom: 20px;
     border: 1px solid var(--border-color);
     transition: var(--transition);
-    position: relative;
+    position: relative; /* Needed for canvas positioning */
 }
 
 .chart-container:hover {
@@ -597,11 +621,11 @@ nav {
 .chart-header h3 {
     font-size: 1rem;
     font-weight: 600;
-    color: var(--dark);
+    color: var(--dark); /* Chart titles on white background */
 }
 
 .chart-wrapper {
-    height: 280px;
+    height: 280px; /* Default chart height */
     position: relative;
 }
 
@@ -611,15 +635,15 @@ canvas {
 }
 
 .insight-list {
-    background-color: var(--card-bg);
+    background-color: var(--card-bg); /* White background for table container */
     border-radius: 10px;
     padding: 18px;
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--border-color);
     transition: var(--transition);
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: auto; /* Enable horizontal scrolling on small screens */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .insight-list:hover {
@@ -631,68 +655,69 @@ table {
     border-collapse: collapse;
     margin: 0;
     font-size: 0.9rem;
-    border-radius: 6px;
-    overflow: hidden;
-    min-width: 600px;
+    border-radius: 6px; /* Apply to container if overflow visible */
+    overflow: hidden; /* Clip content to rounded corners */
+    min-width: 600px; /* Ensure table is scrollable on small screens */
 }
 
 th, td {
     padding: 12px;
     text-align: center;
     border: 1px solid var(--border-color);
-    color: var(--dark);
+    color: var(--dark); /* Table text on white background */
 }
 
 th {
-    background-color: var(--secondary);
-    color: var(--light);
+    background-color: var(--secondary); /* Dark header background */
+    color: var(--light); /* Light text on dark header */
     font-weight: 600;
 }
 
 tr:nth-child(even) {
-    background-color: rgba(0,0,0,0.02);
+    background-color: rgba(0,0,0,0.02); /* Subtle striping */
 }
 
 tr:hover {
-    background-color: rgba(0,0,0,0.03);
+    background-color: rgba(0,0,0,0.03); /* Subtle hover effect */
 }
 
+/* Responsive Table Styles */
 @media screen and (max-width: 767px) {
     table {
         border: 0;
-        min-width: auto;
+        min-width: auto; /* Allow table to shrink */
     }
 
     table thead {
-        display: none;
+        display: none; /* Hide table headers */
     }
 
     table tr {
-        display: block;
+        display: block; /* Stack rows vertically */
         margin-bottom: .625em;
         border: 1px solid var(--border-color);
         border-radius: 6px;
         box-shadow: var(--shadow-sm);
-        background-color: var(--card-bg);
+        background-color: var(--card-bg); /* Ensure background for stacked rows */
     }
 
     table td {
-        display: block;
-        text-align: right;
+        display: block; /* Stack cells vertically */
+        text-align: right; /* Align cell content to the right */
         font-size: .8em;
-        border-bottom: 1px dotted var(--border-color);
+        border-bottom: 1px dotted var(--border-color); /* Separator between cells */
     }
 
     table td:last-child {
-        border-bottom: 0;
+        border-bottom: 0; /* Remove border from last cell */
     }
 
     table td::before {
-        content: attr(data-label);
-        float: left;
+        content: attr(data-label); /* Use data-label for pseudo-header */
+        float: left; /* Position label to the left */
         font-weight: bold;
         text-transform: uppercase;
-        color: var(--dark);
+        color: var(--dark); /* Label color */
     }
 }
 
@@ -702,35 +727,35 @@ tr:hover {
 }
 
 .conclusion .section-title h2 {
-     color: var(--light);
+     color: var(--light); /* Title on dark background */
 }
 
 .conclusion .section-title p {
-    color: var(--light);
+    color: var(--light); /* Subtitle on dark background */
 }
 
 .verdict-container {
-    background-color: var(--card-bg);
+    background-color: var(--card-bg); /* White background for verdict */
     border-radius: 10px;
     padding: 30px;
-    max-width: 750px;
-    margin: 0 auto;
+    max-width: 750px; /* Control width */
+    margin: 0 auto; /* Center */
     box-shadow: var(--shadow-md);
-    text-align: left;
+    text-align: left; /* Align text left within container */
     border: 1px solid var(--border-color);
 }
 
 .verdict-header {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Stack title and rating on mobile */
     align-items: flex-start;
     margin-bottom: 20px;
-    gap: 8px;
+    gap: 8px; /* Space between title and rating */
 }
 
 .verdict-header h3 {
     font-size: 1.4rem;
-    color: var(--dark);
+    color: var(--dark); /* Verdict title on white background */
     font-weight: 700;
     line-height: 1.3;
     margin: 0;
@@ -739,9 +764,9 @@ tr:hover {
 .verdict-rating {
     display: inline-block;
     background-color: var(--primary);
-    color: var(--dark);
+    color: var(--dark); /* Text on primary background */
     padding: 4px 12px;
-    border-radius: 15px;
+    border-radius: 15px; /* Pill shape */
     font-weight: 600;
     font-size: 0.8rem;
     border: 1px solid rgba(0,0,0,0.05);
@@ -752,24 +777,24 @@ tr:hover {
     margin-bottom: 16px;
     font-size: 0.95rem;
     line-height: 1.7;
-    color: var(--text);
+    color: var(--text); /* Verdict text on white background */
 }
 
 .verdict-container strong {
-     color: var(--dark);
+     color: var(--dark); /* Emphasized text */
      font-weight: 600;
 }
 
 .monitoring-points {
      margin-top: 24px;
      padding-top: 16px;
-     border-top: 1px solid var(--border-color);
+     border-top: 1px solid var(--border-color); /* Separator */
 }
 
 .monitoring-points h4 {
     font-size: 1.1rem;
     font-weight: 600;
-    color: var(--primary);
+    color: var(--primary); /* Use primary color for this heading */
     margin-bottom: 16px;
 }
 
@@ -782,16 +807,16 @@ tr:hover {
 .monitoring-points li {
     margin-bottom: 12px;
     position: relative;
-    padding-left: 20px;
+    padding-left: 20px; /* Space for custom bullet */
     font-size: 0.9rem;
-    color: var(--text);
+    color: var(--text); /* List item text color */
 }
 
 .monitoring-points li::before {
-    content: '';
+    content: ''; /* Custom bullet */
     position: absolute;
     left: 0;
-    top: 8px;
+    top: 8px; /* Align bullet vertically */
     width: 6px;
     height: 6px;
     background-color: var(--primary);
@@ -805,14 +830,14 @@ tr:hover {
     width: 44px;
     height: 44px;
     background-color: var(--primary);
-    color: var(--dark);
+    color: var(--dark); /* Icon color */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.1rem;
     cursor: pointer;
-    opacity: 0;
+    opacity: 0; /* Hidden by default */
     visibility: hidden;
     transition: var(--transition);
     box-shadow: var(--shadow-md);
@@ -827,20 +852,20 @@ tr:hover {
 }
 
 .back-to-top:hover {
-    background-color: #d4b483;
+    background-color: #d4b483; /* Darker primary on hover */
     transform: translateY(-3px);
 }
 
 footer {
-    background-color: var(--header-footer-bg);
+    background-color: var(--header-footer-bg); /* Light footer background */
     padding: 24px 0;
     border-top: 1px solid var(--border-color);
-    margin-top: 60px;
+    margin-top: 60px; /* Space above footer */
 }
 
 .footer-content {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Stack elements on mobile */
     align-items: center;
     text-align: center;
 }
@@ -848,7 +873,7 @@ footer {
 .footer-logo {
     font-size: 1rem;
     font-weight: 600;
-    color: var(--dark);
+    color: var(--dark); /* Logo text on light background */
     letter-spacing: -0.5px;
     margin-bottom: 16px;
 }
@@ -859,7 +884,7 @@ footer {
 
 .footer-links {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Allow links to wrap */
     justify-content: center;
     list-style: none;
     margin: 0 0 16px 0;
@@ -867,69 +892,71 @@ footer {
 }
 
 .footer-links li {
-    margin: 8px 12px;
+    margin: 8px 12px; /* Spacing around links */
 }
 
 .footer-links a {
     text-decoration: none;
-    color: var(--muted);
+    color: var(--muted); /* Muted link color */
     font-size: 0.9rem;
     transition: color 0.3s;
 }
 
 .footer-links a:hover {
-    color: var(--primary);
+    color: var(--primary); /* Highlight on hover */
 }
 
 .copyright {
-    color: var(--muted);
+    color: var(--muted); /* Muted copyright text */
     font-size: 0.8rem;
     margin-top: 8px;
 }
 
+/* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     body {
-        font-size: 16px;
+        font-size: 16px; /* Base font size */
     }
 
     header {
-        padding: 16px 0;
+        padding: 16px 0; /* Increase header padding */
     }
 
     nav {
-        gap: 24px;
-        flex-wrap: nowrap;
+        gap: 24px; /* Increase gap */
+        flex-wrap: nowrap; /* Prevent wrapping on larger screens */
     }
 
     .logo {
-        font-size: 1.25rem;
-        order: 0;
+        font-size: 1.25rem; /* Larger logo */
+        order: 0; /* Ensure logo is first */
     }
 
+    /* Adjust header search form position and growth */
     .InputContainer {
-        flex-grow: 1;
-        max-width: 350px;
-        order: 1;
-        width: auto;
-        margin-top: 0;
+        flex-grow: 1; /* Allow search to take more space */
+        max-width: 350px; /* Slightly wider max width */
+        order: 1; /* Position after logo */
+        width: auto; /* Allow shrinking */
+        margin-top: 0; /* Remove margin when not wrapped */
     }
 
     .nav-links {
-        display: flex;
-        position: static;
+        display: flex; /* Show nav links */
+        position: static; /* Reset positioning */
         flex-direction: row;
         background: transparent;
         box-shadow: none;
         padding: 0;
         width: auto;
         border-top: none;
-        order: 2;
-        flex-shrink: 0;
-        margin-left: auto;
+        order: 2; /* Position after search */
+        flex-shrink: 0; /* Prevent wrapping */
+        margin-left: auto; /* Push links to the right */
     }
 
     .nav-links li {
-        margin: 0 0 0 24px;
+        margin: 0 0 0 24px; /* Horizontal spacing */
     }
 
     .nav-links a {
@@ -937,57 +964,58 @@ footer {
     }
 
     .mobile-menu {
-        display: none;
+        display: none; /* Hide hamburger */
     }
 
     .hero {
-        padding: 180px 0 80px;
+        padding: 180px 0 80px; /* Increase hero padding */
     }
 
     .hero h1 {
-        font-size: 2.2rem;
+        font-size: 2.2rem; /* Larger hero title */
     }
 
     .hero p {
-        font-size: 1rem;
+        font-size: 1rem; /* Larger hero subtitle */
     }
 
     .section {
-        padding: 80px 0;
+        padding: 80px 0; /* Increase section padding */
     }
 
     .section-title h2 {
-        font-size: 2rem;
+        font-size: 2rem; /* Larger section titles */
     }
 
     .cards {
+        /* Responsive grid: fit cards, min 300px wide */
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 24px;
+        gap: 24px; /* Increase gap between cards */
     }
 
     .verdict-container {
-        padding: 40px;
+        padding: 40px; /* Increase padding */
     }
     .verdict-header {
-        flex-direction: row;
+        flex-direction: row; /* Align title and rating side-by-side */
         justify-content: space-between;
         align-items: center;
     }
      .verdict-header h3 {
-        font-size: 1.6rem;
+        font-size: 1.6rem; /* Larger verdict title */
      }
      .verdict-container p {
-        font-size: 1rem;
+        font-size: 1rem; /* Larger verdict text */
      }
      .monitoring-points h4 {
-        font-size: 1.2rem;
+        font-size: 1.2rem; /* Larger monitoring title */
      }
      .monitoring-points li {
-        font-size: 0.95rem;
+        font-size: 0.95rem; /* Larger monitoring points text */
      }
 
     .footer-content {
-        flex-direction: row;
+        flex-direction: row; /* Align footer items horizontally */
         justify-content: space-between;
         align-items: center;
         text-align: left;
@@ -1002,55 +1030,60 @@ footer {
     }
 
     .footer-links li {
-        margin: 0 0 0 20px;
+        margin: 0 0 0 20px; /* Horizontal spacing for footer links */
     }
 }
 
+/* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     .hero {
-        padding: 200px 0 100px;
+        padding: 200px 0 100px; /* Further increase hero padding */
     }
 
     .hero h1 {
-        font-size: 2.6rem;
+        font-size: 2.6rem; /* Even larger hero title */
     }
 
     .section-title h2 {
-        font-size: 2.2rem;
+        font-size: 2.2rem; /* Even larger section titles */
     }
 
     .chart-wrapper {
-        height: 350px;
+        height: 350px; /* Taller charts on large screens */
     }
 
-    .InputContainer {
-        max-width: 400px;
+    .InputContainer { /* Target header search container */
+        max-width: 400px; /* Allow more width */
     }
 }
 
-@media (max-width: 480px) {
+/* Adjust wrapping point for header search if needed */
+@media (max-width: 480px) { /* Example breakpoint */
     nav {
-        flex-wrap: wrap;
+        flex-wrap: wrap; /* Ensure wrapping */
         justify-content: space-between;
     }
     .logo {
-        flex-basis: auto;
+        /* Ensure logo takes appropriate space */
+        flex-basis: auto; /* Adjust as needed */
     }
-    .InputContainer {
-        order: 2;
-        width: 100%;
+    .InputContainer { /* Target header search container */
+        order: 2; /* Place search below logo */
+        width: 100%; /* Take full width */
         max-width: none;
-        margin-top: 8px;
-        margin-left: 0;
-        margin-right: 0;
+        margin-top: 8px; /* Add space above */
+        margin-left: 0; /* Reset margin */
+        margin-right: 0; /* Reset margin */
     }
     .mobile-menu {
-        order: 1;
-        margin-left: 0;
+        order: 1; /* Keep hamburger top right */
+        margin-left: 0; /* Reset margin */
     }
     .nav-links {
-         top: 105px;
-         order: 3;
-         width: 100%;
+         /* Adjust top position if header height changes due to wrapping */
+         /* This might need dynamic calculation in JS if height varies significantly */
+         top: 105px; /* Approximate adjusted value - check actual height */
+         order: 3; /* Ensure it's last */
+         width: 100%; /* Full width */
     }
 }
