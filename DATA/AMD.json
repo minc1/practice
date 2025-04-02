@@ -1,0 +1,111 @@
+{
+    "company": {
+      "name": "Advanced Micro Devices, Inc.",
+      "ticker": "AMD",
+      "analysisTitle": "Forensic Financial Analysis",
+      "heroSubtitle": "Analysis of AMD's explosive growth, Xilinx acquisition impact, cyclical downturn, recent AI-driven recovery, and persistent inventory concerns.",
+      "pageTitle": "ForensicFinancials | Advanced Micro Devices (AMD) Analysis"
+    },
+    "trendAnalysis": {
+      "sectionSubtitle": "Examining AMD's volatile journey: Hyper-growth, acquisition integration, cyclical slump, and AI-fueled rebound (FY2020-FY2024)",
+      "cards": [
+        {
+          "title": "Revenue Trajectory",
+          "iconClass": "fas fa-chart-line positive",
+          "points": [
+            "<strong>Hyper-Growth Phase (2020-2022)</strong> - Explosive annual growth (+45%, +68%, +44%) driven by PC, gaming, and data center demand.",
+            "<strong>Cyclical Downturn (2023)</strong> - Revenue declined (-3.9%) reflecting broader semiconductor slump and PC market weakness.",
+            "<strong>Strong Recovery (2024)</strong> - Rebounded strongly (+13.7%), fueled by <strong>Data Center</strong> (EPYC CPUs, Instinct AI GPUs) and <strong>Client</strong> (Ryzen) segments.",
+            "<strong>Quarterly Volatility & Seasonality</strong> - Significant QoQ fluctuations observed; potential seasonality with weaker Q1 and stronger Q4."
+          ],
+          "footer": "Explosive growth followed by cyclical dip; strong 2024 recovery led by Data Center and Client segments."
+        },
+        {
+          "title": "Profitability Trends",
+          "iconClass": "fas fa-chart-pie neutral",
+          "points": [
+            "<strong>Extreme Volatility</strong> - Massive swings in Net Income growth (+6% FY20, +27% FY21, -58% FY22, -35% FY23, +92% FY24).",
+            "<strong>Acquisition Impact (2022-2023)</strong> - GAAP profitability significantly depressed despite strong 2022 revenue, primarily due to <strong>Xilinx acquisition costs</strong> (amortization, higher OpEx).",
+            "<strong>Strong Rebound (2024)</strong> - Dramatic Net Income recovery (+92%) driven by higher-margin segments and potentially easing acquisition impacts.",
+            "<strong>EPS Dilution (2022)</strong> - EPS growth significantly impacted by share dilution from the all-stock Xilinx deal."
+          ],
+          "footer": "Highly volatile profitability heavily impacted by Xilinx acquisition accounting; strong rebound in 2024."
+        },
+        {
+          "title": "Cash Flow Generation",
+          "iconClass": "fas fa-chart-bar positive",
+          "points": [
+            "<strong>Robust OCF Overall</strong> - Generally strong Operating Cash Flow generation, though volatile (e.g., -53% dip in FY23).",
+            "<strong>Divergence from Net Income</strong> - OCF often more stable or divergent from GAAP NI, especially in 2020 (WC driven) and 2022 (non-cash charges post-Xilinx).",
+            "<strong>Strong FCF Recovery</strong> - Free Cash Flow generation dipped in 2023 but recovered strongly in 2024 (+114.5% TTM reported).",
+            "<strong>Funding Deleveraging & Buybacks</strong> - Strong cash flow enabled significant debt reduction and share repurchases in 2023/2024."
+          ],
+          "footer": "Strong but volatile OCF generation, often diverging from GAAP NI; robust FCF recovery funds debt paydown and buybacks."
+        }
+      ]
+    },
+    "financialMetrics": {
+      "sectionSubtitle": "Investigating cross-statement divergences, forensic flags, and solvency improvements",
+      "cards": [
+         {
+          "title": "Forensic Checks",
+          "iconClass": "fas fa-search negative",
+          "points": [
+              "<strong>Inventory vs COGS Divergence (Persistent Risk)</strong> - Major flag: Inventory growth significantly outpaced COGS growth in <strong>FY2022 (+93% vs +36%)</strong> and again in <strong>FY2024 (+32% vs +7%)</strong>, raising concerns about potential overstocking or obsolescence.",
+              "<strong>AR vs Revenue Divergence (FY2023 Anomaly)</strong> - Red flag: Accounts Receivable grew <strong>+30.5%</strong> in FY2023 while Revenue declined <strong>-3.9%</strong>, suggesting potential collection issues or channel timing, though normalized in FY2024.",
+              "<strong>OCF vs NI Divergence (Notable Years)</strong> - Significant gaps observed in FY2020 (driven by Working Capital) and FY2022 (driven by non-cash acquisition charges like D&A, Stock Comp).",
+              "<strong>Profitability vs Revenue Divergence (FY2022)</strong> - GAAP Operating/Net Income fell sharply despite strong Revenue growth (+44%), clearly linked to Xilinx acquisition accounting."
+          ],
+          "footer": "Key persistent flag: Inventory growth outpacing COGS. Notable past divergences in AR/Revenue and OCF/NI."
+        },
+        {
+          "title": "Solvency & Liquidity",
+          "iconClass": "fas fa-balance-scale positive",
+          "points": [
+              "<strong>Significant Deleveraging (FY2024)</strong> - Substantial debt reduction achieved (Total Debt -83.6%), strengthening the balance sheet.",
+              "<strong>Equity Boost from Acquisition</strong> - Equity significantly increased in FY2022 due to stock issuance for Xilinx.",
+              "<strong>Improved Interest Coverage</strong> - Coverage likely improved dramatically in FY2024 due to strong Operating Income rebound and debt reduction.",
+              "<strong>Strong Cash Position</strong> - Robust cash flow generation supports operations, investments, debt paydown, and buybacks.",
+              "<strong>Funding Mix Shift</strong> - Shift from equity financing (Xilinx deal) towards using strong internal cash flow for deleveraging and buybacks."
+          ],
+          "footer": "Significantly improved solvency profile driven by strong cash flow enabling major debt reduction in 2024."
+        }
+      ]
+    },
+    "investmentConsiderations": {
+      "sectionSubtitle": "Balancing AMD's AI-driven growth opportunities against cyclical risks and inventory concerns",
+      "tableData": [
+        { "factor": "<strong>Market Position / Competition</strong>", "opportunities": "Strong position in Data Center (CPUs/AI GPUs), PC CPUs; gaining AI momentum", "risks": "Intense competition (Nvidia in AI, Intel in CPUs), cyclical nature of semiconductor industry" },
+        { "factor": "<strong>Revenue Growth</strong>", "opportunities": "Major growth driver from AI accelerators (Instinct GPUs), Data Center CPUs (EPYC), potential PC market recovery", "risks": "Cyclical downturns impacting demand, execution risk in competitive AI space" },
+        { "factor": "<strong>Profitability</strong>", "opportunities": "Margin expansion potential from high-value Data Center/AI products, easing acquisition impacts", "risks": "Volatility demonstrated, pressure from R&D investments, competitive pricing" },
+        { "factor": "<strong>Cash Flow</strong>", "opportunities": "Strong OCF/FCF generation supports strategic flexibility (R&D, returns)", "risks": "Volatility linked to working capital swings (inventory, receivables)" },
+        { "factor": "<strong>Financial Health</strong>", "opportunities": "Strengthened balance sheet post-deleveraging, diversified business post-Xilinx", "risks": "Managing large inventory levels effectively" },
+        { "factor": "<strong>Shareholder Returns</strong>", "opportunities": "Share buyback program initiated, potential for future increases funded by FCF", "risks": "Sustainability depends on continued strong cash generation" },
+        { "factor": "<strong>Execution / Strategy</strong>", "opportunities": "Successful Xilinx integration, strong focus on high-growth AI market", "risks": "Managing persistent inventory build-up, maintaining technological lead requires high R&D" }
+      ]
+    },
+    "conclusion": {
+      "sectionSubtitle": "Synthesizing AMD's financial trajectory and investment profile",
+      "verdictTitle": "AI-Fueled Recovery and Stronger Balance Sheet Face Inventory Headwinds",
+      "verdictRating": "Positive / Medium Risk",
+      "paragraphs": [
+          "AMD has navigated a period of extreme growth, strategic transformation via the <strong>Xilinx acquisition</strong>, a cyclical downturn, and a strong recent recovery primarily fueled by the <strong>Data Center and AI markets</strong>. The company demonstrated robust revenue growth capabilities and, despite significant GAAP profitability volatility linked to acquisition accounting, has generated strong underlying operating cash flow.",
+          "This strong cash generation has enabled AMD to significantly <strong>strengthen its balance sheet</strong> through substantial debt reduction in FY2024 and initiate share buybacks. However, a key risk highlighted by forensic analysis is the <strong>persistent growth of inventory outpacing cost of goods sold</strong>, particularly notable again in FY2024. This raises concerns about potential future write-downs or demand mismatches, especially in the rapidly evolving AI landscape.",
+          "Overall, AMD presents a compelling growth story centered on its expanding presence in high-margin markets like Data Center and AI, backed by improving financial health. However, investors must weigh these opportunities against the inherent cyclicality of the semiconductor industry and the significant, ongoing risk associated with <strong>managing high inventory levels</strong>. Continued execution and effective inventory control are critical for sustaining momentum."
+      ],
+      "monitoringPointsTitle": "Key Monitoring Points",
+      "monitoringPoints": [
+        "<strong>Inventory Management:</strong> Track Inventory levels, Inventory Turnover, and Days Inventory Outstanding relative to COGS and forward demand expectations.",
+        "<strong>Segment Performance:</strong> Monitor growth rates and margins in Data Center (AI GPUs, CPUs) vs. other segments (Client, Gaming, Embedded).",
+        "<strong>Margin Trends:</strong> Assess Gross and Operating Margins for sustained improvement as acquisition impacts potentially fade and product mix shifts.",
+        "<strong>Cash Flow Conversion:</strong> Observe the relationship between Net Income, OCF, and FCF, particularly focusing on working capital efficiency."
+      ]
+    },
+    "chartData": {
+      "labels": ["FY2020", "FY2021", "FY2022", "FY2023", "FY2024"],
+      "revenueGrowth": [45.05, 68.33, 43.61, -3.90, 13.69],
+      "arGrowth": [11.67, 30.44, 52.44, 30.45, 14.99],
+      "cfoGrowth": [117.20, 2.29, 1.25, -53.24, 82.42],
+      "niGrowth": [6.30, 26.99, -58.25, -35.30, 92.16]
+    }
+  }
