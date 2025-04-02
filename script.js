@@ -1,6 +1,6 @@
 const DEFAULT_TICKER = 'AAPL';
 const DATA_PATH = 'DATA/';
-const DIVERGENCE_THRESHOLD = 25.0;
+const DIVERGENCE_THRESHOLD = 15.0;
 
 let currentTicker = null;
 let revenueChartInstance = null;
@@ -467,6 +467,17 @@ if (isAnalysisPage) {
                             });
                         }
 
+                        arChartOptions.plugins.legend.labels.generateLabels = function(chart) {
+                            const defaultLabels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                            defaultLabels.forEach(label => {
+                                if (label.datasetIndex === 1) {
+                                    label.fillStyle = secondaryColor;
+                                    label.strokeStyle = secondaryColor;
+                                }
+                            });
+                            return defaultLabels;
+                        };
+
                         arChartInstance = new Chart(arCtx, {
                             type: 'line',
                             data: {
@@ -495,6 +506,17 @@ if (isAnalysisPage) {
                                  } else { }
                             });
                         }
+
+                        cashFlowChartOptions.plugins.legend.labels.generateLabels = function(chart) {
+                            const defaultLabels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                            defaultLabels.forEach(label => {
+                                if (label.datasetIndex === 1) {
+                                    label.fillStyle = secondaryColor;
+                                    label.strokeStyle = secondaryColor;
+                                }
+                            });
+                            return defaultLabels;
+                        };
 
                         cashFlowChartInstance = new Chart(cashFlowCtx, {
                             type: 'line',
