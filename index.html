@@ -8,14 +8,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Refined plaid background for hero section */
-        .hero {
+        /* Enhanced vintage effect with stronger textures */
+        :root {
+            --secondary: #1c2541;
+            --vintage-overlay: rgba(197, 164, 126, 0.15);
+            --vintage-line: rgba(197, 164, 126, 0.3);
+            --vintage-dark: rgba(28, 37, 65, 0.9);
+        }
+        
+        /* Paper texture base */
+        body {
+            background-color: #f5f1e8;
+        }
+        
+        /* Refined plaid background with stronger vintage effect */
+        .hero, .cta-section {
             position: relative;
             background-color: var(--secondary);
             overflow: hidden;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
         
-        .hero::before {
+        .hero::before, .cta-section::before {
             content: "";
             position: absolute;
             top: 0;
@@ -23,19 +37,38 @@
             right: 0;
             bottom: 0;
             background: 
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(197, 164, 126, 0.05) 2px, transparent 2px),
-                linear-gradient(rgba(197, 164, 126, 0.05) 2px, transparent 2px);
+                /* Crosshatch pattern */
+                linear-gradient(90deg, 
+                    rgba(255, 255, 255, 0.03) 1px, 
+                    transparent 1px),
+                linear-gradient(
+                    rgba(255, 255, 255, 0.03) 1px, 
+                    transparent 1px),
+                /* Larger plaid pattern */
+                linear-gradient(90deg, 
+                    var(--vintage-line) 2px, 
+                    transparent 2px),
+                linear-gradient(
+                    var(--vintage-line) 2px, 
+                    transparent 2px),
+                /* Subtle paper texture */
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.15 0"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.3"/></svg>'),
+                /* Vintage paper tint */
+                linear-gradient(
+                    var(--vintage-overlay),
+                    var(--vintage-overlay));
             background-size: 
-                30px 30px,
-                30px 30px,
-                120px 120px,
-                120px 120px;
+                20px 20px,
+                20px 20px,
+                80px 80px,
+                80px 80px,
+                100px 100px,
+                auto;
             z-index: 0;
         }
         
-        .hero::after {
+        /* Enhanced radial gradient with vignette effect */
+        .hero::after, .cta-section::after {
             content: "";
             position: absolute;
             top: 0;
@@ -44,64 +77,51 @@
             bottom: 0;
             background: radial-gradient(
                 circle at center,
-                rgba(28, 37, 65, 0.4) 0%,
-                rgba(28, 37, 65, 0.8) 70%,
-                var(--secondary) 100%
+                rgba(28, 37, 65, 0.3) 0%,
+                rgba(28, 37, 65, 0.85) 60%,
+                var(--vintage-dark) 100%
             );
-            z-index: 0;
-        }
-        
-        .hero .container {
-            position: relative;
             z-index: 1;
         }
-
-        /* Add the same background to the CTA section */
-        .cta-section {
+        
+        /* Additional vintage effects */
+        .hero::after, .cta-section::after {
+            mix-blend-mode: multiply;
+        }
+        
+        /* Edge wear effect */
+        .hero::after, .cta-section::after {
+            box-shadow: 
+                inset 0 0 30px rgba(0, 0, 0, 0.6),
+                inset 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Container positioning */
+        .hero .container, .cta-section .container {
             position: relative;
-            background-color: var(--secondary);
-            overflow: hidden;
+            z-index: 2;
         }
         
-        .cta-section::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(197, 164, 126, 0.05) 2px, transparent 2px),
-                linear-gradient(rgba(197, 164, 126, 0.05) 2px, transparent 2px);
-            background-size: 
-                30px 30px,
-                30px 30px,
-                120px 120px,
-                120px 120px;
-            z-index: 0;
+        /* Vintage typography enhancement */
+        .hero h1, .cta-section h2 {
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
         }
         
-        .cta-section::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(
-                circle at center,
-                rgba(28, 37, 65, 0.4) 0%,
-                rgba(28, 37, 65, 0.8) 70%,
-                var(--secondary) 100%
-            );
-            z-index: 0;
+        /* Button styling to match vintage theme */
+        .cta-button {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .cta-section .container {
-            position: relative;
-            z-index: 1;
+        /* Search form styling */
+        .search-form input {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(197, 164, 126, 0.3);
+        }
+        
+        .search-form button {
+            background-color: rgba(197, 164, 126, 0.3);
+            border: 1px solid rgba(197, 164, 126, 0.5);
         }
     </style>
 </head>
