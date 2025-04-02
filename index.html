@@ -13,6 +13,7 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
+                <!-- Header search now goes to analysis page directly -->
                 <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
                     <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
                     <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
@@ -22,6 +23,8 @@
                     <li><a href="#features">Features</a></li>
                     <li><a href="#methodology">Methodology</a></li>
                     <li><a href="#about">About</a></li>
+                    <!-- Link to the new search page -->
+                    <li><a href="search.html">Search</a></li>
                 </ul>
                 <button class="mobile-menu" aria-label="Toggle menu">
                     <i class="fas fa-bars"></i>
@@ -37,7 +40,8 @@
                 <p>Detect accounting anomalies and assess financial health with professional-grade analysis tools</p>
                 <div class="hero-separator"></div>
                 <div class="hero-cta">
-                    <a href="analysis.html" class="cta-button">
+                    <!-- Updated link to search.html -->
+                    <a href="search.html" class="cta-button">
                         Start Analysis <i class="fas fa-arrow-right"></i>
                     </a>
                     <a href="#features" class="cta-button secondary">
@@ -153,6 +157,7 @@
         <section class="section cta-section">
             <div class="container">
                 <h2>Analyze a Company's Financial Health</h2>
+                <!-- Updated form action to analysis.html -->
                 <form class="search-form" action="analysis.html" method="GET">
                     <input type="text" name="ticker" placeholder="Enter ticker (e.g., AAPL)" required
                            aria-label="Stock ticker symbol">
@@ -178,6 +183,8 @@
                     <li><a href="#features">Features</a></li>
                     <li><a href="#methodology">Methodology</a></li>
                     <li><a href="#about">About</a></li>
+                     <!-- Link to the new search page -->
+                    <li><a href="search.html">Search</a></li>
                 </ul>
             </div>
             <div class="copyright">
