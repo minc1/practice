@@ -7,18 +7,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Plaid background for hero section */
+        .hero {
+            position: relative;
+            background-color: #2d3142; /* Dark base color */
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(169, 169, 169, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(169, 169, 169, 0.1) 1px, transparent 1px),
+                linear-gradient(rgba(211, 211, 211, 0.15) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(211, 211, 211, 0.15) 2px, transparent 2px);
+            background-size: 
+                25px 25px,
+                25px 25px,
+                100px 100px,
+                100px 100px;
+            z-index: 0;
+        }
+    </style>
 </head>
 <body>
     <header id="header">
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
-                <!-- START: Added Header Search Form -->
                 <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
                     <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
                     <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
                 </form>
-                <!-- END: Added Header Search Form -->
                 <ul class="nav-links">
                     <li><a href="#hero">Home</a></li>
                     <li><a href="#features">Features</a></li>
@@ -33,14 +58,13 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section class="hero" id="hero">
             <div class="container">
                 <h1>Forensic Financial Statement Analysis</h1>
                 <p>Detect accounting anomalies and assess financial health with professional-grade analysis tools</p>
                 <div class="hero-separator"></div>
                 <div class="hero-cta">
-                    <a href="analysis.html" class="cta-button">
+                    <a href="search.html" class="cta-button">
                         Start Analysis <i class="fas fa-arrow-right"></i>
                     </a>
                     <a href="#features" class="cta-button secondary">
@@ -50,7 +74,6 @@
             </div>
         </section>
 
-        <!-- Features Section -->
         <section class="section" id="features">
             <div class="container">
                 <div class="section-title">
@@ -58,7 +81,6 @@
                     <p>Professional tools to uncover financial insights</p>
                 </div>
                 <div class="cards">
-                    <!-- Feature Cards - Reusing existing card component styles -->
                     <div class="card">
                         <div class="card-header">
                             <h3><i class="fas fa-chart-line"></i> Revenue Analysis</h3>
@@ -101,7 +123,6 @@
             </div>
         </section>
 
-        <!-- Methodology Section -->
         <section class="section dark-bg" id="methodology">
             <div class="container">
                 <div class="section-title">
@@ -130,34 +151,10 @@
                             <p>Application of forensic accounting techniques to identify potential red flags</p>
                         </div>
                     </div>
-                    <!-- Removed 4th step:
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h3>Comprehensive Assessment</h3>
-                            <p>Holistic evaluation of financial health, risks, and investment considerations</p>
-                        </div>
-                    </div>
-                    -->
                 </div>
             </div>
         </section>
 
-        <!-- CTA Section -->
-        <section class="section cta-section">
-            <div class="container">
-                <h2>Ready to examine a company?</h2>
-                <!-- This form remains as the main CTA search -->
-                <form class="search-form" action="analysis.html" method="GET">
-                    <input type="text" name="ticker" placeholder="Enter ticker (e.g., AAPL)" required
-                           aria-label="Stock ticker symbol">
-                    <button type="submit" aria-label="Analyze">
-                        <i class="fas fa-search"></i> Analyze
-                    </button>
-                </form>
-            </div>
-        </section>
-        <!-- About Section -->
         <section class="section" id="about">
             <div class="container">
                 <div class="section-title">
@@ -179,6 +176,20 @@
                 </div>
             </div>
         </section>
+
+        <section class="section cta-section">
+            <div class="container">
+                <h2>Analyze a Company's Financial Health</h2>
+                <form class="search-form" action="analysis.html" method="GET">
+                    <input type="text" name="ticker" placeholder="Enter ticker (e.g., AAPL)" required
+                           aria-label="Stock ticker symbol">
+                    <button type="submit" aria-label="Analyze">
+                        <i class="fas fa-search"></i> Analyze
+                    </button>
+                </form>
+            </div>
+        </section>
+
     </main>
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
