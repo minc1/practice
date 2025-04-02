@@ -1,5 +1,5 @@
 // --- Global Variables & Constants ---
-const DEFAULT_TICKER = 'JD'; // Default ticker to load on page init
+const DEFAULT_TICKER = 'AAPL'; // Default ticker to load on page init
 const DATA_PATH = 'DATA/'; // Path to the data directory
 let currentTicker = null; // Keep track of the currently loaded ticker
 let revenueChartInstance = null;
@@ -9,7 +9,7 @@ let cashFlowChartInstance = null;
 // *** NEW: Define Divergence Calculation Thresholds ***
 // Threshold (in percentage points) for growth difference to be considered a divergence
 const AR_REVENUE_DIVERGENCE_THRESHOLD = 15.0; // A/R growth > Revenue growth by 15%
-const NI_CFO_DIVERGENCE_THRESHOLD = 25.0;   // Net Income growth > CFO growth by 25%
+const NI_CFO_DIVERGENCE_THRESHOLD = 30.0;   // Net Income growth > CFO growth by 30%
 
 // Determine current page
 const isAnalysisPage = window.location.pathname.includes('analysis.html');
@@ -337,7 +337,7 @@ if (isAnalysisPage) {
                     labels: {
                         boxWidth: 8, boxHeight: 8, padding: 8,
                         font: { size: 10 }, color: '#6c757d',
-                        usePointStyle: true, pointStyle: 'circle' // Default legend point style
+                        usePointStyle: true, pointStyle: 'circle'
                     }
                 },
                 tooltip: {
@@ -403,6 +403,13 @@ if (isAnalysisPage) {
             backgroundColor: 'rgba(255,255,255,0.85)',
             padding: { top: 3, bottom: 3, left: 5, right: 5 }, borderRadius: 4,
             callout: { display: true, position: 'bottom', borderWidth: 1, borderColor: 'rgba(0,0,0,0.1)', margin: 5 }
+        });
+
+        // Legend entry for divergence explanation
+        const createDivergenceLegend = () => ({
+            label: 'Divergence', pointStyle: 'rectRot', pointRadius: 5,
+            borderColor: divergenceColor, backgroundColor: divergenceColor,
+            borderWidth: 1, data: [] // No data to plot
         });
 
         // Callbacks for dynamic point styling based on calculated indices
@@ -570,20 +577,9 @@ if (isAnalysisPage) {
                                         pointBackgroundColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor),
                                         pointRadius: pointRadiusCallback(arDivergenceIndices),
                                         pointHoverRadius: pointHoverRadiusCallback(arDivergenceIndices),
-                                        pointBorderColor: secondaryColor // Keep point border consistent
+                                        pointBorderColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor)
                                     },
-                                    // START: Added Divergence Legend Dataset
-                                    {
-                                        label: 'Divergence',
-                                        data: [], // No actual data points to plot
-                                        borderColor: divergenceColor,
-                                        backgroundColor: divergenceColor, // Makes the legend point solid
-                                        pointStyle: 'circle', // Ensure circle style
-                                        pointRadius: 5,       // Control legend point size
-                                        borderWidth: 1,
-                                        showLine: false       // Explicitly hide any line
-                                    }
-                                    // END: Added Divergence Legend Dataset
+                                    createDivergenceLegend() // Keep the legend entry
                                 ]
                             },
                             options: arChartOptions
@@ -627,20 +623,9 @@ if (isAnalysisPage) {
                                         pointBackgroundColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor),
                                         pointRadius: pointRadiusCallback(cfDivergenceIndices),
                                         pointHoverRadius: pointHoverRadiusCallback(cfDivergenceIndices),
-                                        pointBorderColor: secondaryColor // Keep point border consistent
+                                        pointBorderColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor)
                                     },
-                                    // START: Added Divergence Legend Dataset
-                                    {
-                                        label: 'Divergence',
-                                        data: [], // No actual data points to plot
-                                        borderColor: divergenceColor,
-                                        backgroundColor: divergenceColor, // Makes the legend point solid
-                                        pointStyle: 'circle', // Ensure circle style
-                                        pointRadius: 5,       // Control legend point size
-                                        borderWidth: 1,
-                                        showLine: false       // Explicitly hide any line
-                                    }
-                                    // END: Added Divergence Legend Dataset
+                                    createDivergenceLegend() // Keep the legend entry
                                 ]
                             },
                             options: cashFlowChartOptions
