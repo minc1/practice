@@ -1,3 +1,5 @@
+--- START OF FILE search.html ---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,13 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Search page specific styles */
         .search-hero {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: calc(100vh - 120px); /* Adjusted for header/footer */
+            min-height: calc(100vh - 120px);
             padding: 40px 20px;
             text-align: center;
             background-color: var(--body-bg);
@@ -48,8 +49,6 @@
             line-height: 1.6;
         }
 
-        /* Use existing .search-form styles from style.css where possible */
-        /* Override specific styles for this page's main search */
         .search-hero .search-form {
             display: flex;
             height: 56px;
@@ -59,7 +58,7 @@
             margin-bottom: 24px;
             border: 1px solid var(--border-color);
             transition: var(--transition);
-            max-width: 100%; /* Ensure it doesn't exceed container */
+            max-width: 100%;
             margin-left: auto;
             margin-right: auto;
         }
@@ -77,13 +76,12 @@
             outline: none;
             color: var(--text);
             background-color: var(--card-bg);
-            /* Reset mobile overrides from style.css */
             border-radius: 0;
             text-align: left;
             box-shadow: none;
             margin-bottom: 0;
             z-index: auto;
-            border: none; /* Re-remove border */
+            border: none;
         }
 
         .search-hero .search-form input::placeholder {
@@ -105,16 +103,15 @@
             font-size: 1rem;
             min-width: 120px;
             justify-content: center;
-             /* Reset mobile overrides from style.css */
             border-radius: 0;
             width: auto;
             box-shadow: none;
-            border: none; /* Re-remove border */
+            border: none;
         }
 
         .search-hero .search-form button:hover {
             background-color: #d4b483;
-            transform: none; /* Override potential global hover effects */
+            transform: none;
         }
 
         .search-examples {
@@ -123,11 +120,10 @@
             font-style: italic;
         }
 
-        /* Responsive adjustments */
         @media (max-width: 768px) {
             .search-container {
                 padding: 30px 20px;
-                margin: 0 16px; /* Add side margin */
+                margin: 0 16px;
             }
 
             .search-title {
@@ -142,30 +138,29 @@
 
             .search-hero .search-form {
                 height: 50px;
-                /* Keep flex-direction row for consistency */
                 flex-direction: row;
-                height: 50px; /* Adjust height */
-                border-radius: 25px; /* Match global style */
-                overflow: hidden; /* Re-apply */
-                gap: 0; /* Remove gap */
-                background: var(--card-bg); /* Apply background */
-                box-shadow: var(--shadow-md); /* Re-apply */
-                border: 1px solid var(--border-color); /* Re-apply */
+                height: 50px;
+                border-radius: 25px;
+                overflow: hidden;
+                gap: 0;
+                background: var(--card-bg);
+                box-shadow: var(--shadow-md);
+                border: 1px solid var(--border-color);
             }
 
             .search-hero .search-form input {
-                padding: 0 20px; /* Match global style */
-                border-radius: 0; /* Remove individual radius */
-                border: none; /* Remove border */
-                box-shadow: none; /* Remove shadow */
+                padding: 0 20px;
+                border-radius: 0;
+                border: none;
+                box-shadow: none;
             }
 
             .search-hero .search-form button {
-                padding: 0 24px; /* Match global style */
-                border-radius: 0; /* Remove individual radius */
-                width: auto; /* Reset width */
-                min-width: auto; /* Allow button to shrink */
-                font-size: 0.95rem; /* Adjust font size */
+                padding: 0 24px;
+                border-radius: 0;
+                width: auto;
+                min-width: auto;
+                font-size: 0.95rem;
             }
 
             .search-examples {
@@ -175,8 +170,8 @@
 
         @media (max-width: 480px) {
             .search-hero {
-                padding: 60px 16px 40px; /* Adjust padding */
-                min-height: calc(100vh - 80px); /* Adjust min height */
+                padding: 60px 16px 40px;
+                min-height: calc(100vh - 80px);
             }
 
             .search-title {
@@ -187,7 +182,6 @@
                 font-size: 0.9rem;
             }
 
-             /* Apply stacking for the search form only on very small screens */
             .search-hero .search-form {
                 flex-direction: column;
                 height: auto;
@@ -205,8 +199,8 @@
                 border: 1px solid var(--border-color);
                 box-shadow: var(--shadow-sm);
                 text-align: center;
-                margin-bottom: 0; /* Reset margin */
-                z-index: auto; /* Reset z-index */
+                margin-bottom: 0;
+                z-index: auto;
             }
 
             .search-hero .search-form button {
@@ -225,7 +219,6 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
-                <!-- Header search now goes to analysis page directly -->
                 <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
                     <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
                     <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
@@ -234,8 +227,7 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="index.html#features">Features</a></li>
                     <li><a href="index.html#methodology">Methodology</a></li>
-                    <!-- Link to the new search page -->
-                    <li><a href="search.html">Search</a></li>
+                    <li><a href="index.html#about">About</a></li>
                 </ul>
                 <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
                     <i class="fas fa-bars"></i>
@@ -249,7 +241,6 @@
             <div class="search-container">
                 <h1 class="search-title">Forensic Financial Analysis</h1>
                 <p class="search-subtitle">Enter a stock ticker symbol to uncover accounting insights and financial health indicators</p>
-                <!-- This form submits to analysis.html -->
                 <form class="search-form" action="analysis.html" method="GET">
                     <input type="text" name="ticker" placeholder="Search by ticker (e.g., AAPL, MSFT, TSLA)" required aria-label="Stock ticker symbol">
                     <button type="submit" aria-label="Analyze">
@@ -269,7 +260,7 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="index.html#features">Features</a></li>
                     <li><a href="index.html#methodology">Methodology</a></li>
-                     <li><a href="search.html">Search</a></li>
+                    <li><a href="index.html#about">About</a></li>
                 </ul>
             </div>
             <div class="copyright">
@@ -278,18 +269,14 @@
         </div>
     </footer>
 
-    <!-- Include script.js for header functionality (mobile menu, scroll) -->
     <script src="script.js"></script>
     <script>
-        // Minimal JS for search page specific interactions if needed in future
-        // Currently, the form submission handles the navigation.
-        // Add event listener for header form if needed (though action attribute handles it)
         const headerSearchFormOnSearchPage = document.querySelector('#headerTickerSearchForm');
         if (headerSearchFormOnSearchPage) {
             headerSearchFormOnSearchPage.addEventListener('submit', function(e) {
-                // Allow default form submission to analysis.html
             });
         }
     </script>
 </body>
 </html>
+--- END OF FILE search.html ---
