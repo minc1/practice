@@ -338,10 +338,7 @@ if (isAnalysisPage) {
                         boxWidth: 8, boxHeight: 8, padding: 8,
                         font: { size: 10 }, color: '#6c757d',
                         usePointStyle: true,
-                        filter: function(item) {
-                            // Always show all legends including Divergence
-                            return true;
-                        }
+                        filter: (legendItem) => true // Always show all legend items
                     }
                 },
                 tooltip: {
@@ -413,8 +410,7 @@ if (isAnalysisPage) {
         const createDivergenceLegend = () => ({
             label: 'Divergence', pointStyle: 'rectRot', pointRadius: 5,
             borderColor: divergenceColor, backgroundColor: divergenceColor,
-            borderWidth: 1, data: [], // No data to plot
-            hidden: false // Always show in legend
+            borderWidth: 1, data: Array(chartLabels.length).fill(null) // Create array with nulls matching chart labels length
         });
 
         // Callbacks for dynamic point styling based on calculated indices
@@ -584,7 +580,7 @@ if (isAnalysisPage) {
                                         pointHoverRadius: pointHoverRadiusCallback(arDivergenceIndices),
                                         pointBorderColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor)
                                     },
-                                    createDivergenceLegend() // Always include divergence legend
+                                    createDivergenceLegend() // Keep the legend entry
                                 ]
                             },
                             options: arChartOptions
@@ -630,7 +626,7 @@ if (isAnalysisPage) {
                                         pointHoverRadius: pointHoverRadiusCallback(cfDivergenceIndices),
                                         pointBorderColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor)
                                     },
-                                    createDivergenceLegend() // Always include divergence legend
+                                    createDivergenceLegend() // Keep the legend entry
                                 ]
                             },
                             options: cashFlowChartOptions
