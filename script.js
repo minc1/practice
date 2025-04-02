@@ -337,8 +337,7 @@ if (isAnalysisPage) {
                     labels: {
                         boxWidth: 8, boxHeight: 8, padding: 8,
                         font: { size: 10 }, color: '#6c757d',
-                        usePointStyle: true // Keep this true
-                        // pointStyle: 'circle' // <<< REMOVED/COMMENTED OUT TO ALLOW DATASET-SPECIFIC STYLES
+                        usePointStyle: true
                     }
                 },
                 tooltip: {
