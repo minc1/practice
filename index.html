@@ -8,10 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Plaid background for hero section that matches the site's design language */
+        /* Refined plaid background for hero section */
         .hero {
             position: relative;
-            background-color: var(--secondary); /* Using the site's secondary color variable */
+            background-color: var(--secondary);
+            overflow: hidden;
         }
         
         .hero::before {
@@ -21,17 +22,38 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(rgba(197, 164, 126, 0.08) 2px, transparent 2px),
-                linear-gradient(90deg, rgba(197, 164, 126, 0.08) 2px, transparent 2px);
+            background: 
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(197, 164, 126, 0.05) 2px, transparent 2px),
+                linear-gradient(rgba(197, 164, 126, 0.05) 2px, transparent 2px);
             background-size: 
-                25px 25px,
-                25px 25px,
-                100px 100px,
-                100px 100px;
+                30px 30px,
+                30px 30px,
+                120px 120px,
+                120px 120px;
             z-index: 0;
+        }
+        
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                circle at center,
+                rgba(28, 37, 65, 0.4) 0%,
+                rgba(28, 37, 65, 0.8) 70%,
+                var(--secondary) 100%
+            );
+            z-index: 0;
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
