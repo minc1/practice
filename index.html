@@ -8,13 +8,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Shared plaid background styles */
-        .plaid-background {
+        /* Refined plaid background for hero section */
+        .hero {
             position: relative;
+            background-color: var(--secondary);
             overflow: hidden;
         }
         
-        .plaid-background::before {
+        .hero::before {
             content: "";
             position: absolute;
             top: 0;
@@ -34,7 +35,7 @@
             z-index: 0;
         }
         
-        .plaid-background::after {
+        .hero::after {
             content: "";
             position: absolute;
             top: 0;
@@ -44,25 +45,63 @@
             background: radial-gradient(
                 circle at center,
                 rgba(28, 37, 65, 0.4) 0%,
-                rgba(28, 37, 65, 0.7) 60%,
+                rgba(28, 37, 65, 0.8) 70%,
                 var(--secondary) 100%
             );
             z-index: 0;
         }
         
-        .plaid-background .container {
+        .hero .container {
             position: relative;
             z-index: 1;
         }
-        
-        /* Hero-specific styles */
-        .hero {
+
+        /* Add the same background to the CTA section */
+        .cta-section {
+            position: relative;
             background-color: var(--secondary);
+            overflow: hidden;
         }
         
-        /* CTA section-specific styles */
-        .cta-section {
-            background-color: var(--secondary);
+        .cta-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(197, 164, 126, 0.05) 2px, transparent 2px),
+                linear-gradient(rgba(197, 164, 126, 0.05) 2px, transparent 2px);
+            background-size: 
+                30px 30px,
+                30px 30px,
+                120px 120px,
+                120px 120px;
+            z-index: 0;
+        }
+        
+        .cta-section::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                circle at center,
+                rgba(28, 37, 65, 0.4) 0%,
+                rgba(28, 37, 65, 0.8) 70%,
+                var(--secondary) 100%
+            );
+            z-index: 0;
+        }
+        
+        .cta-section .container {
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
@@ -89,7 +128,7 @@
     </header>
 
     <main>
-        <section class="hero plaid-background" id="hero">
+        <section class="hero" id="hero">
             <div class="container">
                 <h1>Forensic Financial Statement Analysis</h1>
                 <p>Detect accounting anomalies and assess financial health with professional-grade analysis tools</p>
@@ -208,7 +247,7 @@
             </div>
         </section>
 
-        <section class="section cta-section plaid-background">
+        <section class="section cta-section">
             <div class="container">
                 <h2>Analyze a Company's Financial Health</h2>
                 <form class="search-form" action="analysis.html" method="GET">
