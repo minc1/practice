@@ -8,10 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Plaid background for hero section */
+        /* Plaid background for hero section that matches the site's design language */
         .hero {
             position: relative;
-            background-color: #2d3142; /* Dark base color */
+            background-color: var(--secondary); /* Using the site's secondary color variable */
         }
         
         .hero::before {
@@ -22,10 +22,10 @@
             right: 0;
             bottom: 0;
             background-image: 
-                linear-gradient(rgba(169, 169, 169, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(169, 169, 169, 0.1) 1px, transparent 1px),
-                linear-gradient(rgba(211, 211, 211, 0.15) 2px, transparent 2px),
-                linear-gradient(90deg, rgba(211, 211, 211, 0.15) 2px, transparent 2px);
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(rgba(197, 164, 126, 0.08) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(197, 164, 126, 0.08) 2px, transparent 2px);
             background-size: 
                 25px 25px,
                 25px 25px,
