@@ -1,16 +1,15 @@
-// --- Global Variables & Constants ---
-const DEFAULT_TICKER = 'JD'; // Default ticker to load on page init
-const DATA_PATH = 'DATA/'; // Path to the data directory
-let currentTicker = null; // Keep track of the currently loaded ticker
+const DEFAULT_TICKER = 'AAPL';
+const DATA_PATH = 'DATA/';
+const DIVERGENCE_THRESHOLD = 15.0;
+
+let currentTicker = null;
 let revenueChartInstance = null;
 let arChartInstance = null;
 let cashFlowChartInstance = null;
 
-// Determine current page
 const isAnalysisPage = window.location.pathname.includes('analysis.html');
 const isLandingPage = !isAnalysisPage;
 
-// --- Helper Functions ---
 const select = (el, all = false) => {
     el = el.trim();
     if (all) {
@@ -36,7 +35,6 @@ const onScroll = (el, listener) => {
     target.addEventListener('scroll', listener);
 };
 
-// Helper function to populate elements safely
 const populateElement = (selector, data, property = 'textContent') => {
     const element = select(selector);
     if (element) {
@@ -47,27 +45,22 @@ const populateElement = (selector, data, property = 'textContent') => {
                 element.textContent = data;
             }
         } else {
-            element[property] = ''; // Clear if data is missing
-            console.warn(`Data not found or null/undefined for selector: ${selector}`);
+            element[property] = '';
         }
     } else {
-        // console.warn(`Element not found for selector: ${selector}`); // Less noisy
     }
 };
 
-// Helper function to generate cards dynamically
 const generateCards = (containerId, cardData) => {
     const container = select(`#${containerId}`);
     if (!container) {
-        console.error(`Card container #${containerId} not found.`);
         return;
     }
      if (!Array.isArray(cardData)) {
-        console.error(`Invalid card data for #${containerId}. Expected array.`);
         container.innerHTML = '<p class="error-message" style="color: var(--danger); text-align: center;">Error loading card data.</p>';
         return;
     }
-    container.innerHTML = ''; // Clear placeholder/previous cards
+    container.innerHTML = '';
     if (cardData.length === 0) {
         container.innerHTML = '<p style="text-align: center; color: var(--muted);">No card data available.</p>';
         return;
@@ -90,19 +83,16 @@ const generateCards = (containerId, cardData) => {
     });
 };
 
-// Helper function to populate table dynamically
 const populateTable = (tbodyId, tableRowData) => {
     const tbody = select(`#${tbodyId}`);
     if (!tbody) {
-        console.error(`Table body #${tbodyId} not found.`);
         return;
     }
     if (!Array.isArray(tableRowData)) {
-        console.error(`Invalid table data for #${tbodyId}. Expected array.`);
         tbody.innerHTML = '<tr><td colspan="3" class="error-message" style="color: var(--danger); text-align: center;">Error loading table data.</td></tr>';
         return;
     }
-    tbody.innerHTML = ''; // Clear placeholder
+    tbody.innerHTML = '';
     if (tableRowData.length === 0) {
         tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: var(--muted);">No table data available.</td></tr>';
         return;
@@ -118,19 +108,16 @@ const populateTable = (tbodyId, tableRowData) => {
     });
 };
 
-// Helper function to populate list items dynamically
 const populateList = (ulId, listItems, useInnerHTML = false) => {
     const ul = select(`#${ulId}`);
      if (!ul) {
-        console.error(`List #${ulId} not found.`);
         return;
     }
     if (!Array.isArray(listItems)) {
-        console.error(`Invalid list data for #${ulId}. Expected array.`);
         ul.innerHTML = '<li class="error-message" style="color: var(--danger);">Error loading list data.</li>';
         return;
     }
-    ul.innerHTML = ''; // Clear placeholder
+    ul.innerHTML = '';
     if (listItems.length === 0) {
         ul.innerHTML = '<li style="color: var(--muted);">No list items available.</li>';
         return;
@@ -146,36 +133,48 @@ const populateList = (ulId, listItems, useInnerHTML = false) => {
     });
 };
 
-// Helper to show loading/error messages (Primarily for analysis page)
 const showMessage = (message, type = 'loading') => {
     const messageArea = select('#loading-error-message');
     const mainContent = select('#main-content');
-    if (!messageArea || !mainContent) return; // Only run on analysis page
+    if (!messageArea || !mainContent) return;
 
     const messageP = messageArea.querySelector('p');
 
     if (message) {
-        messageP.innerHTML = message; // Use innerHTML to allow icons
-        messageArea.className = `message-area ${type}`; // Add class for styling
+        messageP.innerHTML = message;
+        messageArea.className = `message-area ${type}`;
         messageArea.style.display = 'flex';
-        mainContent.style.display = 'none'; // Hide main content
+        mainContent.style.display = 'none';
     } else {
         messageArea.style.display = 'none';
-        mainContent.style.display = 'block'; // Show main content
+        mainContent.style.display = 'block';
     }
 };
 
-// Helper to destroy existing chart instances
 const destroyCharts = () => {
     if (revenueChartInstance) { revenueChartInstance.destroy(); revenueChartInstance = null; }
     if (arChartInstance) { arChartInstance.destroy(); arChartInstance = null; }
     if (cashFlowChartInstance) { cashFlowChartInstance.destroy(); cashFlowChartInstance = null; }
-    console.log("Previous chart instances destroyed.");
 };
 
-// --- UI Interaction Logic (Mobile Menu, Header Scroll, Back to Top) ---
+const calculateDivergenceIndices = (data1, data2, threshold) => {
+    if (!Array.isArray(data1) || !Array.isArray(data2) || data1.length !== data2.length) {
+        return [];
+    }
+    const indices = [];
+    for (let i = 0; i < data1.length; i++) {
+        const val1 = data1[i];
+        const val2 = data2[i];
+        if (typeof val1 === 'number' && typeof val2 === 'number' && !isNaN(val1) && !isNaN(val2)) {
+            if (Math.abs(val1 - val2) > threshold) {
+                indices.push(i);
+            }
+        }
+    }
+    return indices;
+};
 
-// Mobile Menu Toggle
+
 const mobileMenuButton = select('.mobile-menu');
 const navLinks = select('.nav-links');
 const mobileMenuIcon = select('.mobile-menu i');
@@ -186,7 +185,6 @@ if (mobileMenuButton && navLinks && mobileMenuIcon) {
         mobileMenuIcon.classList.toggle('fa-bars');
         mobileMenuIcon.classList.toggle('fa-times');
         mobileMenuButton.setAttribute('aria-expanded', navLinks.classList.contains('show'));
-        // Recalculate top position dynamically in case header wraps
         const headerHeight = select('#header')?.offsetHeight || 61;
         navLinks.style.top = `${headerHeight}px`;
     });
@@ -201,8 +199,7 @@ if (mobileMenuButton && navLinks && mobileMenuIcon) {
     }, true);
 }
 
-// Landing page CTA search form handling
-const ctaSearchForm = select('.search-form'); // Select the CTA search form
+const ctaSearchForm = select('.search-form');
 if (ctaSearchForm && isLandingPage) {
     ctaSearchForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -213,8 +210,7 @@ if (ctaSearchForm && isLandingPage) {
     });
 }
 
-// Landing page HEADER search form handling
-const headerSearchForm = select('#headerTickerSearchForm'); // Select the new header search form
+const headerSearchForm = select('#headerTickerSearchForm');
 if (headerSearchForm && isLandingPage) {
     headerSearchForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -225,8 +221,6 @@ if (headerSearchForm && isLandingPage) {
     });
 }
 
-
-// Header Scroll Effect
 const header = select('#header');
 if (header) {
     const headerScrolled = () => {
@@ -240,7 +234,6 @@ if (header) {
     onScroll(window, headerScrolled);
 }
 
-// Back to Top Button
 const backToTopButton = select('.back-to-top');
 if (backToTopButton) {
     const toggleBackToTop = () => {
@@ -258,35 +251,23 @@ if (backToTopButton) {
     });
 }
 
-
-// --- Chart.js Implementation & Data Loading (Only for Analysis Page) ---
-
-// Wrap analysis page specific logic in a check
 if (isAnalysisPage) {
     document.addEventListener('DOMContentLoaded', function() {
 
-        // Check if Chart.js and annotation plugin are loaded
         if (typeof Chart === 'undefined') {
-            console.error("Chart.js library not loaded.");
             showMessage('<i class="fas fa-exclamation-triangle"></i> Chart library failed to load. Please refresh.', 'error');
             return;
         }
         if (typeof ChartAnnotation === 'undefined') {
-            console.error("Chartjs-plugin-annotation not loaded.");
-            // Annotations might fail, but charts could still work partially
         }
 
-        // Register the annotation plugin
         try {
             if (typeof ChartAnnotation !== 'undefined') {
                  Chart.register(ChartAnnotation);
-                 console.log("Chartjs-plugin-annotation registered successfully.");
             }
         } catch (error) {
-            console.error("Error registering Chartjs-plugin-annotation:", error);
         }
 
-        // --- Common Chart Configuration ---
         const commonChartOptions = {
             responsive: true,
             maintainAspectRatio: false,
@@ -348,11 +329,10 @@ if (isAnalysisPage) {
             layout: { padding: { top: 20, right: 20, bottom: 10, left: 10 } }
         };
 
-        // --- Chart Styling Helper Functions ---
-        const divergenceColor = '#c5817e'; // var(--danger)
-        const primaryColor = '#c5a47e';    // var(--primary)
-        const secondaryColor = '#1c2541';  // var(--secondary)
-        const mutedColor = '#6c757d';      // var(--muted)
+        const divergenceColor = '#c5817e';
+        const primaryColor = '#c5a47e';
+        const secondaryColor = '#1c2541';
+        const mutedColor = '#6c757d';
 
         const createAnnotationLabel = (xVal, yVal, content, yAdj = -15, xAdj = 0) => ({
             type: 'label', xValue: xVal, yValue: yVal, content: content,
@@ -381,8 +361,6 @@ if (isAnalysisPage) {
             return indices.includes(context.dataIndex) ? highlightRadius : normalRadius;
         };
 
-
-        // --- Core Data Loading and Page Population Function ---
         const loadAnalysisData = async (ticker) => {
             ticker = ticker.trim().toUpperCase();
             if (!ticker) {
@@ -390,11 +368,9 @@ if (isAnalysisPage) {
                 return;
             }
 
-            console.log(`Attempting to load data for ticker: ${ticker}`);
             showMessage(`<i class="fas fa-spinner fa-spin"></i> Loading analysis for ${ticker}...`, 'loading');
-            destroyCharts(); // Destroy previous charts before loading new data
+            destroyCharts();
 
-            // Select the search button specific to analysis.html header
             const searchButton = select('#tickerSearchForm button');
             if (searchButton) searchButton.disabled = true;
 
@@ -411,15 +387,12 @@ if (isAnalysisPage) {
 
                 const data = await response.json();
 
-                // --- Data Validation (Basic) ---
                 if (!data || typeof data !== 'object') {
                     throw new Error(`Invalid data format received for ticker "${ticker}".`);
                 }
 
-                console.log(`Analysis data for ${ticker} loaded successfully.`);
-                currentTicker = ticker; // Update current ticker tracker
+                currentTicker = ticker;
 
-                // --- Populate Static Content Areas ---
                 populateElement('[data-dynamic="page-title"]', data.company?.pageTitle || `ForensicFinancials | ${ticker} Analysis`);
                 populateElement('[data-dynamic="hero-title"]', `${data.company?.name || ticker} (${data.company?.ticker || ticker})<br>${data.company?.analysisTitle || 'Financial Analysis'}`, 'innerHTML');
                 populateElement('[data-dynamic="hero-subtitle"]', data.company?.heroSubtitle || `Analysis details for ${ticker}.`);
@@ -445,11 +418,20 @@ if (isAnalysisPage) {
                 populateElement('[data-dynamic="monitoring-title"]', data.conclusion?.monitoringPointsTitle || 'Key Monitoring Points');
                 populateList('monitoring-points-list', data.conclusion?.monitoringPoints || [], true);
 
-                // --- Initialize Charts with Dynamic Data ---
                 const chartData = data.chartData || {};
                 const chartLabels = chartData.labels || [];
 
-                // 1. Revenue Chart
+                const arDivergenceIndices = calculateDivergenceIndices(
+                    chartData.revenueGrowth,
+                    chartData.arGrowth,
+                    DIVERGENCE_THRESHOLD
+                );
+                const cfDivergenceIndices = calculateDivergenceIndices(
+                    chartData.cfoGrowth,
+                    chartData.niGrowth,
+                    DIVERGENCE_THRESHOLD
+                );
+
                 const revenueCtx = select('#revenueChart')?.getContext('2d');
                 if (revenueCtx) {
                     try {
@@ -468,15 +450,12 @@ if (isAnalysisPage) {
                             },
                             options: JSON.parse(JSON.stringify(commonChartOptions))
                         });
-                        console.log("Revenue chart initialized.");
-                    } catch (error) { console.error("Error initializing Revenue Chart:", error); }
-                } else { console.warn("Canvas element #revenueChart not found."); }
+                    } catch (error) { }
+                } else { }
 
-                // 2. Accounts Receivable vs Revenue Chart
                 const arCtx = select('#arChart')?.getContext('2d');
                 if (arCtx) {
                     try {
-                        const arDivergenceIndices = chartData.divergenceIndices?.arChart || [];
                         const arChartOptions = JSON.parse(JSON.stringify(commonChartOptions));
                         arChartOptions.plugins.annotation = { annotations: {} };
                         if (chartData.annotations?.arChart && Array.isArray(chartData.annotations.arChart)) {
@@ -484,9 +463,20 @@ if (isAnalysisPage) {
                                 if (typeof anno.xVal === 'number' && typeof anno.yVal === 'number' && anno.content) {
                                     arChartOptions.plugins.annotation.annotations[`arLabel${index + 1}`] =
                                         createAnnotationLabel(anno.xVal, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
-                                } else { console.warn(`Invalid annotation data for arChart at index ${index}`); }
+                                } else { }
                             });
                         }
+
+                        arChartOptions.plugins.legend.labels.generateLabels = function(chart) {
+                            const defaultLabels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                            defaultLabels.forEach(label => {
+                                if (label.datasetIndex === 1) {
+                                    label.fillStyle = secondaryColor;
+                                    label.strokeStyle = secondaryColor;
+                                }
+                            });
+                            return defaultLabels;
+                        };
 
                         arChartInstance = new Chart(arCtx, {
                             type: 'line',
@@ -500,15 +490,12 @@ if (isAnalysisPage) {
                             },
                             options: arChartOptions
                         });
-                        console.log("A/R chart initialized.");
-                    } catch (error) { console.error("Error initializing A/R Chart:", error); }
-                } else { console.warn("Canvas element #arChart not found."); }
+                    } catch (error) { }
+                } else { }
 
-                // 3. Operating Cash Flow vs Net Income Chart
                 const cashFlowCtx = select('#cashFlowChart')?.getContext('2d');
                 if (cashFlowCtx) {
                      try {
-                        const cfDivergenceIndices = chartData.divergenceIndices?.cashFlowChart || [];
                         const cashFlowChartOptions = JSON.parse(JSON.stringify(commonChartOptions));
                         cashFlowChartOptions.plugins.annotation = { annotations: {} };
                          if (chartData.annotations?.cashFlowChart && Array.isArray(chartData.annotations.cashFlowChart)) {
@@ -516,9 +503,20 @@ if (isAnalysisPage) {
                                  if (typeof anno.xVal === 'number' && typeof anno.yVal === 'number' && anno.content) {
                                     cashFlowChartOptions.plugins.annotation.annotations[`cfLabel${index + 1}`] =
                                         createAnnotationLabel(anno.xVal, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
-                                 } else { console.warn(`Invalid annotation data for cashFlowChart at index ${index}`); }
+                                 } else { }
                             });
                         }
+
+                        cashFlowChartOptions.plugins.legend.labels.generateLabels = function(chart) {
+                            const defaultLabels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                            defaultLabels.forEach(label => {
+                                if (label.datasetIndex === 1) {
+                                    label.fillStyle = secondaryColor;
+                                    label.strokeStyle = secondaryColor;
+                                }
+                            });
+                            return defaultLabels;
+                        };
 
                         cashFlowChartInstance = new Chart(cashFlowCtx, {
                             type: 'line',
@@ -532,64 +530,50 @@ if (isAnalysisPage) {
                             },
                             options: cashFlowChartOptions
                         });
-                        console.log("Cash Flow chart initialized.");
-                    } catch (error) { console.error("Error initializing Cash Flow Chart:", error); }
-                } else { console.warn("Canvas element #cashFlowChart not found."); }
+                    } catch (error) { }
+                } else { }
 
-                // --- Responsive Chart Adjustments ---
-                handleResize(); // Apply initial responsive settings
+                handleResize();
 
-                // Hide loading message and show content
                 showMessage(null);
-                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top after loading new data
+                window.scrollTo({ top: 0, behavior: 'smooth' });
 
             } catch (error) {
-                console.error('Failed to load or process analysis data:', error);
                 showMessage(`<i class="fas fa-exclamation-triangle"></i> ${error.message}`, 'error');
-                currentTicker = null; // Reset current ticker on error
+                currentTicker = null;
             } finally {
-                 if (searchButton) searchButton.disabled = false; // Re-enable search button
+                 if (searchButton) searchButton.disabled = false;
             }
         };
 
-
-        // --- Event Listeners ---
-
-        // Ticker Search Form Submission (Analysis Page Header)
-        const analysisHeaderSearchForm = select('#tickerSearchForm'); // Use the correct ID for analysis page
-        const tickerInput = select('#tickerInput'); // Use the correct ID for analysis page
+        const analysisHeaderSearchForm = select('#tickerSearchForm');
+        const tickerInput = select('#tickerInput');
         if (analysisHeaderSearchForm && tickerInput) {
             analysisHeaderSearchForm.addEventListener('submit', (e) => {
-                e.preventDefault(); // Prevent default form submission
+                e.preventDefault();
                 const ticker = tickerInput.value;
-                if (ticker && ticker.toUpperCase() !== currentTicker) { // Only load if ticker is new
+                if (ticker && ticker.toUpperCase() !== currentTicker) {
                      loadAnalysisData(ticker);
-                     // Update URL without reloading page (optional)
                      const newUrl = `${window.location.pathname}?ticker=${ticker.toUpperCase()}`;
                      window.history.pushState({path: newUrl}, '', newUrl);
                 } else if (!ticker) {
                      showMessage('<i class="fas fa-exclamation-circle"></i> Please enter a ticker symbol.', 'error');
                 }
-                // Optionally clear input after search: tickerInput.value = '';
             });
         } else {
-            console.error("Analysis page ticker search form or input element not found.");
         }
 
-        // Debounced Resize Handler for Charts
         let resizeTimeout;
         const handleResize = () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 const isMobile = window.innerWidth <= 768;
-                // Use the globally tracked instances
                 const chartsToResize = [revenueChartInstance, arChartInstance, cashFlowChartInstance];
 
                 chartsToResize.forEach((chart, index) => {
-                    if (!chart || !chart.options) return; // Skip if chart is not initialized
+                    if (!chart || !chart.options) return;
 
                     try {
-                        // Adjust font sizes
                         if (chart.options.plugins?.tooltip?.bodyFont) chart.options.plugins.tooltip.bodyFont.size = isMobile ? 11 : 12;
                         if (chart.options.scales?.x?.ticks?.font) chart.options.scales.x.ticks.font.size = isMobile ? 10 : 12;
                         if (chart.options.scales?.y?.title?.font) chart.options.scales.y.title.font.size = isMobile ? 11 : 12;
@@ -600,7 +584,6 @@ if (isAnalysisPage) {
                             chart.options.plugins.legend.labels.boxHeight = 8;
                         }
 
-                        // Adjust annotation label font size
                         if (chart.options.plugins?.annotation?.annotations) {
                             Object.values(chart.options.plugins.annotation.annotations).forEach(anno => {
                                 if (anno.type === 'label' && anno.font) {
@@ -609,31 +592,24 @@ if (isAnalysisPage) {
                             });
                         }
 
-                        // Resize and update
                         chart.resize();
-                        chart.update('none'); // Use 'none' to avoid jerky animations on resize
+                        chart.update('none');
                     } catch(error) {
-                        console.error(`Error resizing/updating chart index ${index}:`, error);
                     }
                 });
-                 if (chartsToResize.some(c => c)) console.log("Charts resized/updated for responsiveness."); // Log only if charts exist
-            }, 250); // Debounce
+                 if (chartsToResize.some(c => c)) {}
+            }, 250);
         };
         window.addEventListener('resize', handleResize);
 
-
-        // --- Initial Load ---
-        // Check for ticker in URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const tickerParam = urlParams.get('ticker');
 
-        // Set input value from URL param if present
         if (tickerParam && tickerInput) {
             tickerInput.value = tickerParam.toUpperCase();
         }
 
-        // Load ticker from URL or use default
         loadAnalysisData(tickerParam ? tickerParam.toUpperCase() : DEFAULT_TICKER);
 
-    }); // End DOMContentLoaded Wrapper for Analysis Page
-} // End isAnalysisPage check
+    });
+}
