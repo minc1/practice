@@ -410,7 +410,7 @@ if (isAnalysisPage) {
         const createDivergenceLegend = () => ({
             label: 'Divergence', pointStyle: 'rectRot', pointRadius: 5,
             borderColor: divergenceColor, backgroundColor: divergenceColor,
-            borderWidth: 1, data: Array(chartLabels.length).fill(null) // Create array with nulls matching chart labels length
+            borderWidth: 1, data: Array(chartLabels?.length || 1).fill(null) // Create array with nulls to maintain legend
         });
 
         // Callbacks for dynamic point styling based on calculated indices
