@@ -8,14 +8,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Refined plaid background for hero section */
-        .hero {
+        /* Shared plaid background styles */
+        .plaid-background {
             position: relative;
-            background-color: var(--secondary);
             overflow: hidden;
         }
         
-        .hero::before {
+        .plaid-background::before {
             content: "";
             position: absolute;
             top: 0;
@@ -35,7 +34,7 @@
             z-index: 0;
         }
         
-        .hero::after {
+        .plaid-background::after {
             content: "";
             position: absolute;
             top: 0;
@@ -45,15 +44,25 @@
             background: radial-gradient(
                 circle at center,
                 rgba(28, 37, 65, 0.4) 0%,
-                rgba(28, 37, 65, 0.8) 70%,
+                rgba(28, 37, 65, 0.7) 60%,
                 var(--secondary) 100%
             );
             z-index: 0;
         }
         
-        .hero .container {
+        .plaid-background .container {
             position: relative;
             z-index: 1;
+        }
+        
+        /* Hero-specific styles */
+        .hero {
+            background-color: var(--secondary);
+        }
+        
+        /* CTA section-specific styles */
+        .cta-section {
+            background-color: var(--secondary);
         }
     </style>
 </head>
@@ -80,7 +89,7 @@
     </header>
 
     <main>
-        <section class="hero" id="hero">
+        <section class="hero plaid-background" id="hero">
             <div class="container">
                 <h1>Forensic Financial Statement Analysis</h1>
                 <p>Detect accounting anomalies and assess financial health with professional-grade analysis tools</p>
@@ -199,7 +208,7 @@
             </div>
         </section>
 
-        <section class="section cta-section">
+        <section class="section cta-section plaid-background">
             <div class="container">
                 <h2>Analyze a Company's Financial Health</h2>
                 <form class="search-form" action="analysis.html" method="GET">
