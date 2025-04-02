@@ -264,6 +264,56 @@ if (isAnalysisPage) {
             console.error("Error registering Chartjs-plugin-annotation:", error);
         }
 
+        const divergenceColor = '#c5817e'; // Danger color for divergence
+        const primaryColor = '#c5a47e';    // Primary color
+        const secondaryColor = '#1c2541';  // Secondary color
+        const mutedColor = '#6c757d';      // Muted color for annotations
+
+        // Helper function to create annotation labels
+        const createAnnotationLabel = (xVal, yVal, content, yAdj = -15, xAdj = 0) => ({
+            type: 'label', xValue: xVal, yValue: yVal, content: content,
+            color: mutedColor, font: { size: window.innerWidth <= 768 ? 9 : 10, weight: '600' },
+            position: 'start', yAdjust: yAdj, xAdjust: xAdj,
+            backgroundColor: 'rgba(255,255,255,0.85)',
+            padding: { top: 3, bottom: 3, left: 5, right: 5 }, borderRadius: 4,
+            callout: { display: true, position: 'bottom', borderWidth: 1, borderColor: 'rgba(0,0,0,0.1)', margin: 5 }
+        });
+
+        // Helper function to create the dummy dataset for the divergence legend
+        // **MODIFIED** to prevent rendering
+        const createDivergenceLegend = () => ({
+            label: 'Divergence', // This label will appear in the legend
+            borderColor: divergenceColor,
+            backgroundColor: divergenceColor,
+            pointStyle: 'rectRot', // Style for the legend marker
+            // --- Properties to hide rendering ---
+            pointRadius: 0, // No points
+            pointHoverRadius: 0,
+            borderWidth: 0, // No line connecting points (if any existed)
+            showLine: false, // Explicitly hide line
+            data: [] // No actual data needed
+        });
+
+        // Callback function for point background color based on divergence indices
+        const pointStyleCallback = (indices = [], normalColor, highlightColor) => (context) => {
+            // No need to check datasetIndex here as this callback is only applied to data datasets
+            return indices.includes(context.dataIndex) ? highlightColor : normalColor;
+        };
+
+        // Callback function for point radius based on divergence indices
+        const pointRadiusCallback = (indices = [], normalRadius = 4, highlightRadius = 6) => (context) => {
+            // No need to check datasetIndex here
+            return indices.includes(context.dataIndex) ? highlightRadius : normalRadius;
+        };
+
+        // Callback function for point hover radius based on divergence indices
+        const pointHoverRadiusCallback = (indices = [], normalRadius = 6, highlightRadius = 8) => (context) => {
+            // No need to check datasetIndex here
+            return indices.includes(context.dataIndex) ? highlightRadius : normalRadius;
+        };
+
+        // --- Common Chart Options ---
+        // **MODIFIED** to include custom legend onClick
         const commonChartOptions = {
             responsive: true,
             maintainAspectRatio: false,
@@ -275,13 +325,24 @@ if (isAnalysisPage) {
                         boxWidth: 8, boxHeight: 8, padding: 8,
                         font: { size: 10 }, color: '#6c757d',
                         usePointStyle: true, pointStyle: 'circle'
+                    },
+                    // --- Custom onClick handler ---
+                    onClick: function(e, legendItem, legend) {
+                        // Check if the clicked item is the 'Divergence' legend
+                        if (legendItem.text === 'Divergence') {
+                            // Do nothing when 'Divergence' is clicked
+                            return;
+                        }
+                        // Otherwise, use the default behavior (toggle dataset visibility)
+                        // Need to call the default handler correctly
+                        Chart.defaults.plugins.legend.onClick.call(this, e, legendItem, legend);
                     }
                 },
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            // Hide tooltip for the 'Divergence' legend item
-                            if (context.dataset.label === 'Divergence') return null;
+                            // Hide tooltip for the 'Divergence' legend item (datasetIndex 2)
+                            if (context.datasetIndex === 2) return null;
                             let label = context.dataset.label || '';
                             if (label) label += ': ';
                             if (context.parsed.y !== null) {
@@ -326,46 +387,6 @@ if (isAnalysisPage) {
             layout: { padding: { top: 20, right: 20, bottom: 10, left: 10 } }
         };
 
-        const divergenceColor = '#c5817e'; // Danger color for divergence
-        const primaryColor = '#c5a47e';    // Primary color
-        const secondaryColor = '#1c2541';  // Secondary color
-        const mutedColor = '#6c757d';      // Muted color for annotations
-
-        // Helper function to create annotation labels
-        const createAnnotationLabel = (xVal, yVal, content, yAdj = -15, xAdj = 0) => ({
-            type: 'label', xValue: xVal, yValue: yVal, content: content,
-            color: mutedColor, font: { size: window.innerWidth <= 768 ? 9 : 10, weight: '600' },
-            position: 'start', yAdjust: yAdj, xAdjust: xAdj,
-            backgroundColor: 'rgba(255,255,255,0.85)',
-            padding: { top: 3, bottom: 3, left: 5, right: 5 }, borderRadius: 4,
-            callout: { display: true, position: 'bottom', borderWidth: 1, borderColor: 'rgba(0,0,0,0.1)', margin: 5 }
-        });
-
-        // Helper function to create the dummy dataset for the divergence legend
-        const createDivergenceLegend = () => ({
-            label: 'Divergence', // This label will appear in the legend
-            pointStyle: 'rectRot', // Style for the legend marker
-            pointRadius: 5,
-            borderColor: divergenceColor,
-            backgroundColor: divergenceColor,
-            borderWidth: 1,
-            data: [] // No actual data needed, just for the legend entry
-        });
-
-        // Callback function for point background color based on divergence indices
-        const pointStyleCallback = (indices = [], normalColor, highlightColor) => (context) => {
-            return indices.includes(context.dataIndex) ? highlightColor : normalColor;
-        };
-
-        // Callback function for point radius based on divergence indices
-        const pointRadiusCallback = (indices = [], normalRadius = 4, highlightRadius = 6) => (context) => {
-            return indices.includes(context.dataIndex) ? highlightRadius : normalRadius;
-        };
-
-        // Callback function for point hover radius based on divergence indices
-        const pointHoverRadiusCallback = (indices = [], normalRadius = 6, highlightRadius = 8) => (context) => {
-            return indices.includes(context.dataIndex) ? highlightRadius : normalRadius;
-        };
 
         const loadAnalysisData = async (ticker) => {
             ticker = ticker.trim().toUpperCase();
@@ -466,11 +487,16 @@ if (isAnalysisPage) {
                 const revenueCtx = select('#revenueChart')?.getContext('2d');
                 if (revenueCtx) {
                     try {
+                        // Use a deep copy of common options, but remove the custom legend onClick
+                        // as it's not needed for this simple chart.
+                        const revenueChartOptions = JSON.parse(JSON.stringify(commonChartOptions));
+                        delete revenueChartOptions.plugins.legend.onClick; // Remove custom handler
+
                         revenueChartInstance = new Chart(revenueCtx, {
                             type: 'line',
                             data: {
                                 labels: chartLabels,
-                                datasets: [{
+                                datasets: [{ // Dataset Index 0
                                     label: 'Annual Revenue Growth (%)',
                                     data: revenueGrowth,
                                     borderColor: primaryColor, backgroundColor: 'rgba(197, 164, 126, 0.1)',
@@ -481,7 +507,7 @@ if (isAnalysisPage) {
                                     pointBorderColor: primaryColor
                                 }]
                             },
-                            options: JSON.parse(JSON.stringify(commonChartOptions)) // Deep copy options
+                            options: revenueChartOptions // Use the modified options
                         });
                         console.log("Revenue chart initialized.");
                     } catch (error) { console.error("Error initializing Revenue Chart:", error); }
@@ -492,7 +518,7 @@ if (isAnalysisPage) {
                 if (arCtx) {
                     try {
                         // Deep copy and customize options for AR chart
-                        const arChartOptions = JSON.parse(JSON.stringify(commonChartOptions));
+                        const arChartOptions = JSON.parse(JSON.stringify(commonChartOptions)); // Includes custom legend onClick
                         arChartOptions.plugins.annotation = { annotations: {} }; // Ensure fresh annotations object
 
                         // Add annotations if they exist in the data
@@ -510,24 +536,25 @@ if (isAnalysisPage) {
                             data: {
                                 labels: chartLabels,
                                 datasets: [
-                                    { label: 'Revenue Growth (%)', data: revenueGrowth, borderColor: primaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointBackgroundColor: primaryColor, pointRadius: pointRadiusCallback([]), pointHoverRadius: pointHoverRadiusCallback([]), pointBorderColor: primaryColor },
-                                    {
+                                    { // Dataset Index 0
+                                        label: 'Revenue Growth (%)',
+                                        data: revenueGrowth,
+                                        borderColor: primaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4,
+                                        pointBackgroundColor: primaryColor, pointRadius: pointRadiusCallback([]), pointHoverRadius: pointHoverRadiusCallback([]), pointBorderColor: primaryColor
+                                    },
+                                    { // Dataset Index 1
                                         label: 'A/R Growth (%)',
                                         data: arGrowth,
-                                        borderColor: secondaryColor,
-                                        backgroundColor: 'transparent',
-                                        borderWidth: 2,
-                                        tension: 0.4,
-                                        // Use calculated indices for styling
+                                        borderColor: secondaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4,
                                         pointBackgroundColor: pointStyleCallback(calculatedArDivergenceIndices, secondaryColor, divergenceColor),
                                         pointRadius: pointRadiusCallback(calculatedArDivergenceIndices),
                                         pointHoverRadius: pointHoverRadiusCallback(calculatedArDivergenceIndices),
                                         pointBorderColor: pointStyleCallback(calculatedArDivergenceIndices, secondaryColor, divergenceColor)
                                     },
-                                    createDivergenceLegend() // Add dummy dataset for legend
+                                    createDivergenceLegend() // Dataset Index 2 (Dummy Legend)
                                 ]
                             },
-                            options: arChartOptions // Use the customized options
+                            options: arChartOptions // Use the customized options (with legend onClick)
                         });
                         console.log("A/R chart initialized.");
                     } catch (error) { console.error("Error initializing A/R Chart:", error); }
@@ -538,7 +565,7 @@ if (isAnalysisPage) {
                 if (cashFlowCtx) {
                      try {
                         // Deep copy and customize options for Cash Flow chart
-                        const cashFlowChartOptions = JSON.parse(JSON.stringify(commonChartOptions));
+                        const cashFlowChartOptions = JSON.parse(JSON.stringify(commonChartOptions)); // Includes custom legend onClick
                         cashFlowChartOptions.plugins.annotation = { annotations: {} }; // Ensure fresh annotations object
 
                          // Add annotations if they exist in the data
@@ -556,24 +583,25 @@ if (isAnalysisPage) {
                             data: {
                                 labels: chartLabels,
                                 datasets: [
-                                    { label: 'Op Cash Flow Growth (%)', data: cfoGrowth, borderColor: primaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointBackgroundColor: primaryColor, pointRadius: pointRadiusCallback([]), pointHoverRadius: pointHoverRadiusCallback([]), pointBorderColor: primaryColor },
-                                    {
+                                    { // Dataset Index 0
+                                        label: 'Op Cash Flow Growth (%)',
+                                        data: cfoGrowth,
+                                        borderColor: primaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4,
+                                        pointBackgroundColor: primaryColor, pointRadius: pointRadiusCallback([]), pointHoverRadius: pointHoverRadiusCallback([]), pointBorderColor: primaryColor
+                                    },
+                                    { // Dataset Index 1
                                         label: 'Net Income Growth (%)',
                                         data: niGrowth,
-                                        borderColor: secondaryColor,
-                                        backgroundColor: 'transparent',
-                                        borderWidth: 2,
-                                        tension: 0.4,
-                                        // Use calculated indices for styling
+                                        borderColor: secondaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4,
                                         pointBackgroundColor: pointStyleCallback(calculatedCfDivergenceIndices, secondaryColor, divergenceColor),
                                         pointRadius: pointRadiusCallback(calculatedCfDivergenceIndices),
                                         pointHoverRadius: pointHoverRadiusCallback(calculatedCfDivergenceIndices),
                                         pointBorderColor: pointStyleCallback(calculatedCfDivergenceIndices, secondaryColor, divergenceColor)
                                     },
-                                    createDivergenceLegend() // Add dummy dataset for legend
+                                    createDivergenceLegend() // Dataset Index 2 (Dummy Legend)
                                 ]
                             },
-                            options: cashFlowChartOptions // Use the customized options
+                            options: cashFlowChartOptions // Use the customized options (with legend onClick)
                         });
                         console.log("Cash Flow chart initialized.");
                     } catch (error) { console.error("Error initializing Cash Flow Chart:", error); }
