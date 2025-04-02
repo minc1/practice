@@ -1,21 +1,13 @@
-// --- Global Variables & Constants ---
-const DEFAULT_TICKER = 'JD'; // Default ticker to load on page init
-const DATA_PATH = 'DATA/'; // Path to the data directory
-let currentTicker = null; // Keep track of the currently loaded ticker
+const DEFAULT_TICKER = 'AAPL';
+const DATA_PATH = 'DATA/';
+let currentTicker = null;
 let revenueChartInstance = null;
 let arChartInstance = null;
 let cashFlowChartInstance = null;
 
-// *** NEW: Define Divergence Calculation Thresholds ***
-// Threshold (in percentage points) for growth difference to be considered a divergence
-const AR_REVENUE_DIVERGENCE_THRESHOLD = 5.0; // A/R growth > Revenue growth by 5%
-const NI_CFO_DIVERGENCE_THRESHOLD = 10.0;   // Net Income growth > CFO growth by 10%
-
-// Determine current page
 const isAnalysisPage = window.location.pathname.includes('analysis.html');
 const isLandingPage = !isAnalysisPage;
 
-// --- Helper Functions ---
 const select = (el, all = false) => {
     el = el.trim();
     if (all) {
@@ -41,7 +33,6 @@ const onScroll = (el, listener) => {
     target.addEventListener('scroll', listener);
 };
 
-// Helper function to populate elements safely
 const populateElement = (selector, data, property = 'textContent') => {
     const element = select(selector);
     if (element) {
@@ -52,15 +43,13 @@ const populateElement = (selector, data, property = 'textContent') => {
                 element.textContent = data;
             }
         } else {
-            element[property] = ''; // Clear if data is missing
+            element[property] = '';
             console.warn(`Data not found or null/undefined for selector: ${selector}`);
         }
     } else {
-        // console.warn(`Element not found for selector: ${selector}`); // Less noisy
     }
 };
 
-// Helper function to generate cards dynamically
 const generateCards = (containerId, cardData) => {
     const container = select(`#${containerId}`);
     if (!container) {
@@ -72,7 +61,7 @@ const generateCards = (containerId, cardData) => {
         container.innerHTML = '<p class="error-message" style="color: var(--danger); text-align: center;">Error loading card data.</p>';
         return;
     }
-    container.innerHTML = ''; // Clear placeholder/previous cards
+    container.innerHTML = '';
     if (cardData.length === 0) {
         container.innerHTML = '<p style="text-align: center; color: var(--muted);">No card data available.</p>';
         return;
@@ -95,7 +84,6 @@ const generateCards = (containerId, cardData) => {
     });
 };
 
-// Helper function to populate table dynamically
 const populateTable = (tbodyId, tableRowData) => {
     const tbody = select(`#${tbodyId}`);
     if (!tbody) {
@@ -107,7 +95,7 @@ const populateTable = (tbodyId, tableRowData) => {
         tbody.innerHTML = '<tr><td colspan="3" class="error-message" style="color: var(--danger); text-align: center;">Error loading table data.</td></tr>';
         return;
     }
-    tbody.innerHTML = ''; // Clear placeholder
+    tbody.innerHTML = '';
     if (tableRowData.length === 0) {
         tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; color: var(--muted);">No table data available.</td></tr>';
         return;
@@ -123,7 +111,6 @@ const populateTable = (tbodyId, tableRowData) => {
     });
 };
 
-// Helper function to populate list items dynamically
 const populateList = (ulId, listItems, useInnerHTML = false) => {
     const ul = select(`#${ulId}`);
      if (!ul) {
@@ -135,7 +122,7 @@ const populateList = (ulId, listItems, useInnerHTML = false) => {
         ul.innerHTML = '<li class="error-message" style="color: var(--danger);">Error loading list data.</li>';
         return;
     }
-    ul.innerHTML = ''; // Clear placeholder
+    ul.innerHTML = '';
     if (listItems.length === 0) {
         ul.innerHTML = '<li style="color: var(--muted);">No list items available.</li>';
         return;
@@ -151,61 +138,24 @@ const populateList = (ulId, listItems, useInnerHTML = false) => {
     });
 };
 
-/**
- * Calculates indices where the growth of series1 significantly exceeds series2.
- * @param {number[]} series1Growth - Array of growth percentages for the first series (e.g., A/R Growth, NI Growth).
- * @param {number[]} series2Growth - Array of growth percentages for the second series (e.g., Revenue Growth, CFO Growth).
- * @param {number} threshold - The minimum percentage point difference (series1 - series2) to flag as divergence.
- * @returns {number[]} An array of indices where divergence occurs.
- */
-const calculateDivergenceIndices = (series1Growth, series2Growth, threshold) => {
-    const divergentIndices = [];
-    // Ensure both arrays are valid and have the same length
-    if (!Array.isArray(series1Growth) || !Array.isArray(series2Growth) || series1Growth.length !== series2Growth.length) {
-        console.warn("Invalid input arrays for divergence calculation.");
-        return divergentIndices; // Return empty array
-    }
-
-    for (let i = 0; i < series1Growth.length; i++) {
-        const growth1 = series1Growth[i];
-        const growth2 = series2Growth[i];
-
-        // Check if both values are valid numbers before comparing
-        if (typeof growth1 === 'number' && typeof growth2 === 'number') {
-            // Rule: Divergence if series1 growth is greater than series2 growth by the threshold amount
-            if (growth1 > growth2 && (growth1 - growth2) > threshold) {
-                divergentIndices.push(i);
-            }
-        } else {
-             // Optionally log skipped indices due to non-numeric data
-             // console.log(`Skipping divergence check at index ${i} due to non-numeric data.`);
-        }
-    }
-    // Optional: Add logic here later for consecutive periods if needed
-    return divergentIndices;
-};
-
-
-// Helper to show loading/error messages (Primarily for analysis page)
 const showMessage = (message, type = 'loading') => {
     const messageArea = select('#loading-error-message');
     const mainContent = select('#main-content');
-    if (!messageArea || !mainContent) return; // Only run on analysis page
+    if (!messageArea || !mainContent) return;
 
     const messageP = messageArea.querySelector('p');
 
     if (message) {
-        messageP.innerHTML = message; // Use innerHTML to allow icons
-        messageArea.className = `message-area ${type}`; // Add class for styling
+        messageP.innerHTML = message;
+        messageArea.className = `message-area ${type}`;
         messageArea.style.display = 'flex';
-        mainContent.style.display = 'none'; // Hide main content
+        mainContent.style.display = 'none';
     } else {
         messageArea.style.display = 'none';
-        mainContent.style.display = 'block'; // Show main content
+        mainContent.style.display = 'block';
     }
 };
 
-// Helper to destroy existing chart instances
 const destroyCharts = () => {
     if (revenueChartInstance) { revenueChartInstance.destroy(); revenueChartInstance = null; }
     if (arChartInstance) { arChartInstance.destroy(); arChartInstance = null; }
@@ -213,9 +163,6 @@ const destroyCharts = () => {
     console.log("Previous chart instances destroyed.");
 };
 
-// --- UI Interaction Logic (Mobile Menu, Header Scroll, Back to Top) ---
-
-// Mobile Menu Toggle
 const mobileMenuButton = select('.mobile-menu');
 const navLinks = select('.nav-links');
 const mobileMenuIcon = select('.mobile-menu i');
@@ -226,7 +173,6 @@ if (mobileMenuButton && navLinks && mobileMenuIcon) {
         mobileMenuIcon.classList.toggle('fa-bars');
         mobileMenuIcon.classList.toggle('fa-times');
         mobileMenuButton.setAttribute('aria-expanded', navLinks.classList.contains('show'));
-        // Recalculate top position dynamically in case header wraps
         const headerHeight = select('#header')?.offsetHeight || 61;
         navLinks.style.top = `${headerHeight}px`;
     });
@@ -241,8 +187,7 @@ if (mobileMenuButton && navLinks && mobileMenuIcon) {
     }, true);
 }
 
-// Landing page CTA search form handling
-const ctaSearchForm = select('.search-form'); // Select the CTA search form
+const ctaSearchForm = select('.search-form');
 if (ctaSearchForm && isLandingPage) {
     ctaSearchForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -253,8 +198,7 @@ if (ctaSearchForm && isLandingPage) {
     });
 }
 
-// Landing page HEADER search form handling
-const headerSearchForm = select('#headerTickerSearchForm'); // Select the new header search form
+const headerSearchForm = select('#headerTickerSearchForm');
 if (headerSearchForm && isLandingPage) {
     headerSearchForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -265,8 +209,6 @@ if (headerSearchForm && isLandingPage) {
     });
 }
 
-
-// Header Scroll Effect
 const header = select('#header');
 if (header) {
     const headerScrolled = () => {
@@ -280,7 +222,6 @@ if (header) {
     onScroll(window, headerScrolled);
 }
 
-// Back to Top Button
 const backToTopButton = select('.back-to-top');
 if (backToTopButton) {
     const toggleBackToTop = () => {
@@ -298,14 +239,9 @@ if (backToTopButton) {
     });
 }
 
-
-// --- Chart.js Implementation & Data Loading (Only for Analysis Page) ---
-
-// Wrap analysis page specific logic in a check
 if (isAnalysisPage) {
     document.addEventListener('DOMContentLoaded', function() {
 
-        // Check if Chart.js and annotation plugin are loaded
         if (typeof Chart === 'undefined') {
             console.error("Chart.js library not loaded.");
             showMessage('<i class="fas fa-exclamation-triangle"></i> Chart library failed to load. Please refresh.', 'error');
@@ -313,10 +249,8 @@ if (isAnalysisPage) {
         }
         if (typeof ChartAnnotation === 'undefined') {
             console.error("Chartjs-plugin-annotation not loaded.");
-            // Annotations might fail, but charts could still work partially
         }
 
-        // Register the annotation plugin (optional, as we removed annotation data from JSON)
         try {
             if (typeof ChartAnnotation !== 'undefined') {
                  Chart.register(ChartAnnotation);
@@ -326,7 +260,6 @@ if (isAnalysisPage) {
             console.error("Error registering Chartjs-plugin-annotation:", error);
         }
 
-        // --- Common Chart Configuration ---
         const commonChartOptions = {
             responsive: true,
             maintainAspectRatio: false,
@@ -343,7 +276,6 @@ if (isAnalysisPage) {
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            // Hide tooltip for the 'Divergence' legend entry if it somehow gets one
                             if (context.dataset.label === 'Divergence') return null;
                             let label = context.dataset.label || '';
                             if (label) label += ': ';
@@ -358,7 +290,7 @@ if (isAnalysisPage) {
                     titleFont: { size: 13, weight: 'bold' },
                     padding: 10, cornerRadius: 4, displayColors: false
                 },
-                annotation: { // Keep annotation plugin config structure even if empty
+                annotation: {
                     annotations: {}
                 }
             },
@@ -389,13 +321,11 @@ if (isAnalysisPage) {
             layout: { padding: { top: 20, right: 20, bottom: 10, left: 10 } }
         };
 
-        // --- Chart Styling Helper Functions ---
-        const divergenceColor = '#c5817e'; // var(--danger)
-        const primaryColor = '#c5a47e';    // var(--primary)
-        const secondaryColor = '#1c2541';  // var(--secondary)
-        const mutedColor = '#6c757d';      // var(--muted)
+        const divergenceColor = '#c5817e';
+        const primaryColor = '#c5a47e';
+        const secondaryColor = '#1c2541';
+        const mutedColor = '#6c757d';
 
-        // Annotation helper - kept for potential future use, but not used with current JSON
         const createAnnotationLabel = (xVal, yVal, content, yAdj = -15, xAdj = 0) => ({
             type: 'label', xValue: xVal, yValue: yVal, content: content,
             color: mutedColor, font: { size: window.innerWidth <= 768 ? 9 : 10, weight: '600' },
@@ -405,14 +335,12 @@ if (isAnalysisPage) {
             callout: { display: true, position: 'bottom', borderWidth: 1, borderColor: 'rgba(0,0,0,0.1)', margin: 5 }
         });
 
-        // Legend entry for divergence explanation
         const createDivergenceLegend = () => ({
             label: 'Divergence', pointStyle: 'rectRot', pointRadius: 5,
             borderColor: divergenceColor, backgroundColor: divergenceColor,
-            borderWidth: 1, data: [] // No data to plot
+            borderWidth: 1, data: []
         });
 
-        // Callbacks for dynamic point styling based on calculated indices
         const pointStyleCallback = (indices = [], normalColor, highlightColor) => (context) => {
             return indices.includes(context.dataIndex) ? highlightColor : normalColor;
         };
@@ -425,8 +353,6 @@ if (isAnalysisPage) {
             return indices.includes(context.dataIndex) ? highlightRadius : normalRadius;
         };
 
-
-        // --- Core Data Loading and Page Population Function ---
         const loadAnalysisData = async (ticker) => {
             ticker = ticker.trim().toUpperCase();
             if (!ticker) {
@@ -436,9 +362,8 @@ if (isAnalysisPage) {
 
             console.log(`Attempting to load data for ticker: ${ticker}`);
             showMessage(`<i class="fas fa-spinner fa-spin"></i> Loading analysis for ${ticker}...`, 'loading');
-            destroyCharts(); // Destroy previous charts before loading new data
+            destroyCharts();
 
-            // Select the search button specific to analysis.html header
             const searchButton = select('#tickerSearchForm button');
             if (searchButton) searchButton.disabled = true;
 
@@ -455,15 +380,13 @@ if (isAnalysisPage) {
 
                 const data = await response.json();
 
-                // --- Data Validation (Basic) ---
                 if (!data || typeof data !== 'object') {
                     throw new Error(`Invalid data format received for ticker "${ticker}".`);
                 }
 
                 console.log(`Analysis data for ${ticker} loaded successfully.`);
-                currentTicker = ticker; // Update current ticker tracker
+                currentTicker = ticker;
 
-                // --- Populate Static Content Areas ---
                 populateElement('[data-dynamic="page-title"]', data.company?.pageTitle || `ForensicFinancials | ${ticker} Analysis`);
                 populateElement('[data-dynamic="hero-title"]', `${data.company?.name || ticker} (${data.company?.ticker || ticker})<br>${data.company?.analysisTitle || 'Financial Analysis'}`, 'innerHTML');
                 populateElement('[data-dynamic="hero-subtitle"]', data.company?.heroSubtitle || `Analysis details for ${ticker}.`);
@@ -489,35 +412,9 @@ if (isAnalysisPage) {
                 populateElement('[data-dynamic="monitoring-title"]', data.conclusion?.monitoringPointsTitle || 'Key Monitoring Points');
                 populateList('monitoring-points-list', data.conclusion?.monitoringPoints || [], true);
 
-                // --- Prepare Chart Data ---
                 const chartData = data.chartData || {};
                 const chartLabels = chartData.labels || [];
-                const revenueGrowth = chartData.revenueGrowth || [];
-                const arGrowth = chartData.arGrowth || [];
-                const cfoGrowth = chartData.cfoGrowth || [];
-                const niGrowth = chartData.niGrowth || [];
 
-                // *** NEW: Calculate Divergence Indices Dynamically ***
-                console.log("Calculating A/R vs Revenue divergence...");
-                const arDivergenceIndices = calculateDivergenceIndices(
-                    arGrowth,
-                    revenueGrowth,
-                    AR_REVENUE_DIVERGENCE_THRESHOLD // Use specific threshold
-                );
-                console.log("A/R Divergence Indices:", arDivergenceIndices);
-
-                console.log("Calculating Net Income vs CFO divergence...");
-                const cfDivergenceIndices = calculateDivergenceIndices(
-                    niGrowth,
-                    cfoGrowth,
-                    NI_CFO_DIVERGENCE_THRESHOLD // Use specific threshold
-                );
-                 console.log("CFO/NI Divergence Indices:", cfDivergenceIndices);
-
-
-                // --- Initialize Charts with Dynamic Data ---
-
-                // 1. Revenue Chart
                 const revenueCtx = select('#revenueChart')?.getContext('2d');
                 if (revenueCtx) {
                     try {
@@ -527,59 +424,42 @@ if (isAnalysisPage) {
                                 labels: chartLabels,
                                 datasets: [{
                                     label: 'Annual Revenue Growth (%)',
-                                    data: revenueGrowth, // Use the extracted data
+                                    data: chartData.revenueGrowth || [],
                                     borderColor: primaryColor, backgroundColor: 'rgba(197, 164, 126, 0.1)',
                                     borderWidth: 2.5, tension: 0.4, fill: true,
-                                    pointBackgroundColor: primaryColor,
-                                    pointRadius: pointRadiusCallback([]), // Use callback even if no highlight needed
-                                    pointHoverRadius: pointHoverRadiusCallback([]),
-                                    pointBorderColor: primaryColor
+                                    pointBackgroundColor: primaryColor, pointRadius: pointRadiusCallback([]),
+                                    pointHoverRadius: pointHoverRadiusCallback([]), pointBorderColor: primaryColor
                                 }]
                             },
-                            options: JSON.parse(JSON.stringify(commonChartOptions)) // Use deep copy
+                            options: JSON.parse(JSON.stringify(commonChartOptions))
                         });
                         console.log("Revenue chart initialized.");
                     } catch (error) { console.error("Error initializing Revenue Chart:", error); }
                 } else { console.warn("Canvas element #revenueChart not found."); }
 
-                // 2. Accounts Receivable vs Revenue Chart
                 const arCtx = select('#arChart')?.getContext('2d');
                 if (arCtx) {
                     try {
-                        const arChartOptions = JSON.parse(JSON.stringify(commonChartOptions)); // Use deep copy
-                        arChartOptions.plugins.annotation = { annotations: {} }; // Ensure annotations are clear
+                        const arDivergenceIndices = chartData.divergenceIndices?.arChart || [];
+                        const arChartOptions = JSON.parse(JSON.stringify(commonChartOptions));
+                        arChartOptions.plugins.annotation = { annotations: {} };
+                        if (chartData.annotations?.arChart && Array.isArray(chartData.annotations.arChart)) {
+                            chartData.annotations.arChart.forEach((anno, index) => {
+                                if (typeof anno.xVal === 'number' && typeof anno.yVal === 'number' && anno.content) {
+                                    arChartOptions.plugins.annotation.annotations[`arLabel${index + 1}`] =
+                                        createAnnotationLabel(anno.xVal, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
+                                } else { console.warn(`Invalid annotation data for arChart at index ${index}`); }
+                            });
+                        }
 
                         arChartInstance = new Chart(arCtx, {
                             type: 'line',
                             data: {
                                 labels: chartLabels,
                                 datasets: [
-                                    {
-                                        label: 'Revenue Growth (%)',
-                                        data: revenueGrowth,
-                                        borderColor: primaryColor,
-                                        backgroundColor: 'transparent',
-                                        borderWidth: 2,
-                                        tension: 0.4,
-                                        pointBackgroundColor: primaryColor,
-                                        pointRadius: pointRadiusCallback([]),
-                                        pointHoverRadius: pointHoverRadiusCallback([]),
-                                        pointBorderColor: primaryColor
-                                    },
-                                    {
-                                        label: 'A/R Growth (%)',
-                                        data: arGrowth, // Use extracted data
-                                        borderColor: secondaryColor,
-                                        backgroundColor: 'transparent',
-                                        borderWidth: 2,
-                                        tension: 0.4,
-                                        // *** USE CALCULATED INDICES ***
-                                        pointBackgroundColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor),
-                                        pointRadius: pointRadiusCallback(arDivergenceIndices),
-                                        pointHoverRadius: pointHoverRadiusCallback(arDivergenceIndices),
-                                        pointBorderColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor)
-                                    },
-                                    createDivergenceLegend() // Keep the legend entry
+                                    { label: 'Revenue Growth (%)', data: chartData.revenueGrowth || [], borderColor: primaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointBackgroundColor: primaryColor, pointRadius: pointRadiusCallback([]), pointHoverRadius: pointHoverRadiusCallback([]), pointBorderColor: primaryColor },
+                                    { label: 'A/R Growth (%)', data: chartData.arGrowth || [], borderColor: secondaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointBackgroundColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor), pointRadius: pointRadiusCallback(arDivergenceIndices), pointHoverRadius: pointHoverRadiusCallback(arDivergenceIndices), pointBorderColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor) },
+                                    createDivergenceLegend()
                                 ]
                             },
                             options: arChartOptions
@@ -588,44 +468,29 @@ if (isAnalysisPage) {
                     } catch (error) { console.error("Error initializing A/R Chart:", error); }
                 } else { console.warn("Canvas element #arChart not found."); }
 
-                // 3. Operating Cash Flow vs Net Income Chart
                 const cashFlowCtx = select('#cashFlowChart')?.getContext('2d');
                 if (cashFlowCtx) {
                      try {
-                        const cashFlowChartOptions = JSON.parse(JSON.stringify(commonChartOptions)); // Use deep copy
-                        cashFlowChartOptions.plugins.annotation = { annotations: {} }; // Ensure annotations are clear
+                        const cfDivergenceIndices = chartData.divergenceIndices?.cashFlowChart || [];
+                        const cashFlowChartOptions = JSON.parse(JSON.stringify(commonChartOptions));
+                        cashFlowChartOptions.plugins.annotation = { annotations: {} };
+                         if (chartData.annotations?.cashFlowChart && Array.isArray(chartData.annotations.cashFlowChart)) {
+                            chartData.annotations.cashFlowChart.forEach((anno, index) => {
+                                 if (typeof anno.xVal === 'number' && typeof anno.yVal === 'number' && anno.content) {
+                                    cashFlowChartOptions.plugins.annotation.annotations[`cfLabel${index + 1}`] =
+                                        createAnnotationLabel(anno.xVal, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
+                                 } else { console.warn(`Invalid annotation data for cashFlowChart at index ${index}`); }
+                            });
+                        }
 
                         cashFlowChartInstance = new Chart(cashFlowCtx, {
                             type: 'line',
                             data: {
                                 labels: chartLabels,
                                 datasets: [
-                                    {
-                                        label: 'Op Cash Flow Growth (%)',
-                                        data: cfoGrowth, // Use extracted data
-                                        borderColor: primaryColor,
-                                        backgroundColor: 'transparent',
-                                        borderWidth: 2,
-                                        tension: 0.4,
-                                        pointBackgroundColor: primaryColor,
-                                        pointRadius: pointRadiusCallback([]),
-                                        pointHoverRadius: pointHoverRadiusCallback([]),
-                                        pointBorderColor: primaryColor
-                                    },
-                                    {
-                                        label: 'Net Income Growth (%)',
-                                        data: niGrowth, // Use extracted data
-                                        borderColor: secondaryColor,
-                                        backgroundColor: 'transparent',
-                                        borderWidth: 2,
-                                        tension: 0.4,
-                                         // *** USE CALCULATED INDICES ***
-                                        pointBackgroundColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor),
-                                        pointRadius: pointRadiusCallback(cfDivergenceIndices),
-                                        pointHoverRadius: pointHoverRadiusCallback(cfDivergenceIndices),
-                                        pointBorderColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor)
-                                    },
-                                    createDivergenceLegend() // Keep the legend entry
+                                    { label: 'Op Cash Flow Growth (%)', data: chartData.cfoGrowth || [], borderColor: primaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointBackgroundColor: primaryColor, pointRadius: pointRadiusCallback([]), pointHoverRadius: pointHoverRadiusCallback([]), pointBorderColor: primaryColor },
+                                    { label: 'Net Income Growth (%)', data: chartData.niGrowth || [], borderColor: secondaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointBackgroundColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor), pointRadius: pointRadiusCallback(cfDivergenceIndices), pointHoverRadius: pointHoverRadiusCallback(cfDivergenceIndices), pointBorderColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor) },
+                                    createDivergenceLegend()
                                 ]
                             },
                             options: cashFlowChartOptions
@@ -634,60 +499,49 @@ if (isAnalysisPage) {
                     } catch (error) { console.error("Error initializing Cash Flow Chart:", error); }
                 } else { console.warn("Canvas element #cashFlowChart not found."); }
 
-                // --- Responsive Chart Adjustments ---
-                handleResize(); // Apply initial responsive settings
+                handleResize();
 
-                // Hide loading message and show content
                 showMessage(null);
-                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top after loading new data
+                window.scrollTo({ top: 0, behavior: 'smooth' });
 
             } catch (error) {
                 console.error('Failed to load or process analysis data:', error);
                 showMessage(`<i class="fas fa-exclamation-triangle"></i> ${error.message}`, 'error');
-                currentTicker = null; // Reset current ticker on error
+                currentTicker = null;
             } finally {
-                 if (searchButton) searchButton.disabled = false; // Re-enable search button
+                 if (searchButton) searchButton.disabled = false;
             }
-        }; // End of loadAnalysisData
+        };
 
-
-        // --- Event Listeners ---
-
-        // Ticker Search Form Submission (Analysis Page Header)
-        const analysisHeaderSearchForm = select('#tickerSearchForm'); // Use the correct ID for analysis page
-        const tickerInput = select('#tickerInput'); // Use the correct ID for analysis page
+        const analysisHeaderSearchForm = select('#tickerSearchForm');
+        const tickerInput = select('#tickerInput');
         if (analysisHeaderSearchForm && tickerInput) {
             analysisHeaderSearchForm.addEventListener('submit', (e) => {
-                e.preventDefault(); // Prevent default form submission
+                e.preventDefault();
                 const ticker = tickerInput.value;
-                if (ticker && ticker.toUpperCase() !== currentTicker) { // Only load if ticker is new
+                if (ticker && ticker.toUpperCase() !== currentTicker) {
                      loadAnalysisData(ticker);
-                     // Update URL without reloading page (optional)
                      const newUrl = `${window.location.pathname}?ticker=${ticker.toUpperCase()}`;
                      window.history.pushState({path: newUrl}, '', newUrl);
                 } else if (!ticker) {
                      showMessage('<i class="fas fa-exclamation-circle"></i> Please enter a ticker symbol.', 'error');
                 }
-                // Optionally clear input after search: tickerInput.value = '';
             });
         } else {
             console.error("Analysis page ticker search form or input element not found.");
         }
 
-        // Debounced Resize Handler for Charts
         let resizeTimeout;
         const handleResize = () => {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 const isMobile = window.innerWidth <= 768;
-                // Use the globally tracked instances
                 const chartsToResize = [revenueChartInstance, arChartInstance, cashFlowChartInstance];
 
                 chartsToResize.forEach((chart, index) => {
-                    if (!chart || !chart.options) return; // Skip if chart is not initialized
+                    if (!chart || !chart.options) return;
 
                     try {
-                        // Adjust font sizes
                         if (chart.options.plugins?.tooltip?.bodyFont) chart.options.plugins.tooltip.bodyFont.size = isMobile ? 11 : 12;
                         if (chart.options.scales?.x?.ticks?.font) chart.options.scales.x.ticks.font.size = isMobile ? 10 : 12;
                         if (chart.options.scales?.y?.title?.font) chart.options.scales.y.title.font.size = isMobile ? 11 : 12;
@@ -698,7 +552,6 @@ if (isAnalysisPage) {
                             chart.options.plugins.legend.labels.boxHeight = 8;
                         }
 
-                        // Adjust annotation label font size (if annotations were used)
                         if (chart.options.plugins?.annotation?.annotations) {
                             Object.values(chart.options.plugins.annotation.annotations).forEach(anno => {
                                 if (anno.type === 'label' && anno.font) {
@@ -707,31 +560,25 @@ if (isAnalysisPage) {
                             });
                         }
 
-                        // Resize and update
                         chart.resize();
-                        chart.update('none'); // Use 'none' to avoid jerky animations on resize
+                        chart.update('none');
                     } catch(error) {
                         console.error(`Error resizing/updating chart index ${index}:`, error);
                     }
                 });
-                 if (chartsToResize.some(c => c)) console.log("Charts resized/updated for responsiveness."); // Log only if charts exist
-            }, 250); // Debounce
+                 if (chartsToResize.some(c => c)) console.log("Charts resized/updated for responsiveness.");
+            }, 250);
         };
         window.addEventListener('resize', handleResize);
 
-
-        // --- Initial Load ---
-        // Check for ticker in URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const tickerParam = urlParams.get('ticker');
 
-        // Set input value from URL param if present
         if (tickerParam && tickerInput) {
             tickerInput.value = tickerParam.toUpperCase();
         }
 
-        // Load ticker from URL or use default
         loadAnalysisData(tickerParam ? tickerParam.toUpperCase() : DEFAULT_TICKER);
 
-    }); // End DOMContentLoaded Wrapper for Analysis Page
-} // End isAnalysisPage check
+    });
+}

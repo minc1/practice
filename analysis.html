@@ -3,14 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Title will be set dynamically -->
     <title data-dynamic="page-title">ForensicFinancials | Loading...</title>
-    <!-- External Libraries -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.2.1/chartjs-plugin-annotation.min.js" integrity="sha512-eCD/MhL+Uvj+B89Am2/hMv0Q6dWJjkMv/7G2xMSuvTjYkXOP8zsF5Ec0TrX0V8alM5u0M59fzxBNLCSQ60L3qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Link to External CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,7 +15,6 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
-                <!-- Search Form Updated with new classes -->
                 <form class="InputContainer" id="tickerSearchForm">
                     <input type="text" class="input" id="tickerInput" placeholder="Enter Ticker (e.g., JD)" aria-label="Enter Ticker Symbol" required>
                     <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
@@ -36,15 +32,13 @@
         </div>
     </header>
 
-    <!-- Loading/Error Message Area -->
     <div id="loading-error-message" class="message-area" style="display: none;">
         <p></p>
     </div>
 
-    <main id="main-content"> <!-- Wrap main sections for easier show/hide -->
+    <main id="main-content">
         <section class="hero">
             <div class="container">
-                <!-- Dynamic Hero Content -->
                 <h1 data-dynamic="hero-title">Loading...<br>Loading...</h1>
                 <p data-dynamic="hero-subtitle">Loading analysis details...</p>
                 <div class="hero-separator"></div>
@@ -56,7 +50,6 @@
             <div class="container">
                 <div class="section-title">
                     <h2>Temporal Pattern Analysis</h2>
-                    <!-- Dynamic Subtitle -->
                     <p data-dynamic="trends-subtitle">Loading...</p>
                 </div>
 
@@ -65,14 +58,12 @@
                         <h3>Revenue Growth Trend (Annual)</h3>
                     </div>
                     <div class="chart-wrapper">
-                        <!-- Canvas for Chart.js -->
                         <canvas id="revenueChart"></canvas>
                     </div>
                 </div>
 
-                <!-- Dynamic Cards Container -->
                 <div class="cards" id="trends-cards-container">
-                    <p>Loading trend cards...</p> <!-- Placeholder -->
+                    <p>Loading trend cards...</p>
                 </div>
             </div>
         </section>
@@ -81,7 +72,6 @@
             <div class="container">
                 <div class="section-title">
                     <h2>Financial Metrics & Anomalies</h2>
-                     <!-- Dynamic Subtitle -->
                     <p data-dynamic="financials-subtitle">Loading...</p>
                 </div>
 
@@ -90,7 +80,6 @@
                         <h3>Revenue vs. Accounts Receivable Growth (Annual)</h3>
                     </div>
                     <div class="chart-wrapper">
-                         <!-- Canvas for Chart.js -->
                         <canvas id="arChart"></canvas>
                     </div>
                 </div>
@@ -100,14 +89,12 @@
                         <h3>Operating Cash Flow vs. Net Income Growth (Annual)</h3>
                     </div>
                     <div class="chart-wrapper">
-                         <!-- Canvas for Chart.js -->
                         <canvas id="cashFlowChart"></canvas>
                     </div>
                 </div>
 
-                <!-- Dynamic Cards Container -->
                 <div class="cards" id="financials-cards-container">
-                     <p>Loading financial cards...</p> <!-- Placeholder -->
+                     <p>Loading financial cards...</p>
                 </div>
             </div>
         </section>
@@ -116,7 +103,6 @@
             <div class="container">
                 <div class="section-title">
                     <h2>Investment Considerations</h2>
-                     <!-- Dynamic Subtitle -->
                     <p data-dynamic="opportunities-subtitle">Loading...</p>
                 </div>
 
@@ -129,9 +115,8 @@
                                 <th>Risks</th>
                             </tr>
                         </thead>
-                         <!-- Dynamic Table Body -->
                         <tbody id="opportunities-table-body">
-                            <tr><td colspan="3">Loading table data...</td></tr> <!-- Placeholder -->
+                            <tr><td colspan="3">Loading table data...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -142,33 +127,29 @@
             <div class="container">
                 <div class="section-title">
                     <h2>Final Verdict & Key Takeaways</h2>
-                     <!-- Dynamic Subtitle -->
                     <p data-dynamic="conclusion-subtitle">Loading...</p>
                 </div>
 
                 <div class="verdict-container">
                     <div class="verdict-header">
-                         <!-- Dynamic Verdict Title & Rating -->
                         <h3 data-dynamic="verdict-title">Loading Verdict...</h3>
                         <span class="verdict-rating" data-dynamic="verdict-rating">Loading...</span>
                     </div>
 
-                     <!-- Dynamic Verdict Paragraphs -->
                     <div id="verdict-paragraphs">
-                        <p>Loading conclusion...</p> <!-- Placeholder -->
+                        <p>Loading conclusion...</p>
                     </div>
 
                     <div class="monitoring-points">
-                         <!-- Dynamic Monitoring Points Title & List -->
                         <h4 data-dynamic="monitoring-title">Loading...</h4>
                         <ul id="monitoring-points-list">
-                            <li>Loading...</li> <!-- Placeholder -->
+                            <li>Loading...</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
-    </main> <!-- End main content wrapper -->
+    </main>
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
@@ -192,7 +173,6 @@
         </div>
     </footer>
 
-    <!-- Link to External JavaScript (defer ensures it runs after HTML parsing) -->
     <script src="script.js" defer></script>
 </body>
 </html>
