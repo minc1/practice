@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForensicFinancials | Search</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Plaid background for the entire page */
+        body {
+            position: relative;
+            background-color: var(--secondary) !important;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(197, 164, 126, 0.05) 2px, transparent 2px),
+                linear-gradient(rgba(197, 164, 126, 0.05) 2px, transparent 2px);
+            background-size: 
+                30px 30px,
+                30px 30px,
+                120px 120px,
+                120px 120px;
+            z-index: -2;
+            pointer-events: none;
+        }
+        
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                circle at center,
+                rgba(28, 37, 65, 0.4) 0%,
+                rgba(28, 37, 65, 0.7) 60%,
+                var(--secondary) 100%
+            );
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* Fix for the footer margin */
+        footer {
+            margin-top: 0 !important;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Search hero styles */
+        .search-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 120px);
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .search-container {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            position: relative;
+            z-index: 1;
+        }
+
+        .search-title {
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            color: var(--dark);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .search-subtitle {
+            color: var(--muted);
+            margin-bottom: 32px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .search-hero .search-form {
+            display: flex;
+            height: 56px;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 24px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-hero .search-form:focus-within {
+            box-shadow: 0 0 0 2px rgba(197, 164, 126, 0.3);
+            border-color: var(--primary);
+        }
+
+        .search-hero .search-form input {
+            flex-grow: 1;
+            border: none;
+            padding: 0 24px;
+            font-size: 1rem;
+            outline: none;
+            color: var(--text);
+            background-color: var(--card-bg);
+            border-radius: 0;
+            text-align: left;
+            box-shadow: none;
+            margin-bottom: 0;
+            z-index: auto;
+            border: none;
+        }
+
+        .search-hero .search-form input::placeholder {
+            color: var(--muted);
+            opacity: 0.7;
+        }
+
+        .search-hero .search-form button {
+            background-color: var(--primary);
+            color: var(--dark);
+            border: none;
+            padding: 0 32px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            font-size: 1rem;
+            min-width: 120px;
+            justify-content: center;
+            border-radius: 0;
+            width: auto;
+            box-shadow: none;
+            border: none;
+        }
+
+        .search-hero .search-form button:hover {
+            background-color: #d4b483;
+            transform: none;
+        }
+
+        .search-examples {
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+        
+        /* Make sure header is above the background */
+        #header {
+            position: relative;
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .search-container {
+                padding: 30px 20px;
+                margin: 0 16px;
+            }
+
+            .search-title {
+                font-size: 1.5rem;
+                margin-bottom: 16px;
+            }
+
+            .search-subtitle {
+                font-size: 0.95rem;
+                margin-bottom: 24px;
+            }
+
+            .search-hero .search-form {
+                height: 50px;
+                flex-direction: row;
+                height: 50px;
+                border-radius: 25px;
+                overflow: hidden;
+                gap: 0;
+                background: var(--card-bg);
+                box-shadow: var(--shadow-md);
+                border: 1px solid var(--border-color);
+            }
+
+            .search-hero .search-form input {
+                padding: 0 20px;
+                border-radius: 0;
+                border: none;
+                box-shadow: none;
+            }
+
+            .search-hero .search-form button {
+                padding: 0 24px;
+                border-radius: 0;
+                width: auto;
+                min-width: auto;
+                font-size: 0.95rem;
+            }
+
+            .search-examples {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-hero {
+                padding: 60px 16px 40px;
+                min-height: calc(100vh - 80px);
+            }
+
+            .search-title {
+                font-size: 1.4rem;
+            }
+
+            .search-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .search-hero .search-form {
+                flex-direction: column;
+                height: auto;
+                border-radius: 8px;
+                overflow: visible;
+                gap: 12px;
+                background: transparent;
+                box-shadow: none;
+                border: none;
+            }
+
+            .search-hero .search-form input {
+                padding: 15px 20px;
+                border-radius: 8px;
+                border: 1px solid var(--border-color);
+                box-shadow: var(--shadow-sm);
+                text-align: center;
+                margin-bottom: 0;
+                z-index: auto;
+            }
+
+            .search-hero .search-form button {
+                padding: 15px 20px;
+                border-radius: 8px;
+                width: 100%;
+                box-shadow: var(--shadow-sm);
+                border: 1px solid var(--border-color);
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Forensic<span>Financials</span></a>
+                <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
+                    <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
+                    <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
+                </form>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#methodology">Methodology</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+                <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="search-hero">
+            <div class="search-container">
+                <h1 class="search-title">Forensic Financial Analysis</h1>
+                <p class="search-subtitle">Enter a stock ticker symbol to uncover accounting insights and financial health indicators</p>
+                <form class="search-form" action="analysis.html" method="GET">
+                    <input type="text" name="ticker" placeholder="Search by ticker (e.g., AAPL, MSFT, TSLA)" required aria-label="Stock ticker symbol">
+                    <button type="submit" aria-label="Analyze">
+                        <i class="fas fa-search"></i> Analyze
+                    </button>
+                </form>
+                <p class="search-examples">Examples: AAPL, MSFT, GOOGL, AMZN, TSLA, JNJ</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Forensic<span>Financials</span> by Cho</div>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#methodology">Methodology</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                <p>© 2025 ForensicFinancials. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const headerSearchFormOnSearchPage = document.querySelector('#headerTickerSearchForm');
+        if (headerSearchFormOnSearchPage) {
+            headerSearchFormOnSearchPage.addEventListener('submit', function(e) {
+            });
+        }
+    </script>
+</body>
+</html>
