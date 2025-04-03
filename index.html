@@ -45,8 +45,9 @@
             bottom: 0;
             background: radial-gradient(
                 circle at center,
-                rgba(28, 37, 65, 0.4) 0%,
-                rgba(28, 37, 65, 0.7) 60%,
+                rgba(28, 37, 65, 0.2) 0%,
+                rgba(28, 37, 65, 0.6) 30%,
+                rgba(28, 37, 65, 0.8) 60%,
                 var(--secondary) 100%
             );
             z-index: 0;
@@ -67,12 +68,30 @@
         /* Fix for the spacing issue at the bottom of the page */
         footer {
             margin-top: 0 !important; /* Override the 60px margin in style.css */
+            position: relative;
+            z-index: 1;
         }
         
-        /* Ensure proper spacing for the CTA section */
+        /* Create a seamless transition between sections */
+        body {
+            background-color: var(--secondary);
+        }
+        
+        /* Remove section padding/margin to create seamless flow */
         .cta-section.plaid-background {
-            margin-bottom: 0;
-            padding-bottom: 80px; /* Maintain the original padding */
+            margin-top: 0;
+            padding-top: 80px;
+            padding-bottom: 80px;
+            border-top: none;
+        }
+        
+        /* Add a subtle gradient connector between sections */
+        .about-to-cta-connector {
+            height: 80px;
+            background: linear-gradient(to bottom, var(--body-bg), var(--secondary));
+            margin-top: -80px;
+            position: relative;
+            z-index: 0;
         }
     </style>
 </head>
@@ -217,6 +236,9 @@
                 </div>
             </div>
         </section>
+
+        <!-- Gradient connector to create seamless transition -->
+        <div class="about-to-cta-connector"></div>
 
         <section class="section cta-section plaid-background">
             <div class="container">
