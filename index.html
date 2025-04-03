@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Global plaid background for the entire page */
+        /* Global plaid background */
         body {
             position: relative;
             background-color: var(--secondary) !important;
@@ -53,45 +53,42 @@
             pointer-events: none;
         }
         
-        /* Section-specific styles */
-        .hero, .cta-section {
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Remove background colors from sections that should show the global background */
-        .hero, .cta-section {
-            background-color: transparent !important;
-        }
-        
-        /* Remove any pseudo-elements from these sections */
-        .hero::before, .hero::after,
-        .cta-section::before, .cta-section::after {
-            display: none !important;
-        }
-        
-        /* Fix for the footer margin */
-        footer {
-            margin-top: 0 !important;
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Make sure header is above the background */
+        /* Z-index management */
         #header {
             position: relative;
             z-index: 10;
         }
         
-        /* Ensure other sections have proper z-index */
-        .section {
+        main {
             position: relative;
             z-index: 1;
         }
         
-        /* Ensure the CTA section has proper spacing */
+        .back-to-top {
+            z-index: 20;
+        }
+        
+        /* Section styling */
+        .hero, .section, .cta-section {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Override background colors */
+        .hero {
+            background-color: transparent !important;
+        }
+        
         .cta-section {
+            background-color: transparent !important;
             padding: 80px 0;
+        }
+        
+        /* Fix footer margin */
+        footer {
+            margin-top: 0 !important;
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>

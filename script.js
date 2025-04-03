@@ -1,6 +1,6 @@
 const DEFAULT_TICKER = 'AAPL';
 const DATA_PATH = 'DATA/';
-const DIVERGENCE_THRESHOLD = 15.0;
+const DIVERGENCE_THRESHOLD = 30.0;
 
 let currentTicker = null;
 let revenueChartInstance = null;
@@ -8,7 +8,8 @@ let arChartInstance = null;
 let cashFlowChartInstance = null;
 
 const isAnalysisPage = window.location.pathname.includes('analysis.html');
-const isLandingPage = !isAnalysisPage;
+const isSearchPage = window.location.pathname.includes('search.html'); // Added check
+const isLandingPage = !isAnalysisPage && !isSearchPage; // Updated check
 
 const select = (el, all = false) => {
     el = el.trim();
@@ -136,18 +137,19 @@ const populateList = (ulId, listItems, useInnerHTML = false) => {
 const showMessage = (message, type = 'loading') => {
     const messageArea = select('#loading-error-message');
     const mainContent = select('#main-content');
-    if (!messageArea || !mainContent) return;
+    if (!messageArea || !mainContent) return; // Only applies to analysis page
 
     const messageP = messageArea.querySelector('p');
+    if (!messageP) return; // Ensure p element exists
 
     if (message) {
         messageP.innerHTML = message;
         messageArea.className = `message-area ${type}`;
         messageArea.style.display = 'flex';
-        mainContent.style.display = 'none';
+        if (mainContent) mainContent.style.display = 'none'; // Hide main content if it exists
     } else {
         messageArea.style.display = 'none';
-        mainContent.style.display = 'block';
+        if (mainContent) mainContent.style.display = 'block'; // Show main content if it exists
     }
 };
 
@@ -189,37 +191,60 @@ if (mobileMenuButton && navLinks && mobileMenuIcon) {
         navLinks.style.top = `${headerHeight}px`;
     });
 
+    // Close mobile menu when a link is clicked (applies to all pages)
     on('click', '.nav-links a', function(e) {
-        if (navLinks.classList.contains('show')) {
+        // Check if the link is internal (starts with #) or external
+        const href = this.getAttribute('href');
+        const isInternalLink = href && href.startsWith('#');
+
+        // Only close if it's an internal link on the same page OR if mobile menu is open
+        if (navLinks.classList.contains('show') && (isInternalLink || !href || href === '#')) {
+             // If it's just a # or empty href, prevent default jump
+             if (!isInternalLink || href === '#') {
+                 e.preventDefault();
+             }
             navLinks.classList.remove('show');
             mobileMenuIcon.classList.remove('fa-times');
             mobileMenuIcon.classList.add('fa-bars');
             mobileMenuButton.setAttribute('aria-expanded', 'false');
+        } else if (navLinks.classList.contains('show') && !isInternalLink) {
+            // If it's an external link and menu is open, allow navigation but close menu visually first
+             navLinks.classList.remove('show');
+             mobileMenuIcon.classList.remove('fa-times');
+             mobileMenuIcon.classList.add('fa-bars');
+             mobileMenuButton.setAttribute('aria-expanded', 'false');
         }
-    }, true);
+    }, true); // Use capture phase if needed, but usually bubble is fine
 }
 
-const ctaSearchForm = select('.search-form');
+// --- Form Handling Logic ---
+
+// Landing Page: CTA Search Form (Points to analysis.html)
+const ctaSearchForm = select('.cta-section .search-form');
 if (ctaSearchForm && isLandingPage) {
     ctaSearchForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const tickerInput = this.querySelector('input[name="ticker"]');
-        if (tickerInput && tickerInput.value.trim()) {
-            window.location.href = `analysis.html?ticker=${tickerInput.value.trim().toUpperCase()}`;
-        }
+        // Allow default form submission to analysis.html (action="analysis.html")
     });
 }
 
+// Landing Page & Search Page: Header Search Form (Points to analysis.html)
 const headerSearchForm = select('#headerTickerSearchForm');
-if (headerSearchForm && isLandingPage) {
-    headerSearchForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const tickerInput = this.querySelector('input[name="ticker"]');
-        if (tickerInput && tickerInput.value.trim()) {
-            window.location.href = `analysis.html?ticker=${tickerInput.value.trim().toUpperCase()}`;
-        }
+if (headerSearchForm && (isLandingPage || isSearchPage)) {
+     headerSearchForm.addEventListener('submit', function(e) {
+        // Allow default form submission to analysis.html (action="analysis.html")
     });
 }
+
+// Search Page: Main Search Form (Points to analysis.html)
+const mainSearchFormOnSearchPage = select('.search-hero .search-form');
+if (mainSearchFormOnSearchPage && isSearchPage) {
+    mainSearchFormOnSearchPage.addEventListener('submit', function(e) {
+         // Allow default form submission to analysis.html (action="analysis.html")
+    });
+}
+
+
+// --- General UI Enhancements ---
 
 const header = select('#header');
 if (header) {
@@ -251,6 +276,7 @@ if (backToTopButton) {
     });
 }
 
+// --- Analysis Page Specific Logic ---
 if (isAnalysisPage) {
     document.addEventListener('DOMContentLoaded', function() {
 
@@ -259,6 +285,7 @@ if (isAnalysisPage) {
             return;
         }
         if (typeof ChartAnnotation === 'undefined') {
+            console.warn('Chartjs-plugin-annotation not loaded. Annotations will not be displayed.');
         }
 
         try {
@@ -266,6 +293,7 @@ if (isAnalysisPage) {
                  Chart.register(ChartAnnotation);
             }
         } catch (error) {
+            console.error("Error registering ChartAnnotation plugin:", error);
         }
 
         const commonChartOptions = {
@@ -298,7 +326,7 @@ if (isAnalysisPage) {
                     titleFont: { size: 13, weight: 'bold' },
                     padding: 10, cornerRadius: 4, displayColors: false
                 },
-                annotation: {
+                annotation: { // Ensure annotation plugin options are always present
                     annotations: {}
                 }
             },
@@ -450,31 +478,39 @@ if (isAnalysisPage) {
                             },
                             options: JSON.parse(JSON.stringify(commonChartOptions))
                         });
-                    } catch (error) { }
-                } else { }
+                    } catch (error) { console.error("Error creating Revenue Chart:", error); }
+                } else { console.warn("Revenue chart canvas not found"); }
 
                 const arCtx = select('#arChart')?.getContext('2d');
                 if (arCtx) {
                     try {
                         const arChartOptions = JSON.parse(JSON.stringify(commonChartOptions));
+                        // Ensure annotations object exists even if no data annotations are present
                         arChartOptions.plugins.annotation = { annotations: {} };
-                        if (chartData.annotations?.arChart && Array.isArray(chartData.annotations.arChart)) {
+                        if (typeof ChartAnnotation !== 'undefined' && chartData.annotations?.arChart && Array.isArray(chartData.annotations.arChart)) {
                             chartData.annotations.arChart.forEach((anno, index) => {
                                 if (typeof anno.xVal === 'number' && typeof anno.yVal === 'number' && anno.content) {
                                     arChartOptions.plugins.annotation.annotations[`arLabel${index + 1}`] =
                                         createAnnotationLabel(anno.xVal, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
-                                } else { }
+                                } else { console.warn(`Invalid annotation data at index ${index} for AR chart.`); }
                             });
                         }
 
                         arChartOptions.plugins.legend.labels.generateLabels = function(chart) {
                             const defaultLabels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
                             defaultLabels.forEach(label => {
-                                if (label.datasetIndex === 1) {
+                                if (label.datasetIndex === 1) { // A/R Growth
                                     label.fillStyle = secondaryColor;
                                     label.strokeStyle = secondaryColor;
+                                } else if (label.datasetIndex === 2) { // Divergence Legend
+                                     label.fillStyle = divergenceColor;
+                                     label.strokeStyle = divergenceColor;
                                 }
                             });
+                            // Filter out the dummy 'Divergence' dataset from the legend if no points highlighted
+                            if (arDivergenceIndices.length === 0) {
+                                return defaultLabels.filter(label => label.datasetIndex !== 2);
+                            }
                             return defaultLabels;
                         };
 
@@ -485,36 +521,44 @@ if (isAnalysisPage) {
                                 datasets: [
                                     { label: 'Revenue Growth (%)', data: chartData.revenueGrowth || [], borderColor: primaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointBackgroundColor: primaryColor, pointRadius: pointRadiusCallback([]), pointHoverRadius: pointHoverRadiusCallback([]), pointBorderColor: primaryColor },
                                     { label: 'A/R Growth (%)', data: chartData.arGrowth || [], borderColor: secondaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointBackgroundColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor), pointRadius: pointRadiusCallback(arDivergenceIndices), pointHoverRadius: pointHoverRadiusCallback(arDivergenceIndices), pointBorderColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor) },
-                                    createDivergenceLegend()
+                                    createDivergenceLegend() // Add dummy dataset for legend item
                                 ]
                             },
                             options: arChartOptions
                         });
-                    } catch (error) { }
-                } else { }
+                    } catch (error) { console.error("Error creating AR Chart:", error); }
+                } else { console.warn("AR chart canvas not found"); }
 
                 const cashFlowCtx = select('#cashFlowChart')?.getContext('2d');
                 if (cashFlowCtx) {
                      try {
                         const cashFlowChartOptions = JSON.parse(JSON.stringify(commonChartOptions));
+                         // Ensure annotations object exists
                         cashFlowChartOptions.plugins.annotation = { annotations: {} };
-                         if (chartData.annotations?.cashFlowChart && Array.isArray(chartData.annotations.cashFlowChart)) {
+                         if (typeof ChartAnnotation !== 'undefined' && chartData.annotations?.cashFlowChart && Array.isArray(chartData.annotations.cashFlowChart)) {
                             chartData.annotations.cashFlowChart.forEach((anno, index) => {
                                  if (typeof anno.xVal === 'number' && typeof anno.yVal === 'number' && anno.content) {
                                     cashFlowChartOptions.plugins.annotation.annotations[`cfLabel${index + 1}`] =
                                         createAnnotationLabel(anno.xVal, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
-                                 } else { }
+                                 } else { console.warn(`Invalid annotation data at index ${index} for Cash Flow chart.`); }
                             });
                         }
 
                         cashFlowChartOptions.plugins.legend.labels.generateLabels = function(chart) {
                             const defaultLabels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
                             defaultLabels.forEach(label => {
-                                if (label.datasetIndex === 1) {
+                                if (label.datasetIndex === 1) { // Net Income Growth
                                     label.fillStyle = secondaryColor;
                                     label.strokeStyle = secondaryColor;
+                                } else if (label.datasetIndex === 2) { // Divergence Legend
+                                     label.fillStyle = divergenceColor;
+                                     label.strokeStyle = divergenceColor;
                                 }
                             });
+                             // Filter out the dummy 'Divergence' dataset from the legend if no points highlighted
+                            if (cfDivergenceIndices.length === 0) {
+                                return defaultLabels.filter(label => label.datasetIndex !== 2);
+                            }
                             return defaultLabels;
                         };
 
@@ -525,43 +569,71 @@ if (isAnalysisPage) {
                                 datasets: [
                                     { label: 'Op Cash Flow Growth (%)', data: chartData.cfoGrowth || [], borderColor: primaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointBackgroundColor: primaryColor, pointRadius: pointRadiusCallback([]), pointHoverRadius: pointHoverRadiusCallback([]), pointBorderColor: primaryColor },
                                     { label: 'Net Income Growth (%)', data: chartData.niGrowth || [], borderColor: secondaryColor, backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointBackgroundColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor), pointRadius: pointRadiusCallback(cfDivergenceIndices), pointHoverRadius: pointHoverRadiusCallback(cfDivergenceIndices), pointBorderColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor) },
-                                    createDivergenceLegend()
+                                    createDivergenceLegend() // Add dummy dataset for legend item
                                 ]
                             },
                             options: cashFlowChartOptions
                         });
-                    } catch (error) { }
-                } else { }
+                    } catch (error) { console.error("Error creating Cash Flow Chart:", error); }
+                } else { console.warn("Cash Flow chart canvas not found"); }
 
-                handleResize();
+                handleResize(); // Initial resize call after chart creation
 
-                showMessage(null);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                showMessage(null); // Hide loading message
+                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
 
             } catch (error) {
+                console.error("Error loading analysis data:", error);
                 showMessage(`<i class="fas fa-exclamation-triangle"></i> ${error.message}`, 'error');
                 currentTicker = null;
+                // Clear dynamic fields on error
+                populateElement('[data-dynamic="page-title"]', 'ForensicFinancials | Error');
+                populateElement('[data-dynamic="hero-title"]', 'Error Loading Analysis', 'innerHTML');
+                populateElement('[data-dynamic="hero-subtitle"]', 'Could not load data.');
+                // Clear other dynamic areas if needed
+                select('#trends-cards-container', true).forEach(el => el.innerHTML = '');
+                select('#financials-cards-container', true).forEach(el => el.innerHTML = '');
+                select('#opportunities-table-body', true).forEach(el => el.innerHTML = '<tr><td colspan="3">Error loading data.</td></tr>');
+                select('#verdict-paragraphs', true).forEach(el => el.innerHTML = '');
+                select('#monitoring-points-list', true).forEach(el => el.innerHTML = '');
             } finally {
-                 if (searchButton) searchButton.disabled = false;
+                 if (searchButton) searchButton.disabled = false; // Re-enable search button
             }
         };
 
+        // Analysis Page: Header Search Form (Handles reload)
         const analysisHeaderSearchForm = select('#tickerSearchForm');
-        const tickerInput = select('#tickerInput');
+        const tickerInput = select('#tickerInput'); // Input field on analysis page header
         if (analysisHeaderSearchForm && tickerInput) {
             analysisHeaderSearchForm.addEventListener('submit', (e) => {
-                e.preventDefault();
+                e.preventDefault(); // Prevent default form submission
                 const ticker = tickerInput.value;
                 if (ticker && ticker.toUpperCase() !== currentTicker) {
-                     loadAnalysisData(ticker);
+                     loadAnalysisData(ticker); // Load data for the new ticker
+                     // Update URL without full page reload
                      const newUrl = `${window.location.pathname}?ticker=${ticker.toUpperCase()}`;
                      window.history.pushState({path: newUrl}, '', newUrl);
                 } else if (!ticker) {
-                     showMessage('<i class="fas fa-exclamation-circle"></i> Please enter a ticker symbol.', 'error');
+                     // Optionally show a message if the input is empty
+                     // showMessage('<i class="fas fa-exclamation-circle"></i> Please enter a ticker symbol.', 'error');
+                     console.warn("Ticker input is empty.");
                 }
             });
         } else {
+            console.error("Analysis page header search form or input not found.");
         }
+
+        // Handle browser back/forward navigation
+        window.addEventListener('popstate', (event) => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tickerParam = urlParams.get('ticker');
+            const targetTicker = tickerParam ? tickerParam.toUpperCase() : DEFAULT_TICKER;
+            if (targetTicker !== currentTicker) {
+                loadAnalysisData(targetTicker);
+                 if (tickerInput) tickerInput.value = targetTicker; // Update input field
+            }
+        });
+
 
         let resizeTimeout;
         const handleResize = () => {
@@ -574,17 +646,19 @@ if (isAnalysisPage) {
                     if (!chart || !chart.options) return;
 
                     try {
+                        // Update common options based on size
                         if (chart.options.plugins?.tooltip?.bodyFont) chart.options.plugins.tooltip.bodyFont.size = isMobile ? 11 : 12;
                         if (chart.options.scales?.x?.ticks?.font) chart.options.scales.x.ticks.font.size = isMobile ? 10 : 12;
                         if (chart.options.scales?.y?.title?.font) chart.options.scales.y.title.font.size = isMobile ? 11 : 12;
                         if (chart.options.scales?.y?.ticks?.font) chart.options.scales.y.ticks.font.size = isMobile ? 10 : 11;
-                        if (chart.options.plugins?.legend?.labels?.font) chart.options.plugins.legend.labels.font.size = 10;
+                        if (chart.options.plugins?.legend?.labels?.font) chart.options.plugins.legend.labels.font.size = 10; // Keep legend font size consistent
                         if (chart.options.plugins?.legend?.labels) {
                             chart.options.plugins.legend.labels.boxWidth = 8;
                             chart.options.plugins.legend.labels.boxHeight = 8;
                         }
 
-                        if (chart.options.plugins?.annotation?.annotations) {
+                        // Update annotation label font size if annotation plugin is loaded
+                        if (typeof ChartAnnotation !== 'undefined' && chart.options.plugins?.annotation?.annotations) {
                             Object.values(chart.options.plugins.annotation.annotations).forEach(anno => {
                                 if (anno.type === 'label' && anno.font) {
                                     anno.font.size = isMobile ? 9 : 10;
@@ -592,24 +666,26 @@ if (isAnalysisPage) {
                             });
                         }
 
-                        chart.resize();
-                        chart.update('none');
+                        chart.resize(); // Resize the chart canvas
+                        chart.update('none'); // Update chart without animation
                     } catch(error) {
+                        console.error(`Error resizing chart ${index}:`, error);
                     }
                 });
-                 if (chartsToResize.some(c => c)) {}
-            }, 250);
+                 if (chartsToResize.some(c => c)) { /* console.log("Charts resized"); */ }
+            }, 250); // Debounce resize event
         };
         window.addEventListener('resize', handleResize);
 
+        // Initial Load Logic
         const urlParams = new URLSearchParams(window.location.search);
         const tickerParam = urlParams.get('ticker');
 
-        if (tickerParam && tickerInput) {
-            tickerInput.value = tickerParam.toUpperCase();
+        const initialTicker = tickerParam ? tickerParam.toUpperCase() : DEFAULT_TICKER;
+        if (tickerInput) {
+            tickerInput.value = initialTicker; // Set initial value in header input
         }
-
-        loadAnalysisData(tickerParam ? tickerParam.toUpperCase() : DEFAULT_TICKER);
+        loadAnalysisData(initialTicker); // Load data for the initial ticker
 
     });
 }
