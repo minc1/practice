@@ -8,6 +8,70 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Global plaid background */
+        body {
+            position: relative;
+            background-color: var(--secondary) !important;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(197, 164, 126, 0.05) 2px, transparent 2px),
+                linear-gradient(rgba(197, 164, 126, 0.05) 2px, transparent 2px);
+            background-size: 
+                30px 30px,
+                30px 30px,
+                120px 120px,
+                120px 120px;
+            z-index: -2;
+            pointer-events: none;
+        }
+        
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                circle at center,
+                rgba(28, 37, 65, 0.2) 0%,
+                rgba(28, 37, 65, 0.6) 30%,
+                rgba(28, 37, 65, 0.8) 60%,
+                var(--secondary) 100%
+            );
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* Z-index management */
+        #header {
+            position: relative;
+            z-index: 10;
+        }
+        
+        main {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Fix footer margin */
+        footer {
+            margin-top: 0 !important;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Search hero styles */
         .search-hero {
             display: flex;
             flex-direction: column;
@@ -16,7 +80,9 @@
             min-height: calc(100vh - 120px);
             padding: 40px 20px;
             text-align: center;
-            background-color: var(--body-bg);
+            position: relative;
+            z-index: 1;
+            background-color: transparent !important;
         }
 
         .search-container {
