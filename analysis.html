@@ -9,6 +9,94 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.2.1/chartjs-plugin-annotation.min.js" integrity="sha512-eCD/MhL+Uvj+B89Am2/hMv0Q6dWJjkMv/7G2xMSuvTjYkXOP8zsF5Ec0TrX0V8alM5u0M59fzxBNLCSQ60L3qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Hero section with plaid background */
+        .hero {
+            position: relative;
+            background-color: transparent !important;
+            overflow: hidden;
+            padding-bottom: 80px; /* Add extra padding at bottom for smoother transition */
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(197, 164, 126, 0.05) 2px, transparent 2px),
+                linear-gradient(rgba(197, 164, 126, 0.05) 2px, transparent 2px);
+            background-size: 
+                30px 30px,
+                30px 30px,
+                120px 120px,
+                120px 120px;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                circle at center,
+                rgba(28, 37, 65, 0.2) 0%,
+                rgba(28, 37, 65, 0.6) 30%,
+                rgba(28, 37, 65, 0.8) 60%,
+                var(--secondary) 100%
+            );
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Smooth transition to next section */
+        #trends {
+            position: relative;
+            margin-top: -60px; /* Pull the section up to overlap with hero */
+            padding-top: 100px; /* Add padding to compensate for the overlap */
+            background-color: var(--secondary);
+        }
+
+        #trends::before {
+            content: "";
+            position: absolute;
+            top: -60px;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to bottom, rgba(28, 37, 65, 0.8), var(--secondary));
+            z-index: -1;
+        }
+
+        /* Ensure hero content stays above the background */
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Z-index management for other elements */
+        #header {
+            position: relative;
+            z-index: 10;
+        }
+        
+        main {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .back-to-top {
+            z-index: 20;
+        }
+    </style>
 </head>
 <body>
     <header id="header">
