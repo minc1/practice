@@ -15,7 +15,7 @@
             position: relative;
             background-color: transparent !important;
             overflow: hidden;
-            padding-bottom: 80px; /* Add extra padding at bottom for smoother transition */
+            padding-bottom: 80px; /* Extra space for gradient fade */
         }
 
         .hero::before {
@@ -60,8 +60,8 @@
         /* Smooth transition to next section */
         #trends {
             position: relative;
-            margin-top: -60px; /* Pull the section up to overlap with hero */
-            padding-top: 100px; /* Add padding to compensate for the overlap */
+            margin-top: -60px; /* Pull up to overlap with hero */
+            padding-top: 100px; /* Compensate for the overlap */
             background-color: var(--secondary);
         }
 
@@ -72,8 +72,10 @@
             left: 0;
             right: 0;
             height: 60px;
-            background: linear-gradient(to bottom, rgba(28, 37, 65, 0.8), var(--secondary));
-            z-index: -1;
+            background: linear-gradient(to bottom, 
+                rgba(28, 37, 65, 0) 0%, 
+                var(--secondary) 100%);
+            z-index: 0;
         }
 
         /* Ensure hero content stays above the background */
@@ -95,6 +97,13 @@
         
         .back-to-top {
             z-index: 20;
+        }
+
+        /* Section styling for consistency */
+        .section {
+            position: relative;
+            background-color: var(--secondary);
+            padding: 80px 0;
         }
     </style>
 </head>
