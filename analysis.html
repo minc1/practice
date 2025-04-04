@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.2.1/chartjs-plugin-annotation.min.js" integrity="sha512-eCD/MhL+Uvj+B89Am2/hMv0Q6dWJjkMv/7G2xMSuvTjYkXOP8zsF5Ec0TrX0V8alM5u0M59fzxBNLCSQ60L3qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Hero section with plaid background */
+        /* Hero section with plaid background - ADJUSTED FOR SYMMETRY */
         .hero {
             position: relative;
             background-color: transparent !important;
@@ -35,6 +35,12 @@
                 30px 30px,
                 120px 120px,
                 120px 120px;
+            /* Adjusted to center vertical lines with the "Explore Analysis" button */
+            background-position: 
+                calc(50% - 0px) 0, /* Center thin vertical lines */
+                0 0,
+                calc(50% - 0px) 0, /* Center thick vertical lines */
+                0 0;
             z-index: -2;
             pointer-events: none;
         }
@@ -87,7 +93,7 @@
             justify-content: center;
             align-items: center;
             min-height: 42vh;
-            transform: translateY(-11%); /* TEXT ALIGHNMENT */
+            transform: translateY(-11%); /* TEXT ALIGNMENT */
         }
 
         /* Z-index management for other elements */

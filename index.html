@@ -6,9 +6,10 @@
     <title>ForensicFinancials | Financial Analysis Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css  rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Global plaid background */
+        /* Global plaid background - ADJUSTED FOR SYMMETRY */
         body {
             position: relative;
             background-color: var(--secondary) !important;
@@ -31,10 +32,17 @@
                 30px 30px,
                 120px 120px,
                 120px 120px;
+            /* Adjusted to center vertical lines with the buttons */
+            background-position: 
+                calc(50% - 0px) 0, /* Center thin vertical lines */
+                0 0,
+                calc(50% - 0px) 0, /* Center thick vertical lines */
+                0 0;
             z-index: -2;
             pointer-events: none;
         }
         
+        /* Rest of the existing styles remain unchanged */
         body::after {
             content: "";
             position: fixed;
