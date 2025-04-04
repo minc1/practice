@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Global plaid background - ADJUSTED FOR SYMMETRY */
+        /* Global plaid background - ENHANCED WITH MULTIPLE SHADES */
         body {
             position: relative;
             background-color: var(--secondary) !important;
@@ -22,21 +22,37 @@
             right: 0;
             bottom: 0;
             background: 
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(197, 164, 126, 0.05) 2px, transparent 2px),
-                linear-gradient(rgba(197, 164, 126, 0.05) 2px, transparent 2px);
+                /* Thin vertical lines with varying opacity */
+                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                /* Thin horizontal lines with varying opacity */
+                linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                /* Thick vertical lines with varying opacity and color */
+                linear-gradient(90deg, rgba(197, 164, 126, 0.07) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(197, 164, 126, 0.03) 2px, transparent 2px),
+                /* Thick horizontal lines with varying opacity and color */
+                linear-gradient(rgba(197, 164, 126, 0.07) 2px, transparent 2px),
+                linear-gradient(rgba(197, 164, 126, 0.03) 2px, transparent 2px);
             background-size: 
                 30px 30px,
+                60px 60px,
                 30px 30px,
+                60px 60px,
                 120px 120px,
-                120px 120px;
-            /* Adjusted to center vertical lines with the search container */
+                240px 240px,
+                120px 120px,
+                240px 240px;
+            /* Centered vertical lines */
             background-position: 
                 calc(50% - 0px) 0, /* Center thin vertical lines */
+                calc(50% - 15px) 0, /* Offset second set of thin vertical lines */
                 0 0,
+                0 15px,
                 calc(50% - 0px) 0, /* Center thick vertical lines */
-                0 0;
+                calc(50% - 60px) 0, /* Offset second set of thick vertical lines */
+                0 0,
+                0 60px;
             z-index: -2;
             pointer-events: none;
         }
