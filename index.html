@@ -130,7 +130,7 @@
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
                 <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
-                    <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
+                    <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g. AAPL)" aria-label="Enter Ticker Symbol" required>
                     <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
                 </form>
                 <ul class="nav-links">
@@ -147,6 +147,7 @@
     </header>
 
     <main>
+        <!-- Hero Section -->
         <section class="hero" id="hero">
             <div class="container">
                 <h1>Forensic Financial Statement Analysis</h1>
@@ -163,6 +164,7 @@
             </div>
         </section>
 
+        <!-- Features Section -->
         <section class="section" id="features">
             <div class="container">
                 <div class="section-title">
@@ -212,53 +214,81 @@
             </div>
         </section>
 
+        <!-- Updated Methodology Section -->
         <section class="section dark-bg" id="methodology">
             <div class="container">
                 <div class="section-title">
                     <h2>Analysis Methodology</h2>
-                    <p>Based on established forensic accounting principles</p>
+                    <p>
+                        Based on established forensic accounting principles. All data is obtained from third-party sources and may contain inaccuracies.
+                    </p>
                 </div>
+
                 <div class="methodology-steps">
+                    <!-- Step 1: Data Collection -->
                     <div class="step">
                         <div class="step-number">1</div>
                         <div class="step-content">
                             <h3>Data Collection</h3>
-                            <p>Comprehensive financial statement data from reliable sources spanning multiple years</p>
+                            <p>
+                                We gather multi-year financial statements from SEC Filings, the EDGAR Database, 
+                                Yahoo Finance, Google Finance, Alpha Vantage, and Financial Modeling Prep.
+                            </p>
                         </div>
                     </div>
+
+                    <!-- Step 2: Trend Analysis -->
                     <div class="step">
                         <div class="step-number">2</div>
                         <div class="step-content">
                             <h3>Trend Analysis</h3>
-                            <p>Identification of growth patterns, seasonality, and long-term performance indicators</p>
+                            <p>
+                                We examine growth trajectories, seasonality, and predictability to
+                                highlight long-term patterns. These insights are essential for analysts seeking clarity in strategic planning.
+                            </p>
                         </div>
                     </div>
+
+                    <!-- Step 3: Anomaly Detection -->
                     <div class="step">
                         <div class="step-number">3</div>
                         <div class="step-content">
                             <h3>Anomaly Detection</h3>
-                            <p>Application of forensic accounting techniques to identify potential red flags</p>
+                            <p>
+                                By applying specialized forensic accounting techniques, we identify unusual
+                                variances or potential red flags, ensuring corporate integrity and stakeholder confidence.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- About Section -->
         <section class="section" id="about">
             <div class="container">
                 <div class="section-title">
                     <h2>About Us</h2>
-                    <p>Empowering Investors with Forensic Financial Insights</p>
                 </div>
                 <div class="about-content">
                     <p>
-                        At ForensicFinancials, our mission is to empower both institutional and retail investors to make informed decisions. We leverage advanced forensic accounting methodologies and cutting-edge data visualization tools to uncover hidden insights and detect potential financial anomalies.
+                        At ForensicFinancials, our mission is to empower both institutional and retail investors
+                        to make informed decisions. We leverage advanced forensic accounting methodologies and
+                        cutting-edge data visualization tools to uncover hidden insights and detect potential
+                        financial anomalies.
                     </p>
-                    <p> <br></p>
+                    <p><br></p>
                     <p>
-                        Built on a foundation of transparency, integrity, and rigorous analysis, our platform delivers professional-grade insights that simplify the complex financial landscape. Whether you're evaluating growth trends, comparing financial metrics, or assessing risk factors, our goal is to provide you with the reliable information needed to navigate today's markets confidently.
+                        Built on a foundation of transparency, integrity, and rigorous analysis, our platform delivers
+                        professional-grade insights that simplify the complex financial landscape. Whether you're
+                        evaluating growth trends, comparing financial metrics, or assessing risk factors, our goal is
+                        to provide you with the reliable information needed to navigate today's markets confidently.
                     </p>
-                    <p> <br></p>
+                    <p><br></p>
+                    <p>
+                        Please let us know if you have any questions or concerns. We hope you have a wonderful day.
+                    </p>
+                    <p><br></p>
                     <p class="signature">
                         <em>- The ForensicFinancials Team</em>
                     </p>
@@ -266,6 +296,7 @@
             </div>
         </section>
 
+        <!-- Call-to-Action Section -->
         <section class="section cta-section">
             <div class="container">
                 <h2>Analyze a Company's Financial Health</h2>
@@ -273,12 +304,11 @@
                     <input type="text" name="ticker" placeholder="Enter ticker (e.g., AAPL)" required
                            aria-label="Stock ticker symbol">
                     <button type="submit" aria-label="Analyze">
-                        <i class="fas fa-search"></i> Analyze
+                        <i class="fas fa-arrow-right"></i> Analyze
                     </button>
                 </form>
             </div>
         </section>
-
     </main>
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
