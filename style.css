@@ -41,7 +41,7 @@ body {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 16px;
+    padding: 0 24px; /* Increased padding for more space */
 }
 
 header {
@@ -65,8 +65,8 @@ nav {
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 16px;
-    gap: 16px;
+    padding: 0 24px; /* Increased padding for more space */
+    gap: 24px; /* Increased gap for more space */
     flex-wrap: wrap;
 }
 
@@ -335,7 +335,7 @@ nav {
 
 .hero-cta {
     display: flex;
-    gap: 16px;
+    gap: 20px; /* Increased gap for more space */
     justify-content: center;
     flex-wrap: wrap;
 }
@@ -346,7 +346,7 @@ nav {
     justify-content: center;
     background-color: var(--primary);
     color: var(--dark);
-    padding: 12px 24px;
+    padding: 12px 28px; /* Increased padding for more space */
     border-radius: 6px;
     text-decoration: none;
     font-weight: 600;
@@ -382,13 +382,13 @@ nav {
 }
 
 .section {
-    padding: 60px 0;
+    padding: 80px 0; /* Increased padding for more space */
 }
 
 .methodology-steps {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
+    gap: 32px; /* Increased gap for more space */
     margin-top: 40px;
     justify-content: center;
 }
@@ -396,9 +396,9 @@ nav {
 .step {
     display: flex;
     align-items: flex-start;
-    gap: 16px;
+    gap: 20px; /* Increased gap for more space */
     background-color: rgba(255, 255, 255, 0.05);
-    padding: 24px;
+    padding: 28px; /* Increased padding for more space */
     border-radius: 8px;
     transition: transform 0.3s;
     max-width: 380px;
@@ -427,7 +427,7 @@ nav {
 }
 
 .step-content h3 {
-    margin-bottom: 8px;
+    margin-bottom: 12px; /* Increased margin for more space */
     font-size: 1.1rem;
     color: var(--light);
 }
@@ -442,24 +442,24 @@ nav {
 .cta-section {
     background-color: var(--secondary);
     text-align: center;
-    padding: 80px 0;
+    padding: 100px 0; /* Increased padding for more space */
 }
 
 .cta-section h2 {
-    margin-bottom: 24px;
+    margin-bottom: 32px; /* Increased margin for more space */
     font-size: 2rem;
     color: var(--light);
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 50px; /* Increased margin for more space */
 }
 
 .section-title h2 {
     font-size: 1.7rem;
     color: var(--light);
-    margin-bottom: 12px;
+    margin-bottom: 16px; /* Increased margin for more space */
     font-weight: 700;
     position: relative;
     display: inline-block;
@@ -488,7 +488,7 @@ nav {
 .cards {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 32px; /* Increased gap for more space */
 }
 
 .card {
@@ -508,7 +508,7 @@ nav {
 }
 
 .card-header {
-    padding: 18px;
+    padding: 22px; /* Increased padding for more space */
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -522,7 +522,7 @@ nav {
 }
 
 .card-header h3 i {
-    margin-right: 10px;
+    margin-right: 12px; /* Increased margin for more space */
     font-size: 0.9rem;
     width: 20px;
     text-align: center;
@@ -533,7 +533,7 @@ nav {
 .neutral { color: var(--warning); }
 
 .card-body {
-    padding: 18px;
+    padding: 22px; /* Increased padding for more space */
     flex-grow: 1;
 }
 
@@ -544,9 +544,9 @@ nav {
 }
 
 .card-body li {
-    margin-bottom: 10px;
+    margin-bottom: 14px; /* Increased margin for more space */
     position: relative;
-    padding-left: 20px;
+    padding-left: 24px; /* Increased padding for more space */
     font-size: 0.9rem;
     color: var(--text);
 }
@@ -554,18 +554,18 @@ nav {
 .card-body li:before {
     content: "•";
     position: absolute;
-    left: 6px;
+    left: 8px; /* Increased left position for more space */
     color: var(--muted);
     font-weight: bold;
 }
 
 .card-body li strong {
-    color: var(--dark);
-    font-weight: 600;
+     color: var(--dark);
+     font-weight: 600;
 }
 
 .card-footer {
-    padding: 12px 18px;
+    padding: 16px 22px; /* Increased padding for more space */
     background-color: #f8f9fa;
     border-top: 1px solid var(--border-color);
     font-size: 0.8rem;
@@ -575,9 +575,9 @@ nav {
 .chart-container {
     background-color: var(--card-bg);
     border-radius: 10px;
-    padding: 18px;
+    padding: 24px; /* Increased padding for more space */
     box-shadow: var(--shadow-sm);
-    margin-bottom: 20px;
+    margin-bottom: 32px; /* Increased margin for more space */
     border: 1px solid var(--border-color);
     transition: var(--transition);
     position: relative;
@@ -591,7 +591,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 20px; /* Increased margin for more space */
 }
 
 .chart-header h3 {
@@ -613,7 +613,7 @@ canvas {
 .insight-list {
     background-color: var(--card-bg);
     border-radius: 10px;
-    padding: 18px;
+    padding: 24px; /* Increased padding for more space */
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--border-color);
     transition: var(--transition);
@@ -637,7 +637,7 @@ table {
 }
 
 th, td {
-    padding: 12px;
+    padding: 16px; /* Increased padding for more space */
     text-align: center;
     border: 1px solid var(--border-color);
     color: var(--dark);
@@ -669,7 +669,7 @@ tr:hover {
 
     table tr {
         display: block;
-        margin-bottom: 1em; /* Increased spacing between rows */
+        margin-bottom: 1.2em; /* Increased spacing between rows */
         border: 1px solid var(--border-color);
         border-radius: 8px; /* Slightly larger radius */
         box-shadow: var(--shadow-sm);
@@ -683,7 +683,7 @@ tr:hover {
         font-size: 0.85em; /* Slightly larger font */
         border: none; /* Remove individual cell borders */
         border-bottom: 1px solid rgba(0,0,0,0.05); /* Lighter separator */
-        padding: 12px 15px; /* Adjusted padding */
+        padding: 14px 18px; /* Increased padding for more space */
         min-height: 38px; /* Ensure consistent height */
         line-height: 1.5; /* Improve readability */
     }
@@ -698,7 +698,7 @@ tr:hover {
         font-weight: 600; /* Adjusted weight */
         text-transform: uppercase;
         color: var(--dark);
-        padding-right: 10px; /* Space between label and value */
+        padding-right: 12px; /* Increased space between label and value */
         text-align: left;
         width: 45%; /* Allocate space for label */
         white-space: nowrap;
@@ -731,7 +731,7 @@ tr:hover {
 .verdict-container {
     background-color: var(--card-bg);
     border-radius: 10px;
-    padding: 30px;
+    padding: 36px; /* Increased padding for more space */
     max-width: 750px;
     margin: 0 auto;
     box-shadow: var(--shadow-md);
@@ -743,8 +743,8 @@ tr:hover {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 20px;
-    gap: 8px;
+    margin-bottom: 24px; /* Increased margin for more space */
+    gap: 12px; /* Increased gap for more space */
 }
 
 .verdict-header h3 {
@@ -759,7 +759,7 @@ tr:hover {
     display: inline-block;
     background-color: var(--primary);
     color: var(--dark);
-    padding: 4px 12px;
+    padding: 4px 14px; /* Increased padding for more space */
     border-radius: 15px;
     font-weight: 600;
     font-size: 0.8rem;
@@ -768,7 +768,7 @@ tr:hover {
 }
 
 .verdict-container p {
-    margin-bottom: 16px;
+    margin-bottom: 20px; /* Increased margin for more space */
     font-size: 0.95rem;
     line-height: 1.7;
     color: var(--text);
@@ -780,8 +780,8 @@ tr:hover {
 }
 
 .monitoring-points {
-     margin-top: 24px;
-     padding-top: 16px;
+     margin-top: 28px; /* Increased margin for more space */
+     padding-top: 20px; /* Increased padding for more space */
      border-top: 1px solid var(--border-color);
 }
 
@@ -789,7 +789,7 @@ tr:hover {
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--primary);
-    margin-bottom: 16px;
+    margin-bottom: 20px; /* Increased margin for more space */
 }
 
 .monitoring-points ul {
@@ -799,9 +799,9 @@ tr:hover {
 }
 
 .monitoring-points li {
-    margin-bottom: 12px;
+    margin-bottom: 16px; /* Increased margin for more space */
     position: relative;
-    padding-left: 20px;
+    padding-left: 24px; /* Increased padding for more space */
     font-size: 0.9rem;
     color: var(--text);
 }
@@ -852,9 +852,9 @@ tr:hover {
 
 footer {
     background-color: var(--header-footer-bg);
-    padding: 24px 0;
+    padding: 28px 0; /* Increased padding for more space */
     border-top: 1px solid var(--border-color);
-    margin-top: 60px;
+    margin-top: 80px; /* Increased margin for more space */
 }
 
 .footer-content {
@@ -869,7 +869,7 @@ footer {
     font-weight: 600;
     color: var(--dark);
     letter-spacing: -0.5px;
-    margin-bottom: 16px;
+    margin-bottom: 20px; /* Increased margin for more space */
 }
 
 .footer-logo span {
@@ -881,12 +881,12 @@ footer {
     flex-wrap: wrap;
     justify-content: center;
     list-style: none;
-    margin: 0 0 16px 0;
+    margin: 0 0 20px 0; /* Increased margin for more space */
     padding: 0;
 }
 
 .footer-links li {
-    margin: 8px 12px;
+    margin: 8px 16px; /* Increased margin for more space */
 }
 
 .footer-links a {
@@ -903,7 +903,7 @@ footer {
 .copyright {
     color: var(--muted);
     font-size: 0.8rem;
-    margin-top: 8px;
+    margin-top: 12px; /* Increased margin for more space */
 }
 
 @media (min-width: 768px) {
@@ -916,7 +916,7 @@ footer {
     }
 
     nav {
-        gap: 24px;
+        gap: 32px; /* Increased gap for more space */
         flex-wrap: nowrap;
     }
 
@@ -948,7 +948,7 @@ footer {
     }
 
     .nav-links li {
-        margin: 0 0 0 24px;
+        margin: 0 0 0 28px; /* Increased margin for more space */
     }
 
     .nav-links a {
@@ -972,7 +972,7 @@ footer {
     }
 
     .section {
-        padding: 80px 0;
+        padding: 100px 0; /* Increased padding for more space */
     }
 
     .section-title h2 {
@@ -981,11 +981,11 @@ footer {
 
     .cards {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 24px;
+        gap: 32px; /* Increased gap for more space */
     }
 
     .verdict-container {
-        padding: 40px;
+        padding: 48px; /* Increased padding for more space */
     }
     .verdict-header {
         flex-direction: row;
@@ -1021,7 +1021,7 @@ footer {
     }
 
     .footer-links li {
-        margin: 0 0 0 20px;
+        margin: 0 0 0 24px; /* Increased margin for more space */
     }
 }
 
