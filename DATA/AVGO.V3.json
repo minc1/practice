@@ -1,0 +1,106 @@
+{
+    "company": {
+        "name": "Broadcom Inc.",
+        "ticker": "AVGO",
+        "analysisTitle": "Forensic Financial Analysis",
+        "heroSubtitle": "Comprehensive examination of AVGO's M&A-driven growth, post-VMware integration dynamics, and cash flow resilience amidst acquisition-related volatility.",
+        "pageTitle": "ForensicFinancials | Broadcom Inc. (AVGO) Analysis"
+    },
+    "trendAnalysis": {
+        "sectionSubtitle": "Examining AVGO's acquisition-fueled growth and integration phases (FY2015-FY2024)",
+        "cards": [
+            {
+                "title": "Revenue Trajectory",
+                "iconClass": "fas fa-chart-line neutral",
+                "points": [
+                    "<strong>M&A-Driven Growth</strong> - Revenue spikes correlate with major acquisitions: +94% (FY2016, Avago merger), +33% (FY2017, Brocade), +44% (FY2024, VMware). Organic growth ranges 6-21%.",
+                    "<strong>VMware Impact</strong> - FY2024 revenue +44%, but COGS +71% initially compressed margins (Gross Profit Ratio -19.0%). Q1 2025 shows recovery (OpInc +35.3% on +6.1% revenue).",
+                    "<strong>Stabilization Phase</strong> - Post-acquisition quarters (Q2 2024-Q1 2025) show steady revenue growth (4.4-7.5%) and margin expansion, indicating integration progress."
+                ],
+                "footer": "Revenue growth heavily M&A-dependent; VMware integration now driving stabilization."
+            },
+            {
+                "title": "Profitability & Cash Flow",
+                "iconClass": "fas fa-chart-pie positive",
+                "points": [
+                    "<strong>GAAP Volatility</strong> - Net Income growth swings wildly: -58.1% (FY2024, VMware costs) to +70.7% (FY2022). OCF growth more stable (+10.4% FY2024 vs NI -58.1%).",
+                    "<strong>Cash Conversion</strong> - OCF consistently exceeds NI due to non-cash add-backs (D&A, stock comp). Q1 2025: NI +27.3% vs OCF +9.1% from lower add-backs.",
+                    "<strong>Margin Recovery</strong> - Post-VMware, OpInc growth accelerated to +35.3% (Q1 2025), suggesting synergy capture."
+                ],
+                "footer": "NI distorted by M&A accounting; OCF highlights underlying strength. Margin recovery underway."
+            },
+            {
+                "title": "Leverage & Funding",
+                "iconClass": "fas fa-chart-bar neutral",
+                "points": [
+                    "<strong>Acquisition Debt</strong> - FY2024 LTD +76.2% to fund VMware; deleveraging since (Q1 2025 LTD -8.1%). Debt/Equity spiked but trending down.",
+                    "<strong>Cash Flow Prioritization</strong> - Post-deal focus on debt repayment (Q1 2025 Debt Repay +55%) over buybacks (Repurchases -69%).",
+                    "<strong>Equity Dilution</strong> - Minimal; funding primarily debt-based. FY2024 Equity +1.8% despite acquisition."
+                ],
+                "footer": "Leverage spikes post-M&A but rapid deleveraging follows. Strong OCF supports debt paydown."
+            }
+        ]
+    },
+    "financialMetrics": {
+        "sectionSubtitle": "Investigating forensic flags, working capital anomalies, and post-M&A solvency",
+        "cards": [
+            {
+                "title": "Forensic Checks",
+                "iconClass": "fas fa-search negative",
+                "points": [
+                    "<strong>A/R vs Revenue</strong> - FY2022: A/R +42.8% vs Revenue +21.0%. Q1 2025: A/R +12.2% vs Revenue +6.1%. Potential billing/collection issues.",
+                    "<strong>Inventory vs COGS</strong> - Q1 2025: Inventory +8.4% vs COGS -5.6%. Similar Q3 2024: +2.8% vs -14.0%. Overproduction or slowing demand risk.",
+                    "<strong>OCF/NI Divergence</strong> - FY2024: NI -58.1% vs OCF +10.4%. Recurring due to D&A from M&A. Q1 2025: NI +27.3% vs OCF +9.1% from WC changes.",
+                    "<strong>Interest Expense</strong> - FY2024 LTD +76.2% but Interest Exp +1.3%. Timing or rate benefits may not persist."
+                ],
+                "footer": "Working capital flags (A/R, Inventory) and OCF/NI gaps warrant monitoring post-VMware."
+            },
+            {
+                "title": "Solvency & Liquidity",
+                "iconClass": "fas fa-balance-scale neutral",
+                "points": [
+                    "<strong>Debt Capacity</strong> - FY2024 Total Liabilities +1.0% to $75B; LTD $39B. Deleveraging pace critical for rating agencies.",
+                    "<strong>Interest Coverage</strong> - OpInc growth (+35.3% Q1 2025) outpaces Interest Exp (flat), but absolute debt high.",
+                    "<strong>Liquidity Backstop</strong> - $12B cash (Q1 2025) and $40B OCF (TTM) provide ample coverage.",
+                    "<strong>M&A Flexibility</strong> - Current leverage limits near-term deals; focus on VMware integration."
+                ],
+                "footer": "Elevated but manageable leverage; strong OCF supports debt service."
+            }
+        ]
+    },
+    "investmentConsiderations": {
+        "sectionSubtitle": "Balancing AVGO's cash flow strength against integration risks and leverage",
+        "tableData": [
+            { "factor": "<strong>Market Position</strong>", "opportunities": "Semiconductor leader (AI networking, custom chips) + VMware's enterprise software dominance", "risks": "Integration complexity; competition in both sectors (NVIDIA, Intel, VMware alternatives)" },
+            { "factor": "<strong>Revenue</strong>", "opportunities": "VMware cross-sell ($4B+ synergy target); AI infrastructure growth (25% of semi sales)", "risks": "Semiconductor cyclicality; enterprise software slowdown" },
+            { "factor": "<strong>Profitability</strong>", "opportunities": "Post-VMware OpInc growth (+35% Q1 2025); software margin accretion long-term", "risks": "Amortization drag ($3B/year); stock comp ($2B/year)" },
+            { "factor": "<strong>Cash Flow</strong>", "opportunities": "OCF $40B+ supports deleveraging; FCF yield ~5% post-dividend", "risks": "Working capital volatility (A/R, Inventory flags)" },
+            { "factor": "<strong>Financial Health</strong>", "opportunities": "Deleveraging path (2.5x Net Debt/EBITDA target); investment-grade rating", "risks": "Covenants on VMware acquisition debt" },
+            { "factor": "<strong>Shareholder Returns</strong>", "opportunities": "Dividend growth (13% CAGR); buyback resumption post-deleveraging", "risks": "Current pause on buybacks (Q1 2025 -69%)" },
+            { "factor": "<strong>Outlook</strong>", "opportunities": "AI-driven semi demand; VMware subscription transition", "risks": "Regulatory scrutiny (software bundling); CEO succession" }
+        ]
+    },
+    "conclusion": {
+        "sectionSubtitle": "Synthesizing AVGO's financial trajectory and investment profile",
+        "verdictTitle": "Cash Flow Titan Navigating Post-M&A Integration",
+        "verdictRating": "Core Holding / Moderate Risk",
+        "paragraphs": [
+            "Broadcom's forensic analysis reveals a company with <strong>exceptional cash generation</strong> ($40B TTM OCF) but <strong>GAAP earnings distorted by M&A accounting</strong>. The VMware acquisition (FY2024) initially crushed margins (Gross Profit Ratio -19.0%) and Net Income (-58.1%), but recent quarters (Q1 2025 OpInc +35.3%) demonstrate rapid synergy capture. Deleveraging is underway (Q1 2025 LTD -8.1%), though absolute debt remains elevated ($39B).",
+            "Critical forensic flags include <strong>A/R growth outpacing revenue</strong> (Q1 2025: +12.2% vs +6.1%) and <strong>inventory builds amid falling COGS</strong> (Q1 2025: +8.4% vs -5.6%), suggesting potential demand or billing issues. The <strong>OCF/NI divergence</strong> (FY2024: +10.4% vs -58.1%) is structural, driven by $3B+ annual D&A from past deals.",
+            "AVGO is a <strong>high-conviction hold</strong> for investors comfortable with its M&A-heavy model. Near-term success hinges on VMware integration, while long-term value stems from AI semi growth and software margin expansion. Monitoring working capital trends and deleveraging pace is essential."
+        ],
+        "monitoringPointsTitle": "Key Monitoring Points",
+        "monitoringPoints": [
+            "<strong>VMware Synergies:</strong> Track $4B+ cost synergy target achievement and software revenue retention.",
+            "<strong>Working Capital:</strong> Watch A/R days (currently ~45) and inventory turnover (4.5x) for deterioration.",
+            "<strong>Debt Paydown:</strong> Ensure continued LTD reduction (~$2B/quarter) to hit 2.5x Net Debt/EBITDA."
+        ]
+    },
+    "chartData": {
+        "labels": ["FY2015", "FY2016", "FY2017", "FY2018", "FY2019", "FY2020", "FY2021", "FY2022", "FY2023", "FY2024"],
+        "revenueGrowth": [59.9, 94.0, 33.2, 18.2, 8.4, 5.7, 14.9, 21.0, 7.9, 44.0],
+        "arGrowth": [30.3, 1.1, 12.2, 35.8, -2.0, -29.5, -9.8, 42.8, 6.6, 40.0],
+        "cfoGrowth": [97.3, 47.2, 92.1, 35.6, 9.2, 24.4, 14.1, 21.6, 8.1, 10.4],
+        "niGrowth": [4.2, -2.3, 2.0, 5.8, -77.8, 8.7, 1.3, 70.7, 22.5, -58.1]
+    }
+}

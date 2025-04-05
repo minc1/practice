@@ -1,0 +1,104 @@
+{
+  "company": {
+    "name": "Snap Inc.",
+    "ticker": "SNAP",
+    "analysisTitle": "Forensic Financial Analysis",
+    "heroSubtitle": "Comprehensive examination of SNAP's volatile growth trajectory, cash flow challenges, and evolving profitability profile in the competitive social media landscape.",
+    "pageTitle": "ForensicFinancials | Snap Inc. (SNAP) Analysis"
+  },
+  "trendAnalysis": {
+    "sectionSubtitle": "Analyzing SNAP's cyclical recovery, cash flow volatility, and path to sustainable profitability (FY2015-FY2024)",
+    "cards": [
+      {
+        "title": "Revenue Trajectory",
+        "iconClass": "fas fa-chart-line neutral",
+        "points": [
+          "<strong>Explosive Growth to Volatility</strong> - Peaked at +64.2% YoY (2021), collapsed to +0.1% (2023), rebounded to +16.4% (2024) via ad platform improvements.",
+          "<strong>Seasonality</strong> - Q4 revenue surges (+13.5% QoQ 2024) vs Q1 declines (-12.2% Q1'24). Annual growth driven by DR ads and Snapchat+ subscriptions.",
+          "<strong>Inflection Point</strong> - 2024 recovery (+16% YoY Q2, +15% Q3, +14% Q4) driven by doubled advertisers and ARPU improvements."
+        ],
+        "footer": "High sensitivity to ad market cycles with recent recovery signs"
+      },
+      {
+        "title": "Profitability",
+        "iconClass": "fas fa-chart-pie positive",
+        "points": [
+          "<strong>First GAAP Profit</strong> - Q4 2024 Net Income of $9M after $1.3B loss in 2023, driven by operating leverage (+84.5% QoQ OpInc growth).",
+          "<strong>SBC Impact</strong> - Stock-based compensation declined 21% YoY (2024) but remains $1B+ annually, distorting GAAP metrics.",
+          "<strong>Margin Expansion</strong> - 2024 Adjusted EBITDA surged to $509M (+214% YoY) via cost controls and revenue mix shifts."
+        ],
+        "footer": "Fragile profitability reliant on sustained ad momentum and cost discipline"
+      },
+      {
+        "title": "Cash Flow",
+        "iconClass": "fas fa-chart-bar negative",
+        "points": [
+          "<strong>OCF Volatility</strong> - 2024 OCF +67.7% vs NI +47.2%, but Q4'24 saw +99% OCF growth vs +1.1% NI from working capital swings.",
+          "<strong>Working Capital Swings</strong> - ChangeInWC growth ranged from -82% (Q4'24) to +82% (2022), creating cash flow unpredictability.",
+          "<strong>FCF Generation</strong> - 2024 FCF $219M vs -$287M (2022), but reliant on $3.4B cash reserves to offset $4.2B debt."
+        ],
+        "footer": "Cash generation improving but remains hypersensitive to timing differences"
+      }
+    ]
+  },
+  "financialMetrics": {
+    "sectionSubtitle": "Investigating working capital anomalies, SBC distortions, and solvency risks",
+    "cards": [
+      {
+        "title": "Forensic Checks",
+        "iconClass": "fas fa-search negative",
+        "points": [
+          "<strong>OCF vs NI Divergence</strong> - Persistent mismatch (2024: NI +47.2% vs OCF +67.7%) from SBC and WC timing.",
+          "<strong>A/R Quality</strong> - 2023 anomaly: Revenue +0.1% vs A/R +8.0%, resolved in 2024 (+16.4% Rev vs +5.5% A/R).",
+          "<strong>Debt Refinancing Risk</strong> - $1.5B notes issued Feb 2025 to refinance maturing debt despite $3.4B cash reserves."
+        ],
+        "footer": "Cash conversion quality and debt management require ongoing scrutiny"
+      },
+      {
+        "title": "Solvency & Liquidity",
+        "iconClass": "fas fa-balance-scale neutral",
+        "points": [
+          "<strong>Cash Cushion</strong> - $3.4B liquidity vs $36M 2025 debt maturities provides short-term flexibility.",
+          "<strong>Negative Coverage Ratio</strong> - LTM Interest Coverage -33.3x due to historical losses, improving to +2.1x using 2024 Adj EBITDA.",
+          "<strong>Shareholder Returns</strong> - $500M+ annual buybacks (2023-2024) partially offset SBC dilution despite unprofitability."
+        ],
+        "footer": "Adequate liquidity but leveraged balance sheet (Debt/Equity 1.75x)"
+      }
+    ]
+  },
+  "investmentConsiderations": {
+    "sectionSubtitle": "Balancing SNAP's ad recovery against cash flow risks and monetization challenges",
+    "tableData": [
+      { "factor": "<strong>Market Position</strong>", "opportunities": "AR innovation leader with 453M DAUs; Snapchat+ reached 14M subscribers ($500M+ run rate)", "risks": "Competition from TikTok/Instagram Reels; North America DAUs stagnant" },
+      { "factor": "<strong>Revenue</strong>", "opportunities": "DR ad improvements doubled active advertisers YoY; international user growth (9% YoY)", "risks": "Low RoW ARPU ($1.21 vs NA $6.38); brand ad weakness in Q4'24" },
+      { "factor": "<strong>Profitability</strong>", "opportunities": "2024 operating margin expansion to 11% (vs -15% in 2022)", "risks": "SBC remains 25% of revenue; high R&D spend needed for AR" },
+      { "factor": "<strong>Cash Flow</strong>", "opportunities": "Positive FCF since 2021; Q4'24 OCF $231M (6x Q4'23)", "risks": "Working capital swings caused 46% QoQ OCF volatility in 2024" },
+      { "factor": "<strong>Financial Health</strong>", "opportunities": "No major debt maturities until 2026 after refinancing", "risks": "$4.2B total debt vs $3.4B cash; negative retained earnings (-$8.6B)" },
+      { "factor": "<strong>Shareholder Returns</strong>", "opportunities": "Aggressive buybacks reduced share count growth to 1.2% YoY", "risks": "$1.3B repurchases (2023-2024) exceeded GAAP income" },
+      { "factor": "<strong>New Initiatives</strong>", "opportunities": "AR shopping tools drove 45% increase in DR conversions", "risks": "Monetizing AR remains unproven; regulatory scrutiny on teen usage" }
+    ]
+  },
+  "conclusion": {
+    "sectionSubtitle": "Synthesizing SNAP's financial trajectory and speculative turnaround",
+    "verdictTitle": "Recovery in Progress: Advertising Momentum vs. Structural Cash Flow Risks",
+    "verdictRating": "High Risk / High Reward",
+    "paragraphs": [
+      "SNAP demonstrates a fragile turnaround, achieving its <strong>first quarterly GAAP profit</strong> in Q4 2024 (+$9M) through ad platform improvements and cost discipline. While 2024 revenue growth reaccelerated to +16.4% and Adjusted EBITDA tripled, the company remains exposed to <strong>working capital volatility</strong> (2024 OCF swung from -46% Q1 to +99% Q4) and <strong>high fixed costs</strong> (SBC + infrastructure).",
+      "Critical forensic flags include <strong>persistent OCF/NI divergence</strong> driven by $1B+ annual SBC and erratic WC changes, alongside <strong>leverage risks</strong> from $4.2B debt. However, refinancing extended maturities, and $3.4B cash provides runway to execute its AR-driven growth strategy.",
+      "Investors must weigh 2024's operational progress against SNAP's history of value destruction (-$8.6B retained earnings). The stock suits risk-tolerant investors betting on sustained ad momentum and AR monetization breakthroughs."
+    ],
+    "monitoringPointsTitle": "Critical Monitoring Points",
+    "monitoringPoints": [
+      "<strong>Cash Flow Conversion Ratio:</strong> Track if OCF growth stabilizes within ±15% of Net Income to confirm earnings quality.",
+      "<strong>International ARPU:</strong> Monitor RoW ARPU growth beyond $1.21 to validate global monetization efforts.",
+      "<strong>SBC-to-Revenue Ratio:</strong> Sustain SBC below 20% of revenue (2024: 25%) to improve GAAP profitability credibility."
+    ]
+  },
+  "chartData": {
+    "labels": ["2015","2016","2017","2018","2019","2020","2021","2022","2023","2024"],
+    "revenueGrowth": [0,5.895,1.04,43.093,45.329,46.113,64.247,11.775,0.093,16.397],
+    "arGrowth": [0,2.67,71.815,27.012,38.66,51.218,43.61,10.686,8.037,5.5],
+    "cfoGrowth": [0,-99.348,-20.192,6.09,55.798,45.027,2.747,-36.966,33.533,67.726],
+    "niGrowth": [0,-38.014,-5.694,63.545,17.696,8.593,48.356,-1.93,7.496,47.231]
+  }
+}
