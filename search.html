@@ -4,11 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ForensicFinancials | Search</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-77GZWBEMLF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-77GZWBEMLF');
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Global plaid background */
+        /* Global plaid background - UPDATED WITH WHITE AND GREY SHADES - TIGHTENED GRID */
         body {
             position: relative;
             background-color: var(--secondary) !important;
@@ -22,19 +31,42 @@
             right: 0;
             bottom: 0;
             background: 
+                /* Thin vertical lines with varying opacity */
+                linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                /* Thin horizontal lines with varying opacity */
+                linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(197, 164, 126, 0.05) 2px, transparent 2px),
-                linear-gradient(rgba(197, 164, 126, 0.05) 2px, transparent 2px);
+                /* Thick vertical lines with varying opacity and color */
+                linear-gradient(90deg, rgba(255, 255, 255, 0.09) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 2px, transparent 2px),
+                /* Thick horizontal lines with varying opacity and color */
+                linear-gradient(rgba(255, 255, 255, 0.09) 2px, transparent 2px),
+                linear-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
             background-size: 
-                30px 30px,
-                30px 30px,
-                120px 120px,
-                120px 120px;
+                30px 30px, /* Tightened spacing */
+                60px 60px, /* Tightened spacing */
+                30px 30px, /* Tightened spacing */
+                60px 60px, /* Tightened spacing */
+                120px 120px, /* Tightened spacing */
+                240px 240px, /* Tightened spacing */
+                120px 120px, /* Tightened spacing */
+                240px 240px; /* Tightened spacing */
+            /* Centered vertical lines */
+            background-position: 
+                calc(50% - 0px) 0, /* Center thin vertical lines */
+                calc(50% - 15px) 0, /* Offset second set of thin vertical lines */
+                0 0,
+                0 15px,
+                calc(50% - 0px) 0, /* Center thick vertical lines */
+                calc(50% - 60px) 0, /* Offset second set of thick vertical lines */
+                0 0,
+                0 60px;
             z-index: -2;
             pointer-events: none;
         }
         
+        /* Rest of the existing styles remain unchanged */
         body::after {
             content: "";
             position: fixed;
@@ -78,7 +110,7 @@
             align-items: center;
             justify-content: center;
             min-height: calc(100vh - 120px);
-            padding: 40px 20px;
+            padding: 60px 30px; /* Increased padding for more space */
             text-align: center;
             position: relative;
             z-index: 1;
@@ -89,7 +121,7 @@
             max-width: 600px;
             width: 100%;
             margin: 0 auto;
-            padding: 40px;
+            padding: 48px; /* Increased padding for more space */
             background-color: var(--card-bg);
             border-radius: 12px;
             box-shadow: var(--shadow-lg);
@@ -306,12 +338,11 @@
                 <h1 class="search-title">Forensic Financial Analysis</h1>
                 <p class="search-subtitle">Enter a stock ticker symbol to uncover accounting insights and financial health indicators</p>
                 <form class="search-form" action="analysis.html" method="GET">
-                    <input type="text" name="ticker" placeholder="Search by ticker (e.g., AAPL, MSFT, TSLA)" required aria-label="Stock ticker symbol">
+                    <input type="text" name="ticker" placeholder="Examples: AAPL, MSFT, TSLA  " required aria-label="Stock ticker symbol">
                     <button type="submit" aria-label="Analyze">
                         <i class="fas fa-search"></i> Analyze
                     </button>
                 </form>
-                <p class="search-examples">Examples: AAPL, MSFT, GOOGL, AMZN, TSLA, JNJ</p>
             </div>
         </section>
     </main>

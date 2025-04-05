@@ -4,42 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-dynamic="page-title">ForensicFinancials | Loading...</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-77GZWBEMLF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-77GZWBEMLF');
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.2.1/chartjs-plugin-annotation.min.js" integrity="sha512-eCD/MhL+Uvj+B89Am2/hMv0Q6dWJjkMv/7G2xMSuvTjYkXOP8zsF5Ec0TrX0V8alM5u0M59fzxBNLCSQ60L3qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Global plaid background */
-        body {
+        /* Hero section with plaid background - UPDATED WITH WHITE AND GREY SHADES - TIGHTENED GRID */
+        .hero {
             position: relative;
-            background-color: var(--secondary) !important;
+            background-color: transparent !important;
+            overflow: hidden;
+            padding-bottom: 80px; /* Extra space for gradient fade */
         }
-        
-        body::before {
+
+        .hero::before {
             content: "";
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
             background: 
+                /* Thin vertical lines with varying opacity */
+                linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                /* Thin horizontal lines with varying opacity */
+                linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(197, 164, 126, 0.05) 2px, transparent 2px),
-                linear-gradient(rgba(197, 164, 126, 0.05) 2px, transparent 2px);
+                /* Thick vertical lines with varying opacity and color */
+                linear-gradient(90deg, rgba(255, 255, 255, 0.09) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 2px, transparent 2px),
+                /* Thick horizontal lines with varying opacity and color */
+                linear-gradient(rgba(255, 255, 255, 0.09) 2px, transparent 2px),
+                linear-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
             background-size: 
-                30px 30px,
-                30px 30px,
-                120px 120px,
-                120px 120px;
+                30px 30px, /* Tightened spacing */
+                60px 60px, /* Tightened spacing */
+                30px 30px, /* Tightened spacing */
+                60px 60px, /* Tightened spacing */
+                120px 120px, /* Tightened spacing */
+                240px 240px, /* Tightened spacing */
+                120px 120px, /* Tightened spacing */
+                240px 240px; /* Tightened spacing */
+            /* Centered vertical lines */
+            background-position: 
+                calc(50% - 0px) 0, /* Center thin vertical lines */
+                calc(50% - 15px) 0, /* Offset second set of thin vertical lines */
+                0 0,
+                0 15px,
+                calc(50% - 0px) 0, /* Center thick vertical lines */
+                calc(50% - 60px) 0, /* Offset second set of thick vertical lines */
+                0 0,
+                0 60px;
             z-index: -2;
             pointer-events: none;
         }
-        
-        body::after {
+
+        .hero::after {
             content: "";
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             right: 0;
@@ -54,8 +87,41 @@
             z-index: -1;
             pointer-events: none;
         }
-        
-        /* Z-index management */
+
+        /* Smooth transition to next section */
+        #trends {
+            position: relative;
+            margin-top: -60px; /* Pull up to overlap with hero */
+            padding-top: 100px; /* Compensate for the overlap */
+            background-color: var(--secondary);
+        }
+
+        #trends::before {
+            content: "";
+            position: absolute;
+            top: -60px;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to bottom, 
+                rgba(28, 37, 65, 0) 0%, 
+                var(--secondary) 100%);
+            z-index: 0;
+        }
+
+        /* Ensure hero content stays above the background */
+        .hero .container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 42vh;
+            transform: translateY(-11%); /* TEXT ALIGNMENT */
+        }
+
+        /* Z-index management for other elements */
         #header {
             position: relative;
             z-index: 10;
@@ -69,46 +135,12 @@
         .back-to-top {
             z-index: 20;
         }
-        
-        /* Section styling */
-        .hero, .section, .conclusion {
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Override background colors */
-        .hero {
-            background-color: transparent !important;
-        }
-        
-        /* Fix for the loading message area */
-        #loading-error-message {
-            position: relative;
-            z-index: 5;
-        }
-        
-        /* Fix for chart containers */
-        .chart-container {
-            position: relative;
-            z-index: 2;
-        }
-        
-        /* Fix footer margin */
-        footer {
-            margin-top: 0 !important;
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Ensure proper spacing for sections */
+
+        /* Section styling for consistency */
         .section {
-            padding: 60px 0;
-        }
-        
-        /* Fix for the verdict container */
-        .verdict-container {
             position: relative;
-            z-index: 2;
+            background-color: var(--secondary);
+            padding: 100px 0; /* Increased padding for more space */
         }
     </style>
 </head>
@@ -155,14 +187,7 @@
                     <p data-dynamic="trends-subtitle">Loading...</p>
                 </div>
 
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h3>Revenue Growth Trend (Annual)</h3>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="revenueChart"></canvas>
-                    </div>
-                </div>
+                <div id="revenueChart"></div>
 
                 <div class="cards" id="trends-cards-container">
                     <p>Loading trend cards...</p>
@@ -177,23 +202,9 @@
                     <p data-dynamic="financials-subtitle">Loading...</p>
                 </div>
 
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h3>Revenue vs. Accounts Receivable Growth (Annual)</h3>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="arChart"></canvas>
-                    </div>
-                </div>
+                <div id="arChart"></div>
 
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h3>Operating Cash Flow vs. Net Income Growth (Annual)</h3>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="cashFlowChart"></canvas>
-                    </div>
-                </div>
+                <div id="cashFlowChart"></div>
 
                 <div class="cards" id="financials-cards-container">
                      <p>Loading financial cards...</p>
@@ -275,6 +286,8 @@
         </div>
     </footer>
 
-    <script src="script.js" defer></script>
+    <script src="components.js"></script>
+    <script src="controllers.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
