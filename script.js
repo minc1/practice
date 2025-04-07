@@ -284,6 +284,7 @@ if (isAnalysisPage) {
             showMessage('<i class="fas fa-exclamation-triangle"></i> Chart library failed to load. Please refresh.', 'error');
             return;
         }
+        let ChartAnnotation;
         if (typeof ChartAnnotation === 'undefined') {
             console.warn('Chartjs-plugin-annotation not loaded. Annotations will not be displayed.');
         }
@@ -407,7 +408,9 @@ if (isAnalysisPage) {
 
                 if (!response.ok) {
                     if (response.status === 404) {
-                        throw new Error(`Analysis data not found for ticker "${ticker}". Please check the symbol or try another.`);
+                        // Redirect to the error page for unsupported ticker
+                        window.location.href = `error-loading.html?ticker=${ticker}`;
+                        return;
                     } else {
                         throw new Error(`HTTP error! status: ${response.status} - Could not fetch data for ${ticker}.`);
                     }
@@ -584,18 +587,8 @@ if (isAnalysisPage) {
 
             } catch (error) {
                 console.error("Error loading analysis data:", error);
-                showMessage(`<i class="fas fa-exclamation-triangle"></i> ${error.message}`, 'error');
-                currentTicker = null;
-                // Clear dynamic fields on error
-                populateElement('[data-dynamic="page-title"]', 'ForensicFinancials | Error');
-                populateElement('[data-dynamic="hero-title"]', 'Error Loading Analysis', 'innerHTML');
-                populateElement('[data-dynamic="hero-subtitle"]', 'Could not load data.');
-                // Clear other dynamic areas if needed
-                select('#trends-cards-container', true).forEach(el => el.innerHTML = '');
-                select('#financials-cards-container', true).forEach(el => el.innerHTML = '');
-                select('#opportunities-table-body', true).forEach(el => el.innerHTML = '<tr><td colspan="3">Error loading data.</td></tr>');
-                select('#verdict-paragraphs', true).forEach(el => el.innerHTML = '');
-                select('#monitoring-points-list', true).forEach(el => el.innerHTML = '');
+                // Redirect to error page for any other errors
+                window.location.href = `error-loading.html?ticker=${ticker}`;
             } finally {
                  if (searchButton) searchButton.disabled = false; // Re-enable search button
             }
