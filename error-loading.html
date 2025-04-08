@@ -15,139 +15,20 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css"> {/* Link the main stylesheet */}
-    <style>
-        /* Minimal inline styles if absolutely needed, prefer style.css */
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-             position: relative; /* Needed for pseudo elements */
-             /* Background handled by global style.css now */
-        }
-
-        main {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 80px 15px 40px; /* Adjust padding top accounting for fixed header */
-            position: relative;
-            z-index: 1;
-        }
-
-        .error-container {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: var(--shadow-lg);
-            padding: 40px;
-            max-width: 600px;
-            width: 100%; /* Use 100% width up to max-width */
-            text-align: center;
-            margin: 0 auto; /* Center horizontally */
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .error-icon {
-            font-size: 3.5rem;
-            color: var(--primary);
-            margin-bottom: 24px;
-            display: inline-block;
-        }
-
-        .error-title {
-            font-size: 1.8rem;
-            color: var(--dark);
-            margin-bottom: 16px;
-            font-weight: 600;
-        }
-
-        .error-message {
-            color: var(--text);
-            margin-bottom: 32px;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        .error-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            align-items: center;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 28px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
-            border: none;
-            cursor: pointer;
-            min-height: 44px; /* Ensure good tap target */
-            text-align: center; /* Ensure text is centered */
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: var(--dark);
-        }
-
-        .btn-secondary {
-            background-color: rgba(28, 37, 65, 0.1);
-            color: var(--dark);
-            border: 1px solid rgba(28, 37, 65, 0.2);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-primary:hover {
-            background-color: #d4b483;
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(28, 37, 65, 0.15);
-        }
-
-        .btn i {
-            margin-right: 8px;
-        }
-
-        @media (min-width: 768px) {
-            .error-actions {
-                flex-direction: row;
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .error-container {
-                padding: 30px 20px;
-            }
-            .error-title { font-size: 1.5rem; }
-            .error-message { font-size: 0.95rem; }
-            .btn { width: 100%; padding: 14px 20px; }
-        }
-    </style>
+    <!-- Link style.css directly -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Removed inline styles as they should be in style.css -->
 </head>
 <body>
     <header id="header">
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
+                 <!-- ADDED Search Toggle Button -->
                 <button class="search-toggle" aria-label="Toggle search" aria-expanded="false">
                     <i class="fas fa-search"></i>
                 </button>
+                <!-- Existing Search Form -->
                 <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
                     <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
                     <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
@@ -170,15 +51,16 @@
             <i class="fas fa-chart-line error-icon"></i>
             <h1 class="error-title">Ticker Currently Unsupported</h1>
             <p class="error-message">
-                We sincerely apologize for the inconvenience. The ticker symbol you entered is either invalid or not yet supported in our database.
-                We're continuously expanding our coverage. You can try searching for another major US equity or request this ticker below.
+                We sincerely apologize for the inconvenience.
+                Please be patient with us as we're continuously expanding our coverage to include more companies.
+                You can request this ticker to be added to our database by clicking the button below.
             </p>
             <div class="error-actions">
                 <a href="https://x.com/ForensicFin" target="_blank" class="btn btn-primary">
-                    <i class="fab fa-x-twitter"></i> Request Ticker
+                    <i class="fab fa-x-twitter"></i> Request a Ticker
                 </a>
-                <a href="search.html" class="btn btn-secondary"> {/* Link to search page */}
-                    <i class="fas fa-search"></i> Try Another Search
+                <a href="index.html" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Return Home
                 </a>
             </div>
         </div>
@@ -201,9 +83,53 @@
         </div>
     </footer>
 
-    {/* Removed inline script - Rely on external scripts */}
-    {/* Include script.js if menu toggle/scroll effects are desired here */}
-    <script src="script.js" defer></script>
-    <script src="search-toggle.js" defer></script>
+    <script>
+        // Mobile menu toggle functionality (Keep this specific script for error page if needed, or rely on script.js if it's included)
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            const mobileMenuIcon = document.querySelector('.mobile-menu i');
+
+            if (mobileMenuButton && navLinks && mobileMenuIcon) {
+                mobileMenuButton.addEventListener('click', function() {
+                    navLinks.classList.toggle('show');
+                    mobileMenuIcon.classList.toggle('fa-bars');
+                    mobileMenuIcon.classList.toggle('fa-times');
+                    mobileMenuButton.setAttribute('aria-expanded', navLinks.classList.contains('show'));
+                    const headerHeight = document.querySelector('#header')?.offsetHeight || 61;
+                    navLinks.style.top = `${headerHeight}px`;
+                });
+
+                // Close mobile menu when a link is clicked
+                const navLinksItems = document.querySelectorAll('.nav-links a');
+                navLinksItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        if (navLinks.classList.contains('show')) {
+                            navLinks.classList.remove('show');
+                            mobileMenuIcon.classList.remove('fa-times');
+                            mobileMenuIcon.classList.add('fa-bars');
+                            mobileMenuButton.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                });
+            }
+
+            // Header scroll effect
+            const header = document.querySelector('#header');
+            if (header) {
+                const headerScrolled = () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                };
+                window.addEventListener('load', headerScrolled);
+                window.addEventListener('scroll', headerScrolled);
+            }
+        });
+    </script>
+    <!-- ADDED search-toggle.js -->
+    <script src="search-toggle.js"></script>
 </body>
 </html>
