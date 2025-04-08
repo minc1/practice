@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-dynamic="page-title">ForensicFinancials | Loading...</title>
+    <title>ForensicFinancials | Financial Analysis Platform</title>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-77GZWBEMLF"></script>
     <script>
@@ -15,21 +15,17 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.2.1/chartjs-plugin-annotation.min.js" integrity="sha512-eCD/MhL+Uvj+B89Am2/hMv0Q6dWJjkMv/7G2xMSuvTjYkXOP8zsF5Ec0TrX0V8alM5u0M59fzxBNLCSQ60L3qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Hero section with plaid background - UPDATED WITH WHITE AND GREY SHADES - TIGHTENED GRID */
-        .hero {
+        /* Global plaid background - UPDATED WITH WHITE AND GREY SHADES - TIGHTENED GRID */
+        body {
             position: relative;
-            background-color: transparent !important;
-            overflow: hidden;
-            padding-bottom: 80px; /* Extra space for gradient fade */
+            background-color: var(--secondary) !important;
         }
 
-        .hero::before {
+        body::before {
             content: "";
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
@@ -70,9 +66,10 @@
             pointer-events: none;
         }
 
-        .hero::after {
+        /* Rest of the existing styles remain unchanged */
+        body::after {
             content: "";
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
@@ -88,40 +85,7 @@
             pointer-events: none;
         }
 
-        /* Smooth transition to next section */
-        #trends {
-            position: relative;
-            margin-top: -60px; /* Pull up to overlap with hero */
-            padding-top: 100px; /* Compensate for the overlap */
-            background-color: var(--secondary);
-        }
-
-        #trends::before {
-            content: "";
-            position: absolute;
-            top: -60px;
-            left: 0;
-            right: 0;
-            height: 60px;
-            background: linear-gradient(to bottom,
-                rgba(28, 37, 65, 0) 0%,
-                var(--secondary) 100%);
-            z-index: 0;
-        }
-
-        /* Ensure hero content stays above the background */
-        .hero .container {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 42vh;
-            transform: translateY(-11%); /* TEXT ALIGNMENT */
-        }
-
-        /* Z-index management for other elements */
+        /* Z-index management */
         #header {
             position: relative;
             z-index: 10;
@@ -136,60 +100,27 @@
             z-index: 20;
         }
 
-        /* Section styling for consistency */
-        .section {
+        /* Section styling */
+        .hero, .section, .cta-section {
             position: relative;
-            background-color: var(--secondary);
+            z-index: 1;
+        }
+
+        /* Override background colors */
+        .hero {
+            background-color: transparent !important;
+        }
+
+        .cta-section {
+            background-color: transparent !important;
             padding: 100px 0; /* Increased padding for more space */
         }
 
-        /* Mobile-specific improvements */
-        @media (max-width: 768px) {
-            .chart-wrapper {
-                height: 250px; /* Smaller height on mobile */
-                margin: 0 -10px; /* Negative margin to allow chart to breathe */
-            }
-
-            .chart-header h3 {
-                font-size: 0.9rem; /* Smaller font size on mobile */
-            }
-
-            .section-title h2 {
-                font-size: 1.5rem; /* Smaller heading on mobile */
-            }
-
-            .verdict-container {
-                padding: 20px; /* Less padding on mobile */
-            }
-
-            .hero h1 {
-                font-size: 1.6rem; /* Smaller hero title on mobile */
-                padding: 0 10px;
-            }
-
-            /* Improved tap targets */
-            .nav-links a,
-            .footer-links a {
-                padding: 12px 8px; /* Larger tap target */
-                display: inline-block;
-            }
-
-            /* Better spacing for mobile */
-            .section {
-                padding: 60px 0;
-            }
-        }
-
-        /* Improved table responsiveness */
-        @media screen and (max-width: 767px) {
-            table td::before {
-                width: 40%; /* Slightly narrower label column */
-                font-size: 0.8rem; /* Smaller label text */
-            }
-
-            table td {
-                min-height: 44px; /* Ensure minimum tap target size */
-            }
+        /* Fix footer margin */
+        footer {
+            margin-top: 0 !important;
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
@@ -198,143 +129,217 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
-                 <!-- ADDED Search Toggle Button -->
-                <button class="search-toggle" aria-label="Toggle search" aria-expanded="false">
+                <button class="search-toggle" aria-label="Toggle search">
                     <i class="fas fa-search"></i>
                 </button>
-                <!-- Existing Search Form (Note: ID changed slightly in original script.js, using that ID here) -->
-                <form class="InputContainer" id="tickerSearchForm">
-                    <input type="text" class="input" id="tickerInput" placeholder="Enter Ticker (e.g., JD)" aria-label="Enter Ticker Symbol" required>
+                <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
+                    <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g. AAPL)" aria-label="Enter Ticker Symbol" required>
                     <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
                 </form>
                 <ul class="nav-links">
-                    <li><a href="#trends">Trend Analysis</a></li>
-                    <li><a href="#financials">Financial Metrics</a></li>
-                    <li><a href="#opportunities">Investment Considerations</a></li>
-                    <li><a href="#conclusion">Conclusion</a></li>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#methodology">Methodology</a></li>
+                    <li><a href="#about">About</a></li>
                 </ul>
-                <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+                <button class="mobile-menu" aria-label="Toggle menu">
                     <i class="fas fa-bars"></i>
                 </button>
             </nav>
         </div>
     </header>
 
-    <div id="loading-error-message" class="message-area" style="display: none;">
-        <p></p>
-    </div>
-
-    <main id="main-content">
-        <section class="hero">
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
             <div class="container">
-                <h1 data-dynamic="hero-title">Loading...<br>Loading...</h1>
-                <p data-dynamic="hero-subtitle">Loading analysis details...</p>
+                <h1>Forensic Financial Statement Analysis</h1>
+                <p>Detect accounting anomalies and assess financial health with professional-grade analysis tools</p>
                 <div class="hero-separator"></div>
-                <a href="#trends" class="cta-button">Explore Analysis <i class="fas fa-arrow-down"></i></a>
-            </div>
-        </section>
-
-        <section class="section" id="trends">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Temporal Pattern Analysis</h2>
-                    <p data-dynamic="trends-subtitle">Loading...</p>
-                </div>
-
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h3>Revenue Growth Trend (Annual)</h3>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="revenueChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="cards" id="trends-cards-container">
-                    <p>Loading trend cards...</p>
+                <div class="hero-cta">
+                    <a href="search.html" class="cta-button">
+                        Start Analysis <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#features" class="cta-button secondary">
+                        Learn More <i class="fas fa-chevron-down"></i>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section class="section" id="financials">
+        <!-- Features Section -->
+        <section class="section" id="features">
             <div class="container">
                 <div class="section-title">
-                    <h2>Financial Metrics & Anomalies</h2>
-                    <p data-dynamic="financials-subtitle">Loading...</p>
+                    <h2>Enterprise-Grade Financial Insights</h2>
+                    <p>Advanced analytics to detect risks, uncover opportunities, and drive smarter decisions</p>
                 </div>
+                <div class="cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-chart-line"></i> Revenue Intelligence</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <!-- Revised Points: Shortened -->
+                                <li>
+                                    <strong>Isolate core drivers</strong> of growth momentum.
+                                    Pinpoint factors accelerating or slowing top-line performance.
+                                </li>
+                                <li>
+                                    <strong>Validate market position</strong>.
+                                    Assess competitive standing and relative strengths or weaknesses.
+                                </li>
+                                <li>
+                                    <strong>Correlate cyclical trends</strong> within historical data.
+                                    Map the duration and amplitude of prior revenue fluctuations.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
 
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h3>Revenue vs. Accounts Receivable Growth (Annual)</h3>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-balance-scale"></i> Cash Flow Diagnostics</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <!-- Revised Points: Shortened -->
+                                <li>
+                                    <strong>Quantify cash flow anomalies</strong>.
+                                    Reveal critical issues fundamentally impacting reporting or operational efficiency.
+                                </li>
+                                <li>
+                                    <strong>Measure cash sustainability</strong>.
+                                    Assess fundamental business ability to reliably fund operations and shareholder returns.
+                                </li>
+                                <li>
+                                    <strong>Evaluate cycle liquidity efficiency</strong>.
+                                    Monitor working capital closely for improved operational stability.
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="chart-wrapper">
-                        <canvas id="arChart"></canvas>
-                    </div>
-                </div>
 
-                <div class="chart-container">
-                    <div class="chart-header">
-                        <h3>Operating Cash Flow vs. Net Income Growth (Annual)</h3>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-search"></i> Divergence Detection</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <!-- Revised Points: Shortened -->
+                                <li>
+                                    <strong>Spot revenue recognition</strong> risks early.
+                                    Analyze discrepancies between reported sales and actual cash inflows.
+                                </li>
+                                <li>
+                                    <strong>Flag inventory mismatches</strong>.
+                                    Proactively compare inventory turnover against COGS and margin stability.
+                                </li>
+                                <li>
+                                    <strong>Detect earnings manipulation</strong>.
+                                    Use proprietary scoring system based on accrual and expense anomalies.
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="chart-wrapper">
-                        <canvas id="cashFlowChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="cards" id="financials-cards-container">
-                     <p>Loading financial cards...</p>
                 </div>
             </div>
         </section>
 
-        <section class="section" id="opportunities">
+        <!-- Updated Methodology Section -->
+        <section class="section dark-bg" id="methodology">
             <div class="container">
                 <div class="section-title">
-                    <h2>Investment Considerations</h2>
-                    <p data-dynamic="opportunities-subtitle">Loading...</p>
+                    <h2>Analysis Methodology</h2>
+                    <p>
+                        Based on established forensic accounting principles. All data is obtained from third-party sources and may contain inaccuracies.
+                    </p>
                 </div>
 
-                <div class="insight-list">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Factor</th>
-                                <th>Opportunities</th>
-                                <th>Risks</th>
-                            </tr>
-                        </thead>
-                        <tbody id="opportunities-table-body">
-                            <tr><td colspan="3">Loading table data...</td></tr>
-                        </tbody>
-                    </table>
+                <div class="methodology-steps">
+                    <!-- Step 1: Data Collection -->
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Data Collection</h3>
+                            <p>
+                                We gather multi-year financial statements from SEC Filings, the EDGAR Database,
+                                Yahoo Finance, Google Finance, Alpha Vantage, and Financial Modeling Prep.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Trend Analysis -->
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Trend Analysis</h3>
+                            <p>
+                                We examine growth trajectories, seasonality, and predictability to
+                                highlight long-term patterns. These insights are essential for analysts seeking clarity in strategic planning.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Anomaly Detection -->
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Anomaly Detection</h3>
+                            <p>
+                                By applying specialized forensic accounting techniques, we identify unusual
+                                variances or potential red flags, ensuring corporate integrity and stakeholder confidence.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="section conclusion" id="conclusion">
+        <!-- About Section -->
+        <section class="section" id="about">
             <div class="container">
                 <div class="section-title">
-                    <h2>Final Verdict & Key Takeaways</h2>
-                    <p data-dynamic="conclusion-subtitle">Loading...</p>
+                    <h2>About Us</h2>
                 </div>
-
-                <div class="verdict-container">
-                    <div class="verdict-header">
-                        <h3 data-dynamic="verdict-title">Loading Verdict...</h3>
-                        <span class="verdict-rating" data-dynamic="verdict-rating">Loading...</span>
-                    </div>
-
-                    <div id="verdict-paragraphs">
-                        <p>Loading conclusion...</p>
-                    </div>
-
-                    <div class="monitoring-points">
-                        <h4 data-dynamic="monitoring-title">Loading...</h4>
-                        <ul id="monitoring-points-list">
-                            <li>Loading...</li>
-                        </ul>
-                    </div>
+                <div class="about-content">
+                    <p>
+                        At ForensicFinancials, our mission is to empower both institutional and retail investors
+                        to make informed decisions. We leverage advanced forensic accounting methodologies and
+                        cutting-edge data visualization tools to uncover hidden insights and detect potential
+                        financial anomalies.
+                    </p>
+                    <p><br></p>
+                    <p>
+                        Built on a foundation of transparency, integrity, and rigorous analysis, our platform delivers
+                        professional-grade insights that simplify the complex financial landscape. Whether you're
+                        evaluating growth trends, comparing financial metrics, or assessing risk factors, our goal is
+                        to provide you with the reliable information needed to navigate today's markets confidently.
+                    </p>
+                    <p><br></p>
+                    <p>
+                        Please let us know if you have any questions or concerns, and we hope you have a wonderful day.
+                    </p>
+                    <p><br></p>
+                    <p class="signature">
+                        <em>- The ForensicFinancials Team</em>
+                    </p>
                 </div>
+            </div>
+        </section>
+
+        <!-- Call-to-Action Section -->
+        <section class="section cta-section">
+            <div class="container">
+                <h2>Review Company's Financial Health</h2>
+                <form class="search-form" action="analysis.html" method="GET">
+                    <input type="text" name="ticker" placeholder="Enter ticker (e.g., AAPL)" required
+                           aria-label="Stock ticker symbol">
+                    <button type="submit" aria-label="Analyze">
+                        <i class="fas fa-arrow-right"></i> Analyze
+                    </button>
+                </form>
             </div>
         </section>
     </main>
@@ -348,11 +353,10 @@
             <div class="footer-content">
                 <div class="footer-logo">Forensic<span>Financials</span> by Cho</div>
                 <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#trends">Trend Analysis</a></li>
-                    <li><a href="#financials">Financial Metrics</a></li>
-                    <li><a href="#opportunities">Investment Considerations</a></li>
-                    <li><a href="#conclusion">Conclusion</a></li>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#methodology">Methodology</a></li>
+                    <li><a href="#about">About</a></li>
                 </ul>
             </div>
             <div class="copyright">
@@ -361,8 +365,7 @@
         </div>
     </footer>
 
-    <script src="script.js" defer></script>
-    <!-- ADDED search-toggle.js -->
+    <script src="script.js"></script>
     <script src="search-toggle.js"></script>
 </body>
 </html>

@@ -1,57 +1,54 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const searchToggleButton = document.querySelector('.search-toggle');
-  const searchInputContainer = document.querySelector('#header nav .InputContainer'); // More specific selector
-  const mobileMenuButton = document.querySelector('.mobile-menu'); // To potentially close search when menu opens
-  const navLinks = document.querySelector('.nav-links'); // To potentially close search when menu opens
+// Search toggle functionality for mobile devices
+document.addEventListener("DOMContentLoaded", () => {
+  const searchToggle = document.querySelector(".search-toggle")
+  const inputContainer = document.querySelector(".InputContainer")
 
-  if (searchToggleButton && searchInputContainer) {
-      searchToggleButton.addEventListener('click', (e) => {
-          e.stopPropagation(); // Prevent click from bubbling up to document listener immediately
-          const isShown = searchInputContainer.classList.toggle('show');
-          searchToggleButton.setAttribute('aria-expanded', isShown);
+  if (searchToggle && inputContainer) {
+    // Set initial state based on screen size
+    const updateSearchVisibility = () => {
+      if (window.innerWidth <= 768) {
+        inputContainer.classList.remove("show")
+      } else {
+        // On desktop, always show the search bar
+        inputContainer.classList.remove("show")
+        inputContainer.style.display = "flex"
+      }
+    }
 
-          // Optional: Close mobile menu if it's open when search is toggled
-          if (isShown && navLinks && navLinks.classList.contains('show')) {
-               navLinks.classList.remove('show');
-               const mobileMenuIcon = mobileMenuButton?.querySelector('i');
-               if (mobileMenuIcon) {
-                  mobileMenuIcon.classList.remove('fa-times');
-                  mobileMenuIcon.classList.add('fa-bars');
-               }
-               if (mobileMenuButton) {
-                  mobileMenuButton.setAttribute('aria-expanded', 'false');
-               }
-          }
-      });
+    // Initial check
+    updateSearchVisibility()
 
-      // Close search if clicking outside the header nav area on mobile
-      document.addEventListener('click', (e) => {
-          const headerNav = document.querySelector('#header nav');
-          if (window.innerWidth <= 768 && searchInputContainer.classList.contains('show')) {
-              if (headerNav && !headerNav.contains(e.target)) {
-                  searchInputContainer.classList.remove('show');
-                  searchToggleButton.setAttribute('aria-expanded', 'false');
-              }
-          }
-      });
+    // Toggle search on click
+    searchToggle.addEventListener("click", () => {
+      if (window.innerWidth <= 768) {
+        inputContainer.classList.toggle("show")
 
-       // Prevent clicks inside the search container from closing it
-       searchInputContainer.addEventListener('click', (e) => {
-          e.stopPropagation();
-       });
+        // Add animation class if showing
+        if (inputContainer.classList.contains("show")) {
+          // Focus the input after animation starts
+          setTimeout(() => {
+            const searchInput = inputContainer.querySelector("input")
+            if (searchInput) searchInput.focus()
+          }, 100)
+        }
+      }
+    })
 
-  } else {
-      if (!searchToggleButton) console.error("Search toggle button not found.");
-      if (!searchInputContainer) console.error("Search input container not found in header nav.");
+    // Update on resize
+    window.addEventListener("resize", () => {
+      updateSearchVisibility()
+    })
+
+    // Close search when clicking outside
+    document.addEventListener("click", (e) => {
+      if (
+        window.innerWidth <= 768 &&
+        !searchToggle.contains(e.target) &&
+        !inputContainer.contains(e.target) &&
+        inputContainer.classList.contains("show")
+      ) {
+        inputContainer.classList.remove("show")
+      }
+    })
   }
-
-  // Optional: Close search bar if mobile menu is opened
-  if (mobileMenuButton && searchInputContainer && searchToggleButton) {
-      mobileMenuButton.addEventListener('click', () => {
-          if (searchInputContainer.classList.contains('show')) {
-              searchInputContainer.classList.remove('show');
-              searchToggleButton.setAttribute('aria-expanded', 'false');
-          }
-      });
-  }
-});
+})

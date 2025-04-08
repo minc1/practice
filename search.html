@@ -327,11 +327,9 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
-                 <!-- ADDED Search Toggle Button -->
-                <button class="search-toggle" aria-label="Toggle search" aria-expanded="false">
+                <button class="search-toggle" aria-label="Toggle search">
                     <i class="fas fa-search"></i>
                 </button>
-                <!-- Existing Search Form -->
                 <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
                     <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
                     <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
@@ -383,16 +381,12 @@
 
     <script src="script.js"></script>
     <script>
-        // This script block remains specific to search.html if needed,
-        // but the general search toggle logic is now in search-toggle.js
         const headerSearchFormOnSearchPage = document.querySelector('#headerTickerSearchForm');
         if (headerSearchFormOnSearchPage) {
             headerSearchFormOnSearchPage.addEventListener('submit', function(e) {
-                // Specific logic for this form on this page, if any
             });
         }
     </script>
-    <!-- ADDED search-toggle.js -->
     <script src="search-toggle.js"></script>
 </body>
 </html>
