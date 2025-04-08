@@ -170,7 +170,7 @@ nav {
 @media (max-width: 768px) {
   .search-toggle {
     display: block;
-    order: 2;
+    order: 1;
   }
 
   .InputContainer {
@@ -205,6 +205,21 @@ nav {
 
   .InputContainer button {
     border-radius: 0;
+  }
+
+  /* Remove gold highlight border for search bars on mobile */
+  .InputContainer:focus-within {
+    box-shadow: none;
+    border-color: var(--border-color);
+  }
+
+  .search-hero .search-form:focus-within {
+    box-shadow: none;
+    border-color: var(--border-color);
+  }
+
+  .mobile-menu {
+    order: 2;
   }
 }
 
