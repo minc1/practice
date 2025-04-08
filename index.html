@@ -17,108 +17,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Global plaid background - UPDATED WITH WHITE AND GREY SHADES - TIGHTENED GRID */
-        body {
-            position: relative;
-            background-color: var(--secondary) !important;
-        }
-        
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                /* Thin vertical lines with varying opacity */
-                linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                /* Thin horizontal lines with varying opacity */
-                linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                /* Thick vertical lines with varying opacity and color */
-                linear-gradient(90deg, rgba(255, 255, 255, 0.09) 2px, transparent 2px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 2px, transparent 2px),
-                /* Thick horizontal lines with varying opacity and color */
-                linear-gradient(rgba(255, 255, 255, 0.09) 2px, transparent 2px),
-                linear-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
-            background-size: 
-                30px 30px, /* Tightened spacing */
-                60px 60px, /* Tightened spacing */
-                30px 30px, /* Tightened spacing */
-                60px 60px, /* Tightened spacing */
-                120px 120px, /* Tightened spacing */
-                240px 240px, /* Tightened spacing */
-                120px 120px, /* Tightened spacing */
-                240px 240px; /* Tightened spacing */
-            /* Centered vertical lines */
-            background-position: 
-                calc(50% - 0px) 0, /* Center thin vertical lines */
-                calc(50% - 15px) 0, /* Offset second set of thin vertical lines */
-                0 0,
-                0 15px,
-                calc(50% - 0px) 0, /* Center thick vertical lines */
-                calc(50% - 60px) 0, /* Offset second set of thick vertical lines */
-                0 0,
-                0 60px;
-            z-index: -2;
-            pointer-events: none;
-        }
-        
-        /* Rest of the existing styles remain unchanged */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(
-                circle at center,
-                rgba(28, 37, 65, 0.2) 0%,
-                rgba(28, 37, 65, 0.6) 30%,
-                rgba(28, 37, 65, 0.8) 60%,
-                var(--secondary) 100%
-            );
-            z-index: -1;
-            pointer-events: none;
-        }
-        
+        /* REMOVED inline body background styles - now handled globally in style.css */
         /* Z-index management */
         #header {
-            position: relative;
+            position: relative; /* Use relative for z-index context if needed */
             z-index: 10;
         }
-        
+
         main {
             position: relative;
             z-index: 1;
         }
-        
+
         .back-to-top {
             z-index: 20;
         }
-        
+
         /* Section styling */
         .hero, .section, .cta-section {
             position: relative;
             z-index: 1;
+            background-color: transparent !important; /* Override default section bg */
         }
-        
-        /* Override background colors */
-        .hero {
-            background-color: transparent !important;
-        }
-        
-        .cta-section {
-            background-color: transparent !important;
-            padding: 100px 0; /* Increased padding for more space */
-        }
-        
+
         /* Fix footer margin */
         footer {
-            margin-top: 0 !important;
+            margin-top: 0 !important; /* Override default section spacing */
             position: relative;
             z-index: 1;
         }
@@ -129,6 +53,9 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
+                <button class="search-toggle" aria-label="Toggle search" aria-expanded="false">
+                    <i class="fas fa-search"></i>
+                </button>
                 <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
                     <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g. AAPL)" aria-label="Enter Ticker Symbol" required>
                     <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
@@ -139,7 +66,7 @@
                     <li><a href="#methodology">Methodology</a></li>
                     <li><a href="#about">About</a></li>
                 </ul>
-                <button class="mobile-menu" aria-label="Toggle menu">
+                <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
                     <i class="fas fa-bars"></i>
                 </button>
             </nav>
@@ -261,7 +188,7 @@
                         <div class="step-content">
                             <h3>Data Collection</h3>
                             <p>
-                                We gather multi-year financial statements from SEC Filings, the EDGAR Database, 
+                                We gather multi-year financial statements from SEC Filings, the EDGAR Database,
                                 Yahoo Finance, Google Finance, Alpha Vantage, and Financial Modeling Prep.
                             </p>
                         </div>
@@ -300,7 +227,7 @@
                 <div class="section-title">
                     <h2>About Us</h2>
                 </div>
-                <div class="about-content">
+                <div class="about-content" style="max-width: 750px; margin: 0 auto; text-align: center; color: var(--light); opacity: 0.9;">
                     <p>
                         At ForensicFinancials, our mission is to empower both institutional and retail investors
                         to make informed decisions. We leverage advanced forensic accounting methodologies and
@@ -362,6 +289,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
+    <script src="search-toggle.js" defer></script> {/* Added search toggle script */}
 </body>
 </html>

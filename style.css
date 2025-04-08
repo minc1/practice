@@ -11,18 +11,18 @@
     --card-bg: #ffffff;
     --header-footer-bg: #ffffff;
     --body-bg: #1c2541;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-    --shadow-md: 0 4px 8px rgba(0,0,0,0.1);
-    --shadow-lg: 0 10px 20px rgba(0,0,0,0.1);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    --border-color: rgba(0,0,0,0.08);
+    --border-color: rgba(0, 0, 0, 0.08);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 html {
@@ -44,9 +44,10 @@ body {
     padding: 0 24px; /* Increased padding for more space */
 }
 
+/* --- Header --- */
 header {
     background-color: var(--header-footer-bg);
-    position: fixed;
+    position: fixed; /* Changed from sticky for easier absolute positioning of search */
     width: 100%;
     z-index: 100;
     box-shadow: var(--shadow-sm);
@@ -59,15 +60,17 @@ header.scrolled {
     box-shadow: var(--shadow-md);
 }
 
+/* --- Navigation & Search --- */
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 24px; /* Increased padding for more space */
-    gap: 24px; /* Increased gap for more space */
+    padding: 0 24px; /* Consistent padding */
+    gap: 16px; /* Slightly reduced gap */
     flex-wrap: wrap;
+    position: relative; /* Needed for absolute positioning of search bar */
 }
 
 .logo {
@@ -87,6 +90,7 @@ nav {
 }
 
 .InputContainer {
+    /* Default styles (desktop) */
     display: flex;
     align-items: center;
     height: 40px;
@@ -100,9 +104,10 @@ nav {
     overflow: hidden;
     box-shadow: var(--shadow-sm);
     transition: box-shadow 0.3s;
-    order: 2;
-    margin-top: 8px;
+    order: 1; /* Position after logo on desktop */
+    margin: 0; /* Reset margin for flex layout */
 }
+
 
 .InputContainer:focus-within {
     box-shadow: 0 0 0 2px rgba(197, 164, 126, 0.5);
@@ -124,8 +129,8 @@ nav {
 }
 
 .InputContainer .input::placeholder {
-     color: var(--muted);
-     font-style: italic;
+    color: var(--muted);
+    font-style: italic;
 }
 
 .InputContainer button {
@@ -141,6 +146,7 @@ nav {
     font-size: 0.9rem;
     cursor: pointer;
     transition: background-color 0.3s;
+    min-height: 40px; /* Ensure good tap target */
 }
 
 .InputContainer button:hover {
@@ -153,48 +159,47 @@ nav {
     color: var(--light);
 }
 
-.search-form {
-    display: flex;
-    max-width: 500px;
-    margin: 32px auto 0;
-    height: 50px;
-    border-radius: 25px;
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-}
-
-.search-form input {
-    flex-grow: 1;
+/* Mobile search icon */
+.search-toggle {
+    display: none; /* Hidden by default */
+    background: none;
     border: none;
-    padding: 0 20px;
-    font-size: 1rem;
-    outline: none;
-    color: var(--text);
-}
-
-.search-form button {
-    background-color: var(--primary);
     color: var(--dark);
-    border: none;
-    padding: 0 24px;
-    font-weight: 600;
+    font-size: 1.2rem;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: background-color 0.3s;
+    padding: 8px;
+    min-height: 44px;
+    min-width: 44px;
+    order: 2; /* Positioned after logo, before menu toggle */
+    margin-left: auto; /* Pushes menu toggle to the right */
 }
 
-.search-form button:hover {
-    background-color: #d4b483;
+/* Mobile menu button adjustments */
+.mobile-menu {
+    display: block;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: var(--dark);
+    transition: transform 0.3s;
+    background: none;
+    border: none;
+    padding: 5px;
+    flex-shrink: 0;
+    order: 3; /* Positioned after search toggle */
+    margin-left: 0; /* Remove margin-left auto */
+    min-height: 44px;
+    min-width: 44px;
 }
 
+.mobile-menu:hover {
+    transform: scale(1.1);
+}
 
 .nav-links {
     display: none;
     list-style: none;
     position: fixed;
-    top: 61px;
+    /* top: 61px;  Will be set dynamically by script.js */
     left: 0;
     width: 100%;
     background-color: var(--header-footer-bg);
@@ -202,9 +207,9 @@ nav {
     align-items: center;
     padding: 20px 0;
     box-shadow: var(--shadow-md);
-    z-index: 99;
+    z-index: 99; /* Above search bar reveal */
     border-top: 1px solid var(--border-color);
-    order: 4;
+    order: 4; /* Last in mobile flow */
 }
 
 .nav-links.show {
@@ -223,10 +228,12 @@ nav {
     transition: color 0.3s;
     position: relative;
     padding: 8px 0;
+    min-height: 44px; /* Ensure good tap target */
+    display: inline-block;
 }
 
 .nav-links a:after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -244,24 +251,8 @@ nav {
     color: var(--primary);
 }
 
-.mobile-menu {
-    display: block;
-    font-size: 1.4rem;
-    cursor: pointer;
-    color: var(--dark);
-    transition: transform 0.3s;
-    background: none;
-    border: none;
-    padding: 5px;
-    flex-shrink: 0;
-    order: 3;
-    margin-left: auto;
-}
 
-.mobile-menu:hover {
-    transform: scale(1.1);
-}
-
+/* --- Message Area --- */
 .message-area {
     padding: 60px 16px 0;
     text-align: center;
@@ -295,17 +286,99 @@ nav {
     border-left: 5px solid var(--primary);
 }
 
-
+/* --- Hero Sections --- */
+/* Generic Hero (index.html, search.html background handled by body::before/after) */
 .hero {
     padding: 140px 0 60px;
     text-align: center;
     position: relative;
-    overflow: hidden;
+    overflow: hidden; /* Needed for pseudo elements if they were here */
+    z-index: 1; /* Ensure content is above background */
 }
 
-.hero .container {
+/* Analysis Page Hero Specific Background (Moved from inline style) */
+.hero#analysis-hero { /* Assuming you add id="analysis-hero" to analysis.html's hero section */
     position: relative;
-    z-index: 1;
+    background-color: transparent !important; /* Override potential body background color bleed */
+    overflow: hidden;
+    padding-bottom: 80px; /* Extra space for gradient fade */
+}
+
+.hero#analysis-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        /* Thin vertical lines with varying opacity */
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        /* Thin horizontal lines with varying opacity */
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        /* Thick vertical lines with varying opacity and color */
+        linear-gradient(90deg, rgba(255, 255, 255, 0.09) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 2px, transparent 2px),
+        /* Thick horizontal lines with varying opacity and color */
+        linear-gradient(rgba(255, 255, 255, 0.09) 2px, transparent 2px),
+        linear-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
+    background-size:
+        30px 30px, /* Tightened spacing */
+        60px 60px, /* Tightened spacing */
+        30px 30px, /* Tightened spacing */
+        60px 60px, /* Tightened spacing */
+        120px 120px, /* Tightened spacing */
+        240px 240px, /* Tightened spacing */
+        120px 120px, /* Tightened spacing */
+        240px 240px; /* Tightened spacing */
+    /* Centered vertical lines */
+    background-position:
+        calc(50% - 0px) 0, /* Center thin vertical lines */
+        calc(50% - 15px) 0, /* Offset second set of thin vertical lines */
+        0 0,
+        0 15px,
+        calc(50% - 0px) 0, /* Center thick vertical lines */
+        calc(50% - 60px) 0, /* Offset second set of thick vertical lines */
+        0 0,
+        0 60px;
+    z-index: -2; /* Behind overlay */
+    pointer-events: none;
+}
+
+.hero#analysis-hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        circle at center,
+        rgba(28, 37, 65, 0.2) 0%,
+        rgba(28, 37, 65, 0.6) 30%,
+        rgba(28, 37, 65, 0.8) 60%,
+        var(--secondary) 100%
+    );
+    z-index: -1; /* Above plaid, below content */
+    pointer-events: none;
+}
+
+
+.hero .container {
+    position: relative; /* Should be relative to stack correctly */
+    z-index: 1; /* Above hero pseudo-elements */
+}
+
+/* Specific container styling for analysis hero (moved from inline) */
+.hero#analysis-hero .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 42vh;
+    transform: translateY(-11%); /* TEXT ALIGNMENT */
 }
 
 .hero h1 {
@@ -353,6 +426,8 @@ nav {
     font-size: 0.95rem;
     transition: var(--transition);
     box-shadow: var(--shadow-sm);
+    min-height: 44px; /* Ensure good tap target */
+    min-width: 44px; /* Ensure good tap target */
 }
 
 .cta-button.secondary {
@@ -381,10 +456,83 @@ nav {
     transform: translateX(4px);
 }
 
+
+/* --- Sections --- */
 .section {
     padding: 80px 0; /* Increased padding for more space */
+    position: relative;
+    z-index: 1; /* Ensure section content is above fixed body background */
+    background-color: var(--secondary); /* Default background for sections */
 }
 
+/* Analysis Page Section Transition (moved from inline) */
+#trends {
+    position: relative;
+    margin-top: -60px; /* Pull up to overlap with hero */
+    padding-top: 100px; /* Compensate for the overlap */
+    background-color: var(--secondary);
+    z-index: 2; /* Ensure it sits above hero content potentially */
+}
+
+#trends::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom,
+        rgba(28, 37, 65, 0) 0%,
+        var(--secondary) 100%);
+    z-index: 0; /* Below the section content */
+}
+
+/* Ensure main content is above general background */
+main {
+    position: relative;
+    z-index: 1;
+}
+
+/* Generic search form style (used in index.html CTA) */
+.search-form {
+    display: flex;
+    max-width: 500px;
+    margin: 32px auto 0;
+    height: 50px;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.search-form input {
+    flex-grow: 1;
+    border: none;
+    padding: 0 20px;
+    font-size: 1rem;
+    outline: none;
+    color: var(--text);
+    min-height: 50px; /* Ensure good tap target */
+}
+
+.search-form button {
+    background-color: var(--primary);
+    color: var(--dark);
+    border: none;
+    padding: 0 24px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s;
+    min-height: 50px; /* Ensure good tap target */
+}
+
+.search-form button:hover {
+    background-color: #d4b483;
+}
+
+/* --- Methodology (index.html) --- */
 .methodology-steps {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -401,7 +549,8 @@ nav {
     padding: 28px; /* Increased padding for more space */
     border-radius: 8px;
     transition: transform 0.3s;
-    max-width: 380px;
+    max-width: 380px; /* Limit width for better grid layout */
+    margin: 0 auto; /* Center steps if grid doesn't fill */
 }
 
 .step:hover {
@@ -439,8 +588,9 @@ nav {
     line-height: 1.5;
 }
 
+/* --- CTA Section (index.html) --- */
 .cta-section {
-    background-color: var(--secondary);
+    background-color: transparent !important; /* Override section default */
     text-align: center;
     padding: 100px 0; /* Increased padding for more space */
 }
@@ -451,6 +601,7 @@ nav {
     color: var(--light);
 }
 
+/* --- Section Title --- */
 .section-title {
     text-align: center;
     margin-bottom: 50px; /* Increased margin for more space */
@@ -466,7 +617,7 @@ nav {
 }
 
 .section-title h2:after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -6px;
     left: 50%;
@@ -485,10 +636,12 @@ nav {
     padding: 0 16px;
 }
 
+/* --- Cards --- */
 .cards {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Default mobile: single column */
     gap: 32px; /* Increased gap for more space */
+    margin-top: 32px; /* Add some space below section title */
 }
 
 .card {
@@ -514,7 +667,7 @@ nav {
 
 .card-header h3 {
     font-size: 1.1rem;
-    margin-bottom: 6px;
+    margin-bottom: 6px; /* Adjust as needed */
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -539,8 +692,8 @@ nav {
 
 .card-body ul {
     list-style: none;
-    margin-bottom: 16px;
-    padding-left: 0;
+    margin-bottom: 16px; /* Add space at the bottom */
+    padding-left: 0; /* Remove default padding */
 }
 
 .card-body li {
@@ -557,21 +710,25 @@ nav {
     left: 8px; /* Increased left position for more space */
     color: var(--muted);
     font-weight: bold;
+    top: 0; /* Align with text top */
 }
 
 .card-body li strong {
-     color: var(--dark);
-     font-weight: 600;
+    color: var(--dark);
+    font-weight: 600;
 }
 
 .card-footer {
     padding: 16px 22px; /* Increased padding for more space */
-    background-color: #f8f9fa;
+    background-color: #f8f9fa; /* Light background for footer */
     border-top: 1px solid var(--border-color);
     font-size: 0.8rem;
-    color: var(--dark);
+    color: var(--dark); /* Darker text for readability */
+    margin-top: auto; /* Push footer to bottom */
 }
 
+
+/* --- Charts (analysis.html) --- */
 .chart-container {
     background-color: var(--card-bg);
     border-radius: 10px;
@@ -580,7 +737,7 @@ nav {
     margin-bottom: 32px; /* Increased margin for more space */
     border: 1px solid var(--border-color);
     transition: var(--transition);
-    position: relative;
+    position: relative; /* For positioning elements inside */
 }
 
 .chart-container:hover {
@@ -601,7 +758,7 @@ nav {
 }
 
 .chart-wrapper {
-    height: 280px;
+    height: 280px; /* Default height */
     position: relative;
 }
 
@@ -610,16 +767,18 @@ canvas {
     height: 100% !important;
 }
 
+/* --- Insight List / Table (analysis.html) --- */
 .insight-list {
     background-color: var(--card-bg);
     border-radius: 10px;
-    padding: 24px; /* Increased padding for more space */
+    padding: 0; /* Remove padding, let table handle it */
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--border-color);
     transition: var(--transition);
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: auto; /* Enable horizontal scroll */
+    -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+    margin-top: 32px; /* Space above table */
 }
 
 .insight-list:hover {
@@ -631,97 +790,60 @@ table {
     border-collapse: collapse;
     margin: 0;
     font-size: 0.9rem;
-    border-radius: 6px;
-    overflow: hidden;
-    min-width: 600px;
+    border-radius: 10px; /* Apply radius to table itself */
+    overflow: hidden; /* Clip content to rounded corners */
+    min-width: 600px; /* Ensure horizontal scroll appears when needed */
 }
 
 th, td {
     padding: 16px; /* Increased padding for more space */
-    text-align: center;
-    border: 1px solid var(--border-color);
+    text-align: left; /* Align text left for readability */
+    border: none; /* Remove default borders */
+    border-bottom: 1px solid var(--border-color); /* Use bottom border as separator */
     color: var(--dark);
+    white-space: normal; /* Allow text wrapping */
+}
+td:first-child, th:first-child {
+     padding-left: 24px; /* More padding for first column */
+}
+td:last-child, th:last-child {
+     padding-right: 24px; /* More padding for last column */
 }
 
 th {
-    background-color: var(--secondary);
-    color: var(--light);
+    background-color: #f8f9fa; /* Lighter header */
+    color: var(--dark);
     font-weight: 600;
+    text-transform: uppercase; /* Optional: Uppercase headers */
+    font-size: 0.8rem; /* Smaller header text */
+    letter-spacing: 0.5px;
+    border-bottom-width: 2px; /* Thicker border below header */
+    border-color: #e0e0e0;
+}
+
+tr {
+     border: none; /* Remove default row borders */
+}
+
+tr:last-child td {
+    border-bottom: none; /* Remove border from last row */
 }
 
 tr:nth-child(even) {
-    background-color: rgba(0,0,0,0.02);
+    background-color: rgba(0, 0, 0, 0.02); /* Subtle striping */
 }
 
 tr:hover {
-    background-color: rgba(0,0,0,0.03);
+    background-color: rgba(197, 164, 126, 0.1); /* Use primary color accent on hover */
 }
 
-@media screen and (max-width: 767px) {
-    table {
-        border: 0;
-        min-width: auto;
-    }
-
-    table thead {
-        display: none;
-    }
-
-    table tr {
-        display: block;
-        margin-bottom: 1.2em; /* Increased spacing between rows */
-        border: 1px solid var(--border-color);
-        border-radius: 8px; /* Slightly larger radius */
-        box-shadow: var(--shadow-sm);
-        background-color: var(--card-bg);
-        overflow: hidden; /* Ensure content respects border radius */
-    }
-
-    table td {
-        display: block;
-        text-align: right;
-        font-size: 0.85em; /* Slightly larger font */
-        border: none; /* Remove individual cell borders */
-        border-bottom: 1px solid rgba(0,0,0,0.05); /* Lighter separator */
-        padding: 14px 18px; /* Increased padding for more space */
-        min-height: 38px; /* Ensure consistent height */
-        line-height: 1.5; /* Improve readability */
-    }
-
-    table tr td:last-child { /* Corrected selector */
-        border-bottom: 0;
-    }
-
-    table td::before {
-        content: attr(data-label);
-        float: left;
-        font-weight: 600; /* Adjusted weight */
-        text-transform: uppercase;
-        color: var(--dark);
-        padding-right: 12px; /* Increased space between label and value */
-        text-align: left;
-        width: 45%; /* Allocate space for label */
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        line-height: 1.5; /* Match td line-height */
-    }
-
-    /* Clearfix for floated ::before element */
-    table td::after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-}
-
-
+/* --- Conclusion Section (analysis.html) --- */
 .conclusion {
     text-align: center;
 }
 
 .conclusion .section-title h2 {
-     color: var(--light);
+    color: var(--light);
 }
 
 .conclusion .section-title p {
@@ -733,7 +855,7 @@ tr:hover {
     border-radius: 10px;
     padding: 36px; /* Increased padding for more space */
     max-width: 750px;
-    margin: 0 auto;
+    margin: 32px auto 0; /* Space above */
     box-shadow: var(--shadow-md);
     text-align: left;
     border: 1px solid var(--border-color);
@@ -741,10 +863,12 @@ tr:hover {
 
 .verdict-header {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Default mobile */
     align-items: flex-start;
     margin-bottom: 24px; /* Increased margin for more space */
     gap: 12px; /* Increased gap for more space */
+    padding-bottom: 20px; /* Space below header */
+    border-bottom: 1px solid var(--border-color); /* Separator line */
 }
 
 .verdict-header h3 {
@@ -763,26 +887,30 @@ tr:hover {
     border-radius: 15px;
     font-weight: 600;
     font-size: 0.8rem;
-    border: 1px solid rgba(0,0,0,0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
     line-height: 1.4;
+    min-height: 28px; /* Ensure good tap target */
 }
 
-.verdict-container p {
+.verdict-container #verdict-paragraphs p { /* Target paragraphs directly */
     margin-bottom: 20px; /* Increased margin for more space */
     font-size: 0.95rem;
     line-height: 1.7;
     color: var(--text);
 }
+.verdict-container #verdict-paragraphs p:last-child {
+    margin-bottom: 0; /* Remove margin from last paragraph */
+}
 
 .verdict-container strong {
-     color: var(--dark);
-     font-weight: 600;
+    color: var(--dark);
+    font-weight: 600;
 }
 
 .monitoring-points {
-     margin-top: 28px; /* Increased margin for more space */
-     padding-top: 20px; /* Increased padding for more space */
-     border-top: 1px solid var(--border-color);
+    margin-top: 28px; /* Increased margin for more space */
+    padding-top: 20px; /* Increased padding for more space */
+    border-top: 1px solid var(--border-color);
 }
 
 .monitoring-points h4 {
@@ -804,19 +932,21 @@ tr:hover {
     padding-left: 24px; /* Increased padding for more space */
     font-size: 0.9rem;
     color: var(--text);
+    min-height: 28px; /* Ensure good tap target */
 }
 
 .monitoring-points li::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
-    top: 8px;
+    top: 8px; /* Adjust vertical alignment */
     width: 6px;
     height: 6px;
     background-color: var(--primary);
     border-radius: 50%;
 }
 
+/* --- Back to Top Button --- */
 .back-to-top {
     position: fixed;
     bottom: 20px;
@@ -835,7 +965,7 @@ tr:hover {
     visibility: hidden;
     transition: var(--transition);
     box-shadow: var(--shadow-md);
-    z-index: 99;
+    z-index: 99; /* High z-index */
     border: none;
     outline: none;
 }
@@ -850,26 +980,29 @@ tr:hover {
     transform: translateY(-3px);
 }
 
+/* --- Footer --- */
 footer {
     background-color: var(--header-footer-bg);
-    padding: 28px 0; /* Increased padding for more space */
+    padding: 28px 0; /* Default padding */
     border-top: 1px solid var(--border-color);
-    margin-top: 80px; /* Increased margin for more space */
+    margin-top: 80px; /* Default margin */
+    position: relative; /* Ensure it's in flow */
+    z-index: 1; /* Above body background */
 }
 
 .footer-content {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Default mobile */
     align-items: center;
     text-align: center;
 }
 
 .footer-logo {
-    font-size: 1rem;
+    font-size: 1rem; /* Default */
     font-weight: 600;
     color: var(--dark);
     letter-spacing: -0.5px;
-    margin-bottom: 20px; /* Increased margin for more space */
+    margin-bottom: 20px; /* Default */
 }
 
 .footer-logo span {
@@ -881,19 +1014,22 @@ footer {
     flex-wrap: wrap;
     justify-content: center;
     list-style: none;
-    margin: 0 0 20px 0; /* Increased margin for more space */
+    margin: 0 0 20px 0; /* Default */
     padding: 0;
 }
 
 .footer-links li {
-    margin: 8px 16px; /* Increased margin for more space */
+    margin: 8px 16px; /* Default */
 }
 
 .footer-links a {
     text-decoration: none;
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* Default */
     transition: color 0.3s;
+    padding: 8px 0; /* Default */
+    display: inline-block;
+    min-height: 44px; /* Ensure good tap target */
 }
 
 .footer-links a:hover {
@@ -902,13 +1038,258 @@ footer {
 
 .copyright {
     color: var(--muted);
-    font-size: 0.8rem;
-    margin-top: 12px; /* Increased margin for more space */
+    font-size: 0.8rem; /* Default */
+    margin-top: 12px; /* Default */
 }
 
+
+/* ==========================================================================
+   MEDIA QUERIES
+   ========================================================================== */
+
+/* --- Small devices (landscape phones, 768px and down) --- */
+@media (max-width: 768px) {
+    body {
+        font-size: 15px; /* Slightly smaller base font */
+    }
+
+    .container {
+        padding: 0 16px; /* Reduced padding */
+    }
+
+    nav {
+        padding: 0 16px; /* Match container padding */
+        gap: 12px; /* Reduce gap further on mobile */
+    }
+
+    .logo {
+        font-size: 1rem; /* Smaller logo */
+    }
+
+    /* --- Mobile Search Toggle Implementation --- */
+    .search-toggle {
+        display: block; /* Show search icon on mobile */
+    }
+
+    .InputContainer {
+        /* Mobile specific styles for the search bar */
+        display: flex; /* Keep as flex for input/button */
+        position: absolute;
+        top: 100%; /* Position below the header */
+        left: 0;
+        width: 100%;
+        max-width: 100%; /* Override desktop max-width */
+        z-index: 98; /* Below nav links dropdown (99) but above page content */
+        border-radius: 0;
+        height: 0; /* Initially hidden */
+        padding: 0; /* Reset padding */
+        margin: 0; /* Reset margin */
+        overflow: hidden;
+        transition: height 0.35s ease-in-out; /* Smooth transition */
+        box-shadow: var(--shadow-md);
+        border: none; /* Remove default border */
+        border-top: 1px solid var(--border-color); /* Add separator */
+        background-color: var(--header-footer-bg); /* Match header */
+        order: 99; /* Ensure it doesn't interfere with nav layout when hidden */
+    }
+
+    .InputContainer.show {
+        height: 50px; /* Height when shown */
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .InputContainer .input {
+        padding: 0 15px;
+        border-radius: 0;
+        height: 100%; /* Fill container height */
+        font-size: 0.95rem; /* Slightly larger text */
+        background-color: var(--card-bg); /* Ensure background color */
+    }
+
+    .InputContainer button {
+        border-radius: 0;
+        height: 100%; /* Fill container height */
+        font-size: 1rem;
+        min-width: 50px; /* Ensure decent tap area */
+    }
+    /* --- End Mobile Search --- */
+
+    .nav-links {
+        /* top is set dynamically by script.js */
+        z-index: 99; /* Ensure nav links appear above the revealed search bar */
+    }
+
+    /* --- Section Padding & Titles --- */
+    .section {
+        padding: 60px 0; /* Reduced padding */
+    }
+    .section-title h2 {
+        font-size: 1.5rem; /* Smaller heading on mobile */
+    }
+    .section-title p {
+        font-size: 0.9rem;
+    }
+
+    /* --- Hero --- */
+     .hero {
+        padding: 100px 0 50px; /* Adjust padding */
+    }
+    .hero h1 {
+        font-size: 1.6rem; /* Smaller hero title on mobile */
+        padding: 0 10px;
+    }
+    .hero p {
+        font-size: 0.9rem;
+    }
+    .hero#analysis-hero .container {
+         transform: translateY(-5%); /* Reduce vertical shift */
+         min-height: 35vh;
+    }
+
+
+    /* --- Cards --- */
+    .cards {
+        gap: 24px; /* Reduce gap */
+    }
+    .card-header { padding: 18px; }
+    .card-header h3 { font-size: 1rem; }
+    .card-body { padding: 18px; }
+    .card-body li { font-size: 0.85rem; padding-left: 20px; }
+    .card-body li:before { left: 6px; }
+    .card-footer { padding: 12px 18px; font-size: 0.75rem; }
+
+    /* --- Charts --- */
+    .chart-wrapper {
+        height: 250px; /* Smaller height on mobile */
+        margin: 0 -10px; /* Negative margin to allow chart to breathe */
+    }
+    .chart-header h3 {
+        font-size: 0.9rem; /* Smaller font size on mobile */
+    }
+    .chart-container {
+        padding: 18px;
+    }
+
+    /* --- Table Responsive Styles --- */
+    .insight-list {
+        box-shadow: none; /* Remove shadow on mobile list container */
+        border: none; /* Remove border */
+        background: transparent; /* Remove background */
+        margin-top: 24px;
+    }
+    table {
+        border: 0;
+        min-width: auto; /* Allow table to shrink */
+        border-radius: 0; /* Remove radius */
+        box-shadow: none;
+    }
+
+    table thead {
+        display: none; /* Hide table header */
+    }
+
+    table tr {
+        display: block;
+        margin-bottom: 1.2em; /* Increased spacing between rows */
+        border: 1px solid var(--border-color);
+        border-radius: 8px; /* Slightly larger radius */
+        box-shadow: var(--shadow-sm);
+        background-color: var(--card-bg);
+        overflow: hidden; /* Ensure content respects border radius */
+    }
+
+    table td {
+        display: block;
+        text-align: right; /* Value aligns right */
+        font-size: 0.85em; /* Slightly larger font */
+        border: none; /* Remove individual cell borders */
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Lighter separator */
+        padding: 14px 18px; /* Increased padding for more space */
+        min-height: 44px; /* Ensure good tap target */
+        line-height: 1.5; /* Improve readability */
+        position: relative; /* Needed for ::before positioning */
+        white-space: normal; /* Allow wrapping */
+    }
+
+    table tr td:last-child {
+        border-bottom: 0; /* Remove bottom border from last cell in block */
+    }
+
+    table td::before {
+        content: attr(data-label); /* Use data-label attribute */
+        float: left;
+        font-weight: 600; /* Adjusted weight */
+        text-transform: uppercase; /* Match header style */
+        color: var(--dark);
+        padding-right: 12px; /* Increased space between label and value */
+        text-align: left;
+        width: 45%; /* Allocate space for label */
+        white-space: nowrap; /* Prevent label wrapping */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.5; /* Match td line-height */
+        font-size: 0.9em; /* Make label slightly smaller */
+    }
+
+    /* Clearfix for floated ::before element */
+    table td::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    /* --- End Table Responsive --- */
+
+
+    /* --- Verdict --- */
+    .verdict-container {
+        padding: 24px; /* Less padding on mobile */
+    }
+    .verdict-header h3 { font-size: 1.2rem; }
+    .verdict-container p { font-size: 0.9rem; }
+    .monitoring-points h4 { font-size: 1rem; }
+    .monitoring-points li { font-size: 0.85rem; padding-left: 20px; }
+    .monitoring-points li::before { top: 7px; }
+
+
+    /* --- Footer Mobile Optimizations --- */
+    footer {
+        padding: 20px 0; /* Reduced padding */
+        margin-top: 60px; /* Reduced margin */
+    }
+
+    .footer-logo {
+        font-size: 1rem; /* Slightly smaller */
+        margin-bottom: 15px; /* Reduced margin */
+    }
+
+    .footer-links {
+        margin-bottom: 15px; /* Reduced margin */
+    }
+
+    .footer-links li {
+        margin: 4px 10px; /* Reduced vertical and horizontal margin */
+    }
+
+    .footer-links a {
+        font-size: 0.8rem; /* Smaller font size */
+        padding: 6px 4px; /* Adjusted padding for tap target */
+        min-height: 38px; /* Slightly reduced min-height if needed, but 44px is safer */
+    }
+
+    .copyright {
+        font-size: 0.75rem; /* Slightly smaller */
+        margin-top: 10px; /* Reduced margin */
+        text-align: center; /* Explicitly center */
+        width: 100%;       /* Ensure it takes full width for centering */
+    }
+    /* --- End Footer Mobile --- */
+}
+
+
+/* --- Medium devices (tablets, 768px and up) --- */
 @media (min-width: 768px) {
     body {
-        font-size: 16px;
+        font-size: 16px; /* Reset base font */
     }
 
     header {
@@ -917,7 +1298,7 @@ footer {
 
     nav {
         gap: 32px; /* Increased gap for more space */
-        flex-wrap: nowrap;
+        flex-wrap: nowrap; /* Prevent wrapping on desktop */
     }
 
     .logo {
@@ -926,25 +1307,46 @@ footer {
     }
 
     .InputContainer {
+        order: 1; /* Search after logo */
         flex-grow: 1;
         max-width: 350px;
-        order: 1;
-        width: auto;
-        margin-top: 0;
+        width: auto; /* Allow shrinking */
+        margin-top: 0; /* Remove mobile margin */
+        position: relative; /* Override absolute */
+        height: 40px; /* Reset height */
+        top: auto; left: auto; /* Reset positioning */
+        z-index: auto; /* Reset z-index */
+        box-shadow: var(--shadow-sm); /* Reset shadow */
+        border: 1px solid var(--border-color); /* Reset border */
+        border-radius: 20px; /* Restore radius */
+        overflow: hidden; /* Restore overflow */
+        transition: box-shadow 0.3s; /* Restore transition */
+        background-color: var(--card-bg); /* Restore background */
+    }
+
+     .InputContainer.show { /* Remove mobile show styles */
+        height: 40px;
+        border-bottom: none;
+     }
+
+    .search-toggle {
+        display: none; /* Hide toggle icon on desktop */
     }
 
     .nav-links {
         display: flex;
-        position: static;
+        position: static; /* Override fixed */
         flex-direction: row;
         background: transparent;
         box-shadow: none;
         padding: 0;
         width: auto;
         border-top: none;
-        order: 2;
-        flex-shrink: 0;
-        margin-left: auto;
+        order: 2; /* Links after search */
+        flex-shrink: 0; /* Don't shrink links */
+        margin-left: auto; /* Push to right */
+        z-index: auto; /* Reset z-index */
+        top: auto; /* Reset top */
     }
 
     .nav-links li {
@@ -956,7 +1358,7 @@ footer {
     }
 
     .mobile-menu {
-        display: none;
+        display: none; /* Hide mobile menu toggle */
     }
 
     .hero {
@@ -969,6 +1371,11 @@ footer {
 
     .hero p {
         font-size: 1rem;
+    }
+
+     .hero#analysis-hero .container {
+         transform: translateY(-11%); /* Restore vertical shift */
+         min-height: 42vh;
     }
 
     .section {
@@ -984,29 +1391,62 @@ footer {
         gap: 32px; /* Increased gap for more space */
     }
 
+     .chart-wrapper {
+        height: 320px; /* Slightly adjust desktop height */
+        margin: 0; /* Remove negative margin */
+    }
+
+     /* Restore Table Styles for Desktop */
+    .insight-list {
+        background-color: var(--card-bg);
+        border-radius: 10px;
+        padding: 0;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border-color);
+    }
+    table {
+        border-radius: 10px; /* Restore radius */
+        min-width: 600px;
+    }
+    table thead { display: table-header-group; } /* Show header */
+    table tr { display: table-row; margin-bottom: 0; border: none; border-radius: 0; box-shadow: none; background: transparent; overflow: visible;}
+    table td { display: table-cell; text-align: left; font-size: 0.9rem; border-bottom: 1px solid var(--border-color); padding: 16px; min-height: auto; line-height: 1.6; position: static; border-radius: 0;}
+    table tr:last-child td { border-bottom: none; }
+    table tr td:last-child { border-bottom: none; } /* Ensure last cell in row has no border either */
+    table td::before { display: none; } /* Hide data-label */
+    table td::after { display: none; } /* Remove clearfix */
+    td:first-child, th:first-child { padding-left: 24px; }
+    td:last-child, th:last-child { padding-right: 24px; }
+    tr:nth-child(even) { background-color: rgba(0, 0, 0, 0.02); }
+    tr:hover { background-color: rgba(197, 164, 126, 0.1); }
+
+
     .verdict-container {
         padding: 48px; /* Increased padding for more space */
     }
     .verdict-header {
-        flex-direction: row;
+        flex-direction: row; /* Side-by-side header */
         justify-content: space-between;
         align-items: center;
     }
-     .verdict-header h3 {
+    .verdict-header h3 {
         font-size: 1.6rem;
-     }
-     .verdict-container p {
+    }
+    .verdict-container p { /* Use #verdict-paragraphs selector */
         font-size: 1rem;
-     }
-     .monitoring-points h4 {
+    }
+     .verdict-container #verdict-paragraphs p {
+        font-size: 1rem;
+    }
+    .monitoring-points h4 {
         font-size: 1.2rem;
-     }
-     .monitoring-points li {
+    }
+    .monitoring-points li {
         font-size: 0.95rem;
-     }
+    }
 
     .footer-content {
-        flex-direction: row;
+        flex-direction: row; /* Row layout for footer */
         justify-content: space-between;
         align-items: center;
         text-align: left;
@@ -1021,10 +1461,13 @@ footer {
     }
 
     .footer-links li {
-        margin: 0 0 0 24px; /* Increased margin for more space */
+        margin: 0 0 0 24px; /* Space between links */
     }
+    .footer-links a { font-size: 0.9rem; } /* Restore font size */
+    .copyright { font-size: 0.8rem; text-align: left; width: auto; margin-top: 0;} /* Restore copyright */
 }
 
+/* --- Large devices (desktops, 992px and up) --- */
 @media (min-width: 992px) {
     .hero {
         padding: 200px 0 100px;
@@ -1039,42 +1482,39 @@ footer {
     }
 
     .chart-wrapper {
-        height: 350px;
+        height: 350px; /* Larger charts */
     }
 
     .InputContainer {
-        max-width: 400px;
+        max-width: 400px; /* Wider search bar */
     }
 }
 
+
+/* --- Extra small devices (phones, 480px and down) --- */
 @media (max-width: 480px) {
+    /* Mobile Nav adjustments for very small screens */
     nav {
-        flex-wrap: wrap;
-        justify-content: space-between;
+        flex-wrap: wrap; /* Ensure wrapping works */
+        justify-content: space-between; /* Space out logo and toggles */
+        row-gap: 8px; /* Add gap if nav wraps */
     }
     .logo {
-        flex-basis: auto;
-    }
-    .InputContainer {
-        order: 2;
-        width: 100%;
-        max-width: none;
-        margin-top: 8px;
-        margin-left: 0;
-        margin-right: 0;
-    }
-    .mobile-menu {
-        order: 1;
-        margin-left: 0;
-    }
-    .nav-links {
-         top: 105px;
-         order: 3;
-         width: 100%;
+        flex-basis: auto; /* Allow logo to take natural width */
     }
 
-    /* Mobile styles for CTA search form */
-    .search-form {
+    /* Ensure toggles stay on the right */
+    .search-toggle { order: 2; margin-left: auto; } /* Keep margin auto */
+    .mobile-menu { order: 3; margin-left: 8px; } /* Add small gap */
+
+    .nav-links {
+         /* Adjust top based on potential wrapped header, script calculates dynamically */
+        order: 4; /* Keep as last */
+        width: 100%;
+    }
+
+    /* Specific styles for CTA search form on index.html (very small screens) */
+    .cta-section .search-form {
         max-width: none;
         width: 100%;
         flex-direction: column;
@@ -1082,9 +1522,10 @@ footer {
         border-radius: 8px;
         overflow: visible; /* Allow box shadow */
         box-shadow: none; /* Remove shadow from container */
+        margin-top: 24px;
     }
 
-    .search-form input {
+    .cta-section .search-form input {
         border-radius: 8px 8px 0 0;
         text-align: center;
         padding: 15px 20px;
@@ -1093,9 +1534,10 @@ footer {
         box-shadow: var(--shadow-sm); /* Add shadow */
         margin-bottom: -1px; /* Overlap borders */
         z-index: 1; /* Ensure input shadow is above button */
+        min-height: 50px; /* Ensure good tap target */
     }
 
-    .search-form button {
+    .cta-section .search-form button {
         border-radius: 0 0 8px 8px;
         padding: 15px 24px;
         justify-content: center;
@@ -1103,5 +1545,90 @@ footer {
         border: 1px solid var(--border-color); /* Add border */
         border-top: none; /* Remove top border */
         box-shadow: var(--shadow-sm); /* Add shadow */
+        min-height: 50px; /* Ensure good tap target */
+        width: 100%; /* Make button full width */
     }
+
+    /* Improved tap targets for mobile nav/footer links */
+    .nav-links a,
+    .footer-links a {
+        padding: 12px 8px; /* Ensure padding creates decent tap area */
+    }
+
+    /* Better spacing for mobile charts */
+    .chart-wrapper {
+        height: 220px;
+        margin: 0 -5px; /* Reduce negative margin */
+    }
+
+    .chart-header h3 {
+        font-size: 0.9rem;
+    }
+
+    /* More compact verdict container on mobile */
+    .verdict-container {
+        padding: 20px;
+    }
+
+    .verdict-header h3 {
+        font-size: 1.2rem;
+    }
+
+    /* Footer styles for very small mobile */
+    .footer-logo {
+        font-size: 0.9rem; /* Smaller */
+        margin-bottom: 10px;
+    }
+    .footer-links { gap: 5px; margin: 0 0 10px 0; }
+    .footer-links li { margin: 3px 6px; }
+    .footer-links a { font-size: 0.75rem; padding: 8px 5px; min-height: 36px;}
+    .copyright { font-size: 0.7rem; }
+
+}
+
+/* Global Background Styles (apply to body for fixed effect) */
+body::before {
+    content: "";
+    position: fixed; /* Fixed position */
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+        /* Thin vertical lines */
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        /* Thin horizontal lines */
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        /* Thick vertical lines */
+        linear-gradient(90deg, rgba(255, 255, 255, 0.09) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 2px, transparent 2px),
+        /* Thick horizontal lines */
+        linear-gradient(rgba(255, 255, 255, 0.09) 2px, transparent 2px),
+        linear-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
+    background-size:
+        30px 30px, 60px 60px,
+        30px 30px, 60px 60px,
+        120px 120px, 240px 240px,
+        120px 120px, 240px 240px;
+    background-position:
+        calc(50% - 0px) 0, calc(50% - 15px) 0,
+        0 0, 0 15px,
+        calc(50% - 0px) 0, calc(50% - 60px) 0,
+        0 0, 0 60px;
+    z-index: -2; /* Furthest back */
+    pointer-events: none;
+}
+
+body::after {
+    content: "";
+    position: fixed; /* Fixed position */
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(
+        circle at center,
+        rgba(28, 37, 65, 0.2) 0%,
+        rgba(28, 37, 65, 0.6) 30%,
+        rgba(28, 37, 65, 0.8) 60%,
+        var(--secondary) 100%
+    );
+    z-index: -1; /* Above plaid, below content */
+    pointer-events: none;
 }

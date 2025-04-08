@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForensicFinancials | Ticker Unavailable</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-77GZWBEMLF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-77GZWBEMLF');
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> {/* Link the main stylesheet */}
+    <style>
+        /* Minimal inline styles if absolutely needed, prefer style.css */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+             position: relative; /* Needed for pseudo elements */
+             /* Background handled by global style.css now */
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 15px 40px; /* Adjust padding top accounting for fixed header */
+            position: relative;
+            z-index: 1;
+        }
+
+        .error-container {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%; /* Use 100% width up to max-width */
+            text-align: center;
+            margin: 0 auto; /* Center horizontally */
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .error-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 24px;
+            display: inline-block;
+        }
+
+        .error-title {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .error-message {
+            color: var(--text);
+            margin-bottom: 32px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .error-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            border: none;
+            cursor: pointer;
+            min-height: 44px; /* Ensure good tap target */
+            text-align: center; /* Ensure text is centered */
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--dark);
+        }
+
+        .btn-secondary {
+            background-color: rgba(28, 37, 65, 0.1);
+            color: var(--dark);
+            border: 1px solid rgba(28, 37, 65, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            background-color: #d4b483;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(28, 37, 65, 0.15);
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .error-actions {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .error-container {
+                padding: 30px 20px;
+            }
+            .error-title { font-size: 1.5rem; }
+            .error-message { font-size: 0.95rem; }
+            .btn { width: 100%; padding: 14px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Forensic<span>Financials</span></a>
+                <button class="search-toggle" aria-label="Toggle search" aria-expanded="false">
+                    <i class="fas fa-search"></i>
+                </button>
+                <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
+                    <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
+                    <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
+                </form>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#methodology">Methodology</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+                <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="error-container">
+            <i class="fas fa-chart-line error-icon"></i>
+            <h1 class="error-title">Ticker Currently Unsupported</h1>
+            <p class="error-message">
+                We sincerely apologize for the inconvenience. The ticker symbol you entered is either invalid or not yet supported in our database.
+                We're continuously expanding our coverage. You can try searching for another major US equity or request this ticker below.
+            </p>
+            <div class="error-actions">
+                <a href="https://x.com/ForensicFin" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-x-twitter"></i> Request Ticker
+                </a>
+                <a href="search.html" class="btn btn-secondary"> {/* Link to search page */}
+                    <i class="fas fa-search"></i> Try Another Search
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Forensic<span>Financials</span> by Cho</div>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#methodology">Methodology</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                <p>© 2025 ForensicFinancials. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    {/* Removed inline script - Rely on external scripts */}
+    {/* Include script.js if menu toggle/scroll effects are desired here */}
+    <script src="script.js" defer></script>
+    <script src="search-toggle.js" defer></script>
+</body>
+</html>

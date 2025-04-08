@@ -17,100 +17,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Global plaid background - UPDATED WITH WHITE AND GREY SHADES - TIGHTENED GRID */
-        body {
-            position: relative;
-            background-color: var(--secondary) !important;
-        }
-        
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                /* Thin vertical lines with varying opacity */
-                linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                /* Thin horizontal lines with varying opacity */
-                linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                /* Thick vertical lines with varying opacity and color */
-                linear-gradient(90deg, rgba(255, 255, 255, 0.09) 2px, transparent 2px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 2px, transparent 2px),
-                /* Thick horizontal lines with varying opacity and color */
-                linear-gradient(rgba(255, 255, 255, 0.09) 2px, transparent 2px),
-                linear-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
-            background-size: 
-                30px 30px, /* Tightened spacing */
-                60px 60px, /* Tightened spacing */
-                30px 30px, /* Tightened spacing */
-                60px 60px, /* Tightened spacing */
-                120px 120px, /* Tightened spacing */
-                240px 240px, /* Tightened spacing */
-                120px 120px, /* Tightened spacing */
-                240px 240px; /* Tightened spacing */
-            /* Centered vertical lines */
-            background-position: 
-                calc(50% - 0px) 0, /* Center thin vertical lines */
-                calc(50% - 15px) 0, /* Offset second set of thin vertical lines */
-                0 0,
-                0 15px,
-                calc(50% - 0px) 0, /* Center thick vertical lines */
-                calc(50% - 60px) 0, /* Offset second set of thick vertical lines */
-                0 0,
-                0 60px;
-            z-index: -2;
-            pointer-events: none;
-        }
-        
-        /* Rest of the existing styles remain unchanged */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(
-                circle at center,
-                rgba(28, 37, 65, 0.2) 0%,
-                rgba(28, 37, 65, 0.6) 30%,
-                rgba(28, 37, 65, 0.8) 60%,
-                var(--secondary) 100%
-            );
-            z-index: -1;
-            pointer-events: none;
-        }
-        
+        /* REMOVED inline body background styles - now handled globally in style.css */
+
         /* Z-index management */
         #header {
-            position: relative;
+            position: relative; /* Use relative for z-index context */
             z-index: 10;
         }
-        
+
         main {
             position: relative;
             z-index: 1;
+            flex: 1; /* Allow main to grow and push footer down */
+            display: flex; /* Use flex to center content vertically */
+            flex-direction: column;
         }
-        
+
         /* Fix footer margin */
         footer {
-            margin-top: 0 !important;
+            margin-top: 0 !important; /* Remove default section spacing */
             position: relative;
             z-index: 1;
         }
-        
+
         /* Search hero styles */
         .search-hero {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: calc(100vh - 120px);
-            padding: 60px 30px; /* Increased padding for more space */
+            flex-grow: 1; /* Allow hero to take available space */
+            padding: 60px 15px; /* Use consistent mobile padding */
             text-align: center;
             position: relative;
             z-index: 1;
@@ -121,7 +58,7 @@
             max-width: 600px;
             width: 100%;
             margin: 0 auto;
-            padding: 48px; /* Increased padding for more space */
+            padding: 48px; /* Default padding */
             background-color: var(--card-bg);
             border-radius: 12px;
             box-shadow: var(--shadow-lg);
@@ -145,18 +82,18 @@
             line-height: 1.6;
         }
 
+        /* Updated search form styling specific to this page */
         .search-hero .search-form {
             display: flex;
-            height: 56px;
-            border-radius: 28px;
+            height: 56px; /* Taller search bar */
+            border-radius: 28px; /* Fully rounded */
             overflow: hidden;
             box-shadow: var(--shadow-md);
-            margin-bottom: 24px;
+            margin: 0 auto 24px; /* Centered, with bottom margin */
             border: 1px solid var(--border-color);
             transition: var(--transition);
-            max-width: 100%;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 100%; /* Ensure it doesn't exceed container */
+            background: var(--card-bg); /* White background */
         }
 
         .search-hero .search-form:focus-within {
@@ -171,13 +108,13 @@
             font-size: 1rem;
             outline: none;
             color: var(--text);
-            background-color: var(--card-bg);
-            border-radius: 0;
+            background-color: transparent; /* Inherit from parent */
+            border-radius: 0; /* Remove radius */
             text-align: left;
             box-shadow: none;
             margin-bottom: 0;
             z-index: auto;
-            border: none;
+            min-height: 54px; /* Match container height */
         }
 
         .search-hero .search-form input::placeholder {
@@ -189,7 +126,7 @@
             background-color: var(--primary);
             color: var(--dark);
             border: none;
-            padding: 0 32px;
+            padding: 0 32px; /* More padding */
             font-weight: 600;
             cursor: pointer;
             display: flex;
@@ -199,27 +136,33 @@
             font-size: 1rem;
             min-width: 120px;
             justify-content: center;
-            border-radius: 0;
+            border-radius: 0; /* Remove radius */
             width: auto;
             box-shadow: none;
-            border: none;
+            min-height: 54px; /* Match container height */
         }
 
         .search-hero .search-form button:hover {
             background-color: #d4b483;
-            transform: none;
+            transform: none; /* No transform */
         }
 
         .search-examples {
             color: var(--muted);
             font-size: 0.9rem;
             font-style: italic;
+            margin-top: -16px; /* Pull up slightly */
+             margin-bottom: 16px; /* Add space below */
         }
 
+        /* Mobile improvements */
         @media (max-width: 768px) {
+            .search-hero {
+                 padding: 40px 16px; /* Adjust padding */
+             }
             .search-container {
                 padding: 30px 20px;
-                margin: 0 16px;
+                margin: 0; /* Remove horizontal margin */
             }
 
             .search-title {
@@ -233,43 +176,35 @@
             }
 
             .search-hero .search-form {
-                height: 50px;
-                flex-direction: row;
-                height: 50px;
+                height: 50px; /* Reduce height */
                 border-radius: 25px;
-                overflow: hidden;
-                gap: 0;
-                background: var(--card-bg);
-                box-shadow: var(--shadow-md);
-                border: 1px solid var(--border-color);
             }
 
             .search-hero .search-form input {
                 padding: 0 20px;
-                border-radius: 0;
-                border: none;
-                box-shadow: none;
+                min-height: 48px;
             }
 
             .search-hero .search-form button {
                 padding: 0 24px;
-                border-radius: 0;
-                width: auto;
-                min-width: auto;
                 font-size: 0.95rem;
+                min-width: auto;
+                min-height: 48px;
             }
 
             .search-examples {
                 font-size: 0.85rem;
+                 margin-top: -12px;
             }
         }
 
         @media (max-width: 480px) {
-            .search-hero {
-                padding: 60px 16px 40px;
-                min-height: calc(100vh - 80px);
-            }
-
+             .search-hero {
+                 padding: 30px 16px; /* Further reduce padding */
+             }
+             .search-container {
+                 padding: 24px 16px;
+             }
             .search-title {
                 font-size: 1.4rem;
             }
@@ -278,35 +213,43 @@
                 font-size: 0.9rem;
             }
 
+            /* Stacked form for very small screens */
             .search-hero .search-form {
                 flex-direction: column;
                 height: auto;
                 border-radius: 8px;
                 overflow: visible;
-                gap: 12px;
-                background: transparent;
+                gap: 0; /* Remove gap for stacked */
+                background: transparent; /* No background on container */
                 box-shadow: none;
                 border: none;
+                margin-bottom: 16px;
             }
 
             .search-hero .search-form input {
                 padding: 15px 20px;
-                border-radius: 8px;
+                border-radius: 8px 8px 0 0; /* Top corners rounded */
                 border: 1px solid var(--border-color);
                 box-shadow: var(--shadow-sm);
                 text-align: center;
-                margin-bottom: 0;
-                z-index: auto;
+                margin-bottom: -1px; /* Overlap border */
+                min-height: 50px;
+                background-color: var(--card-bg); /* Add background */
             }
 
             .search-hero .search-form button {
                 padding: 15px 20px;
-                border-radius: 8px;
+                border-radius: 0 0 8px 8px; /* Bottom corners rounded */
                 width: 100%;
                 box-shadow: var(--shadow-sm);
                 border: 1px solid var(--border-color);
+                border-top: none; /* Remove top border */
                 font-size: 0.95rem;
+                min-height: 50px;
             }
+             .search-examples {
+                 margin-top: 0;
+             }
         }
     </style>
 </head>
@@ -315,6 +258,9 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
+                <button class="search-toggle" aria-label="Toggle search" aria-expanded="false">
+                    <i class="fas fa-search"></i>
+                </button>
                 <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
                     <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
                     <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
@@ -338,11 +284,12 @@
                 <h1 class="search-title">Forensic Financial Analysis</h1>
                 <p class="search-subtitle">Enter a stock ticker symbol to uncover accounting insights and financial health indicators</p>
                 <form class="search-form" action="analysis.html" method="GET">
-                    <input type="text" name="ticker" placeholder="Examples: AAPL, MSFT, TSLA  " required aria-label="Stock ticker symbol">
+                    <input type="text" name="ticker" placeholder="Examples: AAPL, MSFT, TSLA" required aria-label="Stock ticker symbol">
                     <button type="submit" aria-label="Analyze">
                         <i class="fas fa-search"></i> Analyze
                     </button>
                 </form>
+                <p class="search-examples">Supported tickers include major US equities.</p>
             </div>
         </section>
     </main>
@@ -364,13 +311,8 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
-    <script>
-        const headerSearchFormOnSearchPage = document.querySelector('#headerTickerSearchForm');
-        if (headerSearchFormOnSearchPage) {
-            headerSearchFormOnSearchPage.addEventListener('submit', function(e) {
-            });
-        }
-    </script>
+    <script src="script.js" defer></script> {/* Keep main script */}
+    <script src="search-toggle.js" defer></script> {/* Added search toggle script */}
+    {/* REMOVED empty inline script block */}
 </body>
 </html>
