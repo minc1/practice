@@ -141,6 +141,7 @@ nav {
     font-size: 0.9rem;
     cursor: pointer;
     transition: background-color 0.3s;
+    min-height: 40px; /* Ensure good tap target */
 }
 
 .InputContainer button:hover {
@@ -170,6 +171,7 @@ nav {
     font-size: 1rem;
     outline: none;
     color: var(--text);
+    min-height: 50px; /* Ensure good tap target */
 }
 
 .search-form button {
@@ -183,6 +185,7 @@ nav {
     align-items: center;
     gap: 8px;
     transition: background-color 0.3s;
+    min-height: 50px; /* Ensure good tap target */
 }
 
 .search-form button:hover {
@@ -223,6 +226,8 @@ nav {
     transition: color 0.3s;
     position: relative;
     padding: 8px 0;
+    min-height: 44px; /* Ensure good tap target */
+    display: inline-block;
 }
 
 .nav-links a:after {
@@ -256,6 +261,8 @@ nav {
     flex-shrink: 0;
     order: 3;
     margin-left: auto;
+    min-height: 44px; /* Ensure good tap target */
+    min-width: 44px; /* Ensure good tap target */
 }
 
 .mobile-menu:hover {
@@ -353,6 +360,8 @@ nav {
     font-size: 0.95rem;
     transition: var(--transition);
     box-shadow: var(--shadow-sm);
+    min-height: 44px; /* Ensure good tap target */
+    min-width: 44px; /* Ensure good tap target */
 }
 
 .cta-button.secondary {
@@ -684,7 +693,7 @@ tr:hover {
         border: none; /* Remove individual cell borders */
         border-bottom: 1px solid rgba(0,0,0,0.05); /* Lighter separator */
         padding: 14px 18px; /* Increased padding for more space */
-        min-height: 38px; /* Ensure consistent height */
+        min-height: 44px; /* Ensure good tap target */
         line-height: 1.5; /* Improve readability */
     }
 
@@ -765,6 +774,7 @@ tr:hover {
     font-size: 0.8rem;
     border: 1px solid rgba(0,0,0,0.05);
     line-height: 1.4;
+    min-height: 28px; /* Ensure good tap target */
 }
 
 .verdict-container p {
@@ -804,6 +814,7 @@ tr:hover {
     padding-left: 24px; /* Increased padding for more space */
     font-size: 0.9rem;
     color: var(--text);
+    min-height: 28px; /* Ensure good tap target */
 }
 
 .monitoring-points li::before {
@@ -838,6 +849,8 @@ tr:hover {
     z-index: 99;
     border: none;
     outline: none;
+    min-height: 44px; /* Ensure good tap target */
+    min-width: 44px; /* Ensure good tap target */
 }
 
 .back-to-top.visible {
@@ -894,6 +907,9 @@ footer {
     color: var(--muted);
     font-size: 0.9rem;
     transition: color 0.3s;
+    padding: 8px 0; /* Ensure good tap target */
+    display: inline-block;
+    min-height: 44px; /* Ensure good tap target */
 }
 
 .footer-links a:hover {
@@ -1093,6 +1109,7 @@ footer {
         box-shadow: var(--shadow-sm); /* Add shadow */
         margin-bottom: -1px; /* Overlap borders */
         z-index: 1; /* Ensure input shadow is above button */
+        min-height: 50px; /* Ensure good tap target */
     }
 
     .search-form button {
@@ -1103,5 +1120,32 @@ footer {
         border: 1px solid var(--border-color); /* Add border */
         border-top: none; /* Remove top border */
         box-shadow: var(--shadow-sm); /* Add shadow */
+        min-height: 50px; /* Ensure good tap target */
+    }
+    
+    /* Improved tap targets for mobile */
+    .nav-links a, 
+    .footer-links a {
+        padding: 12px 8px;
+        min-height: 44px;
+    }
+    
+    /* Better spacing for mobile charts */
+    .chart-wrapper {
+        height: 220px;
+        margin: 0 -10px;
+    }
+    
+    .chart-header h3 {
+        font-size: 0.9rem;
+    }
+    
+    /* More compact verdict container on mobile */
+    .verdict-container {
+        padding: 20px;
+    }
+    
+    .verdict-header h3 {
+        font-size: 1.2rem;
     }
 }

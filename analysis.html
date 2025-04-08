@@ -142,6 +142,55 @@
             background-color: var(--secondary);
             padding: 100px 0; /* Increased padding for more space */
         }
+        
+        /* Mobile-specific improvements */
+        @media (max-width: 768px) {
+            .chart-wrapper {
+                height: 250px; /* Smaller height on mobile */
+                margin: 0 -10px; /* Negative margin to allow chart to breathe */
+            }
+            
+            .chart-header h3 {
+                font-size: 0.9rem; /* Smaller font size on mobile */
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem; /* Smaller heading on mobile */
+            }
+            
+            .verdict-container {
+                padding: 20px; /* Less padding on mobile */
+            }
+            
+            .hero h1 {
+                font-size: 1.6rem; /* Smaller hero title on mobile */
+                padding: 0 10px;
+            }
+            
+            /* Improved tap targets */
+            .nav-links a, 
+            .footer-links a {
+                padding: 12px 8px; /* Larger tap target */
+                display: inline-block;
+            }
+            
+            /* Better spacing for mobile */
+            .section {
+                padding: 60px 0;
+            }
+        }
+        
+        /* Improved table responsiveness */
+        @media screen and (max-width: 767px) {
+            table td::before {
+                width: 40%; /* Slightly narrower label column */
+                font-size: 0.8rem; /* Smaller label text */
+            }
+            
+            table td {
+                min-height: 44px; /* Ensure minimum tap target size */
+            }
+        }
     </style>
 </head>
 <body>
