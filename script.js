@@ -423,6 +423,13 @@ if (isAnalysisPage) {
     const secondaryColor = "#1c2541";  // var(--secondary)
     const mutedColor = "#6c757d";      // var(--muted)
 
+    // Define radii for points
+    const smallPointRadius = 2;
+    const smallPointHoverRadius = 4;
+    const tinyPointRadius = 2; // Radius for divergence points
+    const tinyPointHoverRadius = 4; // Hover radius for divergence points
+
+
     // --- Chart Helper Functions ---
 
     const createAnnotationLabel = (xVal, yVal, content, yAdj = -15, xAdj = 0) => ({
@@ -460,17 +467,12 @@ if (isAnalysisPage) {
         data: [], // No actual data needed for legend item
     });
 
-    // Callback to style points based on divergence
+    // Callback to style point COLOR based on divergence (only affects visible points)
     const pointStyleCallback = (indices = [], normalColor, highlightColor) => (context) => {
+        // Only return highlight color if the index is a divergence point
+        // Otherwise, return the normal color (this is important even if radius is 0,
+        // as Chart.js might still try to render something internally)
         return indices.includes(context.dataIndex) ? highlightColor : normalColor;
-    };
-
-    const pointRadiusCallback = (indices = [], normalRadius = 4, highlightRadius = 6) => (context) => {
-        return indices.includes(context.dataIndex) ? highlightRadius : normalRadius;
-    };
-
-    const pointHoverRadiusCallback = (indices = [], normalRadius = 6, highlightRadius = 8) => (context) => {
-        return indices.includes(context.dataIndex) ? highlightRadius : normalRadius;
     };
 
 
@@ -572,9 +574,11 @@ if (isAnalysisPage) {
                     tension: 0.4, // Smoother line
                     fill: true,
                     pointBackgroundColor: primaryColor,
-                    pointRadius: pointRadiusCallback([]), // Use callback even if no divergence
-                    pointHoverRadius: pointHoverRadiusCallback([]),
                     pointBorderColor: primaryColor,
+                    // --- MODIFIED: Set small radius for all points ---
+                    pointRadius: smallPointRadius,
+                    pointHoverRadius: smallPointHoverRadius,
+                    // --- END MODIFICATION ---
                   },
                 ],
               },
@@ -645,9 +649,11 @@ if (isAnalysisPage) {
                     borderWidth: 2,
                     tension: 0.4,
                     pointBackgroundColor: primaryColor,
-                    pointRadius: pointRadiusCallback([]),
-                    pointHoverRadius: pointHoverRadiusCallback([]),
                     pointBorderColor: primaryColor,
+                    // --- MODIFIED: Hide all points ---
+                    pointRadius: 0,
+                    pointHoverRadius: 0,
+                    // --- END MODIFICATION ---
                   },
                   {
                     label: "A/R Growth (%)",
@@ -656,13 +662,14 @@ if (isAnalysisPage) {
                     backgroundColor: "transparent", // No fill
                     borderWidth: 2,
                     tension: 0.4,
-                    // Style points based on divergence
-                    pointBackgroundColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor),
-                    pointRadius: pointRadiusCallback(arDivergenceIndices),
-                    pointHoverRadius: pointHoverRadiusCallback(arDivergenceIndices),
-                    pointBorderColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor),
+                    // --- MODIFIED: Only show TINY points for divergence ---
+                    pointRadius: (context) => arDivergenceIndices.includes(context.dataIndex) ? tinyPointRadius : 0,
+                    pointHoverRadius: (context) => arDivergenceIndices.includes(context.dataIndex) ? tinyPointHoverRadius : 0,
+                    pointBackgroundColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor), // Use callback for color
+                    pointBorderColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor),    // Use callback for color
+                    // --- END MODIFICATION ---
                   },
-                  // Add the dummy dataset for the legend item
+                  // Add the dummy dataset for the legend item (only shown if divergences exist via generateLabels)
                   createDivergenceLegend(),
                 ],
               },
@@ -729,9 +736,11 @@ if (isAnalysisPage) {
                     borderWidth: 2,
                     tension: 0.4,
                     pointBackgroundColor: primaryColor,
-                    pointRadius: pointRadiusCallback([]),
-                    pointHoverRadius: pointHoverRadiusCallback([]),
                     pointBorderColor: primaryColor,
+                    // --- MODIFIED: Hide all points ---
+                    pointRadius: 0,
+                    pointHoverRadius: 0,
+                    // --- END MODIFICATION ---
                   },
                   {
                     label: "Net Income Growth (%)",
@@ -740,13 +749,14 @@ if (isAnalysisPage) {
                     backgroundColor: "transparent",
                     borderWidth: 2,
                     tension: 0.4,
-                    // Style points based on divergence
-                    pointBackgroundColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor),
-                    pointRadius: pointRadiusCallback(cfDivergenceIndices),
-                    pointHoverRadius: pointHoverRadiusCallback(cfDivergenceIndices),
-                    pointBorderColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor),
+                    // --- MODIFIED: Only show TINY points for divergence ---
+                    pointRadius: (context) => cfDivergenceIndices.includes(context.dataIndex) ? tinyPointRadius : 0,
+                    pointHoverRadius: (context) => cfDivergenceIndices.includes(context.dataIndex) ? tinyPointHoverRadius : 0,
+                    pointBackgroundColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor), // Use callback for color
+                    pointBorderColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor),    // Use callback for color
+                    // --- END MODIFICATION ---
                   },
-                   // Add the dummy dataset for the legend item
+                   // Add the dummy dataset for the legend item (only shown if divergences exist via generateLabels)
                   createDivergenceLegend(),
                 ],
               },
