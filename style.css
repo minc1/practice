@@ -142,6 +142,8 @@ nav {
   cursor: pointer;
   transition: background-color 0.3s;
   min-height: 40px; /* Ensure good tap target */
+  min-width: 44px; /* Slightly bigger button */
+  border-radius: 0 20px 20px 0; /* Rounded right edge */
 }
 
 .InputContainer button:hover {
@@ -374,6 +376,50 @@ nav {
   margin-left: auto;
   min-height: 44px;
   min-width: 44px;
+}
+
+@media (max-width: 768px) {
+  /* Improved mobile menu button styling to match search toggle */
+  .mobile-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(197, 164, 126, 0.1);
+    border-radius: 50%;
+    color: var(--dark);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 8px;
+  }
+
+  .mobile-menu:hover,
+  .mobile-menu:focus {
+    background-color: rgba(197, 164, 126, 0.2);
+    color: var(--primary);
+    transform: scale(1.05);
+  }
+
+  /* Active state for mobile menu */
+  .nav-links.show ~ .mobile-menu,
+  .mobile-menu[aria-expanded="true"] {
+    background-color: rgba(197, 164, 126, 0.2);
+    color: var(--primary);
+  }
+
+  /* Adjust mobile search box appearance */
+  .InputContainer.show {
+    border-radius: 0;
+    overflow: hidden;
+  }
+
+  .InputContainer.show .input {
+    border-radius: 0;
+  }
+
+  .InputContainer.show button {
+    border-radius: 0;
+    width: 60px; /* Slightly bigger button on mobile */
+  }
 }
 
 .message-area {

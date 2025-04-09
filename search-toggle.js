@@ -2,6 +2,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const searchToggle = document.querySelector(".search-toggle")
   const inputContainer = document.querySelector(".InputContainer")
+  const mobileMenu = document.querySelector(".mobile-menu")
+  const navLinks = document.querySelector(".nav-links")
 
   if (searchToggle && inputContainer) {
     // Set initial state based on screen size
@@ -26,6 +28,16 @@ document.addEventListener("DOMContentLoaded", () => {
     searchToggle.addEventListener("click", () => {
       if (window.innerWidth <= 768) {
         const isVisible = inputContainer.classList.contains("show")
+
+        // Close mobile menu if open when search is toggled
+        if (navLinks && navLinks.classList.contains("show") && mobileMenu) {
+          navLinks.classList.remove("show")
+          mobileMenu.setAttribute("aria-expanded", "false")
+          if (mobileMenu.querySelector("i")) {
+            mobileMenu.querySelector("i").classList.remove("fa-times")
+            mobileMenu.querySelector("i").classList.add("fa-bars")
+          }
+        }
 
         // Toggle visibility class
         inputContainer.classList.toggle("show")
