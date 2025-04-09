@@ -286,28 +286,33 @@
         </section>
 
         <section class="section" id="opportunities">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Investment Considerations</h2>
-                    <p data-dynamic="opportunities-subtitle">Loading...</p>
-                </div>
+    <div class="container">
+        <div class="section-title">
+            <h2>Investment Considerations</h2>
+            <p data-dynamic="opportunities-subtitle">Loading...</p>
+        </div>
 
-                <div class="insight-list">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Factor</th>
-                                <th>Opportunities</th>
-                                <th>Risks</th>
-                            </tr>
-                        </thead>
-                        <tbody id="opportunities-table-body">
-                            <tr><td colspan="3">Loading table data...</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
+        <div class="insight-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Factor</th>
+                        <th>Opportunities</th>
+                        <th>Risks</th>
+                    </tr>
+                </thead>
+                <tbody id="opportunities-table-body">
+                    <tr><td colspan="3" style="text-align: center;">Loading investment considerations...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Add a mobile-friendly explanation -->
+        <div class="mobile-only-note" style="display: none; text-align: center; margin-top: 16px; font-size: 0.85rem; color: var(--muted);">
+            <p>Tap on each factor to explore opportunities and risks</p>
+        </div>
+    </div>
+</section>
 
         <section class="section conclusion" id="conclusion">
             <div class="container">
@@ -361,6 +366,20 @@
 
     <script src="script.js" defer></script>
     <script src="search-toggle.js"></script>
+    <script>
+    // Show the mobile note only on small screens
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileNote = document.querySelector('.mobile-only-note');
+        if (mobileNote) {
+            if (window.innerWidth <= 767) {
+                mobileNote.style.display = 'block';
+            }
+            
+            window.addEventListener('resize', function() {
+                mobileNote.style.display = window.innerWidth <= 767 ? 'block' : 'none';
+            });
+        }
+    });
+</script>
 </body>
 </html>
-
