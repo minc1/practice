@@ -1,0 +1,110 @@
+{
+    "company": {
+      "name": "Southwest Airlines Co.",
+      "ticker": "LUV",
+      "analysisTitle": "Forensic Financial Analysis",
+      "heroSubtitle": "Comprehensive examination of LUV's post-pandemic recovery deceleration, recent profitability pressures, and critical operating cash flow deterioration.",
+      "pageTitle": "ForensicFinancials | Southwest Airlines Co. (LUV) Analysis"
+    },
+    "trendAnalysis": {
+      "sectionSubtitle": "Analyzing LUV's journey: Pandemic impact, strong recovery, recent growth slowdown, and emerging cash flow concerns (FY2015-FY2024 & Quarterly Focus)",
+      "cards": [
+        {
+          "title": "Revenue Trajectory",
+          "iconClass": "fas fa-chart-line neutral",
+          "points": [
+            "<strong>Post-Pandemic Slowdown:</strong> Strong rebound in 2021 (+74.5%) and 2022 (+50.8%) followed by significant deceleration in 2023 (+9.6%) and 2024 (+5.3%), indicating demand normalization.",
+            "<strong>Quarterly Seasonality:</strong> Exhibits typical airline seasonality with strong Q2/Q3 QoQ growth and weaker Q1/Q4, though magnitudes vary.",
+            "<strong>Recent Quarterly Trend:</strong> Strong Q2 2024 (+16.2%) followed by decline in Q3 (-6.6%) and stabilization in Q4 (+0.9%), consistent with seasonal patterns but showing overall slowing momentum.",
+            "<strong>Long-Term View:</strong> Pre-pandemic growth was moderate (2-7%); the 10-year trend is heavily impacted by the 2020 collapse and subsequent recovery."
+          ],
+          "footer": "Strong post-pandemic recovery followed by significant growth deceleration; typical seasonality observed quarterly."
+        },
+        {
+          "title": "Profitability Trends",
+          "iconClass": "fas fa-chart-pie negative",
+          "points": [
+            "<strong>High Volatility:</strong> Net Income growth extremely volatile annually (e.g., -233.7% 2020, +131.8% 2021, -44.8% 2022, -13.7% 2023, 0% 2024) and quarterly (e.g., Q3'24 NI -81.7%).",
+            "<strong>Recent Pressure:</strong> Significant Operating Income decline in 2023 (-78%) due to cost pressures, followed by recovery in 2024 (+43.3%). Net Income stagnated at 0% growth in 2024.",
+            "<strong>Quarterly Weakness:</strong> Sharp profitability drop in Q3 2024 (OpInc -91.7%, NI -81.7%) despite moderate revenue decline, with only a weak recovery in Q4.",
+            "<strong>Cost Sensitivity:</strong> Profitability highly sensitive to operating costs (fuel, labor) and demand/pricing environment."
+          ],
+          "footer": "Highly volatile profitability; significant pressure in 2023, stagnation in 2024 Net Income despite Operating Income recovery."
+        },
+        {
+          "title": "Cash Flow Generation",
+          "iconClass": "fas fa-chart-bar negative",
+          "points": [
+            "<strong>Critical 2024 OCF Collapse:</strong> Operating Cash Flow (OCF) plummeted -85.4% in FY2024 despite flat Net Income, a major red flag.",
+            "<strong>Persistent NI vs. OCF Divergence:</strong> Frequent, significant divergences between Net Income and OCF growth annually (e.g., 2022, 2024) and quarterly (e.g., Q2'24, Q3'24).",
+            "<strong>Working Capital Driver:</strong> Divergences primarily driven by large, volatile swings in working capital (esp. Accounts Payable, Deferred Revenue) and non-cash charges.",
+            "<strong>Recent Quarterly OCF:</strong> Highly volatile QoQ, buffered by working capital in Q3'24 (+5.7% OCF vs -81.7% NI) but surging disproportionately in Q2'24 (+76.9% OCF vs +2.6% NI)."
+          ],
+          "footer": "Alarming 2024 OCF collapse; persistent NI/OCF divergence driven by working capital volatility."
+        }
+      ]
+    },
+    "financialMetrics": {
+      "sectionSubtitle": "Investigating cross-statement divergences, forensic flags, and solvency indicators",
+      "cards": [
+         {
+          "title": "Forensic Checks",
+          "iconClass": "fas fa-search negative",
+          "points": [
+              "<strong>OCF vs NI Divergence (Major Flag):</strong> The -85.4% OCF drop vs 0% NI growth in FY2024 is critical. Persistent divergences highlight that NI is an insufficient measure of cash generation.",
+              "<strong>Working Capital Volatility:</strong> Large swings in WC components (esp. Accounts Payable in 2024) significantly impact OCF, potentially masking underlying operational cash trends.",
+              "<strong>Revenue vs. AR Anomalies:</strong> Notable past flag in FY2019 (AR +91.2% vs Rev +2.1%). Recent potential flag in Q1 2024 (AR +17.3% vs Rev -7.2%), though annual 2024 AR trend (-2.8%) was favorable relative to revenue (+5.3%).",
+              "<strong>Inventory vs. COR:</strong> Annual divergences suggest COR heavily influenced by volatile input costs (fuel) rather than just physical inventory levels."
+          ],
+          "footer": "Critical flag: 2024 OCF collapse vs NI. Working capital volatility and past AR anomalies require scrutiny."
+        },
+        {
+          "title": "Solvency & Liquidity",
+          "iconClass": "fas fa-balance-scale neutral",
+          "points": [
+              "<strong>Deleveraging Efforts:</strong> Actively reducing debt post-pandemic (Total Debt growth negative FY2022-2024, esp. -35.9% LT Debt growth in 2024).",
+              "<strong>Investment Grade Rating:</strong> Maintains investment-grade status, indicating market confidence in long-term solvency.",
+              "<strong>Interest Coverage Volatility:</strong> Coverage deteriorated sharply in 2023 but improved significantly in 2024 due to higher Operating Income and lower interest expense.",
+              "<strong>Liquidity Buffer:</strong> Holds significant cash and short-term investments, providing a buffer.",
+              "<strong>FCF Pressure:</strong> The 2024 OCF collapse resulted in negative Free Cash Flow (-$1.6B), pressuring ability to fund investments and returns internally."
+          ],
+          "footer": "Active deleveraging and investment-grade rating are positives, but recent negative FCF is a concern."
+        }
+      ]
+    },
+    "investmentConsiderations": {
+      "sectionSubtitle": "Balancing LUV's market position against operational headwinds and financial concerns",
+      "tableData": [
+        { "factor": "<strong>Market Position</strong>", "opportunities": "Strong domestic brand, loyal customer base, historically efficient point-to-point model", "risks": "Intense competition (legacy & ULCCs), potential negative reaction to strategy shifts (e.g., fees)" },
+        { "factor": "<strong>Revenue</strong>", "opportunities": "New revenue initiatives (premium seating, ancillary fees), network optimization", "risks": "Slowing growth post-recovery, sensitivity to economic conditions and demand, yield pressure" },
+        { "factor": "<strong>Profitability</strong>", "opportunities": "Cost-cutting initiatives, potential easing of fuel/labor cost pressures, efficiency gains", "risks": "High volatility, significant margin pressure from costs, execution risk on efficiency plans" },
+        { "factor": "<strong>Cash Flow</strong>", "opportunities": "Potential OCF recovery if working capital normalizes and profitability improves", "risks": "Severe 2024 OCF decline, negative FCF, high sensitivity to working capital swings, reliance on external financing if OCF remains weak" },
+        { "factor": "<strong>Financial Health</strong>", "opportunities": "Continued deleveraging improving balance sheet, investment-grade rating", "risks": "Elevated debt vs. pre-pandemic, potential strain from negative FCF, volatile interest coverage" },
+        { "factor": "<strong>Shareholder Returns</strong>", "opportunities": "Resumption of dividends/buybacks signals some confidence", "risks": "Sustainability depends heavily on OCF/FCF recovery" },
+        { "factor": "<strong>Outlook</strong>", "opportunities": "Successful execution of cost/revenue plans, potential cyclical tailwinds", "risks": "Uncertain economic outlook, persistent cost inflation, execution risk on strategic changes" }
+      ]
+    },
+    "conclusion": {
+      "sectionSubtitle": "Synthesizing LUV's financial trajectory and investment profile",
+      "verdictTitle": "Navigating Turbulence: Deleveraging Positive, But OCF Collapse Demands Scrutiny",
+      "verdictRating": "Cautious / Medium Risk",
+      "paragraphs": [
+          "Southwest Airlines successfully navigated the pandemic-induced downturn, achieving record revenues in the recovery. However, growth has significantly decelerated, and profitability faced substantial pressure in 2023 before stabilizing somewhat in 2024. The company maintains an investment-grade rating and is actively reducing debt accumulated during the crisis.",
+          "The most critical forensic finding is the <strong>severe deterioration in Operating Cash Flow (OCF) in FY2024 (-85.4%)</strong>, leading to negative Free Cash Flow despite flat Net Income. This stark divergence, primarily driven by unfavorable working capital changes (specifically Accounts Payable), raises significant concerns about the quality and sustainability of underlying cash generation. Persistent NI vs. OCF divergences historically underscore this risk.",
+          "While LUV benefits from a strong brand and is pursuing cost-cutting and revenue initiatives, the recent OCF weakness overshadows the positive deleveraging efforts. The combination of slowing growth, stagnant net income, and critically weak cash flow necessitates a <strong>cautious investment stance</strong>, pending clear evidence of OCF recovery and successful execution of strategic adjustments."
+      ],
+      "monitoringPointsTitle": "Key Monitoring Points",
+      "monitoringPoints": [
+        "<strong>Operating Cash Flow Recovery:</strong> Track OCF generation quarterly, focusing on the underlying drivers beyond working capital swings (e.g., core profitability contribution) to assess if the 2024 collapse was temporary or structural.",
+        "<strong>Working Capital Management:</strong> Monitor key working capital accounts (Accounts Payable, Accounts Receivable, Deferred Revenue) and related ratios (DPO, DSO) for normalization and efficiency improvements.",
+        "<strong>Cost Initiative Execution & Margins:</strong> Assess progress towards stated cost-cutting goals and track operating margins to gauge effectiveness in combating persistent industry cost pressures (fuel, labor)."
+      ]
+    },
+    "chartData": {
+      "labels": ["FY2015", "FY2016", "FY2017", "FY2018", "FY2019", "FY2020", "FY2021", "FY2022", "FY2023", "FY2024"],
+      "revenueGrowth": [6.531, 3.052, 3.652, 3.75, 2.108, -59.658, 74.514, 50.817, 9.562, 5.335],
+      "arGrowth": [29.863, 15.19, 21.245, -14.199, 91.197, 4.052, 20.088, -23.36, 9.808, -2.802],
+      "cfoGrowth": [11.578, 32.582, -8.479, 24.536, -18.516, -1.283, 3.06, 63.221, -16.517, -85.398],
+      "niGrowth": [91.989, 2.889, 55.437, -29.329, -6.694, -2.337, 1.318, -44.831, -13.729, 0.0]
+    }
+  }

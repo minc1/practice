@@ -1,0 +1,111 @@
+{
+    "company": {
+      "name": "The Coca-Cola Company",
+      "ticker": "KO",
+      "analysisTitle": "Forensic Financial Analysis",
+      "heroSubtitle": "Analysis of KO's resilient organic growth, fluctuating reported metrics, and significant cash flow divergences.",
+      "pageTitle": "ForensicFinancials | The Coca-Cola Company (KO) Analysis"
+    },
+    "trendAnalysis": {
+      "sectionSubtitle": "Examining KO's long-term trends, recent performance variations, and organic vs. reported growth dynamics (FY2015-FY2024 & Recent Quarters)",
+      "cards": [
+        {
+          "title": "Revenue Trajectory",
+          "iconClass": "fas fa-chart-line neutral",
+          "points": [
+            "<strong>Long-Term Fluctuations:</strong> Annual revenue shows periods of decline (2015-18, 2020) and recovery (2019, 2021-23), with modest growth in 2024 (+2.9%).",
+            "<strong>Organic vs. Reported:</strong> External sources highlight stronger *organic* revenue growth driven by price/mix, often contrasting with more modest or negative *reported* net revenue growth influenced by currency and refranchising.",
+            "<strong>Quarterly Volatility:</strong> Recent quarters show mixed reported revenue growth (e.g., Q4 2024 -2.6%, Q3 2024 -4.1%, Q2 2024 +9.4%), indicating sensitivity to short-term factors.",
+            "<strong>Pricing Power:</strong> Demonstrated ability to drive growth through price/mix strategies, contributing to organic revenue resilience."
+          ],
+          "footer": "Inconsistent reported revenue growth, but stronger underlying organic performance driven by pricing."
+        },
+        {
+          "title": "Profitability Trends",
+          "iconClass": "fas fa-chart-pie neutral",
+          "points": [
+            "<strong>Variable Net Income:</strong> Annual Net Income growth has been volatile, including significant swings (-80.9% in 2017, +38.6% in 2019, +26.1% in 2021) and recent near-flat performance (-0.8% in 2024).",
+            "<strong>Margin Pressures:</strong> Profitability influenced by currency headwinds, comparability items, marketing investments, and input costs.",
+            "<strong>Quarterly EPS Performance:</strong> Recent quarters show mixed EPS results (e.g., Q4 2024 NI -22.9%, Q3 2024 NI +18.1%, Q2 2024 NI -24.1%), sometimes diverging from revenue trends.",
+            "<strong>Dividend Aristocrat:</strong> Long history of increasing dividends supported by underlying profitability, though payout ratio is relatively high."
+          ],
+          "footer": "Volatile net income growth; profitability impacted by various external and internal factors."
+        },
+        {
+          "title": "Cash Flow Generation",
+          "iconClass": "fas fa-chart-bar negative",
+          "points": [
+            "<strong>Major 2024 OCF Decline:</strong> Significant concern - Annual Operating Cash Flow (OCF) dropped sharply (-41.3%) in 2024 despite relatively flat Net Income (-0.8%).",
+            "<strong>Quarterly OCF Weakness:</strong> Specific quarters also showed substantial OCF declines (e.g., Q1 2024 -80.2%, Q4 2023 -37.9%), often diverging significantly from Net Income.",
+            "<strong>Cited Reasons:</strong> Declines attributed partly to higher tax payments (including IRS litigation deposits) and changes/cycling in working capital benefits.",
+            "<strong>Historical Divergence:</strong> While OCF often tracked NI historically (e.g., 2021), recent periods show a marked negative divergence, raising earnings quality questions."
+          ],
+          "footer": "Significant recent decline in Operating Cash Flow, diverging sharply from Net Income trends."
+        }
+      ]
+    },
+    "financialMetrics": {
+      "sectionSubtitle": "Investigating cross-statement divergences, forensic flags, and solvency indicators",
+      "cards": [
+         {
+          "title": "Forensic Checks",
+          "iconClass": "fas fa-search negative",
+          "points": [
+              "<strong>OCF vs NI Divergence (Critical):</strong> Major flag in FY2024 (NI -0.8% vs OCF -41.3%) and specific quarters (e.g., Q1 2024: NI +61.0% vs OCF -80.2%). Warrants deep scrutiny regarding earnings quality and cash conversion.",
+              "<strong>Working Capital Volatility:</strong> Significant swings noted in working capital's contribution to OCF (e.g., +92% change in 2021, large negative impacts cited in recent quarters/year).",
+              "<strong>Revenue vs. AR:</strong> Annual data shows inconsistent correlation (e.g., 2020 Rev -11.4% vs AR -20.8%; 2024 Rev +2.9% vs AR +4.7%). Receivables turnover appears healthy (avg 12.0x, peak 13.5x in 2024).",
+              "<strong>Inventory vs. COGS:</strong> Annual data shows periods where inventory growth didn't align with COGS changes (e.g., 2018 Inv +15.7% vs COGS -1.4%).",
+              "<strong>Factoring Use:</strong> Company utilizes accounts receivable factoring, which can impact reported cash flows and receivables timing."
+          ],
+          "footer": "Critical OCF vs NI divergence flag; notable working capital volatility."
+        },
+        {
+          "title": "Solvency & Liquidity",
+          "iconClass": "fas fa-balance-scale neutral",
+          "points": [
+              "<strong>Fluctuating Leverage:</strong> Debt-to-Equity ratio has varied (e.g., Macrotrends: 1.65 in 2021 -> 1.29 in 2023; Finbox: ~1.7-1.9 range recently).",
+              "<strong>Interest Coverage:</strong> Varies with EBIT and interest expense; requires monitoring.",
+              "<strong>Funding Mix:</strong> Relies on operating cash flow (recently weakened), debt issuance, and equity.",
+              "<strong>Shareholder Returns:</strong> Consistent dividend increases ('Dividend Aristocrat') and share repurchases significantly impact cash allocation and potentially leverage.",
+              "<strong>Risk Profile:</strong> External analysis suggests KO is less risky than peers, despite financial fluctuations."
+          ],
+          "footer": "Manageable but fluctuating leverage; strong commitment to shareholder returns impacts cash."
+        }
+      ]
+    },
+    "investmentConsiderations": {
+      "sectionSubtitle": "Balancing KO's brand strength against financial inconsistencies and market factors",
+      "tableData": [
+        { "factor": "<strong>Market Position</strong>", "opportunities": "Iconic global brand, extensive distribution network, strong competitive moat", "risks": "Intense competition (PepsiCo, others), changing consumer preferences (health focus)" },
+        { "factor": "<strong>Revenue</strong>", "opportunities": "Strong organic growth via pricing/mix, growth in emerging markets/categories (coffee, hydration)", "risks": "Reported revenue volatility due to FX/refranchising, potential slowdown in pricing power" },
+        { "factor": "<strong>Profitability</strong>", "opportunities": "Revenue growth management initiatives, cost efficiencies", "risks": "Margin pressure from input costs, currency headwinds, marketing investments" },
+        { "factor": "<strong>Cash Flow</strong>", "opportunities": "Potential normalization of tax/working capital impacts", "risks": "Significant recent OCF decline and divergence from NI, sustainability of cash generation for dividends/buybacks" },
+        { "factor": "<strong>Financial Health</strong>", "opportunities": "Manageable leverage historically, access to capital markets", "risks": "Fluctuating debt levels, impact of rising rates, reliance on potentially weakening OCF" },
+        { "factor": "<strong>Shareholder Returns</strong>", "opportunities": "Long track record of dividend growth, commitment to buybacks", "risks": "High payout ratio, sustainability dependent on future cash flow generation" },
+        { "factor": "<strong>Outlook</strong>", "opportunities": "'All-weather strategy' resilience, focus on innovation", "risks": "Global economic uncertainty, regulatory pressures (sugar taxes), FX volatility" }
+      ]
+    },
+    "conclusion": {
+      "sectionSubtitle": "Synthesizing KO's financial trajectory and investment profile",
+      "verdictTitle": "Resilient Brand Facing Cash Flow Headwinds",
+      "verdictRating": "Cautious / Medium Risk",
+      "paragraphs": [
+          "Coca-Cola leverages its iconic brand and global reach to deliver resilient <strong>organic revenue growth</strong>, primarily through effective pricing strategies. However, reported results often show volatility due to currency impacts and strategic shifts like refranchising.",
+          "Despite underlying operational strength, recent financial performance raises significant concerns, headlined by a sharp <strong>decline in Operating Cash Flow (-41.3% in FY2024)</strong> that starkly contrasts with relatively stable Net Income. This divergence, attributed partly to tax payments and working capital swings, demands close scrutiny regarding earnings quality and cash conversion efficiency.",
+          "While KO remains a 'Dividend Aristocrat' with a strong market position, the combination of inconsistent reported growth, profitability pressures, and particularly the significant OCF deterioration warrants a <strong>cautious outlook</strong>. Investors must monitor the normalization of cash flows to ensure the sustainability of shareholder returns and validate the quality of reported earnings."
+      ],
+      "monitoringPointsTitle": "Key Monitoring Points",
+      "monitoringPoints": [
+        "<strong>Operating Cash Flow vs. Net Income:</strong> Track the normalization of this relationship; persistent divergence is a major red flag.",
+        "<strong>Organic vs. Reported Revenue Drivers:</strong> Understand the impact of price/mix, volume, currency, and acquisitions/divestitures on top-line growth.",
+        "<strong>Working Capital Management:</strong> Monitor trends in receivables, inventory, and payables relative to sales and their impact on operating cash flow."
+      ]
+    },
+    "chartData": {
+      "labels": ["FY2015", "FY2016", "FY2017", "FY2018", "FY2019", "FY2020", "FY2021", "FY2022", "FY2023", "FY2024"],
+      "revenueGrowth": [-3.7, -5.5, -15.4, -3.1, 8.6, -11.4, 17.1, 11.3, 6.4, 2.9],
+      "arGrowth": [-11.8, -2.2, -4.9, 0.5, 7.8, -20.8, 11.7, -0.7, -2.2, 4.7],
+      "cfoGrowth": [-0.8, -16.5, -19.2, 7.3, 37.3, -6.0, 28.3, -12.7, 5.3, -41.3],
+      "niGrowth": [3.6, -11.2, -80.9, 4.2, 38.6, -13.1, 26.1, -2.3, 12.3, -0.8]
+    }
+  }
