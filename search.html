@@ -22,7 +22,7 @@
             position: relative;
             background-color: var(--secondary) !important;
         }
-        
+
         body::before {
             content: "";
             position: fixed;
@@ -30,7 +30,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+            background:
                 /* Thin vertical lines with varying opacity */
                 linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
@@ -43,7 +43,7 @@
                 /* Thick horizontal lines with varying opacity and color */
                 linear-gradient(rgba(255, 255, 255, 0.09) 2px, transparent 2px),
                 linear-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
-            background-size: 
+            background-size:
                 30px 30px, /* Tightened spacing */
                 60px 60px, /* Tightened spacing */
                 30px 30px, /* Tightened spacing */
@@ -53,7 +53,7 @@
                 120px 120px, /* Tightened spacing */
                 240px 240px; /* Tightened spacing */
             /* Centered vertical lines */
-            background-position: 
+            background-position:
                 calc(50% - 0px) 0, /* Center thin vertical lines */
                 calc(50% - 15px) 0, /* Offset second set of thin vertical lines */
                 0 0,
@@ -65,7 +65,7 @@
             z-index: -2;
             pointer-events: none;
         }
-        
+
         /* Rest of the existing styles remain unchanged */
         body::after {
             content: "";
@@ -84,25 +84,25 @@
             z-index: -1;
             pointer-events: none;
         }
-        
+
         /* Z-index management */
         #header {
             position: relative;
             z-index: 10;
         }
-        
+
         main {
             position: relative;
             z-index: 1;
         }
-        
+
         /* Fix footer margin */
         footer {
             margin-top: 0 !important;
             position: relative;
             z-index: 1;
         }
-        
+
         /* Search hero styles */
         .search-hero {
             display: flex;
@@ -215,7 +215,7 @@
             font-size: 0.9rem;
             font-style: italic;
         }
-        
+
         /* Mobile improvements */
         @media (max-width: 768px) {
             .search-container {
@@ -265,9 +265,9 @@
             .search-examples {
                 font-size: 0.85rem;
             }
-            
+
             /* Improved tap targets */
-            .nav-links a, 
+            .nav-links a,
             .footer-links a {
                 padding: 12px 8px; /* Larger tap target */
                 display: inline-block;
@@ -327,6 +327,9 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
+                <button class="search-toggle" aria-label="Toggle search">
+                    <i class="fas fa-search"></i>
+                </button>
                 <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
                     <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
                     <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
@@ -384,5 +387,7 @@
             });
         }
     </script>
+    <script src="search-toggle.js"></script>
 </body>
 </html>
+
