@@ -6,31 +6,17 @@
 const DEFAULT_TICKER = "AAPL"
 const DATA_PATH = "DATA/"
 const DIVERGENCE_THRESHOLD = 30.0
-const MOBILE_BREAKPOINT = 768; // px width
-const MOBILE_DATA_POINTS = 10;
+const MOBILE_BREAKPOINT = 768; // Define mobile breakpoint width
+const MAX_DATA_POINTS_MOBILE = 10; // Max data points for mobile charts
 
-let currentTicker = null;
-let revenueChartInstance = null;
-let arChartInstance = null;
-let cashFlowChartInstance = null;
+let currentTicker = null
+let revenueChartInstance = null
+let arChartInstance = null
+let cashFlowChartInstance = null
 
-// Store full data to allow resizing between mobile/desktop views
-let fullChartData = {
-    labels: [],
-    revenueGrowth: [],
-    arGrowth: [],
-    cfoGrowth: [],
-    niGrowth: [],
-    annotations: {} // Store full annotations if needed later
-};
-// Store current divergence indices based on displayed data
-let currentArIndices = [];
-let currentCfIndices = [];
-let isCurrentlyMobile = window.innerWidth <= MOBILE_BREAKPOINT; // Initial state
-
-const isAnalysisPage = window.location.pathname.includes("analysis.html");
-const isSearchPage = window.location.pathname.includes("search.html");
-const isLandingPage = !isAnalysisPage && !isSearchPage;
+const isAnalysisPage = window.location.pathname.includes("analysis.html")
+const isSearchPage = window.location.pathname.includes("search.html")
+const isLandingPage = !isAnalysisPage && !isSearchPage
 
 // --- Helper Functions ---
 
@@ -204,13 +190,8 @@ const destroyCharts = () => {
     cashFlowChartInstance.destroy()
     cashFlowChartInstance = null
   }
-  // Reset global data stores
-  fullChartData = { labels: [], revenueGrowth: [], arGrowth: [], cfoGrowth: [], niGrowth: [], annotations: {} };
-  currentArIndices = [];
-  currentCfIndices = [];
 }
 
-// Calculate divergence based on *currently displayed* data
 const calculateDivergenceIndices = (data1, data2, threshold) => {
   if (!Array.isArray(data1) || !Array.isArray(data2) || data1.length !== data2.length) {
     console.warn("Invalid data for divergence calculation.");
@@ -228,12 +209,6 @@ const calculateDivergenceIndices = (data1, data2, threshold) => {
     }
   }
   return indices
-}
-
-// Function to get the appropriate slice of data based on mobile status
-const getDisplayData = (fullArray) => {
-    if (!Array.isArray(fullArray)) return [];
-    return isCurrentlyMobile ? fullArray.slice(-MOBILE_DATA_POINTS) : fullArray;
 }
 
 
@@ -463,7 +438,7 @@ if (isAnalysisPage) {
 
     const createAnnotationLabel = (xVal, yVal, content, yAdj = -15, xAdj = 0) => ({
         type: 'label',
-        xValue: xVal, // This is the INDEX in the *displayed* data
+        xValue: xVal,
         yValue: yVal,
         content: content,
         color: mutedColor,
@@ -474,19 +449,21 @@ if (isAnalysisPage) {
         backgroundColor: 'rgba(255,255,255,0.85)',
         padding: { top: 3, bottom: 3, left: 5, right: 5 },
         borderRadius: 4,
+        // Optional callout line
         callout: {
             display: true,
             position: 'bottom',
             borderWidth: 1,
             borderColor: 'rgba(0,0,0,0.1)',
-            margin: 5
+            margin: 5 // Distance from point to label start
         }
     });
 
     // Creates a dummy dataset purely for the legend item
     const createDivergenceLegend = () => ({
         label: 'Divergence',
-        pointStyle: 'rectRot',
+        // Use a distinct point style for the legend
+        pointStyle: 'rectRot', // Rotated square
         pointRadius: 5,
         borderColor: divergenceColor,
         backgroundColor: divergenceColor,
@@ -494,23 +471,12 @@ if (isAnalysisPage) {
         data: [], // No actual data needed for legend item
     });
 
-    // Callback to style point COLOR based on divergence (uses GLOBAL indices)
-    const pointStyleCallback = (indicesVarName, normalColor, highlightColor) => (context) => {
-        // Access the correct global index array (currentArIndices or currentCfIndices)
-        const indices = window[indicesVarName] || [];
+    // Callback to style point COLOR based on divergence (only affects visible points)
+    const pointStyleCallback = (indices = [], normalColor, highlightColor) => (context) => {
+        // Only return highlight color if the index is a divergence point
+        // Otherwise, return the normal color (this is important even if radius is 0,
+        // as Chart.js might still try to render something internally)
         return indices.includes(context.dataIndex) ? highlightColor : normalColor;
-    };
-
-    // Callback for point RADIUS (uses GLOBAL indices)
-    const pointRadiusCallback = (indicesVarName, highlightRadius = tinyPointRadius, defaultRadius = 0) => (context) => {
-        const indices = window[indicesVarName] || [];
-        return indices.includes(context.dataIndex) ? highlightRadius : defaultRadius;
-    };
-
-    // Callback for point HOVER RADIUS (uses GLOBAL indices)
-    const pointHoverRadiusCallback = (indicesVarName, highlightHoverRadius = tinyPointHoverRadius, defaultHoverRadius = 0) => (context) => {
-        const indices = window[indicesVarName] || [];
-        return indices.includes(context.dataIndex) ? highlightHoverRadius : defaultHoverRadius;
     };
 
 
@@ -523,7 +489,7 @@ if (isAnalysisPage) {
       }
 
       showMessage(`<i class="fas fa-spinner fa-spin"></i> Loading analysis for ${ticker}...`, "loading")
-      destroyCharts() // Clear previous charts and global data
+      destroyCharts() // Clear previous charts
 
       const searchButton = select("#tickerSearchForm button") // Button in analysis header
       if (searchButton) searchButton.disabled = true // Disable button during load
@@ -534,37 +500,48 @@ if (isAnalysisPage) {
         if (!response.ok) {
           if (response.status === 404) {
             console.warn(`Data file not found for ${ticker}. Redirecting to error page.`);
+            // Redirect to the specific error page for unsupported tickers
             window.location.href = `error-loading.html?ticker=${ticker}`
-            return
+            return // Stop execution here
           } else {
+            // Handle other HTTP errors (e.g., 500 Internal Server Error)
             throw new Error(`HTTP error! status: ${response.status} - Could not fetch data for ${ticker}.`)
           }
         }
 
         const data = await response.json()
 
+        // Basic data validation
         if (!data || typeof data !== "object") {
           throw new Error(`Invalid data format received for ticker "${ticker}". Expected JSON object.`)
         }
         if (!data.company || !data.chartData) {
              console.warn(`Incomplete data structure for ${ticker}. Missing 'company' or 'chartData'.`);
+             // Decide how to handle: show partial data or error out?
+             // For now, proceed but expect potential issues.
         }
+
 
         currentTicker = ticker // Update the currently displayed ticker
 
-        // --- Populate Dynamic Content (Excluding Charts for now) ---
+        // --- Populate Dynamic Content ---
         populateElement('[data-dynamic="page-title"]', data.company?.pageTitle || `ForensicFinancials | ${ticker} Analysis`)
         populateElement('[data-dynamic="hero-title"]', `${data.company?.name || ticker} (${data.company?.ticker || ticker})<br>${data.company?.analysisTitle || "Financial Analysis"}`, "innerHTML")
         populateElement('[data-dynamic="hero-subtitle"]', data.company?.heroSubtitle || `Analysis details for ${ticker}.`)
+
         populateElement('[data-dynamic="trends-subtitle"]', data.trendAnalysis?.sectionSubtitle || "")
         generateCards("trends-cards-container", data.trendAnalysis?.cards || [])
+
         populateElement('[data-dynamic="financials-subtitle"]', data.financialMetrics?.sectionSubtitle || "")
         generateCards("financials-cards-container", data.financialMetrics?.cards || [])
+
         populateElement('[data-dynamic="opportunities-subtitle"]', data.investmentConsiderations?.sectionSubtitle || "")
         populateTable("opportunities-table-body", data.investmentConsiderations?.tableData || [])
+
         populateElement('[data-dynamic="conclusion-subtitle"]', data.conclusion?.sectionSubtitle || "")
         populateElement('[data-dynamic="verdict-title"]', data.conclusion?.verdictTitle || `Verdict for ${ticker}`)
         populateElement('[data-dynamic="verdict-rating"]', data.conclusion?.verdictRating || "N/A")
+        // Populate conclusion paragraphs
         const paragraphsContainer = select("#verdict-paragraphs")
         if (paragraphsContainer && Array.isArray(data.conclusion?.paragraphs)) {
             paragraphsContainer.innerHTML = data.conclusion.paragraphs.map(p => `<p>${p || ""}</p>`).join('');
@@ -572,47 +549,56 @@ if (isAnalysisPage) {
             paragraphsContainer.innerHTML = "<p>Conclusion details not available.</p>";
         }
         populateElement('[data-dynamic="monitoring-title"]', data.conclusion?.monitoringPointsTitle || "Key Monitoring Points")
-        populateList("monitoring-points-list", data.conclusion?.monitoringPoints || [], true)
-
-        // --- Store Full Chart Data ---
-        const rawChartData = data.chartData || {};
-        fullChartData.labels = rawChartData.labels || [];
-        fullChartData.revenueGrowth = rawChartData.revenueGrowth || [];
-        fullChartData.arGrowth = rawChartData.arGrowth || [];
-        fullChartData.cfoGrowth = rawChartData.cfoGrowth || [];
-        fullChartData.niGrowth = rawChartData.niGrowth || [];
-        fullChartData.annotations = rawChartData.annotations || {}; // Store annotations
-
-        // --- Determine Initial Display Data based on current viewport ---
-        isCurrentlyMobile = window.innerWidth <= MOBILE_BREAKPOINT; // Update based on current width
-        const displayLabels = getDisplayData(fullChartData.labels);
-        const displayRevenueGrowth = getDisplayData(fullChartData.revenueGrowth);
-        const displayArGrowth = getDisplayData(fullChartData.arGrowth);
-        const displayCfoGrowth = getDisplayData(fullChartData.cfoGrowth);
-        const displayNiGrowth = getDisplayData(fullChartData.niGrowth);
-
-        // Calculate initial divergence points based on *displayed* data
-        currentArIndices = calculateDivergenceIndices(displayRevenueGrowth, displayArGrowth, DIVERGENCE_THRESHOLD);
-        currentCfIndices = calculateDivergenceIndices(displayCfoGrowth, displayNiGrowth, DIVERGENCE_THRESHOLD);
+        populateList("monitoring-points-list", data.conclusion?.monitoringPoints || [], true) // Use innerHTML for monitoring points
 
         // --- Chart Rendering ---
+        const chartData = data.chartData || {}
+        let originalLabels = chartData.labels || []
+        let originalRevenueGrowth = chartData.revenueGrowth || []
+        let originalArGrowth = chartData.arGrowth || []
+        let originalCfoGrowth = chartData.cfoGrowth || []
+        let originalNiGrowth = chartData.niGrowth || []
+
+        // --- MODIFIED: Limit data points on mobile ---
+        const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+        let displayLabels = originalLabels;
+        let displayRevenueGrowth = originalRevenueGrowth;
+        let displayArGrowth = originalArGrowth;
+        let displayCfoGrowth = originalCfoGrowth;
+        let displayNiGrowth = originalNiGrowth;
+
+        if (isMobile && originalLabels.length > MAX_DATA_POINTS_MOBILE) {
+            console.log(`Mobile detected. Slicing data to last ${MAX_DATA_POINTS_MOBILE} points.`);
+            const sliceStart = originalLabels.length - MAX_DATA_POINTS_MOBILE;
+            displayLabels = originalLabels.slice(sliceStart);
+            displayRevenueGrowth = originalRevenueGrowth.slice(sliceStart);
+            displayArGrowth = originalArGrowth.slice(sliceStart);
+            displayCfoGrowth = originalCfoGrowth.slice(sliceStart);
+            displayNiGrowth = originalNiGrowth.slice(sliceStart);
+        }
+        // --- END MODIFICATION ---
+
+        // Calculate divergence points *based on the data being displayed*
+        const arDivergenceIndices = calculateDivergenceIndices(displayRevenueGrowth, displayArGrowth, DIVERGENCE_THRESHOLD);
+        const cfDivergenceIndices = calculateDivergenceIndices(displayCfoGrowth, displayNiGrowth, DIVERGENCE_THRESHOLD);
+
 
         // Revenue Chart
         const revenueCtx = select("#revenueChart")?.getContext("2d")
-        if (revenueCtx && displayRevenueGrowth.length > 0) {
+        if (revenueCtx && displayRevenueGrowth.length > 0) { // Check if data exists after potential slicing
           try {
             revenueChartInstance = new Chart(revenueCtx, {
               type: "line",
               data: {
-                labels: displayLabels, // Use display data
+                labels: displayLabels, // Use potentially sliced labels
                 datasets: [
                   {
                     label: "Annual Revenue Growth (%)",
-                    data: displayRevenueGrowth, // Use display data
+                    data: displayRevenueGrowth, // Use potentially sliced data
                     borderColor: primaryColor,
-                    backgroundColor: "rgba(197, 164, 126, 0.1)",
+                    backgroundColor: "rgba(197, 164, 126, 0.1)", // Light fill
                     borderWidth: 2.5,
-                    tension: 0.4,
+                    tension: 0.4, // Smoother line
                     fill: true,
                     pointBackgroundColor: primaryColor,
                     pointBorderColor: primaryColor,
@@ -621,64 +607,81 @@ if (isAnalysisPage) {
                   },
                 ],
               },
-              options: JSON.parse(JSON.stringify(commonChartOptions)),
+              options: JSON.parse(JSON.stringify(commonChartOptions)), // Deep copy options
             })
           } catch (error) {
              console.error("Error creating Revenue Chart:", error);
-             revenueCtx.font = "14px Arial"; revenueCtx.fillStyle = "red"; revenueCtx.textAlign = "center";
+             revenueCtx.font = "14px Arial";
+             revenueCtx.fillStyle = "red";
+             revenueCtx.textAlign = "center";
              revenueCtx.fillText("Error loading chart", revenueCtx.canvas.width / 2, revenueCtx.canvas.height / 2);
           }
         } else {
-          console.warn("Revenue chart canvas or data not found/empty")
+          console.warn("Revenue chart canvas or data not found (or sliced to empty on mobile)")
         }
 
         // Accounts Receivable vs Revenue Chart
         const arCtx = select("#arChart")?.getContext("2d")
-        if (arCtx && displayRevenueGrowth.length > 0 && displayArGrowth.length > 0) {
+        if (arCtx && displayRevenueGrowth.length > 0 && displayArGrowth.length > 0) { // Check data after slicing
           try {
-            const arChartOptions = JSON.parse(JSON.stringify(commonChartOptions));
+            const arChartOptions = JSON.parse(JSON.stringify(commonChartOptions)); // Deep copy
 
-            // --- Dynamic Annotations based on displayed data ---
-            arChartOptions.plugins.annotation = { annotations: {} };
-            if (typeof ChartAnnotation !== 'undefined' && fullChartData.annotations?.arChart && Array.isArray(fullChartData.annotations.arChart)) {
-                const startIndex = isCurrentlyMobile ? Math.max(0, fullChartData.labels.length - MOBILE_DATA_POINTS) : 0;
-                fullChartData.annotations.arChart.forEach((anno, fullIndex) => {
-                    // Check if the annotation's original index falls within the displayed range
-                    const displayIndex = fullIndex - startIndex;
-                    if (displayIndex >= 0 && displayIndex < displayLabels.length) {
-                         if (typeof anno.xVal === 'number' && typeof anno.yVal === 'number' && anno.content) {
-                            // Use the displayIndex for xValue
-                            arChartOptions.plugins.annotation.annotations[`arLabel${fullIndex + 1}`] = createAnnotationLabel(displayIndex, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
+            // Add annotations if plugin loaded and data exists
+            // Note: Annotations from JSON are based on original data indices.
+            // If data is sliced, annotations might point to non-existent data points or wrong years.
+            // A more robust solution would involve mapping annotations to the sliced data,
+            // but keeping it simple as requested, we'll add them as they are.
+            arChartOptions.plugins.annotation = { annotations: {} }; // Ensure structure
+            if (typeof ChartAnnotation !== 'undefined' && chartData.annotations?.arChart && Array.isArray(chartData.annotations.arChart)) {
+                chartData.annotations.arChart.forEach((anno, index) => {
+                    // Check if the annotation's xValue (index) exists in the *displayed* data
+                    if (typeof anno.xVal === 'number' && anno.xVal >= 0 && anno.xVal < displayLabels.length && typeof anno.yVal === 'number' && anno.content) {
+                        // Adjust xVal if data was sliced
+                        const adjustedXVal = isMobile && originalLabels.length > MAX_DATA_POINTS_MOBILE
+                            ? Math.max(0, anno.xVal - (originalLabels.length - MAX_DATA_POINTS_MOBILE))
+                            : anno.xVal;
+
+                        // Only add if the adjusted index is valid for the displayed data
+                        if (adjustedXVal >= 0 && adjustedXVal < displayLabels.length) {
+                           arChartOptions.plugins.annotation.annotations[`arLabel${index + 1}`] = createAnnotationLabel(adjustedXVal, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
                         } else {
-                            console.warn(`Invalid annotation data at original index ${fullIndex} for AR chart.`);
+                            console.warn(`AR Annotation ${index+1} skipped: Original index ${anno.xVal} is outside the range of displayed mobile data.`);
                         }
+                    } else {
+                        console.warn(`Invalid or out-of-bounds annotation data at index ${index} for AR chart.`);
                     }
                 });
             }
-            // --- End Dynamic Annotations ---
 
 
+            // Customize legend generation to include divergence item conditionally
             arChartOptions.plugins.legend.labels.generateLabels = (chart) => {
                 const defaultLabels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
                 defaultLabels.forEach(label => {
-                    if (label.datasetIndex === 1) { label.fillStyle = secondaryColor; label.strokeStyle = secondaryColor; }
-                    else if (label.datasetIndex === 2) { label.fillStyle = divergenceColor; label.strokeStyle = divergenceColor; }
+                    if (label.datasetIndex === 1) { // A/R Growth
+                        label.fillStyle = secondaryColor;
+                        label.strokeStyle = secondaryColor;
+                    } else if (label.datasetIndex === 2) { // Divergence Legend Item
+                         label.fillStyle = divergenceColor;
+                         label.strokeStyle = divergenceColor;
+                    }
                 });
-                // Use currentArIndices (global) to decide if legend item is shown
-                if (currentArIndices.length === 0) {
+                // Filter out the dummy 'Divergence' dataset if no points are highlighted (based on displayed data)
+                if (arDivergenceIndices.length === 0) {
                     return defaultLabels.filter(label => label.datasetIndex !== 2);
                 }
                 return defaultLabels;
             };
 
+
             arChartInstance = new Chart(arCtx, {
               type: "line",
               data: {
-                labels: displayLabels, // Use display data
+                labels: displayLabels, // Use potentially sliced labels
                 datasets: [
                   {
                     label: "Revenue Growth (%)",
-                    data: displayRevenueGrowth, // Use display data
+                    data: displayRevenueGrowth, // Use potentially sliced data
                     borderColor: primaryColor,
                     backgroundColor: "transparent",
                     borderWidth: 2,
@@ -690,62 +693,75 @@ if (isAnalysisPage) {
                   },
                   {
                     label: "A/R Growth (%)",
-                    data: displayArGrowth, // Use display data
+                    data: displayArGrowth, // Use potentially sliced data
                     borderColor: secondaryColor,
                     backgroundColor: "transparent",
                     borderWidth: 2,
                     tension: 0.4,
-                    // Reference GLOBAL indices via variable name string
-                    pointRadius: pointRadiusCallback('currentArIndices'),
-                    pointHoverRadius: pointHoverRadiusCallback('currentArIndices'),
-                    pointBackgroundColor: pointStyleCallback('currentArIndices', secondaryColor, divergenceColor),
-                    pointBorderColor: pointStyleCallback('currentArIndices', secondaryColor, divergenceColor),
+                    // Use recalculated divergence indices
+                    pointRadius: (context) => arDivergenceIndices.includes(context.dataIndex) ? tinyPointRadius : 0,
+                    pointHoverRadius: (context) => arDivergenceIndices.includes(context.dataIndex) ? tinyPointHoverRadius : 0,
+                    pointBackgroundColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor),
+                    pointBorderColor: pointStyleCallback(arDivergenceIndices, secondaryColor, divergenceColor),
                   },
-                  createDivergenceLegend(), // Dummy dataset for legend
+                  createDivergenceLegend(),
                 ],
               },
               options: arChartOptions,
             })
           } catch (error) {
             console.error("Error creating AR Chart:", error);
-             arCtx.font = "14px Arial"; arCtx.fillStyle = "red"; arCtx.textAlign = "center";
+             arCtx.font = "14px Arial";
+             arCtx.fillStyle = "red";
+             arCtx.textAlign = "center";
              arCtx.fillText("Error loading chart", arCtx.canvas.width / 2, arCtx.canvas.height / 2);
           }
         } else {
-          console.warn("AR chart canvas or data not found/empty")
+          console.warn("AR chart canvas or data not found (or sliced to empty on mobile)")
         }
 
         // Cash Flow vs Net Income Chart
         const cashFlowCtx = select("#cashFlowChart")?.getContext("2d")
-        if (cashFlowCtx && displayCfoGrowth.length > 0 && displayNiGrowth.length > 0) {
+        if (cashFlowCtx && displayCfoGrowth.length > 0 && displayNiGrowth.length > 0) { // Check data after slicing
           try {
-            const cashFlowChartOptions = JSON.parse(JSON.stringify(commonChartOptions));
+            const cashFlowChartOptions = JSON.parse(JSON.stringify(commonChartOptions)); // Deep copy
 
-             // --- Dynamic Annotations based on displayed data ---
-            cashFlowChartOptions.plugins.annotation = { annotations: {} };
-             if (typeof ChartAnnotation !== 'undefined' && fullChartData.annotations?.cashFlowChart && Array.isArray(fullChartData.annotations.cashFlowChart)) {
-                const startIndex = isCurrentlyMobile ? Math.max(0, fullChartData.labels.length - MOBILE_DATA_POINTS) : 0;
-                fullChartData.annotations.cashFlowChart.forEach((anno, fullIndex) => {
-                    const displayIndex = fullIndex - startIndex;
-                     if (displayIndex >= 0 && displayIndex < displayLabels.length) {
-                         if (typeof anno.xVal === 'number' && typeof anno.yVal === 'number' && anno.content) {
-                            cashFlowChartOptions.plugins.annotation.annotations[`cfLabel${fullIndex + 1}`] = createAnnotationLabel(displayIndex, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
+            // Add annotations (adjusting index if sliced, similar to AR chart)
+            cashFlowChartOptions.plugins.annotation = { annotations: {} }; // Ensure structure
+             if (typeof ChartAnnotation !== 'undefined' && chartData.annotations?.cashFlowChart && Array.isArray(chartData.annotations.cashFlowChart)) {
+                chartData.annotations.cashFlowChart.forEach((anno, index) => {
+                    if (typeof anno.xVal === 'number' && anno.xVal >= 0 && anno.xVal < displayLabels.length && typeof anno.yVal === 'number' && anno.content) {
+                         // Adjust xVal if data was sliced
+                        const adjustedXVal = isMobile && originalLabels.length > MAX_DATA_POINTS_MOBILE
+                            ? Math.max(0, anno.xVal - (originalLabels.length - MAX_DATA_POINTS_MOBILE))
+                            : anno.xVal;
+
+                        // Only add if the adjusted index is valid for the displayed data
+                        if (adjustedXVal >= 0 && adjustedXVal < displayLabels.length) {
+                            cashFlowChartOptions.plugins.annotation.annotations[`cfLabel${index + 1}`] = createAnnotationLabel(adjustedXVal, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
                         } else {
-                            console.warn(`Invalid annotation data at original index ${fullIndex} for Cash Flow chart.`);
+                             console.warn(`Cash Flow Annotation ${index+1} skipped: Original index ${anno.xVal} is outside the range of displayed mobile data.`);
                         }
+                    } else {
+                        console.warn(`Invalid or out-of-bounds annotation data at index ${index} for Cash Flow chart.`);
                     }
                 });
             }
-            // --- End Dynamic Annotations ---
 
+             // Customize legend generation
             cashFlowChartOptions.plugins.legend.labels.generateLabels = (chart) => {
                 const defaultLabels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
                 defaultLabels.forEach(label => {
-                    if (label.datasetIndex === 1) { label.fillStyle = secondaryColor; label.strokeStyle = secondaryColor; }
-                    else if (label.datasetIndex === 2) { label.fillStyle = divergenceColor; label.strokeStyle = divergenceColor; }
+                    if (label.datasetIndex === 1) { // Net Income Growth
+                        label.fillStyle = secondaryColor;
+                        label.strokeStyle = secondaryColor;
+                    } else if (label.datasetIndex === 2) { // Divergence Legend Item
+                         label.fillStyle = divergenceColor;
+                         label.strokeStyle = divergenceColor;
+                    }
                 });
-                // Use currentCfIndices (global)
-                if (currentCfIndices.length === 0) {
+                 // Filter out the dummy 'Divergence' dataset if no points are highlighted (based on displayed data)
+                if (cfDivergenceIndices.length === 0) {
                     return defaultLabels.filter(label => label.datasetIndex !== 2);
                 }
                 return defaultLabels;
@@ -754,11 +770,11 @@ if (isAnalysisPage) {
             cashFlowChartInstance = new Chart(cashFlowCtx, {
               type: "line",
               data: {
-                labels: displayLabels, // Use display data
+                labels: displayLabels, // Use potentially sliced labels
                 datasets: [
                   {
                     label: "Op Cash Flow Growth (%)",
-                    data: displayCfoGrowth, // Use display data
+                    data: displayCfoGrowth, // Use potentially sliced data
                     borderColor: primaryColor,
                     backgroundColor: "transparent",
                     borderWidth: 2,
@@ -770,38 +786,42 @@ if (isAnalysisPage) {
                   },
                   {
                     label: "Net Income Growth (%)",
-                    data: displayNiGrowth, // Use display data
+                    data: displayNiGrowth, // Use potentially sliced data
                     borderColor: secondaryColor,
                     backgroundColor: "transparent",
                     borderWidth: 2,
                     tension: 0.4,
-                    // Reference GLOBAL indices via variable name string
-                    pointRadius: pointRadiusCallback('currentCfIndices'),
-                    pointHoverRadius: pointHoverRadiusCallback('currentCfIndices'),
-                    pointBackgroundColor: pointStyleCallback('currentCfIndices', secondaryColor, divergenceColor),
-                    pointBorderColor: pointStyleCallback('currentCfIndices', secondaryColor, divergenceColor),
+                    // Use recalculated divergence indices
+                    pointRadius: (context) => cfDivergenceIndices.includes(context.dataIndex) ? tinyPointRadius : 0,
+                    pointHoverRadius: (context) => cfDivergenceIndices.includes(context.dataIndex) ? tinyPointHoverRadius : 0,
+                    pointBackgroundColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor),
+                    pointBorderColor: pointStyleCallback(cfDivergenceIndices, secondaryColor, divergenceColor),
                   },
-                  createDivergenceLegend(), // Dummy dataset for legend
+                  createDivergenceLegend(),
                 ],
               },
               options: cashFlowChartOptions,
             })
           } catch (error) {
             console.error("Error creating Cash Flow Chart:", error);
-             cashFlowCtx.font = "14px Arial"; cashFlowCtx.fillStyle = "red"; cashFlowCtx.textAlign = "center";
+             cashFlowCtx.font = "14px Arial";
+             cashFlowCtx.fillStyle = "red";
+             cashFlowCtx.textAlign = "center";
              cashFlowCtx.fillText("Error loading chart", cashFlowCtx.canvas.width / 2, cashFlowCtx.canvas.height / 2);
           }
         } else {
-          console.warn("Cash Flow chart canvas or data not found/empty")
+          console.warn("Cash Flow chart canvas or data not found (or sliced to empty on mobile)")
         }
 
-        handleResize() // Initial resize call for font sizes etc. AFTER charts are created
+        handleResize() // Initial resize call after charts are created
 
         showMessage(null) // Hide loading message, show content
         window.scrollTo({ top: 0, behavior: "smooth" }) // Scroll to top after load
 
       } catch (error) {
         console.error("Error loading or processing analysis data:", error)
+        // Show generic error or redirect for non-404 fetch errors or JSON parsing errors
+        // Redirecting to error page provides a consistent user experience for failures
         window.location.href = `error-loading.html?ticker=${ticker}&error=${encodeURIComponent(error.message)}`
       } finally {
         if (searchButton) searchButton.disabled = false // Re-enable search button
@@ -811,18 +831,21 @@ if (isAnalysisPage) {
     // --- Event Listeners for Analysis Page ---
 
     // Analysis Page: Header Search Form (Handles reload/update)
-    const analysisHeaderSearchForm = select("#tickerSearchForm")
-    const tickerInput = select("#tickerInput")
+    const analysisHeaderSearchForm = select("#tickerSearchForm") // Specific ID for analysis page header form
+    const tickerInput = select("#tickerInput") // Input field in analysis page header
     if (analysisHeaderSearchForm && tickerInput) {
       analysisHeaderSearchForm.addEventListener("submit", (e) => {
-        e.preventDefault()
+        e.preventDefault() // Prevent default page reload
         const newTicker = tickerInput.value.trim().toUpperCase()
         if (newTicker && newTicker !== currentTicker) {
-          loadAnalysisData(newTicker)
+          loadAnalysisData(newTicker) // Load data for the new ticker
+          // Update URL without full page reload for better UX
           const newUrl = `${window.location.pathname}?ticker=${newTicker}`
-          window.history.pushState({ path: newUrl }, "", newUrl)
+          window.history.pushState({ path: newUrl }, "", newUrl) // Update browser history
         } else if (!newTicker) {
           console.warn("Ticker input is empty.")
+          // Optionally show a message to the user
+          // showMessage('<i class="fas fa-exclamation-circle"></i> Please enter a ticker symbol.', 'error');
         } else {
             console.log(`Ticker ${newTicker} is already loaded.`);
         }
@@ -836,114 +859,51 @@ if (isAnalysisPage) {
       const urlParams = new URLSearchParams(window.location.search)
       const tickerParam = urlParams.get("ticker")
       const targetTicker = tickerParam ? tickerParam.toUpperCase() : DEFAULT_TICKER
+      // Reload data only if the ticker in the URL is different from the current one
       if (targetTicker !== currentTicker) {
         console.log(`Popstate event: Loading data for ${targetTicker}`);
         loadAnalysisData(targetTicker)
-        if (tickerInput) tickerInput.value = targetTicker
+        if (tickerInput) tickerInput.value = targetTicker // Update input field to match URL
       }
     })
 
     // --- Resize Handling ---
+    // Note: This resize handler only adjusts visual elements like fonts.
+    // It does NOT dynamically change the number of data points shown after initial load.
+    // A page refresh or new ticker load is required to apply the mobile data limit based on current width.
     let resizeTimeout
     const handleResize = () => {
       clearTimeout(resizeTimeout)
       resizeTimeout = setTimeout(() => {
-        const newIsMobile = window.innerWidth <= MOBILE_BREAKPOINT;
-        const chartsToUpdate = [revenueChartInstance, arChartInstance, cashFlowChartInstance];
-        let dataNeedsUpdate = false;
+        const isMobile = window.innerWidth <= MOBILE_BREAKPOINT; // Use the same breakpoint
+        const chartsToResize = [revenueChartInstance, arChartInstance, cashFlowChartInstance]
 
-        // Check if mobile state changed
-        if (newIsMobile !== isCurrentlyMobile) {
-            console.log(`Resize detected: Switching view to ${newIsMobile ? 'mobile (10 years)' : 'desktop (full)'}`);
-            isCurrentlyMobile = newIsMobile; // Update global state
-            dataNeedsUpdate = true; // Flag that chart data needs slicing/unslicing
-        }
-
-        // Update chart data if needed (mobile state changed)
-        if (dataNeedsUpdate && fullChartData.labels.length > 0) { // Only update if full data exists
-            const newLabels = getDisplayData(fullChartData.labels);
-            const newRevenue = getDisplayData(fullChartData.revenueGrowth);
-            const newAr = getDisplayData(fullChartData.arGrowth);
-            const newCfo = getDisplayData(fullChartData.cfoGrowth);
-            const newNi = getDisplayData(fullChartData.niGrowth);
-
-            // Recalculate divergence indices based on the NEW displayed data
-            currentArIndices = calculateDivergenceIndices(newRevenue, newAr, DIVERGENCE_THRESHOLD);
-            currentCfIndices = calculateDivergenceIndices(newCfo, newNi, DIVERGENCE_THRESHOLD);
-
-            // Update Revenue Chart Data
-            if (revenueChartInstance) {
-                revenueChartInstance.data.labels = newLabels;
-                revenueChartInstance.data.datasets[0].data = newRevenue;
-            }
-
-            // Update AR Chart Data & Annotations
-            if (arChartInstance) {
-                arChartInstance.data.labels = newLabels;
-                arChartInstance.data.datasets[0].data = newRevenue;
-                arChartInstance.data.datasets[1].data = newAr;
-
-                // Update annotations based on new slice
-                const arAnnotations = {};
-                 if (typeof ChartAnnotation !== 'undefined' && fullChartData.annotations?.arChart && Array.isArray(fullChartData.annotations.arChart)) {
-                    const startIndex = isCurrentlyMobile ? Math.max(0, fullChartData.labels.length - MOBILE_DATA_POINTS) : 0;
-                    fullChartData.annotations.arChart.forEach((anno, fullIndex) => {
-                        const displayIndex = fullIndex - startIndex;
-                        if (displayIndex >= 0 && displayIndex < newLabels.length) {
-                            if (typeof anno.xVal === 'number' && typeof anno.yVal === 'number' && anno.content) {
-                                arAnnotations[`arLabel${fullIndex + 1}`] = createAnnotationLabel(displayIndex, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
-                            }
-                        }
-                    });
-                }
-                arChartInstance.options.plugins.annotation.annotations = arAnnotations;
-            }
-
-            // Update Cash Flow Chart Data & Annotations
-            if (cashFlowChartInstance) {
-                cashFlowChartInstance.data.labels = newLabels;
-                cashFlowChartInstance.data.datasets[0].data = newCfo;
-                cashFlowChartInstance.data.datasets[1].data = newNi;
-
-                 // Update annotations based on new slice
-                const cfAnnotations = {};
-                 if (typeof ChartAnnotation !== 'undefined' && fullChartData.annotations?.cashFlowChart && Array.isArray(fullChartData.annotations.cashFlowChart)) {
-                    const startIndex = isCurrentlyMobile ? Math.max(0, fullChartData.labels.length - MOBILE_DATA_POINTS) : 0;
-                    fullChartData.annotations.cashFlowChart.forEach((anno, fullIndex) => {
-                        const displayIndex = fullIndex - startIndex;
-                        if (displayIndex >= 0 && displayIndex < newLabels.length) {
-                             if (typeof anno.xVal === 'number' && typeof anno.yVal === 'number' && anno.content) {
-                                cfAnnotations[`cfLabel${fullIndex + 1}`] = createAnnotationLabel(displayIndex, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
-                            }
-                        }
-                    });
-                }
-                cashFlowChartInstance.options.plugins.annotation.annotations = cfAnnotations;
-            }
-        }
-
-        // Adjust font sizes and update charts (always run this part)
-        chartsToUpdate.forEach((chart, index) => {
-          if (!chart || !chart.options) return;
+        chartsToResize.forEach((chart, index) => {
+          if (!chart || !chart.options) return // Skip if chart doesn't exist
 
           try {
-            const tooltipBodyFontSize = newIsMobile ? 11 : 12;
-            const axisTickFontSize = newIsMobile ? 10 : 12;
-            const axisTitleFontSize = newIsMobile ? 11 : 12;
-            const yAxisTickFontSize = newIsMobile ? 10 : 11;
-            const legendLabelFontSize = 10;
-            const annotationLabelFontSize = newIsMobile ? 9 : 10;
+            // Adjust font sizes based on screen width
+            const tooltipBodyFontSize = isMobile ? 11 : 12;
+            const axisTickFontSize = isMobile ? 10 : 12;
+            const axisTitleFontSize = isMobile ? 11 : 12;
+            const yAxisTickFontSize = isMobile ? 10 : 11;
+            const legendLabelFontSize = 10; // Keep legend font size consistent
+            const annotationLabelFontSize = isMobile ? 9 : 10;
 
+            // Update common options
             if (chart.options.plugins?.tooltip?.bodyFont) chart.options.plugins.tooltip.bodyFont.size = tooltipBodyFontSize;
             if (chart.options.scales?.x?.ticks?.font) chart.options.scales.x.ticks.font.size = axisTickFontSize;
             if (chart.options.scales?.y?.title?.font) chart.options.scales.y.title.font.size = axisTitleFontSize;
             if (chart.options.scales?.y?.ticks?.font) chart.options.scales.y.ticks.font.size = yAxisTickFontSize;
             if (chart.options.plugins?.legend?.labels?.font) chart.options.plugins.legend.labels.font.size = legendLabelFontSize;
+            // Adjust legend box size if needed
             if (chart.options.plugins?.legend?.labels) {
                  chart.options.plugins.legend.labels.boxWidth = 8;
                  chart.options.plugins.legend.labels.boxHeight = 8;
             }
 
+
+            // Update annotation label font size if annotation plugin is loaded and options exist
             if (typeof ChartAnnotation !== 'undefined' && chart.options.plugins?.annotation?.annotations) {
                 Object.values(chart.options.plugins.annotation.annotations).forEach(anno => {
                     if (anno.type === 'label' && anno.font) {
@@ -952,16 +912,16 @@ if (isAnalysisPage) {
                 });
             }
 
-            // Update the chart - this redraws with new data (if changed) and new font sizes
-            chart.update('none'); // Use 'none' to avoid animation during resize
-
+            // Resize and update the chart
+            chart.resize(); // Adjust canvas size
+            chart.update('none'); // Redraw chart without animation
           } catch (error) {
-            console.error(`Error resizing/updating chart ${index}:`, error);
+            console.error(`Error resizing chart ${index}:`, error);
           }
-        });
-        // if (dataNeedsUpdate) { console.log("Chart data updated due to resize."); }
-
-      }, 250) // Debounce resize event
+        })
+        // Optional: Log after resize attempt
+        // if (chartsToResize.some(c => c)) { console.log("Charts resize attempt finished."); }
+      }, 250) // Debounce resize event for performance
     }
     window.addEventListener("resize", handleResize)
 
@@ -971,8 +931,8 @@ if (isAnalysisPage) {
 
     const initialTicker = tickerParam ? tickerParam.toUpperCase() : DEFAULT_TICKER
     if (tickerInput) {
-      tickerInput.value = initialTicker
+      tickerInput.value = initialTicker // Set initial value in header input on analysis page
     }
-    loadAnalysisData(initialTicker) // Load data for the initial ticker
+    loadAnalysisData(initialTicker) // Load data for the initial ticker (from URL or default)
   }) // End DOMContentLoaded for analysis page
 } // End if(isAnalysisPage)
