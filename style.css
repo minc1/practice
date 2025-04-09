@@ -826,149 +826,62 @@ tr:hover {
 }
 
 @media screen and (max-width: 767px) {
-  /* Investment Considerations Table Responsive Redesign */
-  .insight-list {
-    padding: 16px; /* Reduced padding for mobile */
-  }
-
   table {
     border: 0;
     min-width: auto;
-    display: block;
   }
 
   table thead {
-    display: none; /* Hide the header row on mobile */
+    display: none;
   }
 
-  /* Transform each row into a card */
   table tr {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 24px; /* More space between factors */
+    display: block;
+    margin-bottom: 1.2em; /* Increased spacing between rows */
     border: 1px solid var(--border-color);
-    border-radius: 10px;
+    border-radius: 8px; /* Slightly larger radius */
     box-shadow: var(--shadow-sm);
     background-color: var(--card-bg);
-    overflow: hidden;
+    overflow: hidden; /* Ensure content respects border radius */
   }
 
-  /* Style for the Factor cell - make it stand out as a header */
-  table td[data-label="Factor"] {
-    display: block;
-    text-align: left;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--dark);
-    background-color: rgba(197, 164, 126, 0.1); /* Light primary color background */
-    border-bottom: 1px solid var(--border-color);
-    padding: 16px;
-    position: relative;
-  }
-
-  /* Add a subtle indicator for the Factor cell */
-  table td[data-label="Factor"]::before {
-    display: none; /* Hide the label */
-  }
-
-  /* Style for Opportunities cell */
-  table td[data-label="Opportunities"] {
-    display: block;
-    text-align: left;
-    font-size: 0.9rem;
-    padding: 16px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    position: relative;
-    padding-top: 40px; /* Space for the label */
-  }
-
-  /* Style for Risks cell */
-  table td[data-label="Risks"] {
-    display: block;
-    text-align: left;
-    font-size: 0.9rem;
-    padding: 16px;
-    position: relative;
-    padding-top: 40px; /* Space for the label */
-  }
-
-  /* Create labels for Opportunities and Risks */
-  table td[data-label="Opportunities"]::before,
-  table td[data-label="Risks"]::before {
-    content: attr(data-label);
-    position: absolute;
-    top: 12px;
-    left: 16px;
-    font-weight: 600;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--dark);
-    opacity: 0.8;
-  }
-
-  /* Color indicators for Opportunities and Risks */
-  table td[data-label="Opportunities"]::after {
-    content: "";
-    position: absolute;
-    top: 12px;
-    right: 16px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: var(--success);
-  }
-
-  table td[data-label="Risks"]::after {
-    content: "";
-    position: absolute;
-    top: 12px;
-    right: 16px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: var(--danger);
-  }
-
-  /* Empty state styling */
-  table td[data-label="Opportunities"]:empty::before,
-  table td[data-label="Risks"]:empty::before {
-    content: attr(data-label) " (None)";
-  }
-
-  /* Improve readability for longer content */
   table td {
-    line-height: 1.6;
-    min-height: 80px; /* Ensure enough space for content */
-  }
-}
-
-/* Tablet-specific adjustments */
-@media screen and (min-width: 480px) and (max-width: 767px) {
-  table td[data-label="Factor"] {
-    font-size: 1.1rem;
-    padding: 18px;
+    display: block;
+    text-align: right;
+    font-size: 0.85em; /* Slightly larger font */
+    border: none; /* Remove individual cell borders */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Lighter separator */
+    padding: 14px 18px; /* Increased padding for more space */
+    min-height: 44px; /* Ensure good tap target */
+    line-height: 1.5; /* Improve readability */
   }
 
-  table td[data-label="Opportunities"],
-  table td[data-label="Risks"] {
-    font-size: 0.95rem;
-    padding: 18px;
-    padding-top: 45px; /* More space for the label on tablets */
+  table tr td:last-child {
+    /* Corrected selector */
+    border-bottom: 0;
   }
 
-  table td[data-label="Opportunities"]::before,
-  table td[data-label="Risks"]::before {
-    font-size: 0.85rem;
-    top: 14px;
-    left: 18px;
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: 600; /* Adjusted weight */
+    text-transform: uppercase;
+    color: var(--dark);
+    padding-right: 12px; /* Increased space between label and value */
+    text-align: left;
+    width: 45%; /* Allocate space for label */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5; /* Match td line-height */
   }
-}
 
-/* Add a special class for empty cells */
-table td.empty-cell {
-  color: var(--muted);
-  font-style: italic;
+  /* Clearfix for floated ::before element */
+  table td::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 }
 
 .conclusion {
