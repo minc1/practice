@@ -123,12 +123,11 @@
             margin: 0 auto;
             padding: 48px; /* Increased padding for more space */
             background-color: var(--card-bg);
-            border-radius: 16px;
+            border-radius: 12px;
             box-shadow: var(--shadow-lg);
             border: 1px solid var(--border-color);
             position: relative;
             z-index: 1;
-            transition: var(--search-transition);
         }
 
         .search-title {
@@ -151,23 +150,18 @@
             height: 56px;
             border-radius: 28px;
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-md);
             margin-bottom: 24px;
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            transition: var(--search-transition);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
             max-width: 100%;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .search-hero .search-form:hover {
-            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
-            border-color: rgba(0, 0, 0, 0.12);
-        }
-
         .search-hero .search-form:focus-within {
-            box-shadow: 0 1px 8px rgba(197, 164, 126, 0.25);
-            border-color: rgba(197, 164, 126, 0.5);
+            box-shadow: 0 0 0 2px rgba(197, 164, 126, 0.3);
+            border-color: var(--primary);
         }
 
         .search-hero .search-form input {
@@ -189,7 +183,6 @@
         .search-hero .search-form input::placeholder {
             color: var(--muted);
             opacity: 0.7;
-            font-style: normal;
         }
 
         .search-hero .search-form button {
@@ -197,12 +190,12 @@
             color: var(--dark);
             border: none;
             padding: 0 32px;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: var(--search-transition);
+            transition: var(--transition);
             font-size: 1rem;
             min-width: 120px;
             justify-content: center;
@@ -214,10 +207,7 @@
 
         .search-hero .search-form button:hover {
             background-color: #d4b483;
-        }
-
-        .search-hero .search-form button:active {
-            transform: scale(0.98);
+            transform: none;
         }
 
         .search-examples {
@@ -231,7 +221,6 @@
             .search-container {
                 padding: 30px 20px;
                 margin: 0 16px;
-                border-radius: 12px;
             }
 
             .search-title {
@@ -252,8 +241,8 @@
                 overflow: hidden;
                 gap: 0;
                 background: var(--card-bg);
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-                border: 1px solid rgba(0, 0, 0, 0.08);
+                box-shadow: var(--shadow-md);
+                border: 1px solid var(--border-color);
             }
 
             .search-hero .search-form input {
@@ -391,6 +380,14 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        const headerSearchFormOnSearchPage = document.querySelector('#headerTickerSearchForm');
+        if (headerSearchFormOnSearchPage) {
+            headerSearchFormOnSearchPage.addEventListener('submit', function(e) {
+            });
+        }
+    </script>
     <script src="search-toggle.js"></script>
 </body>
 </html>
+

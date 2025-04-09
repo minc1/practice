@@ -34,7 +34,6 @@
             --shadow-lg: 0 10px 20px rgba(0,0,0,0.1);
             --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             --border-color: rgba(0,0,0,0.08);
-            --search-transition: all 0.25s cubic-bezier(0.4, 0.0, 0.2, 1);
         }
 
         * {
@@ -227,33 +226,24 @@
         }
 
         .mobile-menu {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: block;
             font-size: 1.4rem;
             cursor: pointer;
             color: var(--dark);
-            transition: transform 0.2s cubic-bezier(0.4, 0.0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0.0, 0.2, 1), background-color 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+            transition: transform 0.2s ease, color 0.2s ease; /* Updated transition */
             background: none;
             border: none;
             padding: 5px;
             flex-shrink: 0;
             order: 3;
             margin-left: auto;
-            min-height: 44px;
+            min-height: 44px; /* Ensure good tap target */
             min-width: 44px;
-            border-radius: 50%;
         }
 
         .mobile-menu:hover {
-            transform: scale(1.05);
-            color: var(--primary);
-            background-color: rgba(0, 0, 0, 0.04);
-        }
-
-        .mobile-menu:active {
-            transform: scale(0.95);
-            background-color: rgba(0, 0, 0, 0.08);
+            transform: scale(1.05); /* Updated transform */
+            color: var(--primary); /* Updated color */
         }
 
         main {
@@ -346,10 +336,6 @@
 
         .btn-secondary:hover {
             background-color: rgba(28, 37, 65, 0.15);
-        }
-
-        .btn:active {
-            transform: translateY(0) scale(0.98);
         }
 
         .btn i {
@@ -536,123 +522,73 @@
             }
         }
 
-        /* Modern search bar styles */
+        /* Styles for the search bar */
         .search-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: none;
             background: none;
             border: none;
             color: var(--dark);
-            font-size: 1.2rem;
             cursor: pointer;
+            font-size: 1.2rem;
             padding: 8px;
             min-height: 44px;
             min-width: 44px;
-            transition: transform 0.2s cubic-bezier(0.4, 0.0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0.0, 0.2, 1), background-color 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
-            border-radius: 50%;
+            transition: transform 0.2s ease, color 0.2s ease;
         }
 
-        .search-toggle:hover {
+        .search-toggle:hover,
+        .mobile-menu:hover {
             transform: scale(1.05);
             color: var(--primary);
-            background-color: rgba(0, 0, 0, 0.04);
-        }
-
-        .search-toggle:active {
-            transform: scale(0.95);
-            background-color: rgba(0, 0, 0, 0.08);
         }
 
         .InputContainer {
-            display: none;
-            align-items: center;
-            height: 40px;
-            width: 100%;
-            max-width: 250px;
-            background-color: var(--card-bg);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-            transition: var(--search-transition);
-        }
-
-        .InputContainer0,0,0.05);
-            transition: var(--search-transition);
-        }
-
-        .InputContainer:hover {
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            border-color: rgba(0, 0, 0, 0.12);
-        }
-
-        .InputContainer:focus-within {
-            box-shadow: 0 1px 6px rgba(197, 164, 126, 0.25);
-            border-color: rgba(197, 164, 126, 0.5);
-        }
-
-        .InputContainer.show {
-            display: flex;
+            width: 200px;
+            position: relative;
         }
 
         .input {
+            width: 100%;
+            height: 40px;
+            border-radius: 8px;
             border: none;
             outline: none;
-            flex-grow: 1;
-            height: 100%;
-            padding: 0 16px;
-            background-color: transparent;
+            padding: 10px;
+            background-color: rgba(28, 37, 65, 0.1);
             color: var(--dark);
             font-size: 0.9rem;
-            letter-spacing: 0.2px;
+            transition: background-color 0.3s;
         }
 
-        .input::placeholder {
-            color: var(--muted);
-            font-style: normal;
-            opacity: 0.7;
+        .input:focus {
+            background-color: rgba(28, 37, 65, 0.2);
         }
 
         .InputContainer button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
             border: none;
-            height: 100%;
-            width: 40px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: transparent;
-            color: var(--muted);
-            font-size: 0.9rem;
+            color: var(--dark);
             cursor: pointer;
-            transition: var(--search-transition);
+            font-size: 1.1rem;
+            padding: 5px;
+            transition: transform 0.3s;
         }
 
         .InputContainer button:hover {
-            color: var(--primary);
-            background-color: rgba(197, 164, 126, 0.05);
+            transform: translateY(-50%) scale(1.1);
         }
 
-        .InputContainer button:active {
-            transform: scale(0.95);
+        /* Hide the search form by default */
+        .InputContainer {
+            display: none;
         }
 
-        /* Ripple effect for buttons */
-        .ripple {
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            transform: scale(0);
-            animation: ripple 0.6s linear;
-            pointer-events: none;
-        }
-
-        @keyframes ripple {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
+        .InputContainer.show {
+            display: block;
         }
     </style>
 </head>
@@ -767,3 +703,4 @@
     <script src="search-toggle.js"></script>
 </body>
 </html>
+
