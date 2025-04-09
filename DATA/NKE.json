@@ -1,0 +1,188 @@
+{
+    "company": {
+      "name": "NIKE, Inc.",
+      "ticker": "NKE",
+      "analysisTitle": "Forensic Financial Analysis",
+      "heroSubtitle": "Synthesized analysis of NKE's volatile growth history, recent significant slowdown, margin pressures, inventory challenges, and ongoing turnaround efforts (FY2015-FY2024 & Recent Quarters).",
+      "pageTitle": "ForensicFinancials | NIKE, Inc. (NKE) Analysis"
+    },
+    "trendAnalysis": {
+      "sectionSubtitle": "Charting NKE's journey: Decade of volatile growth, COVID impacts, recent slowdown, margin pressures, and strategic shifts (FY2015-FY2025 Q3)",
+      "cards": [
+        {
+          "title": "Revenue Trajectory",
+          "iconClass": "fas fa-chart-line negative",
+          "points": [
+            "<strong>Decade of Volatility:</strong> Generally positive annual growth (mid-to-high single digits avg.) but inconsistent, marked by FY20 COVID decline (-4.4%) and FY21 rebound (+19.1%).",
+            "<strong>Recent Slowdown:</strong> Growth moderated post-rebound (FY22 +4.9%, FY23 +9.6%) before stalling in FY24 (+0.3%).",
+            "<strong>FY25 Weakness:</strong> Sharp quarterly declines observed (Q1 -8.1%, Q3 -8.8% QoQ), reflecting broad-based weakness (geographies, channels) and weak guidance (Q4 FY25 low-to-mid teens decline expected).",
+            "<strong>Seasonality & Disruptions:</strong> Q2 (holiday) typically strong QoQ, Q3 weak QoQ. Recent performance deviates from historical patterns due to macro headwinds, competition, and strategic shifts."
+          ],
+          "footer": "Volatile historical growth followed by significant recent slowdown and weak near-term outlook."
+        },
+        {
+          "title": "Profitability Trends",
+          "iconClass": "fas fa-chart-pie negative",
+          "points": [
+            "<strong>High Annual Volatility:</strong> Net Income growth highly erratic over the decade, impacted by Tax Act (FY18 plunge), COVID (FY20 plunge), subsequent rebounds (FY19, FY21), and margin pressures (FY23 decline).",
+            "<strong>Recent Margin Pressure:</strong> FY23 Net Income fell (-16.1%) despite revenue growth. Q3 FY25 saw sharp QoQ declines in Gross Profit (-13.3%), Operating Income (-43.1%), and Net Income (-31.7%).",
+            "<strong>Margin Drivers:</strong> Recent pressure driven by higher discounts, inventory reserves/write-downs, and product costs. FY24 saw some recovery (+12.4% NI) aided by pricing/lower logistics costs.",
+            "<strong>Cost Cutting & One-offs:</strong> $2B cost-saving plan underway. Q3 FY25 EPS beat expectations partly due to cost control and a one-off tax benefit."
+          ],
+          "footer": "Highly volatile profitability historically; significant recent margin pressure despite cost-cutting efforts."
+        },
+        {
+          "title": "Cash Flow Generation",
+          "iconClass": "fas fa-chart-bar neutral",
+          "points": [
+            "<strong>Volatile OCF:</strong> Annual Operating Cash Flow (OCF) growth also volatile, with major drops in FY16, FY20, FY22, but strong growth in other years (FY15, FY18, FY19, FY24).",
+            "<strong>Significant OCF vs. NI Divergences:</strong> Notable annual divergences occurred (e.g., FY23 NI down, OCF up; FY22 NI up, OCF down), driven by large working capital swings and non-cash items.",
+            "<strong>Recent Quarterly Disconnects:</strong> Q1 FY25 saw OCF plunge (-85.0%) far exceeding NI decline (-29.9%), driven by payables outflow. Q2 FY25 OCF growth (+1.7%) lagged NI growth (+10.7%).",
+            "<strong>FY24 Improvement:</strong> OCF growth (+27.2%) outpaced NI growth (+12.4%) in FY24, a positive sign after prior year divergences, suggesting better cash conversion."
+          ],
+          "footer": "Volatile OCF with significant historical divergences from Net Income; recent quarterly cash conversion concerns."
+        }
+      ]
+    },
+    "financialMetrics": {
+      "sectionSubtitle": "Investigating cross-statement divergences, forensic flags, and capital structure",
+      "cards": [
+        {
+          "title": "Forensic Checks",
+          "iconClass": "fas fa-search negative",
+          "points": [
+            "<strong>Inventory vs. COGS Mismatches:</strong> Major red flags in FY20 & FY22 with inventory growth vastly outpacing COGS/sales, indicating build-ups confirmed by external sources. Q1 FY25 showed similar anomaly (Inv +9.8% vs COGS -9.2%).",
+            "<strong>AR vs. Revenue Divergences:</strong> Potential red flags with AR growing significantly faster than revenue annually (FY21, FY24) and quarterly (Q1/Q2 FY25), suggesting potential cash conversion cycle lengthening or collection issues.",
+            "<strong>OCF vs NI Divergence (Recurring):</strong> Frequent decoupling highlights the impact of working capital volatility (Payables in Q1 FY25, Inventory in FY22) and non-cash items on cash flow reliability relative to earnings.",
+            "<strong>Working Capital Volatility:</strong> Large swings in AR, Inventory, and Payables growth relative to revenue/COGS observed both annually and quarterly, impacting OCF predictability."
+          ],
+          "footer": "Key flags in Inventory/COGS mismatches, AR/Revenue divergences, and OCF vs. NI decoupling driven by working capital."
+        },
+        {
+          "title": "Solvency & Liquidity",
+          "iconClass": "fas fa-balance-scale neutral",
+          "points": [
+            "<strong>Moderate Leverage:</strong> Debt increased over the decade (esp. FY16/FY17) partly funding buybacks, increasing D/E ratio, but absolute levels appear moderate and stable recently (~$9B).",
+            "<strong>Strong Cash Balance:</strong> Maintains significant cash reserves ($8.5B+ reported recently), sufficient to cover near-term debt maturities.",
+            "<strong>Shareholder Returns Impact:</strong> Consistent, large share repurchases and dividends significantly impact financing cash flows and have drained retained earnings recently, reducing equity.",
+            "<strong>Interest Coverage:</strong> Historically strong coverage implied, but recent sharp profit declines (Q3 FY25) likely pressured coverage ratios temporarily. Anomalous Q3 FY25 Interest Expense growth figure needs verification.",
+            "<strong>Data Anomaly Note:</strong> Q3 FY25 Long Term Debt growth (+30.9%) in provided data appears inconsistent with stable Total Debt (-1.3%) and external sources."
+          ],
+          "footer": "Moderate leverage and strong cash position, but significant capital returns impact equity; recent profit dip pressures coverage."
+        }
+      ]
+    },
+    "investmentConsiderations": {
+      "sectionSubtitle": "Balancing NKE's brand strength and turnaround potential against current headwinds and execution risks",
+      "tableData": [
+        {
+          "factor": "<strong>Brand & Market Position</strong>",
+          "opportunities": "Dominant global brand strength, significant customer loyalty, pricing power potential",
+          "risks": "Increased competition (Hoka, On), shifting consumer preferences, potential brand fatigue for legacy products"
+        },
+        {
+          "factor": "<strong>Revenue</strong>",
+          "opportunities": "Market recovery, successful product innovation pipeline, DTC optimization, international growth potential",
+          "risks": "Sustained demand slowdown, continued market share loss, macroeconomic pressures on discretionary spending, execution challenges in DTC vs Wholesale balance"
+        },
+        {
+          "factor": "<strong>Profitability</strong>",
+          "opportunities": "$2B cost-saving plan, operational efficiencies, potential margin recovery from lower freight/input costs and normalized inventory",
+          "risks": "Persistent margin pressure from promotions/discounts, inability to manage inventory effectively, rising costs, failure of cost-cutting plan"
+        },
+        {
+          "factor": "<strong>Cash Flow</strong>",
+          "opportunities": "Strong historical cash generation potential, benefits from working capital optimization",
+          "risks": "OCF volatility and divergence from NI, potential strain from working capital mismanagement (inventory/AR)"
+        },
+        {
+          "factor": "<strong>Financial Health</strong>",
+          "opportunities": "Strong cash balance, moderate leverage provides flexibility",
+          "risks": "Increased leverage over decade, potential pressure on coverage if downturn persists, impact of large capital returns on equity"
+        },
+        {
+          "factor": "<strong>Strategy & Execution</strong>",
+          "opportunities": "Successful execution of turnaround plan ('Win Now'), new leadership impact, refining DTC strategy",
+          "risks": "Execution risk on cost savings and strategic shifts, failure to reignite brand momentum and innovation pipeline"
+        }
+      ]
+    },
+    "conclusion": {
+      "sectionSubtitle": "Synthesizing NKE's financial trajectory and investment profile",
+      "verdictTitle": "Navigating Transition: Brand Strength Tested by Slowdown, Margin Pressure, and Execution Hurdles",
+      "verdictRating": "Cautious / Neutral",
+      "paragraphs": [
+        "Nike, despite its dominant brand, is navigating a challenging period marked by a <strong>significant revenue slowdown</strong> (FY24 stall, weak FY25 outlook) and considerable <strong>margin pressure</strong> stemming from competitive dynamics, inventory management issues, and shifting consumer demand. Historical performance shows resilience but also significant volatility in growth and profitability.",
+        "Forensic analysis highlights recurring risks, particularly <strong>inventory build-ups</strong> relative to sales (FY20, FY22, Q1 FY25) leading to subsequent margin erosion, and notable <strong>divergences between Net Income and Operating Cash Flow</strong> driven by working capital swings (AR, Payables) and non-cash items, raising questions about earnings quality and cash conversion consistency in certain periods.",
+        "With a $2B cost-saving plan underway and a focus on reigniting innovation and brand momentum, Nike aims to navigate this transition. However, the near-term outlook remains weak, demanding close monitoring of execution success."
+      ],
+      "monitoringPointsTitle": "Key Monitoring Points",
+      "monitoringPoints": [
+        "<strong>Revenue Trajectory & Demand Signals:</strong> Track sequential and YoY revenue growth across geographies and channels (DTC vs. Wholesale) against weak guidance for signs of stabilization or further deterioration.",
+        "<strong>Inventory Management & Gross Margin Recovery:</strong> Monitor inventory levels (absolute and relative to sales/COGS) and gross margin performance, assessing the impact of discounting, product costs, and cost-saving initiatives.",
+        "<strong>Cash Conversion Cycle & OCF Quality:</strong> Analyze Operating Cash Flow relative to Net Income, focusing on the drivers of working capital changes (Days Sales Outstanding, Days Inventory Outstanding, Days Payables Outstanding) to gauge cash generation efficiency."
+      ]
+    },
+    "chartData": {
+      "labels": [
+        "FY2015",
+        "FY2016",
+        "FY2017",
+        "FY2018",
+        "FY2019",
+        "FY2020",
+        "FY2021",
+        "FY2022",
+        "FY2023",
+        "FY2024"
+      ],
+      "revenueGrowth": [
+        10.08,
+        5.80,
+        6.10,
+        5.96,
+        7.47,
+        -4.38,
+        19.08,
+        4.88,
+        9.65,
+        0.28
+      ],
+      "arGrowth": [
+        -2.21,
+        -3.48,
+        13.45,
+        -4.87,
+        22.13,
+        -35.65,
+        62.35,
+        4.57,
+        -11.48,
+        7.17
+      ],
+      "cfoGrowth": [
+        55.84,
+        -33.85,
+        17.57,
+        36.13,
+        19.13,
+        -57.90,
+        1.68,
+        -22.07,
+        12.59,
+        27.19
+      ],
+      "niGrowth": [
+        21.54,
+        14.88,
+        12.77,
+        -54.41,
+        108.40,
+        -36.98,
+        125.60,
+        5.57,
+        -16.14,
+        12.43
+      ]
+    }
+  }
