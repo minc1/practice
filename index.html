@@ -4,21 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ForensicFinancials | Financial Analysis Platform</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-77GZWBEMLF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-77GZWBEMLF');
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Global plaid background - UPDATED WITH WHITE AND GREY SHADES - TIGHTENED GRID */
+        body {
+            position: relative;
+            background-color: var(--secondary) !important;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                /* Thin vertical lines with varying opacity */
+                linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                /* Thin horizontal lines with varying opacity */
+                linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                /* Thick vertical lines with varying opacity and color */
+                linear-gradient(90deg, rgba(255, 255, 255, 0.09) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 2px, transparent 2px),
+                /* Thick horizontal lines with varying opacity and color */
+                linear-gradient(rgba(255, 255, 255, 0.09) 2px, transparent 2px),
+                linear-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
+            background-size:
+                30px 30px, /* Tightened spacing */
+                60px 60px, /* Tightened spacing */
+                30px 30px, /* Tightened spacing */
+                60px 60px, /* Tightened spacing */
+                120px 120px, /* Tightened spacing */
+                240px 240px, /* Tightened spacing */
+                120px 120px, /* Tightened spacing */
+                240px 240px; /* Tightened spacing */
+            /* Centered vertical lines */
+            background-position:
+                calc(50% - 0px) 0, /* Center thin vertical lines */
+                calc(50% - 15px) 0, /* Offset second set of thin vertical lines */
+                0 0,
+                0 15px,
+                calc(50% - 0px) 0, /* Center thick vertical lines */
+                calc(50% - 60px) 0, /* Offset second set of thick vertical lines */
+                0 0,
+                0 60px;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Rest of the existing styles remain unchanged */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                circle at center,
+                rgba(28, 37, 65, 0.2) 0%,
+                rgba(28, 37, 65, 0.6) 30%,
+                rgba(28, 37, 65, 0.8) 60%,
+                var(--secondary) 100%
+            );
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Z-index management */
+        #header {
+            position: relative;
+            z-index: 10;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        .back-to-top {
+            z-index: 20;
+        }
+
+        /* Section styling */
+        .hero, .section, .cta-section {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Override background colors */
+        .hero {
+            background-color: transparent !important;
+        }
+
+        .cta-section {
+            background-color: transparent !important;
+            padding: 100px 0; /* Increased padding for more space */
+        }
+
+        /* Fix footer margin */
+        footer {
+            margin-top: 0 !important;
+            position: relative;
+            z-index: 1;
+        }
+    </style>
 </head>
 <body>
     <header id="header">
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
-                <!-- START: Added Header Search Form -->
+                <button class="search-toggle" aria-label="Toggle search">
+                    <i class="fas fa-search"></i>
+                </button>
                 <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
-                    <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
+                    <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g. AAPL)" aria-label="Enter Ticker Symbol" required>
                     <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
                 </form>
-                <!-- END: Added Header Search Form -->
                 <ul class="nav-links">
                     <li><a href="#hero">Home</a></li>
                     <li><a href="#features">Features</a></li>
@@ -40,7 +157,7 @@
                 <p>Detect accounting anomalies and assess financial health with professional-grade analysis tools</p>
                 <div class="hero-separator"></div>
                 <div class="hero-cta">
-                    <a href="analysis.html" class="cta-button">
+                    <a href="search.html" class="cta-button">
                         Start Analysis <i class="fas fa-arrow-right"></i>
                     </a>
                     <a href="#features" class="cta-button secondary">
@@ -54,46 +171,75 @@
         <section class="section" id="features">
             <div class="container">
                 <div class="section-title">
-                    <h2>Core Analytical Features</h2>
-                    <p>Professional tools to uncover financial insights</p>
+                    <h2>Enterprise-Grade Financial Insights</h2>
+                    <p>Advanced analytics to detect risks, uncover opportunities, and drive smarter decisions</p>
                 </div>
                 <div class="cards">
-                    <!-- Feature Cards - Reusing existing card component styles -->
                     <div class="card">
                         <div class="card-header">
-                            <h3><i class="fas fa-chart-line"></i> Revenue Analysis</h3>
+                            <h3><i class="fas fa-chart-line"></i> Revenue Intelligence</h3>
                         </div>
                         <div class="card-body">
                             <ul>
-                                <li>10-year growth trend visualization</li>
-                                <li>Industry benchmarking</li>
-                                <li>Seasonality detection</li>
+                                <!-- Revised Points: Shortened -->
+                                <li>
+                                    <strong>Isolate core drivers</strong> of growth momentum.
+                                    Pinpoint factors accelerating or slowing top-line performance.
+                                </li>
+                                <li>
+                                    <strong>Validate market position</strong>.
+                                    Assess competitive standing and relative strengths or weaknesses.
+                                </li>
+                                <li>
+                                    <strong>Correlate cyclical trends</strong> within historical data.
+                                    Map the duration and amplitude of prior revenue fluctuations.
+                                </li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="card">
                         <div class="card-header">
-                            <h3><i class="fas fa-balance-scale"></i> Cash Flow Verification</h3>
+                            <h3><i class="fas fa-balance-scale"></i> Cash Flow Diagnostics</h3>
                         </div>
                         <div class="card-body">
                             <ul>
-                                <li>Operating cash flow vs. net income analysis</li>
-                                <li>Free cash flow assessment</li>
-                                <li>Cash conversion cycle evaluation</li>
+                                <!-- Revised Points: Shortened -->
+                                <li>
+                                    <strong>Quantify cash flow anomalies</strong>.
+                                    Reveal critical issues fundamentally impacting reporting or operational efficiency.
+                                </li>
+                                <li>
+                                    <strong>Measure cash sustainability</strong>.
+                                    Assess fundamental business ability to reliably fund operations and shareholder returns.
+                                </li>
+                                <li>
+                                    <strong>Evaluate cycle liquidity efficiency</strong>.
+                                    Monitor working capital closely for improved operational stability.
+                                </li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="card">
                         <div class="card-header">
-                            <h3><i class="fas fa-search-dollar"></i> Anomaly Detection</h3>
+                            <h3><i class="fas fa-search"></i> Divergence Detection</h3>
                         </div>
                         <div class="card-body">
                             <ul>
-                                <li>Revenue-receivables divergence analysis</li>
-                                <li>Inventory turnover assessment</li>
-                                <li>Accrual ratio calculation</li>
+                                <!-- Revised Points: Shortened -->
+                                <li>
+                                    <strong>Spot revenue recognition</strong> risks early.
+                                    Analyze discrepancies between reported sales and actual cash inflows.
+                                </li>
+                                <li>
+                                    <strong>Flag inventory mismatches</strong>.
+                                    Proactively compare inventory turnover against COGS and margin stability.
+                                </li>
+                                <li>
+                                    <strong>Detect earnings manipulation</strong>.
+                                    Use proprietary scoring system based on accrual and expense anomalies.
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -101,81 +247,99 @@
             </div>
         </section>
 
-        <!-- Methodology Section -->
+        <!-- Updated Methodology Section -->
         <section class="section dark-bg" id="methodology">
             <div class="container">
                 <div class="section-title">
                     <h2>Analysis Methodology</h2>
-                    <p>Based on established forensic accounting principles</p>
+                    <p>
+                        Based on established forensic accounting principles. All data is obtained from third-party sources and may contain inaccuracies.
+                    </p>
                 </div>
+
                 <div class="methodology-steps">
+                    <!-- Step 1: Data Collection -->
                     <div class="step">
                         <div class="step-number">1</div>
                         <div class="step-content">
                             <h3>Data Collection</h3>
-                            <p>Comprehensive financial statement data from reliable sources spanning multiple years</p>
+                            <p>
+                                We gather multi-year financial statements from SEC Filings, the EDGAR Database,
+                                Yahoo Finance, Google Finance, Alpha Vantage, and Financial Modeling Prep.
+                            </p>
                         </div>
                     </div>
+
+                    <!-- Step 2: Trend Analysis -->
                     <div class="step">
                         <div class="step-number">2</div>
                         <div class="step-content">
                             <h3>Trend Analysis</h3>
-                            <p>Identification of growth patterns, seasonality, and long-term performance indicators</p>
+                            <p>
+                                We examine growth trajectories, seasonality, and predictability to
+                                highlight long-term patterns. These insights are essential for analysts seeking clarity in strategic planning.
+                            </p>
                         </div>
                     </div>
+
+                    <!-- Step 3: Anomaly Detection -->
                     <div class="step">
                         <div class="step-number">3</div>
                         <div class="step-content">
                             <h3>Anomaly Detection</h3>
-                            <p>Application of forensic accounting techniques to identify potential red flags</p>
+                            <p>
+                                By applying specialized forensic accounting techniques, we identify unusual
+                                variances or potential red flags, ensuring corporate integrity and stakeholder confidence.
+                            </p>
                         </div>
                     </div>
-                    <!-- Removed 4th step:
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h3>Comprehensive Assessment</h3>
-                            <p>Holistic evaluation of financial health, risks, and investment considerations</p>
-                        </div>
-                    </div>
-                    -->
                 </div>
             </div>
         </section>
 
-        <!-- CTA Section -->
-        <section class="section cta-section">
-            <div class="container">
-                <h2>Ready to examine a company?</h2>
-                <!-- This form remains as the main CTA search -->
-                <form class="search-form" action="analysis.html" method="GET">
-                    <input type="text" name="ticker" placeholder="Enter ticker (e.g., AAPL)" required
-                           aria-label="Stock ticker symbol">
-                    <button type="submit" aria-label="Analyze">
-                        <i class="fas fa-search"></i> Analyze
-                    </button>
-                </form>
-            </div>
-        </section>
         <!-- About Section -->
         <section class="section" id="about">
             <div class="container">
                 <div class="section-title">
                     <h2>About Us</h2>
-                    <p>Empowering Investors with Forensic Financial Insights</p>
                 </div>
                 <div class="about-content">
                     <p>
-                        At ForensicFinancials, our mission is to empower both institutional and retail investors to make informed decisions. We leverage advanced forensic accounting methodologies and cutting-edge data visualization tools to uncover hidden insights and detect potential financial anomalies.
+                        At ForensicFinancials, our mission is to empower both institutional and retail investors
+                        to make informed decisions. We leverage advanced forensic accounting methodologies and
+                        cutting-edge data visualization tools to uncover hidden insights and detect potential
+                        financial anomalies.
                     </p>
+                    <p><br></p>
                     <p>
-                        Built on a foundation of transparency, integrity, and rigorous analysis, our platform delivers professional-grade insights that simplify the complex financial landscape. Whether you're evaluating growth trends, comparing financial metrics, or assessing risk factors, our goal is to provide you with the reliable information needed to navigate today's markets confidently.
+                        Built on a foundation of transparency, integrity, and rigorous analysis, our platform delivers
+                        professional-grade insights that simplify the complex financial landscape. Whether you're
+                        evaluating growth trends, comparing financial metrics, or assessing risk factors, our goal is
+                        to provide you with the reliable information needed to navigate today's markets confidently.
                     </p>
-                    <p> <br></br></p>
+                    <p><br></p>
+                    <p>
+                        Please let us know if you have any questions or concerns, and we hope you have a wonderful day.
+                    </p>
+                    <p><br></p>
                     <p class="signature">
                         <em>- The ForensicFinancials Team</em>
                     </p>
                 </div>
+            </div>
+        </section>
+
+        <!-- Call-to-Action Section -->
+        <section class="section cta-section">
+            <div class="container">
+                <h2>Review Company's Financial Health</h2>
+                <form class="search-form" action="analysis.html" method="GET">
+                    <input type="text" name="ticker" placeholder="Enter ticker (e.g., AAPL)" required
+                           aria-label="Stock ticker symbol">
+                    <button type="submit" aria-label="Analyze">
+                        <i class="fas fa-arrow-right"></i> Analyze
+                    </button>
+                </form>
             </div>
         </section>
     </main>
@@ -202,5 +366,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="search-toggle.js"></script>
 </body>
 </html>

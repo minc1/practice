@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForensicFinancials | Ticker Unavailable</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-77GZWBEMLF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-77GZWBEMLF');
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c5a47e;
+            --secondary: #1c2541;
+            --dark: #1c2541;
+            --light: #f8f9fa;
+            --text: #495057;
+            --muted: #6c757d;
+            --success: #4caf50;
+            --warning: #ffc107;
+            --danger: #c5817e;
+            --card-bg: #ffffff;
+            --header-footer-bg: #ffffff;
+            --body-bg: #1c2541;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 8px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 20px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-color: rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--body-bg);
+            color: var(--light);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            font-size: 16px;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Global plaid background - WHITE AND GREY SHADES - TIGHTENED GRID */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                /* Thin vertical lines with varying opacity */
+                linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                /* Thin horizontal lines with varying opacity */
+                linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                /* Thick vertical lines with varying opacity and color */
+                linear-gradient(90deg, rgba(255, 255, 255, 0.09) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 2px, transparent 2px),
+                /* Thick horizontal lines with varying opacity and color */
+                linear-gradient(rgba(255, 255, 255, 0.09) 2px, transparent 2px),
+                linear-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
+            background-size:
+                30px 30px, /* Tightened spacing */
+                60px 60px, /* Tightened spacing */
+                30px 30px, /* Tightened spacing */
+                60px 60px, /* Tightened spacing */
+                120px 120px, /* Tightened spacing */
+                240px 240px, /* Tightened spacing */
+                120px 120px, /* Tightened spacing */
+                240px 240px; /* Tightened spacing */
+            /* Centered vertical lines */
+            background-position:
+                calc(50% - 0px) 0, /* Center thin vertical lines */
+                calc(50% - 15px) 0, /* Offset second set of thin vertical lines */
+                0 0,
+                0 15px,
+                calc(50% - 0px) 0, /* Center thick vertical lines */
+                calc(50% - 60px) 0, /* Offset second set of thick vertical lines */
+                0 0,
+                0 60px;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Radial gradient overlay */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                circle at center,
+                rgba(28, 37, 65, 0.2) 0%,
+                rgba(28, 37, 65, 0.6) 30%,
+                rgba(28, 37, 65, 0.8) 60%,
+                var(--secondary) 100%
+            );
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            background-color: var(--header-footer-bg);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            letter-spacing: -0.5px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            text-decoration: none;
+            display: inline-block;
+            order: 0;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: none;
+            list-style: none;
+            position: fixed;
+            top: 61px;
+            left: 0;
+            width: 100%;
+            background-color: var(--header-footer-bg);
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            box-shadow: var(--shadow-md);
+            z-index: 99;
+            border-top: 1px solid var(--border-color);
+            order: 4;
+        }
+
+        .nav-links.show {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 12px 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu {
+            display: block;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: var(--dark);
+            transition: transform 0.3s;
+            background: none;
+            border: none;
+            padding: 5px;
+            flex-shrink: 0;
+            order: 3;
+            margin-left: auto;
+        }
+
+        .mobile-menu:hover {
+            transform: scale(1.1);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .error-container {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            margin: 40px 0;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .error-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 24px;
+            display: inline-block;
+        }
+
+        .error-title {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .error-message {
+            color: var(--text);
+            margin-bottom: 32px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .error-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            border: none;
+            cursor: pointer;
+            min-height: 44px; /* Ensure good tap target */
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--dark);
+        }
+
+        .btn-secondary {
+            background-color: rgba(28, 37, 65, 0.1);
+            color: var(--dark);
+            border: 1px solid rgba(28, 37, 65, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            background-color: #d4b483;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(28, 37, 65, 0.15);
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        footer {
+            background-color: var(--header-footer-bg);
+            padding: 28px 0;
+            border-top: 1px solid var(--border-color);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark);
+            letter-spacing: -0.5px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo span {
+            color: var(--primary);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            margin: 0 0 20px 0;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin: 8px 16px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            padding: 8px 0; /* Ensure good tap target */
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            color: var(--muted);
+            font-size: 0.8rem;
+            margin-top: 12px;
+        }
+
+        @media (min-width: 768px) {
+            .error-actions {
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            .nav-links {
+                display: flex;
+                position: static;
+                flex-direction: row;
+                background: transparent;
+                box-shadow: none;
+                padding: 0;
+                width: auto;
+                border-top: none;
+                order: 2;
+                flex-shrink: 0;
+                margin-left: auto;
+            }
+
+            .nav-links li {
+                margin: 0 0 0 28px;
+            }
+
+            .nav-links a {
+                font-size: 0.95rem;
+            }
+
+            .mobile-menu {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                text-align: left;
+            }
+
+            .footer-logo {
+                margin-bottom: 0;
+            }
+
+            .footer-links {
+                margin-bottom: 0;
+            }
+
+            .footer-links li {
+                margin: 0 0 0 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .error-container {
+                padding: 30px 20px;
+            }
+
+            .error-title {
+                font-size: 1.5rem;
+            }
+
+            .error-message {
+                font-size: 0.95rem;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .logo {
+                flex-basis: auto;
+            }
+
+            .mobile-menu {
+                order: 1;
+                margin-left: 0;
+            }
+
+            .nav-links {
+                top: 105px;
+                order: 3;
+                width: 100%;
+            }
+
+            .nav-links a {
+                padding: 12px 8px; /* Larger tap target */
+                display: inline-block;
+            }
+
+            .btn {
+                width: 100%; /* Full width buttons on small screens */
+                padding: 14px 20px;
+            }
+        }
+
+        /* Styles for the search bar */
+        .search-toggle {
+            background: none;
+            border: none;
+            color: var(--dark);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+            transition: transform 0.3s;
+        }
+
+        .search-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .InputContainer {
+            width: 200px;
+            position: relative;
+        }
+
+        .input {
+            width: 100%;
+            height: 40px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            padding: 10px;
+            background-color: rgba(28, 37, 65, 0.1);
+            color: var(--dark);
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .input:focus {
+            background-color: rgba(28, 37, 65, 0.2);
+        }
+
+        .InputContainer button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--dark);
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 5px;
+            transition: transform 0.3s;
+        }
+
+        .InputContainer button:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        /* Hide the search form by default */
+        .InputContainer {
+            display: none;
+        }
+
+        .InputContainer.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Forensic<span>Financials</span></a>
+                <button class="search-toggle" aria-label="Toggle search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
+                    <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
+                    <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
+                </form>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#methodology">Methodology</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+                <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="error-container">
+            <i class="fas fa-chart-line error-icon"></i>
+            <h1 class="error-title">Ticker Currently Unsupported</h1>
+            <p class="error-message">
+                We sincerely apologize for the inconvenience.
+                Please be patient with us as we're continuously expanding our coverage to include more companies.
+                You can request this ticker to be added to our database by clicking the button below.
+            </p>
+            <div class="error-actions">
+                <a href="https://x.com/ForensicFin" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-x-twitter"></i> Request a Ticker
+                </a>
+                <a href="index.html" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Return Home
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Forensic<span>Financials</span> by Cho</div>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#methodology">Methodology</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                <p>© 2025 ForensicFinancials. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            const mobileMenuIcon = document.querySelector('.mobile-menu i');
+
+            if (mobileMenuButton && navLinks && mobileMenuIcon) {
+                mobileMenuButton.addEventListener('click', function() {
+                    navLinks.classList.toggle('show');
+                    mobileMenuIcon.classList.toggle('fa-bars');
+                    mobileMenuIcon.classList.toggle('fa-times');
+                    mobileMenuButton.setAttribute('aria-expanded', navLinks.classList.contains('show'));
+                    const headerHeight = document.querySelector('#header')?.offsetHeight || 61;
+                    navLinks.style.top = `${headerHeight}px`;
+                });
+
+                // Close mobile menu when a link is clicked
+                const navLinksItems = document.querySelectorAll('.nav-links a');
+                navLinksItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        if (navLinks.classList.contains('show')) {
+                            navLinks.classList.remove('show');
+                            mobileMenuIcon.classList.remove('fa-times');
+                            mobileMenuIcon.classList.add('fa-bars');
+                            mobileMenuButton.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                });
+            }
+
+            // Header scroll effect
+            const header = document.querySelector('#header');
+            if (header) {
+                const headerScrolled = () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                };
+                window.addEventListener('load', headerScrolled);
+                window.addEventListener('scroll', headerScrolled);
+            }
+        });
+    </script>
+    <script src="search-toggle.js"></script>
+</body>
+</html>
