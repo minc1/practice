@@ -47,20 +47,17 @@ document.addEventListener("DOMContentLoaded", () => {
           inputContainer.style.display = "flex"
           inputContainer.style.height = "0"
 
-          // Add a small delay before animation to ensure proper styling
+          // Trigger reflow to ensure transition works
+          inputContainer.offsetHeight
+
+          // Animate to full height
+          inputContainer.style.height = "50px"
+
+          // Focus the input after animation starts
           setTimeout(() => {
-            // Trigger reflow to ensure transition works
-            inputContainer.offsetHeight
-
-            // Animate to full height
-            inputContainer.style.height = "50px"
-
-            // Focus the input after animation starts
-            setTimeout(() => {
-              const searchInput = inputContainer.querySelector("input")
-              if (searchInput) searchInput.focus()
-            }, 100)
-          }, 10)
+            const searchInput = inputContainer.querySelector("input")
+            if (searchInput) searchInput.focus()
+          }, 100)
         } else {
           // Animate to zero height
           inputContainer.style.height = "0"
