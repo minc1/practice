@@ -165,6 +165,13 @@ nav {
   padding: 8px;
   min-height: 44px;
   min-width: 44px;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.search-toggle:hover,
+.mobile-menu:hover {
+  transform: scale(1.05);
+  color: var(--primary);
 }
 
 @media (max-width: 768px) {
@@ -322,19 +329,15 @@ nav {
   font-size: 1.4rem;
   cursor: pointer;
   color: var(--dark);
-  transition: transform 0.3s;
+  transition: transform 0.2s ease, color 0.2s ease;
   background: none;
   border: none;
   padding: 5px;
   flex-shrink: 0;
   order: 3;
   margin-left: auto;
-  min-height: 44px; /* Ensure good tap target */
-  min-width: 44px; /* Ensure good tap target */
-}
-
-.mobile-menu:hover {
-  transform: scale(1.1);
+  min-height: 44px;
+  min-width: 44px;
 }
 
 .message-area {
@@ -1228,25 +1231,26 @@ footer {
 @media (max-width: 768px) {
   .footer-logo {
     font-size: 1.1rem;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
 
   .footer-links {
-    gap: 10px;
-    margin: 0 0 15px 0;
+    gap: 5px;
+    margin: 0 0 10px 0;
   }
 
   .footer-links li {
-    margin: 5px 10px;
+    margin: 3px 8px;
   }
 
   .footer-links a {
-    font-size: 0.8rem;
-    padding: 8px 5px;
+    font-size: 0.7rem;
+    padding: 6px 3px;
   }
 
   .copyright {
     text-align: center;
     width: 100%;
+    font-size: 0.7rem;
   }
 }
