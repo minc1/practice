@@ -4,144 +4,143 @@
     "ticker": "TSLA",
     "pageTitle": "ForensicFinancials | TSLA Financial Analysis",
     "analysisTitle": "Synthesized Financial Growth Analysis",
-    "heroSubtitle": "Integrating annual trends (2006-2024) and recent quarterly dynamics (Q1 2020 - Q4 2024) to assess financial health, growth quality, and competitive positioning."
+    "heroSubtitle": "Integrating annual trends (2007-2024) and recent quarterly dynamics (Q1 2023 - Q4 2024) to assess financial health, growth quality, and competitive positioning amid significant market shifts."
   },
   "trendAnalysis": {
-    "sectionSubtitle": "Examining long-term growth phases alongside recent quarterly performance shifts to understand the current trajectory.",
+    "sectionSubtitle": "Examining Tesla's transition from hyper-growth to recent deceleration and margin pressure.",
     "cards": [
       {
         "title": "Growth Trajectory Overview",
-        "iconClass": "fas fa-chart-line neutral",
+        "iconClass": "fas fa-chart-line negative",
         "points": [
-          "<strong>Long-Term Trend:</strong> Evolved from a high-risk startup (pre-2013) through rapid scaling (2013-2019) to a hyper-growth, profitable phase (2020-2022).",
-          "<strong>Recent Trend:</strong> Sharp deceleration and margin pressure phase initiated in 2023, with near-stagnant annual revenue growth (0.9%) and negative profit growth in 2024. Q4 2024 confirmed weak sequential growth (+2.1% Rev) and margin pressure.",
-          "<strong>Volatility/Consistency:</strong> Extreme volatility historically, particularly in profitability and cash flow. Recent quarterly data (2023-2024) shows high volatility in margins, income, and OCF, indicating instability.",
-          "<strong>Profitability Trend:</strong> Explosive profit growth 2020-2022 reversed sharply in 2023-2024, with significant annual (-52.5% NI in 2024) and quarterly contractions (e.g., Q4'24 OpInc -41.7%)."
+          "<strong>Long-Term Trend:</strong> Transitioned from volatile startup (pre-2013) to explosive hyper-growth (approx. 2013-2022) with revenue often exceeding 50% annually.",
+          "<strong>Recent Trend:</strong> Sharp annual deceleration (Revenue growth: 51.4% in 2022 -> 18.8% in 2023 -> 0.9% in 2024). Quarterly data shows high volatility and recent contractions (e.g., Q1'24 -15.4%, Q3'24 -1.2%) with only weak recovery in Q4'24 (+2.1%).",
+          "<strong>Volatility/Consistency:</strong> Shift from consistent high growth to recent inconsistency and significant volatility, particularly in quarterly profitability and cash flow metrics.",
+          "<strong>Profitability Trend:</strong> Dramatic annual improvement turning profitable (2020-2022), followed by sharp deceleration and contraction (Net Income -52.5% in 2024). Quarterly profits show extreme volatility and recent sharp declines (e.g., OpInc -43.3% Q1'24, -41.7% Q4'24)."
         ],
-        "footer": "The transition from hyper-growth to stagnation necessitates close monitoring of underlying drivers."
+        "footer": "Hyper-growth era has ended; facing significant recent deceleration and volatility."
       },
       {
-        "title": "Margin Performance Under Pressure",
+        "title": "Margin Performance",
         "iconClass": "fas fa-arrow-trend-down negative",
         "points": [
-          "<strong>Annual Margin Trend:</strong> Strong expansion 2020-2022 (`growthGrossProfitRatio`, `growthOperatingIncomeRatio` positive) reversed dramatically in 2023-2024 (both ratios showed significant negative growth).",
-          "<strong>Quarterly Margin Trend:</strong> Persistent QoQ margin compression evident throughout 2023 and 2024, often exceeding revenue deceleration (e.g., Q4'24 Rev +2.1%, Gross Profit -16.4%).",
-          "<strong>Key Drivers:</strong> Strategic price cuts initiated late 2022/early 2023 and continued periodically, driven by slowing demand and intensifying competition (per external context).",
-          "<strong>Implication:</strong> Significant erosion of pricing power and challenges in maintaining cost advantages amidst industry pressure. Margin compression is a primary driver of recent financial strain."
+          "<strong>Annual Margin Trend:</strong> Strong margin expansion during growth phase (e.g., 2021-2022) reversed sharply into severe compression in 2023 (Gross Profit Ratio -28.7%, Operating Margin -45.2%) and continued in 2024 (Operating Margin -21.2%).",
+          "<strong>Quarterly Margin Trend:</strong> Significant quarterly margin pressure evident throughout 2023 and 2024 (e.g., `growthOperatingMargin` -28.8% Q1'23, -41.7% Q4'24), indicating persistent challenges.",
+          "<strong>Key Drivers:</strong> Margin compression primarily driven by vehicle price cuts to combat slowing demand and rising competition, outpacing cost efficiencies. R&D spending also contributes to operating margin pressure.",
+          "<strong>Implication:</strong> Eroding pricing power and challenges in maintaining profitability levels achieved during peak growth, signaling increased competitive pressure."
         ],
-        "footer": "Margin recovery is critical but faces significant headwinds from competition and pricing strategies."
+        "footer": "Severe and persistent margin compression is a major concern."
       },
       {
-        "title": "Cash Flow Dynamics & Quality",
-        "iconClass": "fas fa-chart-bar neutral",
+        "title": "Cash Flow Dynamics",
+        "iconClass": "fas fa-chart-bar warning",
         "points": [
-          "<strong>OCF vs. NI Divergence - Annual:</strong> Variable quality. 2023 saw NI growth (+19%) despite OCF decline (-10%) due to working capital drag (inventory/receivables build). 2024 saw OCF growth (+13%) despite NI collapse (-52%), aided by slower WC drag/timing.",
-          "<strong>OCF vs. NI Divergence - Quarterly:</strong> High volatility. Q4 2024 showed a major red flag: NI +8.7% vs OCF -23.0%, driven by adverse working capital changes (-34.6%).",
-          "<strong>Working Capital Impact:</strong> Highly volatile and often disproportionate changes in working capital significantly impact OCF predictability and quality, reflecting reactive management to demand/production shifts.",
-          "<strong>Funding Source Trend:</strong> Clear shift from reliance on external debt/equity in early phases to primarily internal funding via retained earnings in recent years (2019-2024), improving the balance sheet risk profile."
+          "<strong>OCF vs. NI Divergence - Annual:</strong> Lower quality earnings in 2023 (NI +19.2% vs OCF -10.0%) due to working capital drag. In 2024, OCF (+12.6%) diverged positively from collapsing NI (-52.5%), cushioned by working capital timing/non-cash items, masking underlying profit weakness.",
+          "<strong>OCF vs. NI Divergence - Quarterly:</strong> Frequent and extreme divergences. Q1 2024 saw OCF plunge (-94.5%) far exceeding NI drop (-85.8%) due to receivables build. Q3 2024 saw OCF surge (+73.2%) despite weak NI (+47.0%) driven by working capital management. Q4 2024 showed poor conversion (NI +7.4% vs OCF -23.0%).",
+          "<strong>Working Capital Impact:</strong> OCF highly sensitive to large, erratic swings in working capital (inventory, receivables). Significant cash drains from WC in Q1'24 and Q4'24 highlight volatility and predictability issues.",
+          "<strong>Funding Source Trend:</strong> Shifted from external capital reliance (early years) to strong internal funding (2020-2022), but recently reverted towards increased debt reliance (2023-2024) amid negative Free Cash Flow."
         ],
-        "footer": "Recent OCF volatility and poor conversion raise concerns about earnings quality and liquidity management."
+        "footer": "Cash flow quality is volatile and recently obscured by significant working capital swings."
       }
     ]
   },
   "financialMetrics": {
-    "sectionSubtitle": "Assessing earnings quality, balance sheet movements, and key operational divergences through ratio analysis.",
+    "sectionSubtitle": "Assessing earnings quality, balance sheet health, and key divergences across annual and quarterly data.",
     "cards": [
       {
-        "title": "Revenue vs. Accounts Receivable Divergence",
-        "iconClass": "fas fa-file-invoice-dollar warning",
+        "title": "Revenue vs. Accounts Receivable",
+        "iconClass": "fas fa-file-invoice-dollar negative",
         "points": [
-          "<strong>Key Annual Divergence:</strong> 2024 showed a major red flag: Net Receivables grew 25.9% while Revenue grew only 0.9%.",
-          "<strong>Key Quarterly Divergences:</strong> Notable instances where A/R growth significantly outpaced Revenue growth in Q4 2023 (+39% vs +8%), Q1 2024 (+11% vs -15%), and Q4 2024 (+33% vs +2%).",
-          "<strong>Potential Implications:</strong> Suggests potential increases in Days Sales Outstanding (DSO), possibly due to lenient payment terms, collection difficulties, channel stuffing, or aggressive revenue recognition practices.",
-          "<strong>Risk Assessment:</strong> High short-term risk to liquidity and cash flow quality, requiring close monitoring and management explanation."
+          "<strong>Key Annual Divergence:</strong> Major red flag in 2024: Net Receivables grew +25.9% while Revenue was nearly flat (+0.9%).",
+          "<strong>Key Quarterly Divergences:</strong> Supporting evidence in Q4 2023 (A/R +39.2% vs Rev +7.8%) and Q1 2024 (A/R +10.8% vs Rev -15.4%).",
+          "<strong>Potential Implications:</strong> Suggests potential lengthening of DSO, aggressive revenue recognition, extended payment terms (mix shift?), channel stuffing, or collection issues. Impacts cash conversion.",
+          "<strong>Risk Assessment:</strong> High risk associated with the 2024 divergence, requiring close monitoring of revenue quality and cash collection efficiency."
         ],
-        "footer": "This divergence is a critical indicator of potential revenue quality issues and cash conversion challenges."
+        "footer": "Significant 2024 A/R vs Revenue divergence warrants scrutiny of revenue quality."
       },
       {
-        "title": "Inventory vs. Cost of Revenue Dynamics",
-        "iconClass": "fas fa-boxes-stacked neutral",
+        "title": "Inventory vs. Cost of Revenue",
+        "iconClass": "fas fa-boxes-stacked warning",
         "points": [
-          "<strong>Annual Inventory Trend:</strong> Inventory growth lagged COGS growth in 2023 (Inv +6% vs COGS +31%). Inventory contracted (-12%) in 2024 despite flat COGS (+1.4%), suggesting destocking or demand alignment efforts.",
-          "<strong>Quarterly Inventory Dynamics:</strong> Q1 2024 saw inventory surge (+18%) while COGS fell (-15%), signaling demand weakness. Subsequent drawdowns in Q2/Q4 2024 aided short-term cash flow but raise questions about sustainable production.",
-          "<strong>Working Capital Link:</strong> Inventory fluctuations (builds in 2023, drawdowns in Q4 2024) are a significant driver of working capital volatility and OCF.",
-          "<strong>Implication/Risk:</strong> Highlights challenges in matching production to fluctuating demand, impacting efficiency and carrying potential obsolescence risk."
+          "<strong>Annual Inventory Trend:</strong> Inventory growth significantly lagged COGS growth in 2022-2023 (suggesting efficiency or stockout risk). Inventory contracted (-11.8%) in 2024 while COGS grew slightly (+1.4%), indicating active reduction.",
+          "<strong>Quarterly Inventory Dynamics:</strong> Red flag in Q1 2024 with inventory build (+17.7%) despite falling COGS (-15.1%), signaling potential overproduction/demand mismatch. Subsequent quarterly reductions suggest efforts to clear stock.",
+          "<strong>Working Capital Link:</strong> Inventory fluctuations significantly impact working capital and OCF, contributing to recent volatility (e.g., cash drain Q1'24, cash source Q4'24).",
+          "<strong>Implication/Risk:</strong> Trends suggest challenges in matching production to fluctuating demand and potential risks of obsolescence or aggressive destocking impacting future fulfillment."
         ],
-        "footer": "Inventory management remains key to navigating demand volatility and optimizing cash flow."
+        "footer": "Volatile inventory management reflects demand uncertainty and impacts cash flow."
       },
       {
-        "title": "Profitability & Operating Leverage",
+        "title": "Profitability & Leverage",
         "iconClass": "fas fa-scale-unbalanced-flip negative",
         "points": [
-          "<strong>Margin Erosion:</strong> Both annual (2023-24) and recent quarterly data confirm significant, persistent erosion in Gross and Operating margins.",
-          "<strong>Operating Deleveraging:</strong> Severe operating deleveraging observed recently, where operating income falls much faster than revenue slows (or falls despite slight revenue growth, e.g., Q4 2024).",
-          "<strong>Cost Structure Insight:</strong> Suggests challenges in adjusting the cost structure quickly enough to counteract slowing growth and aggressive price cuts.",
-          "<strong>Interest Coverage Trend:</strong> While absolute debt is lower, the sharp decline in operating income growth (negative in 2023-24) puts pressure on the trend of interest coverage ratios."
+          "<strong>Margin Erosion/Expansion:</strong> Confirmed severe margin erosion annually (2023-2024) and quarterly (multiple quarters in 2023-2024).",
+          "<strong>Operating Leverage/Deleveraging:</strong> Negative operating leverage evident as Operating Income fell faster than revenue annually (2023) and quarterly (e.g., Q4'24 OpInc -41.7% vs Rev +2.1%).",
+          "<strong>Cost Structure Insight:</strong> Suggests cost structure (including R&D) is not flexible enough or cost cuts are insufficient to offset pricing pressures and slowing growth.",
+          "<strong>Debt & Coverage Trend:</strong> Annual debt growth surged in 2023-2024, reversing prior deleveraging. Quarterly Net Debt spiked in Q1'24 and Q4'24. Interest coverage deteriorated annually (2023-2024) due to falling Operating Income."
         ],
-        "footer": "The inability to maintain margins highlights significant profitability pressure and operational challenges."
+        "footer": "Profitability under severe pressure; financial risk increasing due to rising debt and falling coverage."
       }
     ]
   },
   "investmentConsiderations": {
-    "sectionSubtitle": "Evaluating potential opportunities and risks based on the synthesized financial analysis.",
+    "sectionSubtitle": "Evaluating potential opportunities and risks based on synthesized financial trends.",
     "tableData": [
       {
         "factor": "Market Position & Competition",
-        "opportunities": "Brand strength, technological lead (EV tech, potential FSD), expanding into new markets/segments (Energy, Cybertruck).",
-        "risks": "Intensifying competition (especially China), price wars eroding leadership, potential saturation in core segments/markets."
+        "opportunities": "Strong brand, potential differentiation via R&D (FSD, robotics), established charging network.",
+        "risks": "Intensifying competition (especially China), eroding market share, sensitivity to EV demand cycles."
       },
       {
         "factor": "Revenue Growth",
-        "opportunities": "New model launches (next-gen platform), FSD adoption driving software revenue, Energy storage growth, market share gains if competitors falter.",
-        "risks": "Slowing global EV demand growth, failure of price cuts to stimulate sufficient volume, execution delays on new products, continued competitive pressure."
+        "opportunities": "Growth in Energy Storage, successful launch of new models, potential market recovery.",
+        "risks": "Sustained deceleration, demand saturation in key segments, impact of macroeconomic factors."
       },
       {
-        "factor": "Profitability & Margins",
-        "opportunities": "Successful cost reduction initiatives (manufacturing efficiencies, lower battery costs), higher margin software revenue growth, potential stabilization of pricing environment.",
-        "risks": "Continued price wars, inability to achieve cost targets, rising input costs, negative operating leverage persisting, costs associated with new product ramps (Cybertruck)."
+        "factor": "Profitability",
+        "opportunities": "Cost optimization payoffs (manufacturing efficiencies, lower COGS/vehicle), successful R&D commercialization.",
+        "risks": "Sustained margin pressure from price cuts/competition, negative operating leverage, high R&D spend drag."
       },
       {
-        "factor": "Cash Flow Quality & Generation",
-        "opportunities": "Improved working capital management leading to better OCF conversion, strong FCF generation if margins recover and capex moderates.",
-        "risks": "Persistent poor OCF conversion due to A/R or inventory issues, negative FCF impacting reinvestment/flexibility, high capex requirements for expansion/new tech."
+        "factor": "Cash Flow Quality",
+        "opportunities": "Normalization of working capital leading to more predictable OCF, return to positive FCF.",
+        "risks": "Continued OCF volatility driven by WC swings, poor earnings-to-cash conversion, negative FCF persistence."
       },
       {
-        "factor": "Financial Health & Solvency",
-        "opportunities": "Stronger balance sheet due to past deleveraging, significant cash reserves providing buffer.",
-        "risks": "Sustained cash burn if FCF remains negative, potential need for future financing if internal generation falters significantly, deterioration in credit quality impacting A/R."
+        "factor": "Financial Health/Solvency",
+        "opportunities": "Large cash balance provides cushion, potential return to FCF positive operations.",
+        "risks": "Rising debt levels (reversal of deleveraging), negative FCF straining resources, deteriorating interest coverage."
       },
       {
-        "factor": "Innovation & R&D",
-        "opportunities": "Breakthroughs in FSD/AI leading to significant differentiation and revenue streams, success of Optimus robot, next-gen vehicle platform lowering costs.",
-        "risks": "Failure of R&D bets to materialize commercially, high R&D spending continuing to pressure near-term profitability, competitors catching up technologically."
+        "factor": "Shareholder Returns",
+        "opportunities": "Potential future buybacks if FCF recovers strongly.",
+        "risks": "Negative FCF limits capacity for returns, capital allocation focused on high Capex/R&D."
       },
       {
         "factor": "Outlook/Execution",
-        "opportunities": "Management successfully navigates downturn and executes on cost/product strategy, macroeconomic environment improves.",
-        "risks": "Missing guidance, execution missteps on production ramps or cost initiatives, regulatory headwinds, geopolitical factors impacting supply chains/demand."
+        "opportunities": "Successful execution on next-gen platforms, AI/FSD leadership translating to revenue.",
+        "risks": "Execution risk on new products/factories (e.g., Cybertruck ramp costs), failure to meet R&D promises, competitive landscape shifts."
       }
     ]
   },
   "conclusion": {
-    "sectionSubtitle": "Synthesizing annual and quarterly forensic findings to provide an overall assessment.",
-    "verdictTitle": "Navigating Intense Competition: Growth Stalls, Margins Erode, Cash Quality Questionable",
+    "sectionSubtitle": "Synthesizing the analysis of Tesla's recent financial performance and trajectory.",
+    "verdictTitle": "Growth Stalled, Margins Compressed: Navigating Intense Competition and Financial Flags",
     "verdictRating": "Cautious / Negative",
     "paragraphs": [
-      "Tesla's financial narrative has shifted dramatically from hyper-growth and expanding profitability (2020-2022) to a period of near-stagnant growth, significant margin compression, and operational deleveraging (2023-2024). While the company successfully strengthened its balance sheet during the boom years, the recent annual and quarterly trends reveal considerable stress.",
-      "The primary drivers appear to be strategic price cuts implemented to combat intensifying global competition and potentially slowing EV demand growth. These actions have severely impacted gross and operating margins, reversing the strong gains made previously and leading to sharp declines in profitability, culminating in a 52.5% drop in annual Net Income for 2024.",
-      "Forensic analysis highlights several key concerns: persistent margin erosion, questionable earnings quality due to volatile operating cash flow conversion (negative divergence in 2023, major negative divergence in Q4 2024), and a significant red flag in 2024 with Accounts Receivable growth (26%) vastly outpacing near-flat Revenue growth (0.9%). This A/R anomaly requires urgent clarification as it suggests potential revenue quality or collection issues.",
-      "While Tesla maintains technological strengths and continues to invest heavily in R&D (FSD, AI, next-gen platforms) to defend its moat, its current automotive operations face significant pressure. The financial data indicates a reliance on future innovation payoffs rather than current operational dominance. Given the margin collapse, slowing growth, and cash flow quality concerns, a cautious to negative stance is warranted until evidence of margin stabilization and sustainable cash generation emerges."
+      "Tesla's financial narrative has shifted dramatically from hyper-growth and expanding margins (through ~2022) to significant deceleration and profitability challenges (2023-2024). Annual revenue growth nearly halted in 2024 (+0.9%), accompanied by severe annual and quarterly margin compression driven primarily by aggressive price cuts amid intensifying competition and maturing EV demand.",
+      "Recent performance is marked by considerable volatility and concerning financial signals. Operating income declined sharply in 2023 and 2024, with quarterly results showing deep drops (e.g., Q1'24, Q4'24). While the Energy segment shows promise, the core automotive business faces significant headwinds.",
+      "Key forensic findings raise red flags regarding financial quality and risk. The dramatic 2024 divergence where Accounts Receivable growth (+25.9%) vastly outpaced near-zero Revenue growth (+0.9%) demands scrutiny of revenue recognition and cash conversion. Operating Cash Flow has become highly volatile and disconnected from Net Income, driven by erratic working capital management (inventory builds/drawdowns, receivables swings). Furthermore, the deleveraging trend reversed in 2023-2024 with rising debt alongside negative Free Cash Flow, increasing financial risk.",
+      "While Tesla continues heavy investment in potential future differentiators (R&D, AI, new platforms), the current financial trajectory reflects a company under pressure. The combination of stalled growth, severely compressed margins, questionable revenue quality signals (A/R divergence), volatile cash flows, and rising leverage warrants a cautious investment stance. Stabilization of margins and a return to consistent positive free cash flow generation are critical."
     ],
     "monitoringPointsTitle": "Key Investor Takeaways",
     "monitoringPoints": [
-      "<strong>Margin Trajectory is Paramount:</strong> Investors must scrutinize Automotive Gross Margin % (ex-credits) in upcoming reports. Is the compression bottoming out, or will price cuts/competition continue to drive margins lower? This directly impacts profitability and valuation.",
-      "<strong>Watch Revenue Quality & Cash Conversion:</strong> The extreme 2024 A/R growth vs. Revenue growth divergence needs resolution. Monitor Days Sales Outstanding (DSO) trends and the Operating Cash Flow to Net Income ratio. Sustained poor cash conversion signals underlying business stress or aggressive accounting.",
-      "<strong>Assess Free Cash Flow Generation:</strong> Track Free Cash Flow (FCF) trends closely. Negative FCF in 2023-2024 (based on growth rates) pressures reinvestment capacity. A return to positive and growing FCF is crucial for validating the long-term investment thesis and funding future innovation internally."
+      "<strong>Margin Stabilization Watch:</strong> Closely monitor Automotive Gross Margin (excluding credits) trends QoQ and YoY. Is the compression bottoming out, or will further price actions/competition continue the decline? This is crucial for assessing future profitability.",
+      "<strong>Revenue Quality & Cash Conversion Alert:</strong> Track the relationship between Net Receivables growth and Revenue growth. A continued significant divergence, or rising Days Sales Outstanding (DSO), would amplify concerns about revenue quality, collection efficiency, and near-term cash flow.",
+      "<strong>Free Cash Flow Recovery:</strong> Monitor the trajectory of Free Cash Flow (FCF). A return to sustained positive FCF is essential to validate the business model's ability to self-fund its ambitious investments (Capex, R&D) without increasing reliance on debt or cash reserves."
     ]
   },
   "chartData": {
     "labels": [
-      "2006",
       "2007",
       "2008",
       "2009",
@@ -162,34 +161,32 @@
       "2024"
     ],
     "revenueGrowth": [
-      0.0,
-      0.0,
+      0.000,
       200.945,
-      659.3,
-      428.9,
+      6.593,
+      4.289,
       74.949,
-      102.3,
-      387.2,
+      1.023,
+      3.872,
       58.846,
       26.503,
       73.013,
       67.983,
       82.509,
       14.523,
-      28.31,
+      28.310,
       70.672,
       51.352,
       18.795,
       0.948
     ],
     "arGrowth": [
-      0.0,
-      0.0,
+      0.000,
       55.271,
-      50.6,
+      5.060,
       92.374,
       42.161,
-      181.4,
+      1.814,
       82.956,
       3.614,
       -25.436,
@@ -204,44 +201,42 @@
       25.941
     ],
     "cfoGrowth": [
-      0.0,
-      -145.98,
-      197.7,
-      -542.11,
-      -581.4,
-      1052.5,
-      -130.7,
-      200.4,
-      -12.17,
-      -81.48,
-      763.91,
-      507.39,
-      353.93,
-      146.33,
-      147.1,
+      -14.598,
+      1.977,
+      -54.211,
+      -58.140,
+      -0.170,
+      -1.061,
+      2.004,
+      -1.217,
+      -8.148,
+      76.391,
+      51.018,
+      35.590,
+      14.633,
+      1.471,
       93.454,
       28.068,
-      -9.97,
+      -9.970,
       12.575
     ],
     "niGrowth": [
-      0.0,
-      -160.9,
+      -1.609,
       -5.918,
       32.667,
-      -176.9,
+      -1.769,
       -64.851,
       -55.737,
-      81.32,
-      -297.3,
+      81.320,
+      -2.973,
       -2.022,
       24.053,
       -1.907,
       50.255,
-      11.68,
-      183.6,
-      666.2,
-      127.8,
+      11.680,
+      1.836,
+      6.662,
+      1.278,
       19.201,
       -52.463
     ]
