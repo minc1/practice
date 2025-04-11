@@ -829,58 +829,112 @@ tr:hover {
   table {
     border: 0;
     min-width: auto;
+    display: block;
+    width: 100%;
+    background: transparent;
   }
 
   table thead {
     display: none;
   }
 
+  table tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
   table tr {
-    display: block;
-    margin-bottom: 1.2em; /* Increased spacing between rows */
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
     border: 1px solid var(--border-color);
-    border-radius: 8px; /* Slightly larger radius */
+    border-radius: 12px;
     box-shadow: var(--shadow-sm);
     background-color: var(--card-bg);
-    overflow: hidden; /* Ensure content respects border radius */
+    overflow: hidden;
+    transition: var(--transition);
+  }
+
+  table tr:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
   }
 
   table td {
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     text-align: right;
-    font-size: 0.85em; /* Slightly larger font */
-    border: none; /* Remove individual cell borders */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Lighter separator */
-    padding: 14px 18px; /* Increased padding for more space */
-    min-height: 44px; /* Ensure good tap target */
-    line-height: 1.5; /* Improve readability */
+    font-size: 0.9rem;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 16px 20px;
+    min-height: 52px;
+    line-height: 1.5;
+    position: relative;
   }
 
-  table tr td:last-child {
-    /* Corrected selector */
+  table td:last-child {
     border-bottom: 0;
   }
 
   table td::before {
     content: attr(data-label);
-    float: left;
-    font-weight: 600; /* Adjusted weight */
-    text-transform: uppercase;
+    float: none;
+    font-weight: 600;
+    text-transform: none;
     color: var(--dark);
-    padding-right: 12px; /* Increased space between label and value */
+    padding-right: 16px;
     text-align: left;
-    width: 45%; /* Allocate space for label */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.5; /* Match td line-height */
+    width: auto;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: inherit;
+    flex: 1;
+    display: flex;
+    align-items: center;
   }
 
-  /* Clearfix for floated ::before element */
-  table td::after {
+  /* Add a subtle indicator for interactive rows */
+  table td:first-child::after {
     content: "";
-    display: table;
-    clear: both;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--primary);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  table tr:hover td:first-child::after {
+    opacity: 0.8;
+  }
+
+  /* Style for the value portion of each cell */
+  table td > span {
+    flex: 1;
+    text-align: right;
+    padding-left: 12px;
+    word-break: break-word;
+  }
+
+  /* Special styling for the first cell in each row */
+  table td:first-child {
+    background-color: rgba(197, 164, 126, 0.05);
+    font-weight: 600;
+  }
+
+  /* Highlight important values */
+  table td[data-label="Opportunities"] > span {
+    color: var(--success);
+  }
+
+  table td[data-label="Risks"] > span {
+    color: var(--danger);
   }
 }
 

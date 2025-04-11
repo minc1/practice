@@ -179,18 +179,6 @@
                 padding: 60px 0;
             }
         }
-
-        /* Improved table responsiveness */
-        @media screen and (max-width: 767px) {
-            table td::before {
-                width: 40%; /* Slightly narrower label column */
-                font-size: 0.8rem; /* Smaller label text */
-            }
-
-            table td {
-                min-height: 44px; /* Ensure minimum tap target size */
-            }
-        }
     </style>
 </head>
 <body>
@@ -302,7 +290,12 @@
                             </tr>
                         </thead>
                         <tbody id="opportunities-table-body">
-                            <tr><td colspan="3">Loading table data...</td></tr>
+                            <!-- Example row with the new structure for mobile -->
+                            <tr>
+                                <td data-label="Factor"><span>Loading...</span></td>
+                                <td data-label="Opportunities"><span>Loading...</span></td>
+                                <td data-label="Risks"><span>Loading...</span></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
