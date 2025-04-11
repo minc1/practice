@@ -825,118 +825,66 @@ tr:hover {
   background-color: rgba(0, 0, 0, 0.03);
 }
 
+/* --- START REFACTORED MOBILE TABLE STYLES --- */
 @media screen and (max-width: 767px) {
   table {
     border: 0;
     min-width: auto;
-    display: block;
-    width: 100%;
-    background: transparent;
   }
 
   table thead {
-    display: none;
-  }
-
-  table tbody {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    display: none; /* Hide table header on mobile */
   }
 
   table tr {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0;
+    display: block;
+    margin-bottom: 1.2em; /* Space between cards */
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 8px; /* Card corner rounding */
     box-shadow: var(--shadow-sm);
     background-color: var(--card-bg);
-    overflow: hidden;
-    transition: var(--transition);
-  }
-
-  table tr:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    overflow: hidden; /* Clip content to rounded corners */
+    padding: 16px; /* Padding inside the card */
   }
 
   table td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: right;
-    font-size: 0.9rem;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 16px 20px;
-    min-height: 52px;
-    line-height: 1.5;
-    position: relative;
+    display: grid; /* Use Grid for label-value layout */
+    grid-template-columns: auto 1fr; /* Label width auto, value takes rest */
+    gap: 10px; /* Space between label and value */
+    align-items: center; /* Vertically align label and value */
+    padding: 10px 0; /* Vertical padding within the row */
+    border: none; /* Remove individual cell borders */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Separator line */
+    min-height: 44px; /* Ensure good tap target */
+    font-size: 0.9rem; /* Adjust value font size if needed */
+    color: var(--text); /* Value color */
+    text-align: right; /* Align value text to the right */
+    line-height: 1.5; /* Improve readability */
   }
 
-  table td:last-child {
-    border-bottom: 0;
+  table tr td:last-child {
+    border-bottom: 0; /* Remove separator from last row in card */
   }
 
   table td::before {
-    content: attr(data-label);
+    content: attr(data-label); /* Get label text from data-label */
+    font-weight: 600; /* Make label bold */
+    color: var(--dark); /* Label color */
+    text-transform: uppercase; /* Uppercase labels */
+    font-size: 0.8em; /* Smaller font size for label */
+    text-align: left; /* Align label text left */
+    /* Remove old float/width styles */
     float: none;
-    font-weight: 600;
-    text-transform: none;
-    color: var(--dark);
-    padding-right: 16px;
-    text-align: left;
     width: auto;
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
-    line-height: inherit;
-    flex: 1;
-    display: flex;
-    align-items: center;
+    padding-right: 0;
+    white-space: normal; /* Allow label text to wrap */
+    line-height: 1.5; /* Match td line-height */
   }
 
-  /* Add a subtle indicator for interactive rows */
-  table td:first-child::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background-color: var(--primary);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-
-  table tr:hover td:first-child::after {
-    opacity: 0.8;
-  }
-
-  /* Style for the value portion of each cell */
-  table td > span {
-    flex: 1;
-    text-align: right;
-    padding-left: 12px;
-    word-break: break-word;
-  }
-
-  /* Special styling for the first cell in each row */
-  table td:first-child {
-    background-color: rgba(197, 164, 126, 0.05);
-    font-weight: 600;
-  }
-
-  /* Highlight important values */
-  table td[data-label="Opportunities"] > span {
-    color: var(--success);
-  }
-
-  table td[data-label="Risks"] > span {
-    color: var(--danger);
-  }
+  /* Remove old clearfix if present */
+  /* table td::after { content: ""; display: table; clear: both; } */
 }
+/* --- END REFACTORED MOBILE TABLE STYLES --- */
 
 .conclusion {
   text-align: center;
