@@ -78,19 +78,19 @@
       "metrics": [
         {
           "title": "Operating Margin (FY2024 vs FY2023)",
-          "value": "Improved", // Placeholder: Actual % would be calculated, e.g., "30.5% vs 26.8%"
+          "value": "Improved",
           "trend": "Strong expansion driven by efficiency focus",
           "iconClass": "fas fa-arrow-up positive"
         },
         {
-          "title": "Cloud Revenue Growth (Est. YoY)", // Assuming this is available/calculated
-          "value": "~30%", // Placeholder based on quarterly context
+          "title": "Cloud Revenue Growth (Est. YoY)",
+          "value": "~30%",
           "trend": "Remains a key high-growth driver",
           "iconClass": "fas fa-cloud-upload-alt positive"
         },
         {
-          "title": "Free Cash Flow Growth (FY2024)", // Assuming FCF = OCF - Capex
-          "value": "Significant Growth", // Placeholder: Calculation needed (OCF +23.1%, Capex -62.9% -> implies very strong FCF growth)
+          "title": "Free Cash Flow Growth (FY2024)",
+          "value": "Significant Growth",
           "trend": "Boosted by OCF recovery and lower Capex (in 2024)",
           "iconClass": "fas fa-coins positive"
         }
