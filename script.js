@@ -1,8 +1,3 @@
-// --- START OF FILE script.js ---
-
-// Note: Chart.js and ChartAnnotation are expected to be loaded globally via script tags in analysis.html
-// If using modules, you'd import them: import { Chart } from 'chart.js'; import ChartAnnotation from 'chartjs-plugin-annotation';
-
 const DEFAULT_TICKER = "AAPL"
 const DATA_PATH = "DATA/"
 const DIVERGENCE_THRESHOLD = 30.0
@@ -99,35 +94,44 @@ const generateCards = (containerId, cardData) => {
   })
 }
 
-const populateTable = (tbodyId, tableRowData) => {
-  const tbody = select(`#${tbodyId}`)
-  if (!tbody) {
-    console.error(`Table body not found: #${tbodyId}`);
-    return
-  }
-  if (!Array.isArray(tableRowData)) {
-     console.error(`Invalid table data for #${tbodyId}: Expected array, got ${typeof tableRowData}`);
-    tbody.innerHTML =
-      '<tr><td colspan="3" class="error-message" style="color: var(--danger); text-align: center;">Error loading table data.</td></tr>'
-    return
-  }
-  tbody.innerHTML = "" // Clear previous rows
-  if (tableRowData.length === 0) {
-    tbody.innerHTML =
-      '<tr><td colspan="3" style="text-align: center; color: var(--muted);">No table data available.</td></tr>'
-    return
-  }
-  tableRowData.forEach((row) => {
-    const tr = document.createElement("tr")
-    // Ensure data-label attributes match the <th> text for mobile view
-    tr.innerHTML = `
-            <td data-label="Factor">${row.factor || "-"}</td>
-            <td data-label="Opportunities">${row.opportunities || "-"}</td>
-            <td data-label="Risks">${row.risks || "-"}</td>
-        `
-    tbody.appendChild(tr)
-  })
-}
+// --- REMOVED populateTable function as it's no longer used on analysis page ---
+// const populateTable = (tbodyId, tableRowData) => { ... }
+
+// --- NEW: Function to generate Key Metric cards ---
+const generateMetricCards = (containerId, metricsData) => {
+    const container = select(`#${containerId}`);
+    if (!container) {
+        console.error(`Metric container not found: #${containerId}`);
+        return;
+    }
+    if (!Array.isArray(metricsData)) {
+        console.error(`Invalid metrics data for #${containerId}: Expected array, got ${typeof metricsData}`);
+        container.innerHTML = '<p class="error-message" style="color: var(--danger); text-align: center;">Error loading key metrics.</p>';
+        return;
+    }
+    container.innerHTML = ""; // Clear previous metrics
+    if (metricsData.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: var(--muted);">No key metrics available.</p>';
+        return;
+    }
+    metricsData.forEach((metric) => {
+        const metricElement = document.createElement("div");
+        metricElement.className = "metric-card"; // Use the new CSS class
+        metricElement.innerHTML = `
+            <div class="metric-card-header">
+                 <i class="${metric.iconClass || 'fas fa-chart-simple neutral'}"></i>
+                 <h4>${metric.title || "Untitled Metric"}</h4>
+            </div>
+            <div class="metric-card-body">
+                <span class="metric-value">${metric.value || "-"}</span>
+                <span class="metric-trend">${metric.trend || ""}</span>
+            </div>
+        `;
+        container.appendChild(metricElement);
+    });
+};
+// --- END NEW Function ---
+
 
 const populateList = (ulId, listItems, useInnerHTML = false) => {
   const ul = select(`#${ulId}`)
@@ -535,8 +539,14 @@ if (isAnalysisPage) {
         populateElement('[data-dynamic="financials-subtitle"]', data.financialMetrics?.sectionSubtitle || "")
         generateCards("financials-cards-container", data.financialMetrics?.cards || [])
 
-        populateElement('[data-dynamic="opportunities-subtitle"]', data.investmentConsiderations?.sectionSubtitle || "")
-        populateTable("opportunities-table-body", data.investmentConsiderations?.tableData || [])
+        // --- REMOVED Investment Considerations Table Population ---
+        // populateElement('[data-dynamic="opportunities-subtitle"]', data.investmentConsiderations?.sectionSubtitle || "")
+        // populateTable("opportunities-table-body", data.investmentConsiderations?.tableData || [])
+
+        // --- NEW: Populate Key Metrics Section ---
+        populateElement('[data-dynamic="key-metrics-subtitle"]', data.keyMetrics?.sectionSubtitle || "")
+        generateMetricCards("key-metrics-container", data.keyMetrics?.metrics || [])
+        // --- END NEW ---
 
         populateElement('[data-dynamic="conclusion-subtitle"]', data.conclusion?.sectionSubtitle || "")
         populateElement('[data-dynamic="verdict-title"]', data.conclusion?.verdictTitle || `Verdict for ${ticker}`)

@@ -180,16 +180,16 @@
             }
         }
 
-        /* Improved table responsiveness */
+        /* Improved table responsiveness (Now unused, but kept for reference if needed elsewhere) */
         @media screen and (max-width: 767px) {
-            table td::before {
-                width: 40%; /* Slightly narrower label column */
-                font-size: 0.8rem; /* Smaller label text */
+            /* table td::before {
+                width: 40%;
+                font-size: 0.8rem;
             }
 
             table td {
-                min-height: 44px; /* Ensure minimum tap target size */
-            }
+                min-height: 44px;
+            } */
         }
     </style>
 </head>
@@ -208,7 +208,7 @@
                 <ul class="nav-links">
                     <li><a href="#trends">Trend Analysis</a></li>
                     <li><a href="#financials">Financial Metrics</a></li>
-                    <li><a href="#opportunities">Investment Considerations</a></li>
+                    <li><a href="#key-metrics">Key Metrics</a></li> {/* UPDATED LINK */}
                     <li><a href="#conclusion">Conclusion</a></li>
                 </ul>
                 <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
@@ -285,29 +285,23 @@
             </div>
         </section>
 
-        <section class="section" id="opportunities">
+        {/* --- START: NEW Key Metrics Section --- */}
+        <section class="section" id="key-metrics">
             <div class="container">
                 <div class="section-title">
-                    <h2>Investment Considerations</h2>
-                    <p data-dynamic="opportunities-subtitle">Loading...</p>
+                    <h2>Key Metrics Snapshot</h2>
+                    <p data-dynamic="key-metrics-subtitle">Loading...</p> {/* UPDATED data-dynamic attribute */}
                 </div>
 
-                <div class="insight-list">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Factor</th>
-                                <th>Opportunities</th>
-                                <th>Risks</th>
-                            </tr>
-                        </thead>
-                        <tbody id="opportunities-table-body">
-                            <tr><td colspan="3">Loading table data...</td></tr>
-                        </tbody>
-                    </table>
+                <div class="key-metrics-grid" id="key-metrics-container"> {/* UPDATED container class and ID */}
+                    <p>Loading key metrics...</p> {/* Placeholder */}
                 </div>
             </div>
         </section>
+        {/* --- END: NEW Key Metrics Section --- */}
+
+        {/* --- REMOVED Old Investment Considerations Section --- */}
+        {/* <section class="section" id="opportunities"> ... </section> */}
 
         <section class="section conclusion" id="conclusion">
             <div class="container">
@@ -349,7 +343,7 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="#trends">Trend Analysis</a></li>
                     <li><a href="#financials">Financial Metrics</a></li>
-                    <li><a href="#opportunities">Investment Considerations</a></li>
+                    <li><a href="#key-metrics">Key Metrics</a></li> {/* UPDATED LINK */}
                     <li><a href="#conclusion">Conclusion</a></li>
                 </ul>
             </div>
@@ -363,4 +357,3 @@
     <script src="search-toggle.js"></script>
 </body>
 </html>
-
