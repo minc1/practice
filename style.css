@@ -777,103 +777,114 @@ canvas {
   height: 100% !important;
 }
 
-/* --- REMOVED Old Table Styles --- */
-/* .insight-list { ... } */
-/* table { ... } */
-/* th, td { ... } */
-/* th { ... } */
-/* tr:nth-child(even) { ... } */
-/* tr:hover { ... } */
-
-/* --- REMOVED Old Mobile Table Styles --- */
-/* @media screen and (max-width: 767px) { ... } */
-
-
-/* --- START: NEW Key Metrics Styles --- */
-.key-metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
-  gap: 24px; /* Spacing between metric cards */
-  margin-top: 20px;
-}
-
-.metric-card {
+.insight-list {
   background-color: var(--card-bg);
-  border-radius: 8px;
-  padding: 20px;
+  border-radius: 10px;
+  padding: 24px; /* Increased padding for more space */
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-color);
   transition: var(--transition);
-  display: flex;
-  flex-direction: column;
-  text-align: left;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-.metric-card:hover {
-  transform: translateY(-4px);
+.insight-list:hover {
   box-shadow: var(--shadow-md);
 }
 
-.metric-card-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 12px;
-}
-
-.metric-card-header i {
-  font-size: 1.1rem;
-  color: var(--primary);
-  width: 20px; /* Fixed width for alignment */
-  text-align: center;
-}
-/* Add specific colors for positive/negative/neutral icons if desired */
-.metric-card-header i.positive { color: var(--success); }
-.metric-card-header i.negative { color: var(--danger); }
-.metric-card-header i.neutral { color: var(--warning); }
-
-
-.metric-card-header h4 {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--dark);
+table {
+  width: 100%;
+  border-collapse: collapse;
   margin: 0;
-  flex-grow: 1; /* Allow title to take available space */
+  font-size: 0.9rem;
+  border-radius: 6px;
+  overflow: hidden;
+  min-width: 600px;
 }
 
-.metric-card-body {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* Align items to the start */
-  flex-grow: 1; /* Allow body to fill space */
-}
-
-.metric-value {
-  font-size: 1.4rem;
-  font-weight: 700;
+th,
+td {
+  padding: 16px; /* Increased padding for more space */
+  text-align: center;
+  border: 1px solid var(--border-color);
   color: var(--dark);
-  margin-bottom: 4px;
-  line-height: 1.2;
 }
 
-.metric-trend {
-  font-size: 0.85rem;
-  color: var(--muted);
-  font-style: italic;
+th {
+  background-color: var(--secondary);
+  color: var(--light);
+  font-weight: 600;
 }
 
-@media (max-width: 576px) {
-  .key-metrics-grid {
-    grid-template-columns: 1fr; /* Stack metrics on very small screens */
+tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+tr:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* --- START REFACTORED MOBILE TABLE STYLES --- */
+@media screen and (max-width: 767px) {
+  table {
+    border: 0;
+    min-width: auto;
   }
-  .metric-value {
-    font-size: 1.2rem;
-  }
-}
-/* --- END: NEW Key Metrics Styles --- */
 
+  table thead {
+    display: none; /* Hide table header on mobile */
+  }
+
+  table tr {
+    display: block;
+    margin-bottom: 1.2em; /* Space between cards */
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* Card corner rounding */
+    box-shadow: var(--shadow-sm);
+    background-color: var(--card-bg);
+    overflow: hidden; /* Clip content to rounded corners */
+    padding: 16px; /* Padding inside the card */
+  }
+
+  table td {
+    display: grid; /* Use Grid for label-value layout */
+    grid-template-columns: auto 1fr; /* Label width auto, value takes rest */
+    gap: 10px; /* Space between label and value */
+    align-items: center; /* Vertically align label and value */
+    padding: 10px 0; /* Vertical padding within the row */
+    border: none; /* Remove individual cell borders */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Separator line */
+    min-height: 44px; /* Ensure good tap target */
+    font-size: 0.9rem; /* Adjust value font size if needed */
+    color: var(--text); /* Value color */
+    text-align: right; /* Align value text to the right */
+    line-height: 1.5; /* Improve readability */
+  }
+
+  table tr td:last-child {
+    border-bottom: 0; /* Remove separator from last row in card */
+  }
+
+  table td::before {
+    content: attr(data-label); /* Get label text from data-label */
+    font-weight: 600; /* Make label bold */
+    color: var(--dark); /* Label color */
+    text-transform: uppercase; /* Uppercase labels */
+    font-size: 0.8em; /* Smaller font size for label */
+    text-align: left; /* Align label text left */
+    /* Remove old float/width styles */
+    float: none;
+    width: auto;
+    padding-right: 0;
+    white-space: normal; /* Allow label text to wrap */
+    line-height: 1.5; /* Match td line-height */
+  }
+
+  /* Remove old clearfix if present */
+  /* table td::after { content: ""; display: table; clear: both; } */
+}
+/* --- END REFACTORED MOBILE TABLE STYLES --- */
 
 .conclusion {
   text-align: center;
@@ -1210,10 +1221,6 @@ footer {
 
   .InputContainer {
     max-width: 400px;
-  }
-
-  .key-metrics-grid {
-      grid-template-columns: repeat(3, 1fr); /* Ensure 3 columns on larger screens */
   }
 }
 
