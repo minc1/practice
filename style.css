@@ -1,7 +1,7 @@
 :root {
   --primary: #c5a47e;
   --secondary: #1c2541;
-  --dark: #1c2541;
+  --dark: #1c2541; /* Keep dark as secondary for text contrast */
   --light: #f8f9fa;
   --text: #495057;
   --muted: #6c757d;
@@ -10,12 +10,16 @@
   --danger: #c5817e;
   --card-bg: #ffffff;
   --header-footer-bg: #ffffff;
-  --body-bg: #1c2541;
+  --body-bg: #1c2541; /* Default background for non-plaid pages */
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   --border-color: rgba(0, 0, 0, 0.08);
+  --border-radius-sm: 6px;
+  --border-radius-md: 10px; /* Standard card radius */
+  --border-radius-lg: 12px;
+  --border-radius-xl: 25px; /* For search forms */
 }
 
 * {
@@ -31,17 +35,74 @@ html {
 
 body {
   background-color: var(--body-bg);
-  color: var(--light);
+  color: var(--text); /* Default text color */
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   font-size: 16px;
+}
+
+/* Specific background for pages needing it */
+body.plaid-background {
+    position: relative;
+    background-color: var(--secondary); /* Ensure base color */
+}
+body.plaid-background::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.09) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 2px, transparent 2px),
+        linear-gradient(rgba(255, 255, 255, 0.09) 2px, transparent 2px),
+        linear-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
+    background-size:
+        30px 30px, 60px 60px,
+        30px 30px, 60px 60px,
+        120px 120px, 240px 240px,
+        120px 120px, 240px 240px;
+    background-position:
+        calc(50% - 0px) 0, calc(50% - 15px) 0,
+        0 0, 0 15px,
+        calc(50% - 0px) 0, calc(50% - 60px) 0,
+        0 0, 0 60px;
+    z-index: -2;
+    pointer-events: none;
+}
+body.plaid-background::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(
+        circle at center,
+        rgba(28, 37, 65, 0.2) 0%,
+        rgba(28, 37, 65, 0.6) 30%,
+        rgba(28, 37, 65, 0.8) 60%,
+        var(--secondary) 100%
+    );
+    z-index: -1;
+    pointer-events: none;
+}
+body.plaid-background > * {
+   position: relative;
+   z-index: 1;
+}
+body.plaid-background > #header { z-index: 10; }
+body.plaid-background > .back-to-top { z-index: 20; }
+
+/* Body background for pages without plaid (like statements.html) */
+body:not(.plaid-background) {
+    background-color: var(--light); /* Use light background */
 }
 
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px; /* Increased padding for more space */
+  padding: 0 24px;
 }
 
 header {
@@ -65,8 +126,8 @@ nav {
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px; /* Increased padding for more space */
-  gap: 24px; /* Increased gap for more space */
+  padding: 0 24px;
+  gap: 24px;
   flex-wrap: wrap;
 }
 
@@ -96,7 +157,7 @@ nav {
   flex-shrink: 1;
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
-  border-radius: 20px;
+  border-radius: 20px; /* Specific radius for header search */
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   transition: box-shadow 0.3s;
@@ -141,9 +202,9 @@ nav {
   font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.3s;
-  min-height: 40px; /* Ensure good tap target */
-  min-width: 44px; /* Slightly bigger button */
-  border-radius: 0 20px 20px 0; /* Rounded right edge */
+  min-height: 40px;
+  min-width: 44px;
+  border-radius: 0 20px 20px 0;
 }
 
 .InputContainer button:hover {
@@ -156,7 +217,6 @@ nav {
   color: var(--light);
 }
 
-/* Mobile search icon and animation */
 .search-toggle {
   display: none;
   background: none;
@@ -176,141 +236,11 @@ nav {
   color: var(--primary);
 }
 
-@media (max-width: 768px) {
-  .search-toggle {
-    display: block;
-    order: 1;
-  }
-
-  .InputContainer {
-    display: none;
-    position: absolute;
-    top: 61px;
-    left: 0;
-    width: 100%;
-    max-width: 100%;
-    z-index: 98;
-    border-radius: 0;
-    height: 0;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-    transition: height 0.3s ease, opacity 0.3s ease;
-    box-shadow: var(--shadow-md);
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
-    background-color: var(--header-footer-bg);
-    opacity: 0;
-  }
-
-  .InputContainer.show {
-    display: flex;
-    height: 50px;
-    padding: 0;
-    opacity: 1;
-  }
-
-  .InputContainer .input {
-    padding: 0 15px;
-    border-radius: 0;
-    font-size: 0.9rem;
-    width: 100%;
-    height: 100%;
-  }
-
-  .InputContainer button {
-    border-radius: 0;
-    background-color: var(--primary);
-    width: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Improved search toggle button */
-  .search-toggle {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(197, 164, 126, 0.1);
-    border-radius: 50%;
-    color: var(--dark);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-
-  .search-toggle:hover,
-  .search-toggle:focus {
-    background-color: rgba(197, 164, 126, 0.2);
-    color: var(--primary);
-  }
-
-  /* Active state for search toggle */
-  .InputContainer.show + .nav-links + .mobile-menu + .search-toggle,
-  .InputContainer.show ~ .search-toggle {
-    background-color: rgba(197, 164, 126, 0.2);
-    color: var(--primary);
-  }
-
-  /* Remove gold highlight border for search bars on mobile */
-  .InputContainer:focus-within {
-    box-shadow: none;
-    border-color: var(--border-color);
-  }
-
-  .search-hero .search-form:focus-within {
-    box-shadow: none;
-    border-color: var(--border-color);
-  }
-
-  .mobile-menu {
-    order: 2;
-  }
-}
-
-.search-form {
-  display: flex;
-  max-width: 500px;
-  margin: 32px auto 0;
-  height: 50px;
-  border-radius: 25px;
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-}
-
-.search-form input {
-  flex-grow: 1;
-  border: none;
-  padding: 0 20px;
-  font-size: 1rem;
-  outline: none;
-  color: var(--text);
-  min-height: 50px; /* Ensure good tap target */
-}
-
-.search-form button {
-  background-color: var(--primary);
-  color: var(--dark);
-  border: none;
-  padding: 0 24px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: background-color 0.3s;
-  min-height: 50px; /* Ensure good tap target */
-}
-
-.search-form button:hover {
-  background-color: #d4b483;
-}
-
 .nav-links {
   display: none;
   list-style: none;
   position: fixed;
-  top: 61px;
+  top: 61px; /* Will be adjusted by JS */
   left: 0;
   width: 100%;
   background-color: var(--header-footer-bg);
@@ -339,7 +269,7 @@ nav {
   transition: color 0.3s;
   position: relative;
   padding: 8px 0;
-  min-height: 44px; /* Ensure good tap target */
+  min-height: 44px;
   display: inline-block;
 }
 
@@ -378,50 +308,6 @@ nav {
   min-width: 44px;
 }
 
-@media (max-width: 768px) {
-  /* Improved mobile menu button styling to match search toggle */
-  .mobile-menu {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(197, 164, 126, 0.1);
-    border-radius: 50%;
-    color: var(--dark);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    padding: 8px;
-  }
-
-  .mobile-menu:hover,
-  .mobile-menu:focus {
-    background-color: rgba(197, 164, 126, 0.2);
-    color: var(--primary);
-    transform: scale(1.05);
-  }
-
-  /* Active state for mobile menu */
-  .nav-links.show ~ .mobile-menu,
-  .mobile-menu[aria-expanded="true"] {
-    background-color: rgba(197, 164, 126, 0.2);
-    color: var(--primary);
-  }
-
-  /* Adjust mobile search box appearance */
-  .InputContainer.show {
-    border-radius: 0;
-    overflow: hidden;
-  }
-
-  .InputContainer.show .input {
-    border-radius: 0;
-  }
-
-  .InputContainer.show button {
-    border-radius: 0;
-    width: 60px; /* Slightly bigger button on mobile */
-  }
-}
-
 .message-area {
   padding: 60px 16px 0;
   text-align: center;
@@ -435,7 +321,7 @@ nav {
   background-color: var(--card-bg);
   color: var(--dark);
   padding: 20px 30px;
-  border-radius: 8px;
+  border-radius: var(--border-radius-md);
   box-shadow: var(--shadow-md);
   max-width: 500px;
   font-size: 1.1rem;
@@ -494,7 +380,7 @@ nav {
 
 .hero-cta {
   display: flex;
-  gap: 20px; /* Increased gap for more space */
+  gap: 20px;
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -505,15 +391,17 @@ nav {
   justify-content: center;
   background-color: var(--primary);
   color: var(--dark);
-  padding: 12px 28px; /* Increased padding for more space */
-  border-radius: 6px;
+  padding: 12px 28px;
+  border-radius: var(--border-radius-sm);
   text-decoration: none;
   font-weight: 600;
   font-size: 0.95rem;
   transition: var(--transition);
   box-shadow: var(--shadow-sm);
-  min-height: 44px; /* Ensure good tap target */
-  min-width: 44px; /* Ensure good tap target */
+  min-height: 44px;
+  min-width: 44px;
+  border: none; /* Ensure buttons don't have borders unless specified */
+  cursor: pointer;
 }
 
 .cta-button.secondary {
@@ -537,19 +425,24 @@ nav {
   margin-left: 8px;
   transition: transform 0.3s;
 }
+/* Specific icon margin for statement button */
+.cta-button#viewStatementsLink i {
+    margin-right: 8px;
+    margin-left: 0;
+}
 
 .cta-button:hover i {
   transform: translateX(4px);
 }
 
 .section {
-  padding: 80px 0; /* Increased padding for more space */
+  padding: 80px 0;
 }
 
 .methodology-steps {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 32px; /* Increased gap for more space */
+  gap: 32px;
   margin-top: 40px;
   justify-content: center;
 }
@@ -557,10 +450,10 @@ nav {
 .step {
   display: flex;
   align-items: flex-start;
-  gap: 20px; /* Increased gap for more space */
+  gap: 20px;
   background-color: rgba(255, 255, 255, 0.05);
-  padding: 28px; /* Increased padding for more space */
-  border-radius: 8px;
+  padding: 28px;
+  border-radius: var(--border-radius-md);
   transition: transform 0.3s;
   max-width: 380px;
 }
@@ -588,7 +481,7 @@ nav {
 }
 
 .step-content h3 {
-  margin-bottom: 12px; /* Increased margin for more space */
+  margin-bottom: 12px;
   font-size: 1.1rem;
   color: var(--light);
 }
@@ -603,28 +496,33 @@ nav {
 .cta-section {
   background-color: var(--secondary);
   text-align: center;
-  padding: 100px 0; /* Increased padding for more space */
+  padding: 100px 0;
 }
 
 .cta-section h2 {
-  margin-bottom: 32px; /* Increased margin for more space */
+  margin-bottom: 32px;
   font-size: 2rem;
   color: var(--light);
 }
 
 .section-title {
   text-align: center;
-  margin-bottom: 50px; /* Increased margin for more space */
+  margin-bottom: 50px;
 }
 
 .section-title h2 {
   font-size: 1.7rem;
-  color: var(--light);
-  margin-bottom: 16px; /* Increased margin for more space */
+  color: var(--light); /* Default for dark sections */
+  margin-bottom: 16px;
   font-weight: 700;
   position: relative;
   display: inline-block;
 }
+/* Title color for light background sections */
+body:not(.plaid-background) .section-title h2 {
+    color: var(--dark);
+}
+
 
 .section-title h2:after {
   content: "";
@@ -639,22 +537,26 @@ nav {
 }
 
 .section-title p {
-  color: var(--light);
+  color: var(--light); /* Default for dark sections */
   max-width: 500px;
   margin: 0 auto;
   font-size: 0.95rem;
   padding: 0 16px;
 }
+/* Subtitle color for light background sections */
+body:not(.plaid-background) .section-title p {
+    color: var(--muted);
+}
 
 .cards {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 32px; /* Increased gap for more space */
+  gap: 32px;
 }
 
 .card {
   background-color: var(--card-bg);
-  border-radius: 10px;
+  border-radius: var(--border-radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
@@ -669,7 +571,7 @@ nav {
 }
 
 .card-header {
-  padding: 22px; /* Increased padding for more space */
+  padding: 22px;
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -683,24 +585,18 @@ nav {
 }
 
 .card-header h3 i {
-  margin-right: 12px; /* Increased margin for more space */
+  margin-right: 12px;
   font-size: 0.9rem;
   width: 20px;
   text-align: center;
 }
 
-.positive {
-  color: var(--success);
-}
-.negative {
-  color: var(--danger);
-}
-.neutral {
-  color: var(--warning);
-}
+.positive { color: var(--success); }
+.negative { color: var(--danger); }
+.neutral { color: var(--warning); }
 
 .card-body {
-  padding: 22px; /* Increased padding for more space */
+  padding: 22px;
   flex-grow: 1;
 }
 
@@ -711,9 +607,9 @@ nav {
 }
 
 .card-body li {
-  margin-bottom: 14px; /* Increased margin for more space */
+  margin-bottom: 14px;
   position: relative;
-  padding-left: 24px; /* Increased padding for more space */
+  padding-left: 24px;
   font-size: 0.9rem;
   color: var(--text);
 }
@@ -721,7 +617,7 @@ nav {
 .card-body li:before {
   content: "•";
   position: absolute;
-  left: 8px; /* Increased left position for more space */
+  left: 8px;
   color: var(--muted);
   font-weight: bold;
 }
@@ -732,8 +628,8 @@ nav {
 }
 
 .card-footer {
-  padding: 16px 22px; /* Increased padding for more space */
-  background-color: #f8f9fa;
+  padding: 16px 22px;
+  background-color: #f8f9fa; /* Use light color */
   border-top: 1px solid var(--border-color);
   font-size: 0.8rem;
   color: var(--dark);
@@ -741,10 +637,10 @@ nav {
 
 .chart-container {
   background-color: var(--card-bg);
-  border-radius: 10px;
-  padding: 24px; /* Increased padding for more space */
+  border-radius: var(--border-radius-md);
+  padding: 24px;
   box-shadow: var(--shadow-sm);
-  margin-bottom: 32px; /* Increased margin for more space */
+  margin-bottom: 32px;
   border: 1px solid var(--border-color);
   transition: var(--transition);
   position: relative;
@@ -758,13 +654,16 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px; /* Increased margin for more space */
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* Allow legend to wrap */
+  gap: 10px; /* Gap between title and legend */
 }
 
 .chart-header h3 {
   font-size: 1rem;
   font-weight: 600;
   color: var(--dark);
+  margin: 0; /* Remove default margin */
 }
 
 .chart-wrapper {
@@ -779,8 +678,8 @@ canvas {
 
 .insight-list {
   background-color: var(--card-bg);
-  border-radius: 10px;
-  padding: 24px; /* Increased padding for more space */
+  border-radius: var(--border-radius-md);
+  padding: 24px;
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-color);
   transition: var(--transition);
@@ -793,19 +692,18 @@ canvas {
   box-shadow: var(--shadow-md);
 }
 
-table {
+table { /* Base styles for all tables */
   width: 100%;
   border-collapse: collapse;
   margin: 0;
   font-size: 0.9rem;
-  border-radius: 6px;
+  border-radius: var(--border-radius-sm);
   overflow: hidden;
-  min-width: 600px;
 }
 
 th,
 td {
-  padding: 16px; /* Increased padding for more space */
+  padding: 16px;
   text-align: center;
   border: 1px solid var(--border-color);
   color: var(--dark);
@@ -825,67 +723,6 @@ tr:hover {
   background-color: rgba(0, 0, 0, 0.03);
 }
 
-/* --- START REFACTORED MOBILE TABLE STYLES --- */
-@media screen and (max-width: 767px) {
-  table {
-    border: 0;
-    min-width: auto;
-  }
-
-  table thead {
-    display: none; /* Hide table header on mobile */
-  }
-
-  table tr {
-    display: block;
-    margin-bottom: 1.2em; /* Space between cards */
-    border: 1px solid var(--border-color);
-    border-radius: 8px; /* Card corner rounding */
-    box-shadow: var(--shadow-sm);
-    background-color: var(--card-bg);
-    overflow: hidden; /* Clip content to rounded corners */
-    padding: 16px; /* Padding inside the card */
-  }
-
-  table td {
-    display: grid; /* Use Grid for label-value layout */
-    grid-template-columns: auto 1fr; /* Label width auto, value takes rest */
-    gap: 10px; /* Space between label and value */
-    align-items: center; /* Vertically align label and value */
-    padding: 10px 0; /* Vertical padding within the row */
-    border: none; /* Remove individual cell borders */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Separator line */
-    min-height: 44px; /* Ensure good tap target */
-    font-size: 0.9rem; /* Adjust value font size if needed */
-    color: var(--text); /* Value color */
-    text-align: right; /* Align value text to the right */
-    line-height: 1.5; /* Improve readability */
-  }
-
-  table tr td:last-child {
-    border-bottom: 0; /* Remove separator from last row in card */
-  }
-
-  table td::before {
-    content: attr(data-label); /* Get label text from data-label */
-    font-weight: 600; /* Make label bold */
-    color: var(--dark); /* Label color */
-    text-transform: uppercase; /* Uppercase labels */
-    font-size: 0.8em; /* Smaller font size for label */
-    text-align: left; /* Align label text left */
-    /* Remove old float/width styles */
-    float: none;
-    width: auto;
-    padding-right: 0;
-    white-space: normal; /* Allow label text to wrap */
-    line-height: 1.5; /* Match td line-height */
-  }
-
-  /* Remove old clearfix if present */
-  /* table td::after { content: ""; display: table; clear: both; } */
-}
-/* --- END REFACTORED MOBILE TABLE STYLES --- */
-
 .conclusion {
   text-align: center;
 }
@@ -900,8 +737,8 @@ tr:hover {
 
 .verdict-container {
   background-color: var(--card-bg);
-  border-radius: 10px;
-  padding: 36px; /* Increased padding for more space */
+  border-radius: var(--border-radius-md);
+  padding: 36px;
   max-width: 750px;
   margin: 0 auto;
   box-shadow: var(--shadow-md);
@@ -913,8 +750,8 @@ tr:hover {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-bottom: 24px; /* Increased margin for more space */
-  gap: 12px; /* Increased gap for more space */
+  margin-bottom: 24px;
+  gap: 12px;
 }
 
 .verdict-header h3 {
@@ -929,17 +766,17 @@ tr:hover {
   display: inline-block;
   background-color: var(--primary);
   color: var(--dark);
-  padding: 4px 14px; /* Increased padding for more space */
+  padding: 4px 14px;
   border-radius: 15px;
   font-weight: 600;
   font-size: 0.8rem;
   border: 1px solid rgba(0, 0, 0, 0.05);
   line-height: 1.4;
-  min-height: 28px; /* Ensure good tap target */
+  min-height: 28px;
 }
 
 .verdict-container p {
-  margin-bottom: 20px; /* Increased margin for more space */
+  margin-bottom: 20px;
   font-size: 0.95rem;
   line-height: 1.7;
   color: var(--text);
@@ -951,8 +788,8 @@ tr:hover {
 }
 
 .monitoring-points {
-  margin-top: 28px; /* Increased margin for more space */
-  padding-top: 20px; /* Increased padding for more space */
+  margin-top: 28px;
+  padding-top: 20px;
   border-top: 1px solid var(--border-color);
 }
 
@@ -960,7 +797,7 @@ tr:hover {
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--primary);
-  margin-bottom: 20px; /* Increased margin for more space */
+  margin-bottom: 20px;
 }
 
 .monitoring-points ul {
@@ -970,12 +807,12 @@ tr:hover {
 }
 
 .monitoring-points li {
-  margin-bottom: 16px; /* Increased margin for more space */
+  margin-bottom: 16px;
   position: relative;
-  padding-left: 24px; /* Increased padding for more space */
+  padding-left: 24px;
   font-size: 0.9rem;
   color: var(--text);
-  min-height: 28px; /* Ensure good tap target */
+  min-height: 28px;
 }
 
 .monitoring-points li::before {
@@ -1010,8 +847,8 @@ tr:hover {
   z-index: 99;
   border: none;
   outline: none;
-  min-height: 44px; /* Ensure good tap target */
-  min-width: 44px; /* Ensure good tap target */
+  min-height: 44px;
+  min-width: 44px;
 }
 
 .back-to-top.visible {
@@ -1026,9 +863,9 @@ tr:hover {
 
 footer {
   background-color: var(--header-footer-bg);
-  padding: 28px 0; /* Increased padding for more space */
+  padding: 28px 0;
   border-top: 1px solid var(--border-color);
-  margin-top: 80px; /* Increased margin for more space */
+  margin-top: 80px;
 }
 
 .footer-content {
@@ -1043,7 +880,7 @@ footer {
   font-weight: 600;
   color: var(--dark);
   letter-spacing: -0.5px;
-  margin-bottom: 20px; /* Increased margin for more space */
+  margin-bottom: 20px;
 }
 
 .footer-logo span {
@@ -1055,12 +892,12 @@ footer {
   flex-wrap: wrap;
   justify-content: center;
   list-style: none;
-  margin: 0 0 20px 0; /* Increased margin for more space */
+  margin: 0 0 20px 0;
   padding: 0;
 }
 
 .footer-links li {
-  margin: 8px 16px; /* Increased margin for more space */
+  margin: 8px 16px;
 }
 
 .footer-links a {
@@ -1068,9 +905,9 @@ footer {
   color: var(--muted);
   font-size: 0.9rem;
   transition: color 0.3s;
-  padding: 8px 0; /* Ensure good tap target */
+  padding: 8px 0;
   display: inline-block;
-  min-height: 44px; /* Ensure good tap target */
+  min-height: 44px;
 }
 
 .footer-links a:hover {
@@ -1080,8 +917,525 @@ footer {
 .copyright {
   color: var(--muted);
   font-size: 0.8rem;
-  margin-top: 12px; /* Increased margin for more space */
+  margin-top: 12px;
 }
+
+.text-center {
+   text-align: center;
+}
+
+/* --- START Styles for statements.html (merged) --- */
+
+.input-section {
+    max-width: 600px;
+    margin: 2rem auto 2rem; /* Added top margin */
+    padding: 24px; /* Added padding */
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+.input-container label {
+    display: block;
+    margin-bottom: .5rem;
+    font-weight: 500;
+    color: var(--dark);
+}
+.input-with-button {
+    display: flex;
+    gap: .5rem;
+}
+.input-with-button input {
+    flex: 1;
+    padding: .75rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem;
+    transition: var(--transition);
+    color: var(--text);
+    background-color: var(--card-bg);
+}
+.input-with-button input:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(197, 164, 126, 0.3);
+}
+.primary-button { /* Style for Analyze button on statements page */
+    display: inline-flex; /* Use inline-flex */
+    align-items: center;
+    justify-content: center; /* Center content */
+    gap: .5rem;
+    padding: 0 1.5rem;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    background: var(--secondary);
+    color: var(--light);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    min-height: 44px;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+.primary-button:hover {
+    background: #2a3a5f; /* Darken secondary */
+}
+.button-icon {
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+.error { /* Error message styling */
+    color: var(--danger);
+    font-size: .9rem;
+    margin-top: .5rem;
+    display: none;
+}
+.loading { /* Loading indicator styling */
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    color: var(--text);
+}
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(28, 37, 65, 0.1);
+    border-top-color: var(--secondary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+.company-header { /* Header above metrics on statements page */
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 24px; /* Add padding */
+}
+.company-header h2 {
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem; /* Adjust size */
+}
+
+.company-metrics { /* Container for metric cards */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+.metric-card { /* Individual metric card */
+    min-width: 180px;
+    text-align: center;
+    background: var(--secondary);
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+}
+.metric-card:hover {
+    background: #2a3a5f;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+.metric-label {
+    display: block;
+    font-size: .9rem;
+    color: var(--light);
+    opacity: 0.8;
+    margin-bottom: .5rem;
+}
+.metric-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--light);
+}
+
+.chart-legend { /* Legend specific to statements page charts */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+.chart-legend-item {
+    display: flex;
+    align-items: center;
+    font-size: .8rem;
+    cursor: pointer;
+    color: var(--muted);
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+.chart-legend-item.disabled {
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+.chart-legend-color {
+    width: 10px;
+    height: 10px;
+    margin-right: .5rem;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.financial-tables { /* Container for all statement tables */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    margin-top: 2rem; /* Add margin */
+}
+.table-section { /* Wrapper for each table + heading */
+     padding: 24px; /* Add padding */
+}
+.table-section h3 {
+    margin-bottom: 1rem;
+    color: var(--dark);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.table-container { /* Makes table horizontally scrollable */
+    overflow-x: auto;
+    max-height: 500px; /* Optional vertical scroll limit */
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border-color); /* Add border around scroll area */
+    border-radius: var(--border-radius-sm);
+    margin-top: 1rem; /* Space below heading */
+}
+table.financial-table { /* Specific styles for statement tables */
+    width: 100%;
+    min-width: 650px;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    font-size: 0.9rem;
+    border-radius: 0; /* Remove radius from table itself */
+    overflow: visible; /* Allow sticky headers */
+    border: none; /* Remove table border, use container border */
+}
+.financial-table th,
+.financial-table td {
+    padding: .75rem 1.2rem;
+    text-align: right;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text);
+    white-space: nowrap;
+    border-left: 1px solid var(--border-color); /* Add vertical borders */
+}
+.financial-table th:first-child,
+.financial-table td:first-child {
+    text-align: left;
+    position: sticky;
+    left: 0;
+    background: var(--card-bg);
+    z-index: 1;
+    border-left: none; /* No left border on first column */
+}
+.financial-table th {
+    background: var(--secondary);
+    color: var(--light);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: .01em;
+    border-bottom: 2px solid var(--primary);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    border-left: 1px solid var(--border-color); /* Add vertical borders */
+}
+.financial-table th:first-child {
+     background: var(--secondary);
+     z-index: 3;
+     border-left: none;
+}
+
+.financial-table tbody tr:nth-child(even) {
+    background: rgba(28, 37, 65, 0.02);
+}
+/* Ensure even row sticky column matches */
+.financial-table tbody tr:nth-child(even) td:first-child {
+    background: rgba(28, 37, 65, 0.02);
+}
+
+.financial-table tbody tr:hover {
+    background: rgba(197, 164, 126, 0.05);
+}
+.financial-table tbody tr:hover td:first-child {
+    background: rgba(197, 164, 126, 0.05);
+}
+
+.financial-table td .positive-value { color: var(--success); }
+.financial-table td .negative-value { color: var(--danger); }
+.financial-table td .highlight-positive { color: var(--success); font-weight: 600; }
+.financial-table td .highlight-negative { color: var(--danger); font-weight: 600; }
+
+/* --- END Styles for statements.html --- */
+
+
+/* --- START Responsive Styles --- */
+
+@media (max-width: 768px) {
+  .search-toggle {
+    display: block;
+    order: 1;
+  }
+
+  .InputContainer {
+    /* Mobile header search - hidden by default, shown via JS */
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 61px; /* Adjusted by JS */
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    z-index: 98;
+    border-radius: 0;
+    height: 0; /* Start hidden */
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    transition: height 0.3s ease, opacity 0.3s ease, visibility 0s 0.3s;
+    box-shadow: var(--shadow-md);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--header-footer-bg);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .InputContainer.show {
+    display: flex; /* Make visible */
+    height: 50px;
+    opacity: 1;
+    visibility: visible;
+    transition: height 0.3s ease, opacity 0.3s ease, visibility 0s 0s;
+  }
+
+  .InputContainer .input {
+    padding: 0 15px;
+    border-radius: 0;
+    font-size: 0.9rem;
+    width: 100%;
+    height: 100%;
+  }
+
+  .InputContainer button {
+    border-radius: 0;
+    background-color: var(--primary);
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(197, 164, 126, 0.1);
+    border-radius: 50%;
+    color: var(--dark);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .search-toggle:hover,
+  .search-toggle:focus {
+    background-color: rgba(197, 164, 126, 0.2);
+    color: var(--primary);
+  }
+
+  .InputContainer.show + .nav-links + .mobile-menu + .search-toggle,
+  .InputContainer.show ~ .search-toggle {
+    background-color: rgba(197, 164, 126, 0.2);
+    color: var(--primary);
+  }
+
+  .InputContainer:focus-within {
+    box-shadow: none;
+    border-color: var(--border-color);
+  }
+
+  .search-hero .search-form:focus-within {
+    box-shadow: none;
+    border-color: var(--border-color);
+  }
+
+  .mobile-menu {
+    order: 2; /* Keep menu button order */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(197, 164, 126, 0.1);
+    border-radius: 50%;
+    color: var(--dark);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 8px;
+  }
+
+  .mobile-menu:hover,
+  .mobile-menu:focus {
+    background-color: rgba(197, 164, 126, 0.2);
+    color: var(--primary);
+    transform: scale(1.05);
+  }
+
+  .nav-links.show ~ .mobile-menu,
+  .mobile-menu[aria-expanded="true"] {
+    background-color: rgba(197, 164, 126, 0.2);
+    color: var(--primary);
+  }
+
+  .chart-wrapper {
+    height: 250px;
+    margin: 0 -10px;
+  }
+
+  .chart-header h3 {
+    font-size: 0.9rem;
+  }
+
+  .section-title h2 {
+    font-size: 1.5rem;
+  }
+
+  .verdict-container {
+    padding: 20px;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+    padding: 0 10px;
+  }
+
+  .nav-links a,
+  .footer-links a {
+    padding: 12px 8px;
+    display: inline-block;
+  }
+
+  .section {
+    padding: 60px 0;
+  }
+
+  /* Responsive table for analysis.html */
+  .insight-list table thead { display: none; }
+  .insight-list table tr {
+    display: block;
+    margin-bottom: 1.2em;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    background-color: var(--card-bg);
+    overflow: hidden;
+    padding: 16px;
+  }
+  .insight-list table td {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    min-height: 44px;
+    font-size: 0.9rem;
+    color: var(--text);
+    text-align: right;
+    line-height: 1.5;
+  }
+  .insight-list table tr td:last-child { border-bottom: 0; }
+  .insight-list table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--dark);
+    text-transform: uppercase;
+    font-size: 0.8em;
+    text-align: left;
+    float: none;
+    width: auto;
+    padding-right: 0;
+    white-space: normal;
+    line-height: 1.5;
+  }
+
+  /* Responsive styles for statements.html */
+    .input-with-button {
+        flex-direction: column;
+    }
+    .primary-button {
+        justify-content: center;
+        padding: .75rem;
+        width: 100%;
+    }
+    .company-metrics {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    .metric-card {
+        width: 100%;
+        min-width: unset;
+    }
+    .chart-legend {
+        justify-content: center;
+        gap: 0.8rem;
+    }
+    .financial-table {
+        font-size: 0.85rem;
+        min-width: 600px;
+    }
+     .financial-table th,
+     .financial-table td {
+        padding: 0.6rem 0.8rem;
+     }
+     /* Ensure sticky works on mobile tables */
+     .financial-table th:first-child,
+     .financial-table td:first-child {
+         background: var(--card-bg); /* Re-assert background */
+     }
+     .financial-table th:first-child {
+         background: var(--secondary); /* Re-assert background */
+     }
+     .financial-table tbody tr:nth-child(even) td:first-child {
+         background: rgba(28, 37, 65, 0.02); /* Re-assert background */
+     }
+     .financial-table tbody tr:hover td:first-child {
+         background: rgba(197, 164, 126, 0.05); /* Re-assert background */
+     }
+
+
+  .footer-logo {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  .footer-links {
+    gap: 5px;
+    margin: 0 0 10px 0;
+  }
+  .footer-links li {
+    margin: 3px 8px;
+  }
+  .footer-links a {
+    font-size: 0.7rem;
+    padding: 6px 3px;
+  }
+  .copyright {
+    text-align: center;
+    width: 100%;
+    font-size: 0.7rem;
+  }
+
+} /* End @media (max-width: 768px) */
+
 
 @media (min-width: 768px) {
   body {
@@ -1093,7 +1447,7 @@ footer {
   }
 
   nav {
-    gap: 32px; /* Increased gap for more space */
+    gap: 32px;
     flex-wrap: nowrap;
   }
 
@@ -1125,7 +1479,7 @@ footer {
   }
 
   .nav-links li {
-    margin: 0 0 0 28px; /* Increased margin for more space */
+    margin: 0 0 0 28px;
   }
 
   .nav-links a {
@@ -1149,7 +1503,7 @@ footer {
   }
 
   .section {
-    padding: 100px 0; /* Increased padding for more space */
+    padding: 100px 0;
   }
 
   .section-title h2 {
@@ -1158,11 +1512,11 @@ footer {
 
   .cards {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 32px; /* Increased gap for more space */
+    gap: 32px;
   }
 
   .verdict-container {
-    padding: 48px; /* Increased padding for more space */
+    padding: 48px;
   }
   .verdict-header {
     flex-direction: row;
@@ -1198,9 +1552,10 @@ footer {
   }
 
   .footer-links li {
-    margin: 0 0 0 24px; /* Increased margin for more space */
+    margin: 0 0 0 24px;
   }
-}
+} /* End @media (min-width: 768px) */
+
 
 @media (min-width: 992px) {
   .hero {
@@ -1222,7 +1577,8 @@ footer {
   .InputContainer {
     max-width: 400px;
   }
-}
+} /* End @media (min-width: 992px) */
+
 
 @media (max-width: 480px) {
   nav {
@@ -1232,21 +1588,38 @@ footer {
   .logo {
     flex-basis: auto;
   }
+  /* Header search bar behavior at < 480px (when toggled) */
   .InputContainer {
-    order: 2;
-    width: 100%;
-    max-width: none;
-    margin-top: 8px;
-    margin-left: 0;
-    margin-right: 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    /* Add any other default styles needed for your layout */
+  }
+
+  @media (max-width: 768px) {
+    .InputContainer {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.5rem;
+      /* Adjust styles for mobile/tablet view */
+    }
   }
   .mobile-menu {
-    order: 1;
+    order: 1; /* Menu icon first */
     margin-left: 0;
   }
+   .search-toggle {
+     order: 2; /* Search icon second */
+   }
+   .logo {
+     order: 3; /* Logo third */
+     flex-basis: 100%; /* Logo takes full width below icons */
+     text-align: center;
+     margin-top: 8px;
+   }
   .nav-links {
-    top: 105px;
-    order: 3;
+    top: 105px; /* Adjust based on wrapped header height */
+    order: 4; /* Nav links last */
     width: 100%;
   }
 
@@ -1256,42 +1629,41 @@ footer {
     width: 100%;
     flex-direction: column;
     height: auto;
-    border-radius: 8px;
-    overflow: visible; /* Allow box shadow */
-    box-shadow: none; /* Remove shadow from container */
+    border-radius: var(--border-radius-md);
+    overflow: visible;
+    box-shadow: none;
+    margin-top: 24px; /* Adjust margin */
   }
 
   .search-form input {
-    border-radius: 8px 8px 0 0;
+    border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
     text-align: center;
     padding: 15px 20px;
     font-size: 0.95rem;
-    border: 1px solid var(--border-color); /* Add border */
-    box-shadow: var(--shadow-sm); /* Add shadow */
-    margin-bottom: -1px; /* Overlap borders */
-    z-index: 1; /* Ensure input shadow is above button */
-    min-height: 50px; /* Ensure good tap target */
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: -1px;
+    z-index: 1;
+    min-height: 50px;
   }
 
   .search-form button {
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
     padding: 15px 24px;
     justify-content: center;
     font-size: 0.95rem;
-    border: 1px solid var(--border-color); /* Add border */
-    border-top: none; /* Remove top border */
-    box-shadow: var(--shadow-sm); /* Add shadow */
-    min-height: 50px; /* Ensure good tap target */
+    border: 1px solid var(--border-color);
+    border-top: none;
+    box-shadow: var(--shadow-sm);
+    min-height: 50px;
   }
 
-  /* Improved tap targets for mobile */
   .nav-links a,
   .footer-links a {
     padding: 12px 8px;
     min-height: 44px;
   }
 
-  /* Better spacing for mobile charts */
   .chart-wrapper {
     height: 220px;
     margin: 0 -10px;
@@ -1301,7 +1673,6 @@ footer {
     font-size: 0.9rem;
   }
 
-  /* More compact verdict container on mobile */
   .verdict-container {
     padding: 20px;
   }
@@ -1309,32 +1680,72 @@ footer {
   .verdict-header h3 {
     font-size: 1.2rem;
   }
-}
 
-/* Footer styles for mobile */
-@media (max-width: 768px) {
-  .footer-logo {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
+  /* Statements page adjustments < 480px */
+  .input-section {
+      padding: 20px;
+  }
+  .company-header h2 {
+      font-size: 1.3rem;
+  }
+  .metric-card {
+      padding: 0.8rem 1rem;
+  }
+  .metric-value {
+      font-size: 1.1rem;
+  }
+  .table-section {
+      padding: 16px;
+  }
+  .financial-table {
+      font-size: 0.8rem;
+      min-width: 500px; /* Further reduce min-width */
+  }
+  .financial-table th,
+  .financial-table td {
+      padding: 0.5rem 0.6rem;
   }
 
-  .footer-links {
-    gap: 5px;
-    margin: 0 0 10px 0;
-  }
 
-  .footer-links li {
-    margin: 3px 8px;
-  }
+} /* End @media (max-width: 480px) */
 
-  .footer-links a {
-    font-size: 0.7rem;
-    padding: 6px 3px;
-  }
-
-  .copyright {
-    text-align: center;
-    width: 100%;
-    font-size: 0.7rem;
-  }
+@media print {
+    #header, footer, .search-toggle, .mobile-menu, .back-to-top, .cta-button#viewStatementsLink, .input-section {
+        display: none !important;
+    }
+    body { background: #fff !important; color: #000 !important; font-size: 10pt; }
+    body.plaid-background::before, body.plaid-background::after { display: none !important; }
+    .container { max-width: 100% !important; padding: 0 1cm !important; }
+    main { padding-top: 1rem !important; margin-top: 0 !important; }
+    .section { padding: 1cm 0 !important; }
+    .card, .chart-container, .insight-list, .verdict-container, .table-section {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        page-break-inside: avoid !important;
+        padding: 1rem !important;
+        border-radius: 0 !important;
+        margin-bottom: 1cm;
+    }
+    .hero { display: none; } /* Hide hero on print */
+    .section-title h2 { color: #000 !important; font-size: 14pt; }
+    .section-title p { color: #333 !important; font-size: 10pt; }
+    .section-title h2::after { display: none; }
+    .chart-container { page-break-inside: avoid !important; }
+    .chart-wrapper { height: 6cm !important; } /* Fixed height for print charts */
+    .table-container {
+        max-height: none !important;
+        overflow: visible !important;
+        border: none !important;
+    }
+    table, table.financial-table { font-size: 8pt; border: 1px solid #ccc !important; min-width: auto !important; }
+    th, td, .financial-table th, .financial-table td { color: #000 !important; padding: 0.3cm !important; border: 1px solid #ccc !important; }
+    th, .financial-table th { background: #eee !important; font-weight: bold; }
+    .financial-table td:first-child, .financial-table th:first-child { position: static !important; background: inherit !important; } /* Remove sticky for print */
+    a { text-decoration: none !important; color: #000 !important; }
+    .metric-card { background: #eee !important; color: #000 !important; border: 1px solid #ccc !important; }
+    .metric-label, .metric-value { color: #000 !important; }
+    .positive-value, .highlight-positive { color: #006400 !important; } /* Dark green */
+    .negative-value, .highlight-negative { color: #8B0000 !important; } /* Dark red */
+    .verdict-rating { border: 1px solid #ccc; background: #eee; color: #000; }
+    .monitoring-points li::before { background-color: #000; }
 }
