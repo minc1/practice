@@ -142,6 +142,8 @@ nav {
   cursor: pointer;
   transition: background-color 0.3s;
   min-height: 40px; /* Ensure good tap target */
+  min-width: 44px; /* Slightly bigger button */
+  border-radius: 0 20px 20px 0; /* Rounded right edge */
 }
 
 .InputContainer button:hover {
@@ -193,25 +195,61 @@ nav {
     padding: 0;
     margin: 0;
     overflow: hidden;
-    transition: height 0.3s ease;
+    transition: height 0.3s ease, opacity 0.3s ease;
     box-shadow: var(--shadow-md);
     border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
+    background-color: var(--header-footer-bg);
+    opacity: 0;
   }
 
   .InputContainer.show {
     display: flex;
     height: 50px;
     padding: 0;
+    opacity: 1;
   }
 
   .InputContainer .input {
     padding: 0 15px;
     border-radius: 0;
+    font-size: 0.9rem;
+    width: 100%;
+    height: 100%;
   }
 
   .InputContainer button {
     border-radius: 0;
+    background-color: var(--primary);
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Improved search toggle button */
+  .search-toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(197, 164, 126, 0.1);
+    border-radius: 50%;
+    color: var(--dark);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .search-toggle:hover,
+  .search-toggle:focus {
+    background-color: rgba(197, 164, 126, 0.2);
+    color: var(--primary);
+  }
+
+  /* Active state for search toggle */
+  .InputContainer.show + .nav-links + .mobile-menu + .search-toggle,
+  .InputContainer.show ~ .search-toggle {
+    background-color: rgba(197, 164, 126, 0.2);
+    color: var(--primary);
   }
 
   /* Remove gold highlight border for search bars on mobile */
@@ -338,6 +376,50 @@ nav {
   margin-left: auto;
   min-height: 44px;
   min-width: 44px;
+}
+
+@media (max-width: 768px) {
+  /* Improved mobile menu button styling to match search toggle */
+  .mobile-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(197, 164, 126, 0.1);
+    border-radius: 50%;
+    color: var(--dark);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 8px;
+  }
+
+  .mobile-menu:hover,
+  .mobile-menu:focus {
+    background-color: rgba(197, 164, 126, 0.2);
+    color: var(--primary);
+    transform: scale(1.05);
+  }
+
+  /* Active state for mobile menu */
+  .nav-links.show ~ .mobile-menu,
+  .mobile-menu[aria-expanded="true"] {
+    background-color: rgba(197, 164, 126, 0.2);
+    color: var(--primary);
+  }
+
+  /* Adjust mobile search box appearance */
+  .InputContainer.show {
+    border-radius: 0;
+    overflow: hidden;
+  }
+
+  .InputContainer.show .input {
+    border-radius: 0;
+  }
+
+  .InputContainer.show button {
+    border-radius: 0;
+    width: 60px; /* Slightly bigger button on mobile */
+  }
 }
 
 .message-area {
@@ -743,6 +825,7 @@ tr:hover {
   background-color: rgba(0, 0, 0, 0.03);
 }
 
+/* --- START REFACTORED MOBILE TABLE STYLES --- */
 @media screen and (max-width: 767px) {
   table {
     border: 0;
@@ -750,57 +833,58 @@ tr:hover {
   }
 
   table thead {
-    display: none;
+    display: none; /* Hide table header on mobile */
   }
 
   table tr {
     display: block;
-    margin-bottom: 1.2em; /* Increased spacing between rows */
+    margin-bottom: 1.2em; /* Space between cards */
     border: 1px solid var(--border-color);
-    border-radius: 8px; /* Slightly larger radius */
+    border-radius: 8px; /* Card corner rounding */
     box-shadow: var(--shadow-sm);
     background-color: var(--card-bg);
-    overflow: hidden; /* Ensure content respects border radius */
+    overflow: hidden; /* Clip content to rounded corners */
+    padding: 16px; /* Padding inside the card */
   }
 
   table td {
-    display: block;
-    text-align: right;
-    font-size: 0.85em; /* Slightly larger font */
+    display: grid; /* Use Grid for label-value layout */
+    grid-template-columns: auto 1fr; /* Label width auto, value takes rest */
+    gap: 10px; /* Space between label and value */
+    align-items: center; /* Vertically align label and value */
+    padding: 10px 0; /* Vertical padding within the row */
     border: none; /* Remove individual cell borders */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Lighter separator */
-    padding: 14px 18px; /* Increased padding for more space */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Separator line */
     min-height: 44px; /* Ensure good tap target */
+    font-size: 0.9rem; /* Adjust value font size if needed */
+    color: var(--text); /* Value color */
+    text-align: right; /* Align value text to the right */
     line-height: 1.5; /* Improve readability */
   }
 
   table tr td:last-child {
-    /* Corrected selector */
-    border-bottom: 0;
+    border-bottom: 0; /* Remove separator from last row in card */
   }
 
   table td::before {
-    content: attr(data-label);
-    float: left;
-    font-weight: 600; /* Adjusted weight */
-    text-transform: uppercase;
-    color: var(--dark);
-    padding-right: 12px; /* Increased space between label and value */
-    text-align: left;
-    width: 45%; /* Allocate space for label */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    content: attr(data-label); /* Get label text from data-label */
+    font-weight: 600; /* Make label bold */
+    color: var(--dark); /* Label color */
+    text-transform: uppercase; /* Uppercase labels */
+    font-size: 0.8em; /* Smaller font size for label */
+    text-align: left; /* Align label text left */
+    /* Remove old float/width styles */
+    float: none;
+    width: auto;
+    padding-right: 0;
+    white-space: normal; /* Allow label text to wrap */
     line-height: 1.5; /* Match td line-height */
   }
 
-  /* Clearfix for floated ::before element */
-  table td::after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+  /* Remove old clearfix if present */
+  /* table td::after { content: ""; display: table; clear: both; } */
 }
+/* --- END REFACTORED MOBILE TABLE STYLES --- */
 
 .conclusion {
   text-align: center;

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForensicFinancials | Financial Statements</title>
+    <meta name="description" content="View detailed financial statements including Income Statement, Balance Sheet, and Cash Flow.">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-77GZWBEMLF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-77GZWBEMLF');
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { opacity: 0; transition: opacity 0.2s ease-in; background-color: var(--light); }
+        body.page-loaded { opacity: 1; }
+        main { padding-top: 80px; }
+    </style>
+    <script>
+        window.addEventListener('load', () => document.body.classList.add('page-loaded'));
+    </script>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Forensic<span>Financials</span></a>
+                <button class="search-toggle" aria-label="Toggle search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
+                    <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
+                    <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
+                </form>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#methodology">Methodology</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+                <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content container">
+        <section class="input-section card">
+            <div class="input-group">
+                <div class="input-container">
+                    <label for="ticker">Enter Company Ticker</label>
+                    <div class="input-with-button">
+                        <input type="text" id="ticker" placeholder="e.g. NVDA, AAPL" autofocus>
+                        <button id="loadData" class="primary-button">
+                            <span class="button-text">Analyze</span>
+                            <span class="button-icon"><i class="fas fa-search"></i></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="error" id="errorMessage"></div>
+            </div>
+        </section>
+
+        <div class="loading" id="loadingIndicator">
+            <div class="spinner"></div>
+            <p>Loading financial data for <span id="loadingTicker"></span>…</p>
+        </div>
+
+        <section class="results-section" id="dataContainer" style="display: none;">
+            <div class="company-header card">
+                <h2 id="companyHeader"></h2>
+                <div class="company-metrics" id="metricsContainer">
+                </div>
+            </div>
+
+            <div class="chart-container card">
+                <div class="chart-header"><h3>Revenue Trend (Absolute)</h3></div>
+                <div class="chart-wrapper"><canvas id="revenueChart"></canvas></div>
+            </div>
+
+            <div class="chart-container card">
+                <div class="chart-header">
+                    <h3>Profitability & Cash Flow (Absolute)</h3>
+                    <div class="chart-legend" id="chartLegend"></div>
+                </div>
+                <div class="chart-wrapper"><canvas id="metricsChart"></canvas></div>
+            </div>
+
+            <div class="financial-tables">
+                <div class="table-section card">
+                    <h3>Income Statement</h3>
+                    <div class="table-container" id="incomeTable"></div>
+                </div>
+                <div class="table-section card">
+                    <h3>Balance Sheet</h3>
+                    <div class="table-container" id="balanceSheetTable"></div>
+                </div>
+                <div class="table-section card">
+                    <h3>Cash Flow Statement</h3>
+                    <div class="table-container" id="cashFlowTable"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Forensic<span>Financials</span> by Cho</div>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#methodology">Methodology</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </div>
+            <div class="copyright">
+                <p>© <span id="currentYear">2025</span> ForensicFinancials. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="search-toggle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="statements-script.js" defer></script>
+</body>
+</html>
