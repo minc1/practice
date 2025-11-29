@@ -6,9 +6,8 @@
 const DEFAULT_TICKER = "AAPL"
 const DATA_PATH = "data/"
 const DIVERGENCE_THRESHOLD = 30.0
-const MOBILE_BREAKPOINT = 768; // Define mobile breakpoint width
-const MAX_DATA_POINTS_MOBILE = 10; // Max data points for mobile charts
-const DEFAULT_YEARS_TO_SHOW = 10; // Default number of years to show on desktop
+const DEFAULT_YEARS_TO_SHOW = 10; // Default number of years to show
+const ICON_GAP = '6px'; // Gap between icon and text in buttons
 
 let currentTicker = null
 let currentData = null // Store fetched data
@@ -413,37 +412,30 @@ if (isAnalysisPage) {
         return gradient;
     };
 
-    const commonChartOptions = {
+    // Factory function - returns fresh options with callbacks intact
+    const createChartOptions = () => ({
       responsive: true,
       maintainAspectRatio: false,
-      animation: {
-        duration: 1000,
-        easing: 'easeOutQuart'
-      },
+      animation: { duration: 1000, easing: 'easeOutQuart' },
       plugins: {
-        legend: {
-          display: false, // Disabled - using custom HTML legend in header
-        },
+        legend: { display: false },
         tooltip: {
           callbacks: {
             label: (context) => {
-              // Don't show tooltip for the dummy 'Divergence' dataset
-              if (context.dataset.label === "Divergence") return null
-              let label = context.dataset.label || ""
-              if (label) label += ": "
-              if (context.parsed.y !== null) {
-                label += context.parsed.y.toFixed(1) + "%" // Assuming percentage data
-              }
-              return label
+              if (context.dataset.label === "Divergence") return null;
+              let label = (context.dataset.label || "").replace(/\s*\(%\)\s*/g, '');
+              if (label) label += ": ";
+              if (context.parsed.y !== null) label += context.parsed.y.toFixed(2) + "%";
+              return label;
             },
           },
           bodyFont: { size: 13, family: "'Inter', sans-serif" },
           titleFont: { size: 14, weight: "600", family: "'Inter', sans-serif" },
           padding: 12,
-          backgroundColor: "#ffffff", // White background
-          titleColor: "#1c2541", // Dark title
-          bodyColor: "#495057", // Dark body text
-          borderColor: "rgba(0,0,0,0.1)", // Subtle border
+          backgroundColor: "#ffffff",
+          titleColor: "#1c2541",
+          bodyColor: "#495057",
+          borderColor: "rgba(0,0,0,0.1)",
           borderWidth: 1,
           cornerRadius: 8,
           displayColors: true,
@@ -454,22 +446,15 @@ if (isAnalysisPage) {
           shadowBlur: 10,
           shadowColor: "rgba(0,0,0,0.1)"
         },
-        // Annotation plugin configuration (ensure structure exists)
-        annotation: {
-          annotations: {} // Annotations will be added dynamically
-        }
+        annotation: { annotations: {} }
       },
       scales: {
         x: {
           grid: { display: false },
-          ticks: {
-            font: { size: 11, family: "'Inter', sans-serif" },
-            color: "#6c757d",
-            padding: 5
-          },
+          ticks: { font: { size: 11, family: "'Inter', sans-serif" }, color: "#6c757d", padding: 5 },
         },
         y: {
-          beginAtZero: false, // Allow negative growth rates
+          beginAtZero: false,
           title: {
             display: true,
             text: "Growth Rate (%)",
@@ -478,21 +463,17 @@ if (isAnalysisPage) {
             padding: { bottom: 10 }
           },
           ticks: {
-            callback: (value) => value + "%", // Add '%' suffix
+            callback: (value) => value + "%",
             font: { size: 11, family: "'Inter', sans-serif" },
             color: "#6c757d",
             padding: 8
           },
-          grid: { 
-            drawBorder: false, 
-            color: "rgba(0, 0, 0, 0.04)",
-            borderDash: [5, 5]
-          },
+          grid: { drawBorder: false, color: "rgba(0, 0, 0, 0.04)", borderDash: [5, 5] },
         },
       },
-      interaction: { mode: "index", intersect: false }, // Show tooltip for all datasets on hover
-      layout: { padding: { top: 20, right: 20, bottom: 10, left: 10 } }, // Add padding around chart
-    }
+      interaction: { mode: "index", intersect: false },
+      layout: { padding: { top: 20, right: 20, bottom: 10, left: 10 } },
+    });
 
     const divergenceColor = "#c5817e"; // var(--danger)
     const primaryColor = "#c5a47e";    // var(--primary)
@@ -555,19 +536,12 @@ if (isAnalysisPage) {
 
 
     // --- Core Data Loading and Rendering ---
-    // Helper to calculate slice start for a specific chart
+    // Helper to calculate slice start - default 10 years, "full" shows all history
     const getSliceStart = (showFullHistory) => {
-      const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
       const totalLength = currentData.chartData?.labels?.length || 0;
-      
-      if (isMobile && totalLength > MAX_DATA_POINTS_MOBILE) {
-          return totalLength - MAX_DATA_POINTS_MOBILE;
-      }
-      
-      if (!isMobile && !showFullHistory && totalLength > DEFAULT_YEARS_TO_SHOW) {
+      if (!showFullHistory && totalLength > DEFAULT_YEARS_TO_SHOW) {
           return totalLength - DEFAULT_YEARS_TO_SHOW;
       }
-      
       return 0;
     };
 
@@ -614,7 +588,7 @@ if (isAnalysisPage) {
                 },
               ],
             },
-            options: JSON.parse(JSON.stringify(commonChartOptions)),
+            options: createChartOptions(),
             plugins: [{
               id: 'conditionalGradient',
               beforeDatasetsDraw: (chart) => {
@@ -647,7 +621,7 @@ if (isAnalysisPage) {
       const arCtx = select("#arChart")?.getContext("2d")
       if (arCtx && arRevenueGrowthData.length > 0 && arGrowthData.length > 0) {
         try {
-          const arChartOptions = JSON.parse(JSON.stringify(commonChartOptions));
+          const arChartOptions = createChartOptions();
           
           // Annotations Logic (Simplified for sliced data)
           arChartOptions.plugins.annotation = { annotations: {} };
@@ -739,7 +713,7 @@ if (isAnalysisPage) {
       const cashFlowCtx = select("#cashFlowChart")?.getContext("2d")
       if (cashFlowCtx && cfCfoGrowthData.length > 0 && cfNiGrowthData.length > 0) {
         try {
-          const cashFlowChartOptions = JSON.parse(JSON.stringify(commonChartOptions));
+          const cashFlowChartOptions = createChartOptions();
           
           // Annotations Logic
           cashFlowChartOptions.plugins.annotation = { annotations: {} };
@@ -889,9 +863,10 @@ if (isAnalysisPage) {
         populateElement('[data-dynamic="monitoring-title"]', currentData.conclusion?.monitoringPointsTitle || "Key Monitoring Points")
         populateList("monitoring-points-list", currentData.conclusion?.monitoringPoints || [], true)
 
-        // --- Add Individual History Toggle Buttons for Each Chart ---
+        // --- Add Individual History Toggle Buttons and Legends for Each Chart ---
         const chartLabels = currentData.chartData?.labels || [];
-        if (chartLabels.length > DEFAULT_YEARS_TO_SHOW && window.innerWidth > MOBILE_BREAKPOINT) {
+        
+        if (chartLabels.length > DEFAULT_YEARS_TO_SHOW) {
             // Store all toggle buttons for unified updates
             const allToggleBtns = [];
             
@@ -899,20 +874,19 @@ if (isAnalysisPage) {
             const updateAllToggleBtns = () => {
                 allToggleBtns.forEach(btn => {
                     btn.innerHTML = showFullHistory 
-                        ? '<i class="fas fa-compress-arrows-alt" style="margin-right: 4px;"></i>10y' 
-                        : '<i class="fas fa-history" style="margin-right: 4px;"></i>Full';
+                        ? `<i class="fas fa-compress-arrows-alt" style="margin-right: ${ICON_GAP};"></i>10y` 
+                        : `<i class="fas fa-history" style="margin-right: ${ICON_GAP};"></i>Full`;
                 });
             };
             
             // Helper function to create toggle button and custom legend for a specific chart
             const createChartToggle = (canvasId, legendItems) => {
-                // Find chart header by canvas ID (more reliable selector)
                 const canvas = document.getElementById(canvasId);
                 const chartContainer = canvas?.closest('.chart-container');
                 const chartHeader = chartContainer?.querySelector('.chart-header');
                 
                 if (chartHeader) {
-                    // Set up 3-column grid: Title | Legends | Button
+                    // Desktop layout: 3-column grid: Title | Legends | Button
                     chartHeader.style.display = "grid";
                     chartHeader.style.gridTemplateColumns = "auto 1fr auto";
                     chartHeader.style.alignItems = "center";
@@ -974,7 +948,7 @@ if (isAnalysisPage) {
                     toggleBtn.style.fontWeight = "500";
                     toggleBtn.style.transition = "all 0.2s ease";
                     toggleBtn.style.justifySelf = "end";
-                    toggleBtn.innerHTML = '<i class="fas fa-history" style="margin-right: 4px;"></i>Full';
+                    toggleBtn.innerHTML = `<i class="fas fa-history" style="margin-right: ${ICON_GAP};"></i>Full`;
                     
                     // Hover effects
                     toggleBtn.addEventListener("mouseenter", () => {
@@ -989,12 +963,12 @@ if (isAnalysisPage) {
                     // Unified click handler - toggles all charts
                     toggleBtn.addEventListener("click", () => {
                         showFullHistory = !showFullHistory;
-                        updateAllToggleBtns(); // Update all button labels
+                        updateAllToggleBtns();
                         renderCharts();
                     });
                     
                     chartHeader.appendChild(toggleBtn);
-                    allToggleBtns.push(toggleBtn); // Track for unified updates
+                    allToggleBtns.push(toggleBtn);
                 }
             };
             
@@ -1076,50 +1050,17 @@ if (isAnalysisPage) {
     })
 
     // --- Resize Handling ---
-    // Note: This resize handler only adjusts visual elements like fonts.
-    // It does NOT dynamically change the number of data points shown after initial load.
-    // A page refresh or new ticker load is required to apply the mobile data limit based on current width.
+    // Handles chart resize on window resize
     let resizeTimeout
     const handleResize = () => {
       clearTimeout(resizeTimeout)
       resizeTimeout = setTimeout(() => {
-        const isMobile = window.innerWidth <= MOBILE_BREAKPOINT; // Use the same breakpoint
         const chartsToResize = [revenueChartInstance, arChartInstance, cashFlowChartInstance]
 
         chartsToResize.forEach((chart, index) => {
           if (!chart || !chart.options) return // Skip if chart doesn't exist
 
           try {
-            // Adjust font sizes based on screen width
-            const tooltipBodyFontSize = isMobile ? 11 : 12;
-            const axisTickFontSize = isMobile ? 10 : 12;
-            const axisTitleFontSize = isMobile ? 11 : 12;
-            const yAxisTickFontSize = isMobile ? 10 : 11;
-            const legendLabelFontSize = 10; // Keep legend font size consistent
-            const annotationLabelFontSize = isMobile ? 9 : 10;
-
-            // Update common options
-            if (chart.options.plugins?.tooltip?.bodyFont) chart.options.plugins.tooltip.bodyFont.size = tooltipBodyFontSize;
-            if (chart.options.scales?.x?.ticks?.font) chart.options.scales.x.ticks.font.size = axisTickFontSize;
-            if (chart.options.scales?.y?.title?.font) chart.options.scales.y.title.font.size = axisTitleFontSize;
-            if (chart.options.scales?.y?.ticks?.font) chart.options.scales.y.ticks.font.size = yAxisTickFontSize;
-            if (chart.options.plugins?.legend?.labels?.font) chart.options.plugins.legend.labels.font.size = legendLabelFontSize;
-            // Adjust legend box size if needed
-            if (chart.options.plugins?.legend?.labels) {
-                 chart.options.plugins.legend.labels.boxWidth = 8;
-                 chart.options.plugins.legend.labels.boxHeight = 8;
-            }
-
-
-            // Update annotation label font size if annotation plugin is loaded and options exist
-            if (typeof ChartAnnotation !== 'undefined' && chart.options.plugins?.annotation?.annotations) {
-                Object.values(chart.options.plugins.annotation.annotations).forEach(anno => {
-                    if (anno.type === 'label' && anno.font) {
-                        anno.font.size = annotationLabelFontSize;
-                    }
-                });
-            }
-
             // Resize and update the chart
             chart.resize(); // Adjust canvas size
             chart.update('none'); // Redraw chart without animation
