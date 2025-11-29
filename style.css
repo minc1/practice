@@ -503,8 +503,8 @@ nav {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--primary);
-  color: var(--dark);
+  background-color: rgba(197, 164, 126, 0.15);
+  color: var(--primary);
   padding: 12px 28px; /* Increased padding for more space */
   border-radius: 6px;
   text-decoration: none;
@@ -514,23 +514,29 @@ nav {
   box-shadow: var(--shadow-sm);
   min-height: 44px; /* Ensure good tap target */
   min-width: 44px; /* Ensure good tap target */
+  border: 1px solid var(--primary);
+  backdrop-filter: blur(10px);
 }
 
 .cta-button.secondary {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.08);
   color: var(--light);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .cta-button:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
-  background-color: #d4b483;
+  background-color: rgba(197, 164, 126, 0.25);
+  border-color: #d4b483;
+  color: #d4b483;
 }
 
 .cta-button.secondary:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: var(--light);
 }
 
 .cta-button i {
@@ -558,15 +564,19 @@ nav {
   display: flex;
   align-items: flex-start;
   gap: 20px; /* Increased gap for more space */
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.15);
   padding: 28px; /* Increased padding for more space */
   border-radius: 8px;
-  transition: transform 0.3s;
+  transition: var(--transition);
   max-width: 380px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
 }
 
 .step:hover {
   transform: translateY(-5px);
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-md);
 }
 
 .step-number {
@@ -653,24 +663,26 @@ nav {
 }
 
 .card {
-  background-color: var(--card-bg);
+  background-color: rgba(255, 255, 255, 0.15);
   border-radius: 10px;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   flex-direction: column;
+  backdrop-filter: blur(10px);
 }
 
 .card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-md);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .card-header {
   padding: 22px; /* Increased padding for more space */
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .card-header h3 {
@@ -679,7 +691,7 @@ nav {
   font-weight: 600;
   display: flex;
   align-items: center;
-  color: var(--dark);
+  color: var(--light);
 }
 
 .card-header h3 i {
@@ -687,15 +699,16 @@ nav {
   font-size: 0.9rem;
   width: 20px;
   text-align: center;
+  color: var(--primary);
 }
 
-.positive {
+.positive, .card-header h3 i.positive {
   color: var(--success);
 }
-.negative {
+.negative, .card-header h3 i.negative {
   color: var(--danger);
 }
-.neutral {
+.neutral, .card-header h3 i.neutral {
   color: var(--warning);
 }
 
@@ -715,43 +728,48 @@ nav {
   position: relative;
   padding-left: 24px; /* Increased padding for more space */
   font-size: 0.9rem;
-  color: var(--text);
+  color: var(--light);
+  opacity: 0.9;
 }
 
 .card-body li:before {
   content: "•";
   position: absolute;
   left: 8px; /* Increased left position for more space */
-  color: var(--muted);
+  color: var(--primary);
   font-weight: bold;
 }
 
 .card-body li strong {
-  color: var(--dark);
+  color: var(--light);
   font-weight: 600;
+  opacity: 1;
 }
 
 .card-footer {
   padding: 16px 22px; /* Increased padding for more space */
-  background-color: #f8f9fa;
-  border-top: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 0.8rem;
-  color: var(--dark);
+  color: var(--light);
+  opacity: 0.8;
 }
 
 .chart-container {
-  background-color: var(--card-bg);
+  background-color: rgba(255, 255, 255, 0.15);
   border-radius: 10px;
   padding: 24px; /* Increased padding for more space */
   box-shadow: var(--shadow-sm);
   margin-bottom: 32px; /* Increased margin for more space */
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: var(--transition);
   position: relative;
+  backdrop-filter: blur(10px);
 }
 
 .chart-container:hover {
   box-shadow: var(--shadow-md);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .chart-header {
@@ -764,7 +782,7 @@ nav {
 .chart-header h3 {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--dark);
+  color: var(--light);
 }
 
 .chart-wrapper {
@@ -778,19 +796,21 @@ canvas {
 }
 
 .insight-list {
-  background-color: var(--card-bg);
+  background-color: rgba(255, 255, 255, 0.15);
   border-radius: 10px;
   padding: 24px; /* Increased padding for more space */
   box-shadow: var(--shadow-sm);
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: var(--transition);
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  backdrop-filter: blur(10px);
 }
 
 .insight-list:hover {
   box-shadow: var(--shadow-md);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 table {
@@ -807,22 +827,22 @@ th,
 td {
   padding: 16px; /* Increased padding for more space */
   text-align: center;
-  border: 1px solid var(--border-color);
-  color: var(--dark);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--light);
 }
 
 th {
-  background-color: var(--secondary);
+  background-color: rgba(255, 255, 255, 0.1);
   color: var(--light);
   font-weight: 600;
 }
 
 tr:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
 tr:hover {
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* --- START REFACTORED MOBILE TABLE STYLES --- */
@@ -839,10 +859,10 @@ tr:hover {
   table tr {
     display: block;
     margin-bottom: 1.2em; /* Space between cards */
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px; /* Card corner rounding */
     box-shadow: var(--shadow-sm);
-    background-color: var(--card-bg);
+    background-color: rgba(255, 255, 255, 0.15);
     overflow: hidden; /* Clip content to rounded corners */
     padding: 16px; /* Padding inside the card */
   }
@@ -854,10 +874,10 @@ tr:hover {
     align-items: center; /* Vertically align label and value */
     padding: 10px 0; /* Vertical padding within the row */
     border: none; /* Remove individual cell borders */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Separator line */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separator line */
     min-height: 44px; /* Ensure good tap target */
     font-size: 0.9rem; /* Adjust value font size if needed */
-    color: var(--text); /* Value color */
+    color: var(--light); /* Value color */
     text-align: right; /* Align value text to the right */
     line-height: 1.5; /* Improve readability */
   }
@@ -869,7 +889,7 @@ tr:hover {
   table td::before {
     content: attr(data-label); /* Get label text from data-label */
     font-weight: 600; /* Make label bold */
-    color: var(--dark); /* Label color */
+    color: var(--light); /* Label color */
     text-transform: uppercase; /* Uppercase labels */
     font-size: 0.8em; /* Smaller font size for label */
     text-align: left; /* Align label text left */
@@ -899,14 +919,19 @@ tr:hover {
 }
 
 .verdict-container {
-  background-color: var(--card-bg);
+  background-color: rgba(255, 255, 255, 0.15);
   border-radius: 10px;
   padding: 36px; /* Increased padding for more space */
   max-width: 750px;
   margin: 0 auto;
   box-shadow: var(--shadow-md);
   text-align: left;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.verdict-container:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .verdict-header {
@@ -919,7 +944,7 @@ tr:hover {
 
 .verdict-header h3 {
   font-size: 1.4rem;
-  color: var(--dark);
+  color: var(--light);
   font-weight: 700;
   line-height: 1.3;
   margin: 0;
@@ -942,18 +967,20 @@ tr:hover {
   margin-bottom: 20px; /* Increased margin for more space */
   font-size: 0.95rem;
   line-height: 1.7;
-  color: var(--text);
+  color: var(--light);
+  opacity: 0.9;
 }
 
 .verdict-container strong {
-  color: var(--dark);
+  color: var(--light);
   font-weight: 600;
+  opacity: 1;
 }
 
 .monitoring-points {
   margin-top: 28px; /* Increased margin for more space */
   padding-top: 20px; /* Increased padding for more space */
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .monitoring-points h4 {
@@ -974,7 +1001,8 @@ tr:hover {
   position: relative;
   padding-left: 24px; /* Increased padding for more space */
   font-size: 0.9rem;
-  color: var(--text);
+  color: var(--light);
+  opacity: 0.9;
   min-height: 28px; /* Ensure good tap target */
 }
 
