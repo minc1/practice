@@ -1,0 +1,201 @@
+{
+  "company": {
+    "name": "Apple Inc.",
+    "ticker": "AAPL",
+    "analysisTitle": "Quality of Earnings Risk Assessment",
+    "heroSubtitle": "Apple analysis reveals deteriorating revenue quality, with FY2024 receivables growth (+8.6%) outpacing revenue growth (+2.0%) by 4.3x, a critical signal of aggressive year-end sales practices.",
+    "pageTitle": "AAPL | Forensic QoE Dashboard"
+  },
+  "trendAnalysis": {
+    "sectionSubtitle": "Historical Performance & Quality Signals",
+    "cards": [
+      {
+        "title": "Revenue Trajectory",
+        "iconClass": "fas fa-chart-line negative",
+        "points": [
+          "Long-term phase of hyper-growth has matured into a low single-digit growth profile.",
+          "Recent performance shows deceleration, with revenue declining -2.8% in FY2023 and growing just +2.0% in FY2024.",
+          "Quarterly results are extremely seasonal, driven by the Q4/Q1 iPhone launch cycle.",
+          "Revenue quality is deteriorating, with significant year-end receivables builds required to meet targets, as seen in the 4.3x A/R-to-Revenue growth ratio in FY2024."
+        ],
+        "footer": "Growth has stalled and its quality is showing signs of stress."
+      },
+      {
+        "title": "Profitability Trends",
+        "iconClass": "fas fa-chart-pie neutral",
+        "points": [
+          "Historical margin regime is one of expansion, driven by pricing power and a favorable mix shift towards high-margin Services.",
+          "FY2023 showed margin pressure, with Operating Margin compressing -1.5% despite Gross Margin expansion, due to OpEx growth (+6.8%) outpacing gross profit.",
+          "Operating leverage is high but volatile: margins expand significantly in high-volume quarters but compress sharply on revenue declines.",
+          "FY2024 pre-tax income growth (+8.6%) was masked by a +77.7% swing in income tax expense, distorting the net income comparison."
+        ],
+        "footer": "Margins are resilient but vulnerable to volume declines due to a high fixed cost base."
+      },
+      {
+        "title": "Cash Flow & Earnings Quality",
+        "iconClass": "fas fa-chart-bar warning",
+        "points": [
+          "Historically strong cash conversion is showing significant strain, with a major divergence projected for FY2025: Net Income growth of +19.5% vs. OCF growth of -5.7%.",
+          "Working capital is the primary driver of divergence, particularly large builds in Accounts Receivable during peak sales periods.",
+          "FY2025 is forecast to be a year of 'paper profits', where reported earnings are not backed by cash generation.",
+          "Free cash flow conversion, while historically robust, is at risk from increased working capital intensity needed to support sales."
+        ],
+        "footer": "Earnings Quality Grade: Concerning, due to projected negative cash conversion."
+      }
+    ]
+  },
+  "financialMetrics": {
+    "sectionSubtitle": "Forensic & Balance Sheet Health",
+    "cards": [
+      {
+        "title": "Forensic Checks",
+        "iconClass": "fas fa-search negative",
+        "points": [
+          "<strong>A/R vs Revenue (Critical Flag):</strong> In FY2024, Net Receivables grew +8.6% against +2.0% revenue growth, a 4.3x ratio indicating potential channel stuffing or extended payment terms.",
+          "<strong>Inventory vs COGS (Critical Flag):</strong> Inventory growth outpaced COGS growth for two consecutive years (FY2023: +28.0% vs -4.2%; FY2024: +15.1% vs -1.8%), signaling weakening end-market demand.",
+          "<strong>OCF vs NI (Forward-Looking Flag):</strong> FY2025 forecast shows a 25.2 percentage point negative gap between NI growth (+19.5%) and OCF growth (-5.7%), a classic sign of low-quality, accrual-based earnings.",
+          "<strong>Tax Rate Volatility:</strong> A +77.7% increase in income tax expense in FY2024 significantly depressed reported Net Income, making pre-tax income a more reliable measure of core performance for that year."
+        ],
+        "footer": "The combination of A/R and Inventory builds points to systemic pressure to meet growth targets."
+      },
+      {
+        "title": "Solvency & Capital Allocation",
+        "iconClass": "fas fa-balance-scale neutral",
+        "points": [
+          "Debt trajectory shows a clear deleveraging trend, with total debt declining in six of the last eight years.",
+          "Interest coverage remains exceptionally strong given the company's vast cash reserves and profitability.",
+          "The equity base has been systematically reduced via a world-class capital return program funded by operating cash flows.",
+          "Capital allocation prioritizes R&D investment and shareholder returns (buybacks and dividends), with working capital needs increasingly funded by short-term debt in peak quarters."
+        ],
+        "footer": "Solvency risk is negligible; balance sheet is a source of strength."
+      }
+    ]
+  },
+  "investmentConsiderations": {
+    "sectionSubtitle": "Opportunities & Risks",
+    "tableData": [
+      {
+        "factor": "<strong>Market Position & Brand</strong>",
+        "opportunities": [
+          "Leverage immense brand loyalty to drive adoption of new product categories (e.g., Vision Pro, AI-integrated devices).",
+          "Expand high-margin Services revenue by increasing penetration within the installed base of over 2 billion active devices.",
+          "Utilize fortress balance sheet to invest through cycles and acquire strategic assets."
+        ],
+        "risks": [
+          "Maturing smartphone market limits core iPhone growth, increasing pressure on other categories.",
+          "Intensifying competition in key markets like China could lead to market share loss and pricing pressure.",
+          "Regulatory scrutiny regarding App Store policies and market power could impact Services growth and profitability."
+        ]
+      },
+      {
+        "factor": "<strong>Forensic & Earnings Quality</strong>",
+        "opportunities": [
+          "Improved demand could allow for a reduction in channel inventory, aligning inventory growth with COGS.",
+          "A return to higher-quality revenue growth would see the A/R-to-Revenue growth ratio fall below 1.5x.",
+          "Disciplined working capital management could reverse the negative OCF/NI trend, validating earnings quality."
+        ],
+        "risks": [
+          "Continued A/R growth above 2.5x revenue growth would confirm reliance on unsustainable sales tactics.",
+          "Persistent inventory builds could force future product discounting, leading to significant gross margin compression.",
+          "A materialization of the negative OCF/NI divergence in FY2025 would confirm a severe degradation in earnings quality."
+        ]
+      },
+      {
+        "factor": "<strong>Operational Model</strong>",
+        "opportunities": [
+          "Successful new product launches could re-accelerate top-line growth and improve operating leverage.",
+          "Further mix shift towards Services can continue to expand corporate gross margins.",
+          "AI integration across the ecosystem could create a new upgrade cycle and enhance software/services appeal."
+        ],
+        "risks": [
+          "High fixed cost base, particularly in R&D, creates significant negative operating leverage during revenue downturns.",
+          "Supply chain disruptions or geopolitical tensions could impact production and cost structure.",
+          "Failure of new product categories to gain traction would leave the company heavily reliant on the mature iPhone."
+        ]
+      }
+    ]
+  },
+  "conclusion": {
+    "sectionSubtitle": "Final Assessment",
+    "verdictTitle": "Elite Franchise with Deteriorating Earnings Quality",
+    "verdictRating": "Elevated Concerns / Medium-High Risk",
+    "paragraphs": [
+      "Apple has built one of the world's most valuable enterprises on a foundation of strong, cash-backed earnings and exceptional brand power. Historically, its growth has been accompanied by robust cash conversion and expanding margins, reflecting a deep competitive moat.",
+      "However, recent performance in FY2023-2024 and forecasts for FY2025 reveal significant stress. To achieve modest growth, the company is exhibiting signs of aggressive sales practices, evidenced by a critical 4.3x A/R-to-Revenue growth ratio in FY2024. This is compounded by a two-year trend of inventory growing much faster than sales, signaling weakening demand. The forecast for FY2025 points to a severe cash conversion problem, with operating cash flow projected to decline -5.7% while net income grows +19.5%.",
+      "These forensic flags indicate that the quality of Apple's earnings is deteriorating. While the company's solvency is not in question, the balance sheet is being used to mask slowing momentum in the income statement. A continuation of these trends would increase the risk of future margin pressure from discounting and potential earnings write-downs. The verdict will only improve upon a demonstrated return to growth that is not dependent on working capital expansion."
+    ],
+    "monitoringPointsTitle": "Key Monitoring Points for Re-assessment",
+    "monitoringPoints": [
+      "<strong>A/R-to-Revenue Growth Ratio:</strong> Currently 4.3x in FY2024 (critical). A ratio below 1.5x for two consecutive fiscal year-ends is required to signal a return to high-quality revenue recognition.",
+      "<strong>Inventory vs. COGS Growth Spread:</strong> Inventory growth has exceeded COGS growth for two years. This spread must turn negative to indicate demand is absorbing supply, removing the risk of future write-downs.",
+      "<strong>OCF vs. NI Growth:</strong> FY2025 projects a -25.2 percentage point divergence. OCF growth must meet or exceed Net Income growth to restore confidence that earnings are cash-backed."
+    ]
+  },
+  "chartData": {
+    "labels": [
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025"
+    ],
+    "revenueGrowth": [
+      27.86,
+      -7.73,
+      6.31,
+      15.86,
+      -2.04,
+      5.51,
+      33.26,
+      7.79,
+      -2.8,
+      2.02,
+      6.43
+    ],
+    "arGrowth": [
+      11.48,
+      -3.44,
+      21.76,
+      37.35,
+      -6.51,
+      -18.25,
+      37.55,
+      18.3,
+      0.09,
+      8.62,
+      10.14
+    ],
+    "cfoGrowth": [
+      36.09,
+      -18.5,
+      -3.03,
+      20.57,
+      -10.39,
+      16.26,
+      28.96,
+      17.41,
+      -9.5,
+      6.98,
+      -5.73
+    ],
+    "niGrowth": [
+      35.14,
+      -14.43,
+      5.83,
+      23.12,
+      -7.18,
+      3.9,
+      64.92,
+      5.41,
+      -2.81,
+      -3.36,
+      19.5
+    ]
+  }
+}
