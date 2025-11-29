@@ -451,7 +451,11 @@ if (isAnalysisPage) {
       scales: {
         x: {
           grid: { display: false },
-          ticks: { font: { size: 11, family: "'Inter', sans-serif" }, color: "#ced4da", padding: 5 },
+          ticks: {
+            font: { size: 11, family: "'Inter', sans-serif" },
+            color: "#6c757d",
+            padding: 5
+          },
         },
         y: {
           beginAtZero: false,
@@ -459,16 +463,20 @@ if (isAnalysisPage) {
             display: true,
             text: "Growth Rate (%)",
             font: { size: 12, weight: "600", family: "'Inter', sans-serif" },
-            color: "#f8f9fa", // Light text
+            color: "#495057",
             padding: { bottom: 10 }
           },
           ticks: {
             callback: (value) => value + "%",
             font: { size: 11, family: "'Inter', sans-serif" },
-            color: "#ced4da", // Light grey for ticks
+            color: "#6c757d",
             padding: 8
           },
-          grid: { drawBorder: false, color: "rgba(255, 255, 255, 0.1)", borderDash: [5, 5] }, // Light grid lines
+          grid: { 
+            drawBorder: false, 
+            color: "rgba(0, 0, 0, 0.04)",
+            borderDash: [5, 5]
+          },
         },
       },
       interaction: { mode: "index", intersect: false },
@@ -477,8 +485,8 @@ if (isAnalysisPage) {
 
     const divergenceColor = "#c5817e"; // var(--danger)
     const primaryColor = "#c5a47e";    // var(--primary)
-    const secondaryColor = "#f8f9fa";  // var(--light) for better visibility on dark
-    const mutedColor = "#ced4da";      // Light grey for muted text
+    const secondaryColor = "#1c2541";  // var(--secondary)
+    const mutedColor = "#6c757d";      // var(--muted)
 
     // Define radii for points
     const smallPointRadius = 3;
