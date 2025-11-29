@@ -515,6 +515,7 @@ nav {
   min-height: 44px; /* Ensure good tap target */
   min-width: 44px; /* Ensure good tap target */
   border: 1px solid var(--primary);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 
@@ -570,6 +571,7 @@ nav {
   transition: var(--transition);
   max-width: 380px;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 
@@ -671,6 +673,7 @@ nav {
   border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   flex-direction: column;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 
@@ -764,6 +767,7 @@ nav {
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: var(--transition);
   position: relative;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 
@@ -805,6 +809,7 @@ canvas {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 
@@ -927,6 +932,7 @@ tr:hover {
   box-shadow: var(--shadow-md);
   text-align: left;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 
