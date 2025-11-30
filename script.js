@@ -401,22 +401,34 @@ if (stickySectionNav && isAnalysisPage) {
   const sectionElements = sections.map(id => document.getElementById(id)).filter(Boolean)
   const navLinks = stickySectionNav.querySelectorAll('a[data-section]')
   
-  let lastScrollY = 0
   let ticking = false
+  
+  // Helper function to show/hide sticky nav
+  const showStickyNav = () => {
+    stickySectionNav.classList.add('visible')
+  }
+  
+  const hideStickyNav = () => {
+    stickySectionNav.classList.remove('visible')
+  }
   
   const updateStickyNav = () => {
     const scrollY = window.scrollY
     const windowHeight = window.innerHeight
-    const heroSection = select('.hero')
-    const heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight : 300
     
-    // Show sticky nav after scrolling past hero section
-    if (scrollY > heroBottom - 100) {
-      stickySectionNav.classList.add('visible')
-      document.body.classList.add('has-sticky-nav')
-    } else {
-      stickySectionNav.classList.remove('visible')
-      document.body.classList.remove('has-sticky-nav')
+    // Find the "Explore Analysis" button as the trigger point
+    const exploreBtn = document.getElementById('exploreAnalysisBtn')
+    
+    if (exploreBtn) {
+      // Get the bottom position of the Explore Analysis button
+      const btnBottomFromTop = exploreBtn.offsetTop + exploreBtn.offsetHeight
+      
+      // Show sticky nav only after scrolling past the Explore Analysis button
+      if (scrollY > btnBottomFromTop) {
+        showStickyNav()
+      } else {
+        hideStickyNav()
+      }
     }
     
     // Update active section indicator
@@ -444,7 +456,6 @@ if (stickySectionNav && isAnalysisPage) {
       }
     })
     
-    lastScrollY = scrollY
     ticking = false
   }
   
@@ -457,7 +468,22 @@ if (stickySectionNav && isAnalysisPage) {
   }
   
   window.addEventListener('scroll', onScrollHandler, { passive: true })
-  window.addEventListener('load', updateStickyNav)
+  
+  // Ensure sticky nav is hidden on page load (requirement #2)
+  // Use a small delay to ensure DOM is fully ready
+  window.addEventListener('load', () => {
+    hideStickyNav()
+    // Then update based on scroll position
+    setTimeout(updateStickyNav, 100)
+  })
+  
+  // Hide sticky nav when back-to-top button is clicked (requirement #5)
+  const backToTopBtn = select('.back-to-top')
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', () => {
+      hideStickyNav()
+    })
+  }
   
   // Smooth scroll on nav link click
   navLinks.forEach(link => {
@@ -467,8 +493,10 @@ if (stickySectionNav && isAnalysisPage) {
       const targetSection = document.getElementById(sectionId)
       
       if (targetSection) {
-        const headerHeight = select('#header')?.offsetHeight || 60
-        const targetPosition = targetSection.offsetTop - headerHeight - 10
+        // When sticky nav is visible and at top (z-index 101), it covers the header
+        // So we only need to account for the sticky nav height
+        const stickyNavHeight = stickySectionNav.offsetHeight || 60
+        const targetPosition = targetSection.offsetTop - stickyNavHeight - 10
         
         window.scrollTo({
           top: targetPosition,
