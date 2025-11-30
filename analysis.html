@@ -15,8 +15,8 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/2.2.1/chartjs-plugin-annotation.min.js" integrity="sha512-eCD/MhL+Uvj+B89Am2/hMv0Q6dWJjkMv/7G2xMSuvTjYkXOP8zsF5Ec0TrX0V8alM5u0M59fzxBNLCSQ60L3qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <style>
         /* Hero section with plaid background - UPDATED WITH WHITE AND GREY SHADES - TIGHTENED GRID */
@@ -244,12 +244,20 @@
                         <h3>Revenue Growth Trend (Annual)</h3>
                     </div>
                     <div class="chart-wrapper">
-                        <canvas id="revenueChart"></canvas>
+                        <!-- Skeleton for chart -->
+                        <div class="skeleton skeleton-chart" id="revenueChartSkeleton"></div>
+                        <canvas id="revenueChart" style="display: none;"></canvas>
                     </div>
                 </div>
 
                 <div class="cards" id="trends-cards-container">
-                    <p>Loading trend cards...</p>
+                    <!-- Skeleton cards -->
+                    <div class="skeleton-card" id="trendsCardsSkeleton">
+                        <div class="skeleton skeleton-card-header"></div>
+                        <div class="skeleton skeleton-card-line"></div>
+                        <div class="skeleton skeleton-card-line"></div>
+                        <div class="skeleton skeleton-card-line"></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -266,7 +274,8 @@
                         <h3>Revenue vs. Accounts Receivable Growth (Annual)</h3>
                     </div>
                     <div class="chart-wrapper">
-                        <canvas id="arChart"></canvas>
+                        <div class="skeleton skeleton-chart" id="arChartSkeleton"></div>
+                        <canvas id="arChart" style="display: none;"></canvas>
                     </div>
                 </div>
 
@@ -275,12 +284,18 @@
                         <h3>Operating Cash Flow vs. Net Income Growth (Annual)</h3>
                     </div>
                     <div class="chart-wrapper">
-                        <canvas id="cashFlowChart"></canvas>
+                        <div class="skeleton skeleton-chart" id="cashFlowChartSkeleton"></div>
+                        <canvas id="cashFlowChart" style="display: none;"></canvas>
                     </div>
                 </div>
 
                 <div class="cards" id="financials-cards-container">
-                     <p>Loading financial cards...</p>
+                    <div class="skeleton-card" id="financialsCardsSkeleton">
+                        <div class="skeleton skeleton-card-header"></div>
+                        <div class="skeleton skeleton-card-line"></div>
+                        <div class="skeleton skeleton-card-line"></div>
+                        <div class="skeleton skeleton-card-line"></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -293,7 +308,25 @@
                 </div>
 
                 <div class="insight-list">
-                    <table>
+                    <!-- Skeleton for table -->
+                    <div id="opportunitiesTableSkeleton">
+                        <div class="skeleton-table-row">
+                            <div class="skeleton"></div>
+                            <div class="skeleton"></div>
+                            <div class="skeleton"></div>
+                        </div>
+                        <div class="skeleton-table-row">
+                            <div class="skeleton"></div>
+                            <div class="skeleton"></div>
+                            <div class="skeleton"></div>
+                        </div>
+                        <div class="skeleton-table-row">
+                            <div class="skeleton"></div>
+                            <div class="skeleton"></div>
+                            <div class="skeleton"></div>
+                        </div>
+                    </div>
+                    <table style="display: none;" id="opportunitiesTable">
                         <thead>
                             <tr>
                                 <th>Factor</th>
@@ -302,7 +335,6 @@
                             </tr>
                         </thead>
                         <tbody id="opportunities-table-body">
-                            <tr><td colspan="3">Loading table data...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -317,20 +349,31 @@
                 </div>
 
                 <div class="verdict-container">
-                    <div class="verdict-header">
-                        <h3 data-dynamic="verdict-title">Loading Verdict...</h3>
-                        <span class="verdict-rating" data-dynamic="verdict-rating">Loading...</span>
+                    <!-- Skeleton for verdict -->
+                    <div id="verdictSkeleton">
+                        <div class="skeleton skeleton-text" style="width: 50%; height: 1.5rem; margin-bottom: 12px;"></div>
+                        <div class="skeleton skeleton-text" style="width: 80px; height: 24px; border-radius: 12px; margin-bottom: 20px;"></div>
+                        <div class="skeleton skeleton-text" style="width: 100%; margin-bottom: 8px;"></div>
+                        <div class="skeleton skeleton-text" style="width: 95%; margin-bottom: 8px;"></div>
+                        <div class="skeleton skeleton-text" style="width: 90%; margin-bottom: 20px;"></div>
+                        <div class="skeleton skeleton-text" style="width: 40%; height: 1.2rem; margin-bottom: 12px;"></div>
+                        <div class="skeleton skeleton-text" style="width: 85%;"></div>
+                        <div class="skeleton skeleton-text" style="width: 80%;"></div>
                     </div>
+                    <div id="verdictContent" style="display: none;">
+                        <div class="verdict-header">
+                            <h3 data-dynamic="verdict-title"></h3>
+                            <span class="verdict-rating" data-dynamic="verdict-rating"></span>
+                        </div>
 
-                    <div id="verdict-paragraphs">
-                        <p>Loading conclusion...</p>
-                    </div>
+                        <div id="verdict-paragraphs">
+                        </div>
 
-                    <div class="monitoring-points">
-                        <h4 data-dynamic="monitoring-title">Loading...</h4>
-                        <ul id="monitoring-points-list">
-                            <li>Loading...</li>
-                        </ul>
+                        <div class="monitoring-points">
+                            <h4 data-dynamic="monitoring-title"></h4>
+                            <ul id="monitoring-points-list">
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -340,6 +383,16 @@
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+    <!-- Sticky Section Navigation (Mobile) -->
+    <nav class="sticky-section-nav" id="stickySectionNav" aria-label="Section navigation">
+        <ul>
+            <li><a href="#trends" data-section="trends"><i class="fas fa-chart-line"></i><span>Trends</span></a></li>
+            <li><a href="#financials" data-section="financials"><i class="fas fa-calculator"></i><span>Metrics</span></a></li>
+            <li><a href="#opportunities" data-section="opportunities"><i class="fas fa-balance-scale"></i><span>Factors</span></a></li>
+            <li><a href="#conclusion" data-section="conclusion"><i class="fas fa-gavel"></i><span>Verdict</span></a></li>
+        </ul>
+    </nav>
 
     <footer>
         <div class="container">

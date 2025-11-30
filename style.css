@@ -16,6 +16,8 @@
   --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   --border-color: rgba(0, 0, 0, 0.08);
+  --skeleton-base: #e0e0e0;
+  --skeleton-shine: #f5f5f5;
 }
 
 * {
@@ -1166,6 +1168,173 @@ footer {
   margin-top: 12px; /* Increased margin for more space */
 }
 
+/* ============================================
+   SKELETON LOADING STATES
+   ============================================ */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-base) 25%,
+    var(--skeleton-shine) 50%,
+    var(--skeleton-base) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+.skeleton-text {
+  height: 1em;
+  margin-bottom: 0.5em;
+  border-radius: 4px;
+}
+
+.skeleton-text.title {
+  height: 2rem;
+  width: 70%;
+  margin: 0 auto 1rem;
+}
+
+.skeleton-text.subtitle {
+  height: 1rem;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.skeleton-chart {
+  height: 280px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.skeleton-card {
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 22px;
+  border: 1px solid var(--border-color);
+}
+
+.skeleton-card .skeleton-card-header {
+  height: 24px;
+  width: 60%;
+  margin-bottom: 16px;
+}
+
+.skeleton-card .skeleton-card-line {
+  height: 14px;
+  margin-bottom: 12px;
+}
+
+.skeleton-card .skeleton-card-line:last-child {
+  width: 80%;
+  margin-bottom: 0;
+}
+
+.skeleton-table-row {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.skeleton-table-row > div {
+  flex: 1;
+  height: 20px;
+}
+
+/* Hide skeleton when content is loaded */
+.skeleton-container {
+  transition: opacity 0.3s ease;
+}
+
+.skeleton-container.hidden {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+/* ============================================
+   STICKY SECTION NAVIGATION (Mobile)
+   ============================================ */
+.sticky-section-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--header-footer-bg);
+  border-top: 1px solid var(--border-color);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 90;
+  padding: 8px 0;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.sticky-section-nav.visible {
+  transform: translateY(0);
+}
+
+.sticky-section-nav ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0 8px;
+  max-width: 100%;
+}
+
+.sticky-section-nav li {
+  flex: 1;
+  text-align: center;
+}
+
+.sticky-section-nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.65rem;
+  font-weight: 500;
+  padding: 6px 4px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  min-height: 44px;
+  justify-content: center;
+}
+
+.sticky-section-nav a i {
+  font-size: 1rem;
+  margin-bottom: 2px;
+}
+
+.sticky-section-nav a.active,
+.sticky-section-nav a:active {
+  color: var(--primary);
+  background: rgba(197, 164, 126, 0.1);
+}
+
+.sticky-section-nav a:hover {
+  color: var(--primary);
+}
+
+/* Add bottom padding to main content when sticky nav is visible */
+body.has-sticky-nav {
+  padding-bottom: 70px;
+}
+
 @media (min-width: 768px) {
   body {
     font-size: 16px;
@@ -1419,5 +1588,222 @@ footer {
     text-align: center;
     width: 100%;
     font-size: 0.7rem;
+  }
+}
+
+/* ============================================
+   MOBILE OPTIMIZATIONS (iPhone: 375-430px)
+   ============================================ */
+@media (max-width: 768px) {
+  /* Show sticky section nav on mobile */
+  .sticky-section-nav {
+    display: block;
+  }
+
+  /* Reduced section padding for mobile */
+  .section {
+    padding: 40px 0;
+  }
+
+  /* Tighter container padding */
+  .container {
+    padding: 0 16px;
+  }
+
+  /* Reduced hero padding */
+  .hero {
+    padding: 100px 0 40px;
+  }
+
+  .hero .container {
+    min-height: 32vh;
+  }
+
+  /* Reduced section title margins */
+  .section-title {
+    margin-bottom: 28px;
+  }
+
+  .section-title h2 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+
+  .section-title p {
+    font-size: 0.85rem;
+    padding: 0 8px;
+  }
+
+  /* Tighter card grid */
+  .cards {
+    gap: 16px;
+  }
+
+  .card-header {
+    padding: 16px;
+  }
+
+  .card-body {
+    padding: 16px;
+  }
+
+  .card-body li {
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+  }
+
+  /* Chart container adjustments */
+  .chart-container {
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  .chart-header {
+    margin-bottom: 12px;
+    /* Override JS inline grid - use flex-wrap for mobile layout */
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    align-items: center !important;
+    grid-template-columns: unset !important;
+  }
+
+  .chart-header h3 {
+    font-size: 0.9rem;
+    margin: 0;
+    width: 100%;
+    flex-basis: 100%;
+  }
+
+  /* Legend and button on same row for mobile */
+  .chart-custom-legend {
+    flex: 1;
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 6px 10px !important;
+    font-size: 0.65rem !important;
+    justify-self: unset !important;
+  }
+
+  .chart-toggle-btn {
+    /* Physically smaller button for mobile */
+    font-size: 0.6rem !important;
+    padding: 2px 8px !important;
+    min-height: 18px !important;
+    height: 20px !important;
+    min-width: auto !important;
+    justify-self: unset !important;
+    margin-left: auto;
+    line-height: 1 !important;
+    display: flex !important;
+    align-items: center;
+  }
+
+  /* Verdict header - title and rating on same line */
+  .verdict-header {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: flex-start !important;
+    gap: 8px 12px !important;
+  }
+
+  .verdict-header h3 {
+    font-size: 1rem;
+    flex: 1;
+    min-width: 180px;
+    line-height: 1.3;
+  }
+
+  .verdict-rating {
+    font-size: 0.7rem !important;
+    padding: 4px 10px !important;
+    white-space: nowrap;
+    height: fit-content;
+    margin-top: 4px;
+  }
+
+  /* Skeleton adjustments for mobile */
+  .skeleton-chart {
+    height: 200px;
+  }
+
+  .skeleton-text.title {
+    height: 1.5rem;
+  }
+
+  /* Insight list / table container */
+  .insight-list {
+    padding: 16px;
+  }
+
+  /* Monitoring points */
+  .monitoring-points {
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+
+  .monitoring-points li {
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+  }
+
+  /* Footer spacing */
+  footer {
+    padding: 20px 0;
+    margin-top: 40px;
+  }
+}
+
+/* Extra small screens (iPhone SE, older iPhones: 375px) */
+@media (max-width: 390px) {
+  .hero h1 {
+    font-size: 1.4rem;
+  }
+
+  .section-title h2 {
+    font-size: 1.25rem;
+  }
+
+  .sticky-section-nav a {
+    font-size: 0.6rem;
+    padding: 4px 2px;
+  }
+
+  .sticky-section-nav a i {
+    font-size: 0.9rem;
+  }
+
+  .chart-wrapper {
+    height: 180px;
+  }
+
+  .card-header h3 {
+    font-size: 0.95rem;
+  }
+}
+
+/* ============================================
+   TOUCH-FRIENDLY CHART INTERACTIONS
+   ============================================ */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets for chart interactions */
+  .chart-container {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .chart-wrapper {
+    touch-action: pan-y pinch-zoom;
+  }
+
+  /* Chart toggle button touch optimization */
+  .chart-toggle-btn {
+    min-height: 28px !important;
+    min-width: 48px !important;
+    padding: 6px 10px !important;
+  }
+
+  /* Custom legend touch targets */
+  .chart-custom-legend {
+    gap: 12px !important;
   }
 }

@@ -1,13 +1,21 @@
 // --- START OF FILE script.js ---
 
-// Note: Chart.js and ChartAnnotation are expected to be loaded globally via script tags in analysis.html
-// If using modules, you'd import them: import { Chart } from 'chart.js'; import ChartAnnotation from 'chartjs-plugin-annotation';
+// Note: Chart.js and chartjs-plugin-annotation are loaded globally via script tags in analysis.html
+// The annotation plugin auto-registers with Chart.js v3+ when loaded via CDN
+// If using modules, you'd import them: import { Chart } from 'chart.js'; import annotationPlugin from 'chartjs-plugin-annotation';
 
 const DEFAULT_TICKER = "AAPL"
 const DATA_PATH = "data/"
 const DIVERGENCE_THRESHOLD = 30.0
-const DEFAULT_YEARS_TO_SHOW = 10; // Default number of years to show
+const DEFAULT_YEARS_TO_SHOW = 10; // Default number of years to show (desktop)
+const MOBILE_DEFAULT_YEARS = 5; // Default for mobile
 const ICON_GAP = '6px'; // Gap between icon and text in buttons
+const IS_TOUCH_DEVICE = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+const IS_MOBILE = window.innerWidth <= 768;
+
+// Mobile progressive year ranges: 5Y → 10Y → Full → 5Y
+const MOBILE_YEAR_RANGES = [5, 10, 'full'];
+let mobileYearRangeIndex = 0; // Tracks current range on mobile
 
 let currentTicker = null
 let currentData = null // Store fetched data
@@ -194,6 +202,71 @@ const destroyCharts = () => {
   }
 }
 
+// --- Skeleton Loading Management ---
+const showSkeletons = (show) => {
+  const skeletonIds = [
+    'revenueChartSkeleton',
+    'arChartSkeleton', 
+    'cashFlowChartSkeleton',
+    'trendsCardsSkeleton',
+    'financialsCardsSkeleton',
+    'opportunitiesTableSkeleton',
+    'verdictSkeleton'
+  ];
+  
+  const contentIds = [
+    { canvas: 'revenueChart', skeleton: 'revenueChartSkeleton' },
+    { canvas: 'arChart', skeleton: 'arChartSkeleton' },
+    { canvas: 'cashFlowChart', skeleton: 'cashFlowChartSkeleton' },
+    { table: 'opportunitiesTable', skeleton: 'opportunitiesTableSkeleton' },
+    { content: 'verdictContent', skeleton: 'verdictSkeleton' }
+  ];
+  
+  if (show) {
+    // Show skeletons, hide content
+    skeletonIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'block';
+    });
+    
+    contentIds.forEach(item => {
+      if (item.canvas) {
+        const canvas = document.getElementById(item.canvas);
+        if (canvas) canvas.style.display = 'none';
+      }
+      if (item.table) {
+        const table = document.getElementById(item.table);
+        if (table) table.style.display = 'none';
+      }
+      if (item.content) {
+        const content = document.getElementById(item.content);
+        if (content) content.style.display = 'none';
+      }
+    });
+  } else {
+    // Hide skeletons, show content
+    skeletonIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+    
+    contentIds.forEach(item => {
+      if (item.canvas) {
+        const canvas = document.getElementById(item.canvas);
+        if (canvas) canvas.style.display = 'block';
+      }
+      if (item.table) {
+        const table = document.getElementById(item.table);
+        if (table) table.style.display = 'table';
+      }
+      if (item.content) {
+        const content = document.getElementById(item.content);
+        if (content) content.style.display = 'block';
+      }
+    });
+  }
+}
+
 const calculateDivergenceIndices = (data1, data2, threshold) => {
   if (!Array.isArray(data1) || !Array.isArray(data2) || data1.length !== data2.length) {
     console.warn("Invalid data for divergence calculation.");
@@ -321,6 +394,95 @@ if (backToTopButton) {
   })
 }
 
+// --- Sticky Section Navigation (Mobile) ---
+const stickySectionNav = select("#stickySectionNav")
+if (stickySectionNav && isAnalysisPage) {
+  const sections = ['trends', 'financials', 'opportunities', 'conclusion']
+  const sectionElements = sections.map(id => document.getElementById(id)).filter(Boolean)
+  const navLinks = stickySectionNav.querySelectorAll('a[data-section]')
+  
+  let lastScrollY = 0
+  let ticking = false
+  
+  const updateStickyNav = () => {
+    const scrollY = window.scrollY
+    const windowHeight = window.innerHeight
+    const heroSection = select('.hero')
+    const heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight : 300
+    
+    // Show sticky nav after scrolling past hero section
+    if (scrollY > heroBottom - 100) {
+      stickySectionNav.classList.add('visible')
+      document.body.classList.add('has-sticky-nav')
+    } else {
+      stickySectionNav.classList.remove('visible')
+      document.body.classList.remove('has-sticky-nav')
+    }
+    
+    // Update active section indicator
+    let currentSection = null
+    const scrollPosition = scrollY + windowHeight / 3 // Trigger point at 1/3 from top
+    
+    sectionElements.forEach(section => {
+      if (section) {
+        const sectionTop = section.offsetTop
+        const sectionBottom = sectionTop + section.offsetHeight
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+          currentSection = section.id
+        }
+      }
+    })
+    
+    // Update active class on nav links
+    navLinks.forEach(link => {
+      const sectionId = link.getAttribute('data-section')
+      if (sectionId === currentSection) {
+        link.classList.add('active')
+      } else {
+        link.classList.remove('active')
+      }
+    })
+    
+    lastScrollY = scrollY
+    ticking = false
+  }
+  
+  // Throttled scroll handler for performance
+  const onScrollHandler = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateStickyNav)
+      ticking = true
+    }
+  }
+  
+  window.addEventListener('scroll', onScrollHandler, { passive: true })
+  window.addEventListener('load', updateStickyNav)
+  
+  // Smooth scroll on nav link click
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault()
+      const sectionId = link.getAttribute('data-section')
+      const targetSection = document.getElementById(sectionId)
+      
+      if (targetSection) {
+        const headerHeight = select('#header')?.offsetHeight || 60
+        const targetPosition = targetSection.offsetTop - headerHeight - 10
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        })
+        
+        // Update active state immediately for better feedback
+        navLinks.forEach(l => l.classList.remove('active'))
+        link.classList.add('active')
+      }
+    })
+  })
+}
+
 // --- Analysis Page Specific Logic ---
 if (isAnalysisPage) {
   document.addEventListener("DOMContentLoaded", () => {
@@ -330,24 +492,39 @@ if (isAnalysisPage) {
       showMessage('<i class="fas fa-exclamation-triangle"></i> Chart library failed to load. Please refresh.', "error")
       return
     }
-    // Check if ChartAnnotation plugin is loaded
-    let ChartAnnotation = window.ChartAnnotation; // Access potentially global plugin
-    if (typeof ChartAnnotation === "undefined") {
-      console.warn("Chartjs-plugin-annotation not loaded. Annotations will not be displayed.")
-    } else {
-        // Attempt to register the plugin if found
-        try {
-            // Chart.js v3+ uses Chart.register()
-            if (typeof Chart.register === 'function') {
-                 Chart.register(ChartAnnotation);
-                 console.log("ChartAnnotation plugin registered.");
-            } else {
-                // Fallback for older Chart.js versions (less likely needed)
-                console.warn("Chart.register is not a function. Plugin registration might differ for older Chart.js versions.");
-            }
-        } catch (error) {
-            console.error("Error registering ChartAnnotation plugin:", error);
-        }
+    
+    // Log Chart.js version for diagnostics
+    console.log(`Chart.js version: ${Chart.version || 'unknown'}`)
+    // Check if ChartAnnotation plugin is loaded and registered
+    // In Chart.js v3+, the annotation plugin auto-registers when loaded via CDN
+    // Try multiple detection methods for compatibility
+    let isAnnotationPluginAvailable = false;
+    
+    // Method 1: Check Chart.registry (Chart.js v3+)
+    if (Chart.registry && Chart.registry.plugins && Chart.registry.plugins.get('annotation')) {
+      isAnnotationPluginAvailable = true;
+      console.log("ChartAnnotation plugin detected via Chart.registry");
+    }
+    // Method 2: Check if plugin is in Chart.plugins
+    else if (window.chartjs && window.chartjs.plugins && window.chartjs.plugins.annotation) {
+      isAnnotationPluginAvailable = true;
+      console.log("ChartAnnotation plugin detected via window.chartjs");
+    }
+    // Method 3: Check window.ChartAnnotation (older versions)
+    else if (window.ChartAnnotation) {
+      isAnnotationPluginAvailable = true;
+      // Try to register it manually
+      try {
+        Chart.register(window.ChartAnnotation);
+        console.log("ChartAnnotation plugin manually registered");
+      } catch (e) {
+        console.warn("Failed to register ChartAnnotation:", e);
+      }
+    }
+    
+    if (!isAnnotationPluginAvailable) {
+      console.warn("Chartjs-plugin-annotation not loaded. Annotations will not be displayed.");
+      console.warn("Please check Network tab to verify the plugin CDN is loading correctly.");
     }
 
 
@@ -416,10 +593,17 @@ if (isAnalysisPage) {
     const createChartOptions = () => ({
       responsive: true,
       maintainAspectRatio: false,
-      animation: { duration: 1000, easing: 'easeOutQuart' },
+      animation: { 
+        duration: IS_MOBILE ? 600 : 1000, // Faster animation on mobile
+        easing: 'easeOutQuart' 
+      },
       plugins: {
         legend: { display: false },
         tooltip: {
+          enabled: true,
+          // Touch-friendly tooltip settings
+          mode: IS_TOUCH_DEVICE ? 'nearest' : 'index',
+          intersect: IS_TOUCH_DEVICE ? true : false,
           callbacks: {
             label: (context) => {
               if (context.dataset.label === "Divergence") return null;
@@ -429,9 +613,9 @@ if (isAnalysisPage) {
               return label;
             },
           },
-          bodyFont: { size: 13, family: "'Inter', sans-serif" },
-          titleFont: { size: 14, weight: "600", family: "'Inter', sans-serif" },
-          padding: 12,
+          bodyFont: { size: IS_MOBILE ? 12 : 13, family: "'Inter', sans-serif" },
+          titleFont: { size: IS_MOBILE ? 12 : 14, weight: "600", family: "'Inter', sans-serif" },
+          padding: IS_MOBILE ? 10 : 12,
           backgroundColor: "#ffffff",
           titleColor: "#1c2541",
           bodyColor: "#495057",
@@ -439,12 +623,16 @@ if (isAnalysisPage) {
           borderWidth: 1,
           cornerRadius: 8,
           displayColors: true,
-          boxPadding: 6,
+          boxPadding: IS_MOBILE ? 4 : 6,
           usePointStyle: true,
           shadowOffsetX: 0,
           shadowOffsetY: 4,
           shadowBlur: 10,
-          shadowColor: "rgba(0,0,0,0.1)"
+          shadowColor: "rgba(0,0,0,0.1)",
+          // Keep tooltip visible longer on touch
+          animation: {
+            duration: IS_TOUCH_DEVICE ? 200 : 400
+          }
         },
         annotation: { annotations: {} }
       },
@@ -479,7 +667,12 @@ if (isAnalysisPage) {
           },
         },
       },
-      interaction: { mode: "index", intersect: false },
+      interaction: { 
+        mode: IS_TOUCH_DEVICE ? 'nearest' : 'index', 
+        intersect: IS_TOUCH_DEVICE ? true : false,
+        // Increase interaction radius for touch
+        axis: 'x'
+      },
       layout: { padding: { top: 20, right: 20, bottom: 10, left: 10 } },
     });
 
@@ -544,14 +737,38 @@ if (isAnalysisPage) {
 
 
     // --- Core Data Loading and Rendering ---
-    // Helper to calculate slice start - default 10 years, "full" shows all history
-    const getSliceStart = (showFullHistory) => {
+    // Helper to calculate slice start based on device and year range
+    const getSliceStart = () => {
       const totalLength = currentData.chartData?.labels?.length || 0;
-      if (!showFullHistory && totalLength > DEFAULT_YEARS_TO_SHOW) {
+      
+      if (IS_MOBILE) {
+        // Mobile: Use progressive year range
+        const currentRange = MOBILE_YEAR_RANGES[mobileYearRangeIndex];
+        if (currentRange === 'full') {
+          return 0; // Show all data
+        }
+        if (totalLength > currentRange) {
+          return totalLength - currentRange;
+        }
+        return 0;
+      } else {
+        // Desktop: Original behavior (10Y default, toggle to full)
+        if (!showFullHistory && totalLength > DEFAULT_YEARS_TO_SHOW) {
           return totalLength - DEFAULT_YEARS_TO_SHOW;
+        }
+        return 0;
       }
-      return 0;
-    };
+    }
+    
+    // Get current year range label for mobile button
+    const getMobileButtonLabel = () => {
+      const nextIndex = (mobileYearRangeIndex + 1) % MOBILE_YEAR_RANGES.length;
+      const nextRange = MOBILE_YEAR_RANGES[nextIndex];
+      if (nextRange === 'full') {
+        return `View Full`;
+      }
+      return `View ${nextRange}Y`;
+    }
 
     const renderCharts = () => {
       if (!currentData || !currentData.chartData) return;
@@ -566,7 +783,7 @@ if (isAnalysisPage) {
       destroyCharts(); // Clear existing charts before re-rendering
 
       // Revenue Chart - Calculate data slice (unified state)
-      const revenueSliceStart = getSliceStart(showFullHistory);
+      const revenueSliceStart = getSliceStart();
       const revenueLabels = originalLabels.slice(revenueSliceStart);
       const revenueGrowthData = originalRevenueGrowth.slice(revenueSliceStart);
 
@@ -618,7 +835,7 @@ if (isAnalysisPage) {
       }
 
       // Accounts Receivable vs Revenue Chart - Calculate data slice (unified state)
-      const arSliceStart = getSliceStart(showFullHistory);
+      const arSliceStart = getSliceStart();
       const arLabels = originalLabels.slice(arSliceStart);
       const arRevenueGrowthData = originalRevenueGrowth.slice(arSliceStart);
       const arGrowthData = originalArGrowth.slice(arSliceStart);
@@ -633,7 +850,7 @@ if (isAnalysisPage) {
           
           // Annotations Logic (Simplified for sliced data)
           arChartOptions.plugins.annotation = { annotations: {} };
-          if (typeof ChartAnnotation !== 'undefined' && chartData.annotations?.arChart && Array.isArray(chartData.annotations.arChart)) {
+          if (isAnnotationPluginAvailable && chartData.annotations?.arChart && Array.isArray(chartData.annotations.arChart)) {
               chartData.annotations.arChart.forEach((anno, index) => {
                   if (typeof anno.xVal === 'number' && anno.xVal >= 0 && anno.xVal < originalLabels.length && typeof anno.yVal === 'number' && anno.content) {
                       const adjustedXVal = anno.xVal - arSliceStart;
@@ -710,7 +927,7 @@ if (isAnalysisPage) {
       }
 
       // Cash Flow vs Net Income Chart - Calculate data slice (unified state)
-      const cfSliceStart = getSliceStart(showFullHistory);
+      const cfSliceStart = getSliceStart();
       const cfLabels = originalLabels.slice(cfSliceStart);
       const cfCfoGrowthData = originalCfoGrowth.slice(cfSliceStart);
       const cfNiGrowthData = originalNiGrowth.slice(cfSliceStart);
@@ -725,7 +942,7 @@ if (isAnalysisPage) {
           
           // Annotations Logic
           cashFlowChartOptions.plugins.annotation = { annotations: {} };
-          if (typeof ChartAnnotation !== 'undefined' && chartData.annotations?.cashFlowChart && Array.isArray(chartData.annotations.cashFlowChart)) {
+          if (isAnnotationPluginAvailable && chartData.annotations?.cashFlowChart && Array.isArray(chartData.annotations.cashFlowChart)) {
               chartData.annotations.cashFlowChart.forEach((anno, index) => {
                   if (typeof anno.xVal === 'number' && anno.xVal >= 0 && anno.xVal < originalLabels.length && typeof anno.yVal === 'number' && anno.content) {
                       const adjustedXVal = anno.xVal - cfSliceStart;
@@ -813,8 +1030,12 @@ if (isAnalysisPage) {
 
       showMessage(`<i class="fas fa-spinner fa-spin"></i> Loading analysis for ${ticker}...`, "loading")
       
+      // Show skeletons
+      showSkeletons(true);
+      
       // Reset unified state
       showFullHistory = false;
+      mobileYearRangeIndex = 0; // Reset mobile range cycle
       
       // Remove existing toggle buttons and custom legends to prevent duplication
       document.querySelectorAll('.chart-toggle-btn').forEach(btn => btn.remove());
@@ -871,78 +1092,87 @@ if (isAnalysisPage) {
         populateElement('[data-dynamic="monitoring-title"]', currentData.conclusion?.monitoringPointsTitle || "Key Monitoring Points")
         populateList("monitoring-points-list", currentData.conclusion?.monitoringPoints || [], true)
 
-        // --- Add Individual History Toggle Buttons and Legends for Each Chart ---
+        // --- Add Legends and Optional Toggle Buttons for Each Chart ---
         const chartLabels = currentData.chartData?.labels || [];
+        const totalYears = chartLabels.length;
+        // Mobile: show button if > 5 years, Desktop: show if > 10 years
+        const hasToggleOption = IS_MOBILE 
+            ? totalYears > MOBILE_DEFAULT_YEARS 
+            : totalYears > DEFAULT_YEARS_TO_SHOW;
         
-        if (chartLabels.length > DEFAULT_YEARS_TO_SHOW) {
-            // Store all toggle buttons for unified updates
-            const allToggleBtns = [];
+        // Store all toggle buttons for unified updates
+        const allToggleBtns = [];
+        
+        // Helper function to update all toggle buttons
+        const updateAllToggleBtns = () => {
+            allToggleBtns.forEach(btn => {
+                if (IS_MOBILE) {
+                    // Mobile: show next range label using text
+                    btn.textContent = getMobileButtonLabel();
+                } else {
+                    // Desktop: toggle between 10Y and Full using text
+                    btn.textContent = showFullHistory ? "View 10Y" : "View Full";
+                }
+            });
+        };
+        
+        // Helper function to create custom legend (always) and toggle button (if needed) for a specific chart
+        const createChartHeaderElements = (canvasId, legendItems) => {
+            const canvas = document.getElementById(canvasId);
+            const chartContainer = canvas?.closest('.chart-container');
+            const chartHeader = chartContainer?.querySelector('.chart-header');
             
-            // Helper function to update all toggle buttons
-            const updateAllToggleBtns = () => {
-                allToggleBtns.forEach(btn => {
-                    btn.innerHTML = showFullHistory 
-                        ? `<i class="fas fa-compress-arrows-alt" style="margin-right: ${ICON_GAP};"></i>10y` 
-                        : `<i class="fas fa-history" style="margin-right: ${ICON_GAP};"></i>Full`;
-                });
-            };
-            
-            // Helper function to create toggle button and custom legend for a specific chart
-            const createChartToggle = (canvasId, legendItems) => {
-                const canvas = document.getElementById(canvasId);
-                const chartContainer = canvas?.closest('.chart-container');
-                const chartHeader = chartContainer?.querySelector('.chart-header');
+            if (chartHeader) {
+                // Desktop layout: 3-column grid: Title | Legends | Button (or just 2 columns if no button)
+                chartHeader.style.display = "grid";
+                chartHeader.style.gridTemplateColumns = hasToggleOption ? "auto 1fr auto" : "auto 1fr";
+                chartHeader.style.alignItems = "center";
+                chartHeader.style.gap = "16px";
+                chartHeader.style.marginBottom = "12px";
                 
-                if (chartHeader) {
-                    // Desktop layout: 3-column grid: Title | Legends | Button
-                    chartHeader.style.display = "grid";
-                    chartHeader.style.gridTemplateColumns = "auto 1fr auto";
-                    chartHeader.style.alignItems = "center";
-                    chartHeader.style.gap = "16px";
-                    chartHeader.style.marginBottom = "12px";
+                // Title is already in h3, just style it
+                const titleEl = chartHeader.querySelector("h3");
+                if (titleEl) {
+                    titleEl.style.margin = "0";
+                    titleEl.style.justifySelf = "start";
+                }
+                
+                // Create custom legend container (always visible)
+                const legendContainer = document.createElement("div");
+                legendContainer.className = "chart-custom-legend";
+                legendContainer.style.display = "flex";
+                legendContainer.style.alignItems = "center";
+                legendContainer.style.gap = "16px";
+                legendContainer.style.justifySelf = "end";
+                legendContainer.style.fontSize = "0.75rem";
+                legendContainer.style.fontFamily = "'Inter', sans-serif";
+                legendContainer.style.color = "#6c757d";
+                
+                // Add legend items
+                legendItems.forEach(item => {
+                    const legendItem = document.createElement("div");
+                    legendItem.style.display = "flex";
+                    legendItem.style.alignItems = "center";
+                    legendItem.style.gap = "6px";
                     
-                    // Title is already in h3, just style it
-                    const titleEl = chartHeader.querySelector("h3");
-                    if (titleEl) {
-                        titleEl.style.margin = "0";
-                        titleEl.style.justifySelf = "start";
-                    }
+                    const dot = document.createElement("span");
+                    dot.style.width = "10px";
+                    dot.style.height = "10px";
+                    dot.style.borderRadius = "50%";
+                    dot.style.backgroundColor = item.color;
                     
-                    // Create custom legend container (center/middle)
-                    const legendContainer = document.createElement("div");
-                    legendContainer.className = "chart-custom-legend";
-                    legendContainer.style.display = "flex";
-                    legendContainer.style.alignItems = "center";
-                    legendContainer.style.gap = "16px";
-                    legendContainer.style.justifySelf = "end";
-                    legendContainer.style.fontSize = "0.75rem";
-                    legendContainer.style.fontFamily = "'Inter', sans-serif";
-                    legendContainer.style.color = "#6c757d";
+                    const label = document.createElement("span");
+                    label.textContent = item.label;
                     
-                    // Add legend items
-                    legendItems.forEach(item => {
-                        const legendItem = document.createElement("div");
-                        legendItem.style.display = "flex";
-                        legendItem.style.alignItems = "center";
-                        legendItem.style.gap = "6px";
-                        
-                        const dot = document.createElement("span");
-                        dot.style.width = "10px";
-                        dot.style.height = "10px";
-                        dot.style.borderRadius = "50%";
-                        dot.style.backgroundColor = item.color;
-                        
-                        const label = document.createElement("span");
-                        label.textContent = item.label;
-                        
-                        legendItem.appendChild(dot);
-                        legendItem.appendChild(label);
-                        legendContainer.appendChild(legendItem);
-                    });
-                    
-                    chartHeader.appendChild(legendContainer);
-                    
-                    // Create toggle button (right side)
+                    legendItem.appendChild(dot);
+                    legendItem.appendChild(label);
+                    legendContainer.appendChild(legendItem);
+                });
+                
+                chartHeader.appendChild(legendContainer);
+                
+                // Create toggle button if enough data years available
+                if (hasToggleOption) {
                     const toggleBtn = document.createElement("button");
                     toggleBtn.className = "chart-toggle-btn";
                     toggleBtn.style.fontSize = "0.7rem";
@@ -956,21 +1186,35 @@ if (isAnalysisPage) {
                     toggleBtn.style.fontWeight = "500";
                     toggleBtn.style.transition = "all 0.2s ease";
                     toggleBtn.style.justifySelf = "end";
-                    toggleBtn.innerHTML = `<i class="fas fa-history" style="margin-right: ${ICON_GAP};"></i>Full`;
                     
-                    // Hover effects
-                    toggleBtn.addEventListener("mouseenter", () => {
-                        toggleBtn.style.backgroundColor = "#2d3f5f";
-                        toggleBtn.style.transform = "translateY(-1px)";
-                    });
-                    toggleBtn.addEventListener("mouseleave", () => {
-                        toggleBtn.style.backgroundColor = "#1c2541";
-                        toggleBtn.style.transform = "translateY(0)";
-                    });
+                    // Set initial button label based on device (text only)
+                    if (IS_MOBILE) {
+                        toggleBtn.textContent = getMobileButtonLabel();
+                    } else {
+                        toggleBtn.textContent = "View Full";
+                    }
                     
-                    // Unified click handler - toggles all charts
+                    // Hover effects (desktop only)
+                    if (!IS_MOBILE) {
+                        toggleBtn.addEventListener("mouseenter", () => {
+                            toggleBtn.style.backgroundColor = "#2d3f5f";
+                            toggleBtn.style.transform = "translateY(-1px)";
+                        });
+                        toggleBtn.addEventListener("mouseleave", () => {
+                            toggleBtn.style.backgroundColor = "#1c2541";
+                            toggleBtn.style.transform = "translateY(0)";
+                        });
+                    }
+                    
+                    // Click handler - different behavior for mobile vs desktop
                     toggleBtn.addEventListener("click", () => {
-                        showFullHistory = !showFullHistory;
+                        if (IS_MOBILE) {
+                            // Mobile: Cycle through 5Y → 10Y → Full → 5Y
+                            mobileYearRangeIndex = (mobileYearRangeIndex + 1) % MOBILE_YEAR_RANGES.length;
+                        } else {
+                            // Desktop: Toggle between 10Y and Full
+                            showFullHistory = !showFullHistory;
+                        }
                         updateAllToggleBtns();
                         renderCharts();
                     });
@@ -978,33 +1222,37 @@ if (isAnalysisPage) {
                     chartHeader.appendChild(toggleBtn);
                     allToggleBtns.push(toggleBtn);
                 }
-            };
-            
-            // Create toggle buttons for each chart with their legend items (using canvas IDs)
-            createChartToggle(
-                "revenueChart",
-                [{ label: "Revenue Growth", color: primaryColor }]
-            );
-            
-            createChartToggle(
-                "arChart",
-                [
-                    { label: "Revenue", color: primaryColor },
-                    { label: "A/R", color: secondaryColor },
-                    { label: "Divergence", color: divergenceColor }
-                ]
-            );
-            
-            createChartToggle(
-                "cashFlowChart",
-                [
-                    { label: "CFO", color: primaryColor },
-                    { label: "Net Income", color: secondaryColor },
-                    { label: "Divergence", color: divergenceColor }
-                ]
-            );
-        }
+            }
+        };
+        
+        // Create legend (always) and toggle buttons (if >10 years) for each chart
+        createChartHeaderElements(
+            "revenueChart",
+            [{ label: "Revenue Growth", color: primaryColor }]
+        );
+        
+        createChartHeaderElements(
+            "arChart",
+            [
+                { label: "Revenue", color: primaryColor },
+                { label: "A/R", color: secondaryColor },
+                { label: "Divergence", color: divergenceColor }
+            ]
+        );
+        
+        createChartHeaderElements(
+            "cashFlowChart",
+            [
+                { label: "CFO", color: primaryColor },
+                { label: "Net Income", color: secondaryColor },
+                { label: "Divergence", color: divergenceColor }
+            ]
+        );
 
+        // Hide skeletons and show actual content BEFORE rendering charts
+        // (Chart.js needs visible canvas to calculate dimensions)
+        showSkeletons(false);
+        
         renderCharts(); // Initial render
         
         showMessage(null) // Hide loading message, show content
