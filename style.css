@@ -1,3 +1,6 @@
+/* ============================================
+   VARIABLES & RESET
+   ============================================ */
 :root {
   --primary: #c5a47e;
   --secondary: #1c2541;
@@ -39,13 +42,19 @@ body {
   font-size: 16px;
 }
 
+/* ============================================
+   LAYOUT & COMMON STYLES
+   ============================================ */
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px; /* Increased padding for more space */
+  padding: 0 24px; 
 }
 
+/* ============================================
+   HEADER & NAVIGATION
+   ============================================ */
 header {
   background-color: var(--header-footer-bg);
   position: fixed;
@@ -67,8 +76,8 @@ nav {
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px; /* Increased padding for more space */
-  gap: 24px; /* Increased gap for more space */
+  padding: 0 24px; 
+  gap: 24px; 
   flex-wrap: wrap;
 }
 
@@ -88,6 +97,9 @@ nav {
   color: var(--primary);
 }
 
+/* ============================================
+   INPUT & SEARCH COMPONENTS
+   ============================================ */
 .InputContainer {
   display: flex;
   align-items: center;
@@ -143,9 +155,9 @@ nav {
   font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.3s;
-  min-height: 40px; /* Ensure good tap target */
-  min-width: 44px; /* Slightly bigger button */
-  border-radius: 0 20px 20px 0; /* Rounded right edge */
+  min-height: 40px; 
+  min-width: 44px; 
+  border-radius: 0 20px 20px 0; 
 }
 
 .InputContainer button:hover {
@@ -158,7 +170,7 @@ nav {
   color: var(--light);
 }
 
-/* Mobile search icon and animation */
+
 .search-toggle {
   display: none;
   background: none;
@@ -229,7 +241,7 @@ nav {
     justify-content: center;
   }
 
-  /* Improved search toggle button */
+  
   .search-toggle {
     position: relative;
     display: flex;
@@ -247,14 +259,14 @@ nav {
     color: var(--primary);
   }
 
-  /* Active state for search toggle */
+  
   .InputContainer.show + .nav-links + .mobile-menu + .search-toggle,
   .InputContainer.show ~ .search-toggle {
     background-color: rgba(197, 164, 126, 0.2);
     color: var(--primary);
   }
 
-  /* Remove gold highlight border for search bars on mobile */
+  
   .InputContainer:focus-within {
     box-shadow: none;
     border-color: var(--border-color);
@@ -287,7 +299,7 @@ nav {
   font-size: 1rem;
   outline: none;
   color: var(--text);
-  min-height: 50px; /* Ensure good tap target */
+  min-height: 50px; 
 }
 
 .search-form button {
@@ -301,7 +313,7 @@ nav {
   align-items: center;
   gap: 8px;
   transition: background-color 0.3s;
-  min-height: 50px; /* Ensure good tap target */
+  min-height: 50px; 
 }
 
 .search-form button:hover {
@@ -341,7 +353,7 @@ nav {
   transition: color 0.3s;
   position: relative;
   padding: 8px 0;
-  min-height: 44px; /* Ensure good tap target */
+  min-height: 44px; 
   display: inline-block;
 }
 
@@ -381,7 +393,7 @@ nav {
 }
 
 @media (max-width: 768px) {
-  /* Improved mobile menu button styling to match search toggle */
+  
   .mobile-menu {
     position: relative;
     display: flex;
@@ -401,14 +413,14 @@ nav {
     transform: scale(1.05);
   }
 
-  /* Active state for mobile menu */
+  
   .nav-links.show ~ .mobile-menu,
   .mobile-menu[aria-expanded="true"] {
     background-color: rgba(197, 164, 126, 0.2);
     color: var(--primary);
   }
 
-  /* Adjust mobile search box appearance */
+  
   .InputContainer.show {
     border-radius: 0;
     overflow: hidden;
@@ -420,7 +432,7 @@ nav {
 
   .InputContainer.show button {
     border-radius: 0;
-    width: 60px; /* Slightly bigger button on mobile */
+    width: 60px; 
   }
 }
 
@@ -457,6 +469,9 @@ nav {
   border-left: 5px solid var(--primary);
 }
 
+/* ============================================
+   HERO SECTION
+   ============================================ */
 .hero {
   padding: 140px 0 60px;
   text-align: center;
@@ -496,7 +511,7 @@ nav {
 
 .hero-cta {
   display: flex;
-  gap: 20px; /* Increased gap for more space */
+  gap: 20px; 
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -507,18 +522,18 @@ nav {
   justify-content: center;
   background-color: var(--primary);
   color: var(--dark);
-  padding: 12px 28px; /* Increased padding for more space */
+  padding: 12px 28px; 
   border-radius: 6px;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.95rem;
   transition: var(--transition);
   box-shadow: var(--shadow-sm);
-  min-height: 44px; /* Ensure good tap target */
-  min-width: 44px; /* Ensure good tap target */
+  min-height: 44px; 
+  min-width: 44px; 
 }
 
-/* Landing Page Hero CTA - Frosted Glass */
+
 #hero .cta-button {
   background-color: rgba(197, 164, 126, 0.15);
   color: var(--primary);
@@ -533,7 +548,7 @@ nav {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Landing Page Hero Secondary CTA */
+
 #hero .cta-button.secondary {
   background-color: rgba(255, 255, 255, 0.08);
   color: var(--light);
@@ -573,14 +588,17 @@ nav {
   transform: translateX(4px);
 }
 
+/* ============================================
+   SECTIONS & CARDS
+   ============================================ */
 .section {
-  padding: 80px 0; /* Increased padding for more space */
+  padding: 80px 0; 
 }
 
 .methodology-steps {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 32px; /* Increased gap for more space */
+  gap: 32px; 
   margin-top: 40px;
   justify-content: center;
 }
@@ -588,12 +606,13 @@ nav {
 .step {
   display: flex;
   align-items: flex-start;
-  gap: 20px; /* Increased gap for more space */
+  gap: 20px; 
   background-color: rgba(255, 255, 255, 0.15);
-  padding: 28px; /* Increased padding for more space */
+  padding: 28px; 
   border-radius: 8px;
   transition: var(--transition);
   max-width: 380px;
+  margin: 0 auto; 
   border: 1px solid rgba(255, 255, 255, 0.2);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
@@ -624,7 +643,7 @@ nav {
 }
 
 .step-content h3 {
-  margin-bottom: 12px; /* Increased margin for more space */
+  margin-bottom: 12px; 
   font-size: 1.1rem;
   color: var(--light);
 }
@@ -639,24 +658,24 @@ nav {
 .cta-section {
   background-color: var(--secondary);
   text-align: center;
-  padding: 100px 0; /* Increased padding for more space */
+  padding: 100px 0; 
 }
 
 .cta-section h2 {
-  margin-bottom: 32px; /* Increased margin for more space */
+  margin-bottom: 32px; 
   font-size: 2rem;
   color: var(--light);
 }
 
 .section-title {
   text-align: center;
-  margin-bottom: 50px; /* Increased margin for more space */
+  margin-bottom: 50px; 
 }
 
 .section-title h2 {
   font-size: 1.7rem;
   color: var(--light);
-  margin-bottom: 16px; /* Increased margin for more space */
+  margin-bottom: 16px; 
   font-weight: 700;
   position: relative;
   display: inline-block;
@@ -685,7 +704,7 @@ nav {
 .cards {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 32px; /* Increased gap for more space */
+  gap: 32px; 
 }
 
 .card {
@@ -699,7 +718,7 @@ nav {
   flex-direction: column;
 }
 
-/* Landing Page Feature Cards - Frosted Glass */
+
 #features .card {
   background-color: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -717,7 +736,7 @@ nav {
 }
 
 .card-header {
-  padding: 22px; /* Increased padding for more space */
+  padding: 22px; 
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -739,11 +758,11 @@ nav {
 }
 
 .card-header h3 i {
-  margin-right: 12px; /* Increased margin for more space */
+  margin-right: 12px; 
   font-size: 0.9rem;
   width: 20px;
   text-align: center;
-  /* Default icon color inherited or dark */
+  
 }
 
 #features .card-header h3 i {
@@ -761,7 +780,7 @@ nav {
 }
 
 .card-body {
-  padding: 22px; /* Increased padding for more space */
+  padding: 22px; 
   flex-grow: 1;
 }
 
@@ -772,9 +791,9 @@ nav {
 }
 
 .card-body li {
-  margin-bottom: 14px; /* Increased margin for more space */
+  margin-bottom: 14px; 
   position: relative;
-  padding-left: 24px; /* Increased padding for more space */
+  padding-left: 24px; 
   font-size: 0.9rem;
   color: var(--text);
 }
@@ -786,7 +805,7 @@ nav {
 .card-body li:before {
   content: "•";
   position: absolute;
-  left: 8px; /* Increased left position for more space */
+  left: 8px; 
   color: var(--muted);
   font-weight: bold;
 }
@@ -805,7 +824,7 @@ nav {
 }
 
 .card-footer {
-  padding: 16px 22px; /* Increased padding for more space */
+  padding: 16px 22px; 
   background-color: #f8f9fa;
   border-top: 1px solid var(--border-color);
   font-size: 0.8rem;
@@ -821,9 +840,9 @@ nav {
 .chart-container {
   background-color: var(--card-bg);
   border-radius: 10px;
-  padding: 24px; /* Increased padding for more space */
+  padding: 24px; 
   box-shadow: var(--shadow-sm);
-  margin-bottom: 32px; /* Increased margin for more space */
+  margin-bottom: 32px; 
   border: 1px solid var(--border-color);
   transition: var(--transition);
   position: relative;
@@ -837,7 +856,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px; /* Increased margin for more space */
+  margin-bottom: 20px; 
 }
 
 .chart-header h3 {
@@ -859,7 +878,7 @@ canvas {
 .insight-list {
   background-color: var(--card-bg);
   border-radius: 10px;
-  padding: 24px; /* Increased padding for more space */
+  padding: 24px; 
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-color);
   transition: var(--transition);
@@ -884,7 +903,7 @@ table {
 
 th,
 td {
-  padding: 16px; /* Increased padding for more space */
+  padding: 16px; 
   text-align: center;
   border: 1px solid var(--border-color);
   color: var(--dark);
@@ -904,7 +923,7 @@ tr:hover {
   background-color: rgba(0, 0, 0, 0.03);
 }
 
-/* --- START REFACTORED MOBILE TABLE STYLES --- */
+
 @media screen and (max-width: 767px) {
   table {
     border: 0;
@@ -912,58 +931,58 @@ tr:hover {
   }
 
   table thead {
-    display: none; /* Hide table header on mobile */
+    display: none; 
   }
 
   table tr {
     display: block;
-    margin-bottom: 1.2em; /* Space between cards */
+    margin-bottom: 1.2em; 
     border: 1px solid var(--border-color);
-    border-radius: 8px; /* Card corner rounding */
+    border-radius: 8px; 
     box-shadow: var(--shadow-sm);
     background-color: var(--card-bg);
-    overflow: hidden; /* Clip content to rounded corners */
-    padding: 16px; /* Padding inside the card */
+    overflow: hidden; 
+    padding: 16px; 
   }
 
   table td {
-    display: grid; /* Use Grid for label-value layout */
-    grid-template-columns: auto 1fr; /* Label width auto, value takes rest */
-    gap: 10px; /* Space between label and value */
-    align-items: center; /* Vertically align label and value */
-    padding: 10px 0; /* Vertical padding within the row */
-    border: none; /* Remove individual cell borders */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Separator line */
-    min-height: 44px; /* Ensure good tap target */
-    font-size: 0.9rem; /* Adjust value font size if needed */
-    color: var(--text); /* Value color */
-    text-align: right; /* Align value text to the right */
-    line-height: 1.5; /* Improve readability */
+    display: grid; 
+    grid-template-columns: auto 1fr; 
+    gap: 10px; 
+    align-items: center; 
+    padding: 10px 0; 
+    border: none; 
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
+    min-height: 44px; 
+    font-size: 0.9rem; 
+    color: var(--text); 
+    text-align: right; 
+    line-height: 1.5; 
   }
 
   table tr td:last-child {
-    border-bottom: 0; /* Remove separator from last row in card */
+    border-bottom: 0; 
   }
 
   table td::before {
-    content: attr(data-label); /* Get label text from data-label */
-    font-weight: 600; /* Make label bold */
-    color: var(--dark); /* Label color */
-    text-transform: uppercase; /* Uppercase labels */
-    font-size: 0.8em; /* Smaller font size for label */
-    text-align: left; /* Align label text left */
-    /* Remove old float/width styles */
+    content: attr(data-label); 
+    font-weight: 600; 
+    color: var(--dark); 
+    text-transform: uppercase; 
+    font-size: 0.8em; 
+    text-align: left; 
+    
     float: none;
     width: auto;
     padding-right: 0;
-    white-space: normal; /* Allow label text to wrap */
-    line-height: 1.5; /* Match td line-height */
+    white-space: normal; 
+    line-height: 1.5; 
   }
 
-  /* Remove old clearfix if present */
-  /* table td::after { content: ""; display: table; clear: both; } */
+  
+  
 }
-/* --- END REFACTORED MOBILE TABLE STYLES --- */
+
 
 .conclusion {
   text-align: center;
@@ -980,7 +999,7 @@ tr:hover {
 .verdict-container {
   background-color: var(--card-bg);
   border-radius: 10px;
-  padding: 36px; /* Increased padding for more space */
+  padding: 36px; 
   max-width: 750px;
   margin: 0 auto;
   box-shadow: var(--shadow-md);
@@ -989,7 +1008,7 @@ tr:hover {
 }
 
 .verdict-container:hover {
-    background-color: var(--card-bg); /* Or whatever hover effect it had, typically none or slight shadow */
+    background-color: var(--card-bg); 
     box-shadow: var(--shadow-lg);
 }
 
@@ -997,8 +1016,8 @@ tr:hover {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-bottom: 24px; /* Increased margin for more space */
-  gap: 12px; /* Increased gap for more space */
+  margin-bottom: 24px; 
+  gap: 12px; 
 }
 
 .verdict-header h3 {
@@ -1014,17 +1033,17 @@ tr:hover {
   display: inline-block;
   background-color: var(--primary);
   color: var(--dark);
-  padding: 4px 14px; /* Increased padding for more space */
+  padding: 4px 14px; 
   border-radius: 15px;
   font-weight: 600;
   font-size: 0.8rem;
   border: 1px solid rgba(0, 0, 0, 0.05);
   line-height: 1.4;
-  min-height: 28px; /* Ensure good tap target */
+  min-height: 28px; 
 }
 
 .verdict-container p {
-  margin-bottom: 20px; /* Increased margin for more space */
+  margin-bottom: 20px; 
   font-size: 0.95rem;
   line-height: 1.7;
   color: var(--text);
@@ -1036,8 +1055,8 @@ tr:hover {
 }
 
 .monitoring-points {
-  margin-top: 28px; /* Increased margin for more space */
-  padding-top: 20px; /* Increased padding for more space */
+  margin-top: 28px; 
+  padding-top: 20px; 
   border-top: 1px solid var(--border-color);
 }
 
@@ -1045,7 +1064,7 @@ tr:hover {
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--primary);
-  margin-bottom: 20px; /* Increased margin for more space */
+  margin-bottom: 20px; 
 }
 
 .monitoring-points ul {
@@ -1055,12 +1074,12 @@ tr:hover {
 }
 
 .monitoring-points li {
-  margin-bottom: 16px; /* Increased margin for more space */
+  margin-bottom: 16px; 
   position: relative;
-  padding-left: 24px; /* Increased padding for more space */
+  padding-left: 24px; 
   font-size: 0.9rem;
   color: var(--text);
-  min-height: 28px; /* Ensure good tap target */
+  min-height: 28px; 
 }
 
 .monitoring-points li::before {
@@ -1095,8 +1114,8 @@ tr:hover {
   z-index: 99;
   border: none;
   outline: none;
-  min-height: 44px; /* Ensure good tap target */
-  min-width: 44px; /* Ensure good tap target */
+  min-height: 44px; 
+  min-width: 44px; 
 }
 
 .back-to-top.visible {
@@ -1109,11 +1128,14 @@ tr:hover {
   transform: translateY(-3px);
 }
 
+/* ============================================
+   FOOTER
+   ============================================ */
 footer {
   background-color: var(--header-footer-bg);
-  padding: 28px 0; /* Increased padding for more space */
+  padding: 28px 0; 
   border-top: 1px solid var(--border-color);
-  margin-top: 80px; /* Increased margin for more space */
+  margin-top: 80px; 
 }
 
 .footer-content {
@@ -1128,7 +1150,7 @@ footer {
   font-weight: 600;
   color: var(--dark);
   letter-spacing: -0.5px;
-  margin-bottom: 20px; /* Increased margin for more space */
+  margin-bottom: 20px; 
 }
 
 .footer-logo span {
@@ -1140,12 +1162,12 @@ footer {
   flex-wrap: wrap;
   justify-content: center;
   list-style: none;
-  margin: 0 0 20px 0; /* Increased margin for more space */
+  margin: 0 0 20px 0; 
   padding: 0;
 }
 
 .footer-links li {
-  margin: 8px 16px; /* Increased margin for more space */
+  margin: 8px 16px; 
 }
 
 .footer-links a {
@@ -1153,9 +1175,9 @@ footer {
   color: var(--muted);
   font-size: 0.9rem;
   transition: color 0.3s;
-  padding: 8px 0; /* Ensure good tap target */
+  padding: 8px 0; 
   display: inline-block;
-  min-height: 44px; /* Ensure good tap target */
+  min-height: 44px; 
 }
 
 .footer-links a:hover {
@@ -1165,7 +1187,7 @@ footer {
 .copyright {
   color: var(--muted);
   font-size: 0.8rem;
-  margin-top: 12px; /* Increased margin for more space */
+  margin-top: 12px; 
 }
 
 /* ============================================
@@ -1251,7 +1273,7 @@ footer {
   height: 20px;
 }
 
-/* Hide skeleton when content is loaded */
+
 .skeleton-container {
   transition: opacity 0.3s ease;
 }
@@ -1269,13 +1291,15 @@ footer {
   display: none;
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
-  background: var(--header-footer-bg);
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 101; /* Above main header (z-index 100) */
-  padding: 8px 0;
+  left: 16px; 
+  right: 16px; 
+  background: var(--card-bg); 
+  border: 1px solid var(--border-color); 
+  border-top: none; 
+  border-radius: 0 0 10px 10px; 
+  box-shadow: var(--shadow-sm); 
+  z-index: 101;
+  padding: 7px 0; 
   transform: translateY(-100%);
   transition: transform 0.3s ease;
 }
@@ -1306,9 +1330,9 @@ footer {
   gap: 2px;
   text-decoration: none;
   color: var(--muted);
-  font-size: 0.65rem;
+  font-size: 0.62rem; 
   font-weight: 500;
-  padding: 6px 4px;
+  padding: 5px 4px; 
   border-radius: 6px;
   transition: all 0.2s ease;
   min-height: 44px;
@@ -1330,6 +1354,9 @@ footer {
   color: var(--primary);
 }
 
+/* ============================================
+   MEDIA QUERIES & RESPONSIVE DESIGN
+   ============================================ */
 @media (min-width: 768px) {
   body {
     font-size: 16px;
@@ -1340,7 +1367,7 @@ footer {
   }
 
   nav {
-    gap: 32px; /* Increased gap for more space */
+    gap: 32px; 
     flex-wrap: nowrap;
   }
 
@@ -1372,7 +1399,7 @@ footer {
   }
 
   .nav-links li {
-    margin: 0 0 0 28px; /* Increased margin for more space */
+    margin: 0 0 0 28px; 
   }
 
   .nav-links a {
@@ -1396,7 +1423,7 @@ footer {
   }
 
   .section {
-    padding: 100px 0; /* Increased padding for more space */
+    padding: 100px 0; 
   }
 
   .section-title h2 {
@@ -1405,11 +1432,11 @@ footer {
 
   .cards {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 32px; /* Increased gap for more space */
+    gap: 32px; 
   }
 
   .verdict-container {
-    padding: 48px; /* Increased padding for more space */
+    padding: 48px; 
   }
   .verdict-header {
     flex-direction: row;
@@ -1445,7 +1472,7 @@ footer {
   }
 
   .footer-links li {
-    margin: 0 0 0 24px; /* Increased margin for more space */
+    margin: 0 0 0 24px; 
   }
 }
 
@@ -1497,15 +1524,15 @@ footer {
     width: 100%;
   }
 
-  /* Mobile styles for CTA search form */
+  
   .search-form {
     max-width: none;
     width: 100%;
     flex-direction: column;
     height: auto;
     border-radius: 8px;
-    overflow: visible; /* Allow box shadow */
-    box-shadow: none; /* Remove shadow from container */
+    overflow: visible; 
+    box-shadow: none; 
   }
 
   .search-form input {
@@ -1513,11 +1540,11 @@ footer {
     text-align: center;
     padding: 15px 20px;
     font-size: 0.95rem;
-    border: 1px solid var(--border-color); /* Add border */
-    box-shadow: var(--shadow-sm); /* Add shadow */
-    margin-bottom: -1px; /* Overlap borders */
-    z-index: 1; /* Ensure input shadow is above button */
-    min-height: 50px; /* Ensure good tap target */
+    border: 1px solid var(--border-color); 
+    box-shadow: var(--shadow-sm); 
+    margin-bottom: -1px; 
+    z-index: 1; 
+    min-height: 50px; 
   }
 
   .search-form button {
@@ -1525,20 +1552,20 @@ footer {
     padding: 15px 24px;
     justify-content: center;
     font-size: 0.95rem;
-    border: 1px solid var(--border-color); /* Add border */
-    border-top: none; /* Remove top border */
-    box-shadow: var(--shadow-sm); /* Add shadow */
-    min-height: 50px; /* Ensure good tap target */
+    border: 1px solid var(--border-color); 
+    border-top: none; 
+    box-shadow: var(--shadow-sm); 
+    min-height: 50px; 
   }
 
-  /* Improved tap targets for mobile */
+  
   .nav-links a,
   .footer-links a {
     padding: 12px 8px;
     min-height: 44px;
   }
 
-  /* Better spacing for mobile charts */
+  
   .chart-wrapper {
     height: 220px;
     margin: 0 -10px;
@@ -1548,7 +1575,7 @@ footer {
     font-size: 0.9rem;
   }
 
-  /* More compact verdict container on mobile */
+  
   .verdict-container {
     padding: 20px;
   }
@@ -1558,7 +1585,7 @@ footer {
   }
 }
 
-/* Footer styles for mobile */
+
 @media (max-width: 768px) {
   .footer-logo {
     font-size: 1.1rem;
@@ -1590,22 +1617,22 @@ footer {
    MOBILE OPTIMIZATIONS (iPhone: 375-430px)
    ============================================ */
 @media (max-width: 768px) {
-  /* Show sticky section nav on mobile */
+  
   .sticky-section-nav {
     display: block;
   }
 
-  /* Reduced section padding for mobile */
+  
   .section {
     padding: 40px 0;
   }
 
-  /* Tighter container padding */
+  
   .container {
     padding: 0 16px;
   }
 
-  /* Reduced hero padding */
+  
   .hero {
     padding: 100px 0 40px;
   }
@@ -1614,7 +1641,7 @@ footer {
     min-height: 32vh;
   }
 
-  /* Reduced section title margins */
+  
   .section-title {
     margin-bottom: 28px;
   }
@@ -1629,7 +1656,7 @@ footer {
     padding: 0 8px;
   }
 
-  /* Tighter card grid */
+  
   .cards {
     gap: 16px;
   }
@@ -1647,7 +1674,7 @@ footer {
     font-size: 0.85rem;
   }
 
-  /* Chart container adjustments */
+  
   .chart-container {
     padding: 16px;
     margin-bottom: 20px;
@@ -1655,7 +1682,7 @@ footer {
 
   .chart-header {
     margin-bottom: 12px;
-    /* Override JS inline grid - use flex-wrap for mobile layout */
+    
     display: flex !important;
     flex-wrap: wrap !important;
     gap: 8px !important;
@@ -1670,7 +1697,7 @@ footer {
     flex-basis: 100%;
   }
 
-  /* Legend and button on same row for mobile */
+  
   .chart-custom-legend {
     flex: 1;
     justify-content: flex-start !important;
@@ -1681,7 +1708,7 @@ footer {
   }
 
   .chart-toggle-btn {
-    /* Physically smaller button for mobile */
+    
     font-size: 0.6rem !important;
     padding: 2px 8px !important;
     min-height: 18px !important;
@@ -1694,7 +1721,7 @@ footer {
     align-items: center;
   }
 
-  /* Verdict header - title and rating on same line */
+  
   .verdict-header {
     flex-direction: row !important;
     flex-wrap: wrap !important;
@@ -1717,7 +1744,7 @@ footer {
     margin-top: 4px;
   }
 
-  /* Skeleton adjustments for mobile */
+  
   .skeleton-chart {
     height: 200px;
   }
@@ -1726,12 +1753,12 @@ footer {
     height: 1.5rem;
   }
 
-  /* Insight list / table container */
+  
   .insight-list {
     padding: 16px;
   }
 
-  /* Monitoring points */
+  
   .monitoring-points {
     margin-top: 20px;
     padding-top: 16px;
@@ -1742,14 +1769,14 @@ footer {
     font-size: 0.85rem;
   }
 
-  /* Footer spacing */
+  
   footer {
     padding: 20px 0;
     margin-top: 40px;
   }
 }
 
-/* Extra small screens (iPhone SE, older iPhones: 375px) */
+
 @media (max-width: 390px) {
   .hero h1 {
     font-size: 1.4rem;
@@ -1781,7 +1808,7 @@ footer {
    TOUCH-FRIENDLY CHART INTERACTIONS
    ============================================ */
 @media (hover: none) and (pointer: coarse) {
-  /* Larger touch targets for chart interactions */
+  
   .chart-container {
     -webkit-tap-highlight-color: transparent;
   }
@@ -1790,14 +1817,14 @@ footer {
     touch-action: pan-y pinch-zoom;
   }
 
-  /* Chart toggle button touch optimization */
+  
   .chart-toggle-btn {
     min-height: 28px !important;
     min-width: 48px !important;
     padding: 6px 10px !important;
   }
 
-  /* Custom legend touch targets */
+  
   .chart-custom-legend {
     gap: 12px !important;
   }
