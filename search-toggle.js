@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
           inputContainer.offsetHeight
 
           // Animate to full height
-          inputContainer.style.height = "50px"
+          inputContainer.style.height = "56px"
 
           // Focus the input after animation starts
           setTimeout(() => {

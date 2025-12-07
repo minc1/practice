@@ -183,22 +183,21 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
-                <button class="search-toggle" aria-label="Toggle search">
-                    <i class="fas fa-search"></i>
-                </button>
-                <form class="InputContainer" id="tickerSearchForm">
-                    <input type="text" class="input" id="tickerInput" placeholder="Enter Ticker (e.g., JD)" aria-label="Enter Ticker Symbol" required>
-                    <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
-                </form>
-                <ul class="nav-links">
-                    <li><a href="#trends">Trend Analysis</a></li>
-                    <li><a href="#financials">Financial Metrics</a></li>
-                    <li><a href="#opportunities">Investment Considerations</a></li>
-                    <li><a href="#conclusion">Conclusion</a></li>
-                </ul>
-                <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <div class="nav-right">
+                    <form class="InputContainer" id="tickerSearchForm">
+                        <input type="text" class="input" id="tickerInput" placeholder="Enter Ticker (e.g., JD)" aria-label="Enter Ticker Symbol" required>
+                        <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
+                    </form>
+                    <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="nav-links">
+                        <li><a href="#trends"><span>Trend Analysis</span></a></li>
+                        <li><a href="#financials"><span>Financial Metrics</span></a></li>
+                        <li><a href="#opportunities"><span>Investment Considerations</span></a></li>
+                        <li><a href="#conclusion"><span>Conclusion</span></a></li>
+                    </ul>
+                </div>
             </nav>
         </div>
     </header>
@@ -396,4 +395,3 @@
     <script src="search-toggle.js"></script>
 </body>
 </html>
-

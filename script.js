@@ -282,15 +282,16 @@ const navLinks = select(".nav-links")
 const mobileMenuIcon = select(".mobile-menu i")
 
 if (mobileMenuButton && navLinks && mobileMenuIcon) {
+  // Toggle menu on button click
   on("click", ".mobile-menu", (e) => {
+    e.stopPropagation()
     navLinks.classList.toggle("show")
     mobileMenuIcon.classList.toggle("fa-bars")
     mobileMenuIcon.classList.toggle("fa-times")
     mobileMenuButton.setAttribute("aria-expanded", navLinks.classList.contains("show"))
-    const headerHeight = select("#header")?.offsetHeight || 61
-    navLinks.style.top = `${headerHeight}px`
   })
 
+  // Close menu when clicking a nav link
   on(
     "click",
     ".nav-links a",
@@ -310,6 +311,18 @@ if (mobileMenuButton && navLinks && mobileMenuIcon) {
     },
     true,
   )
+
+  // Close menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (navLinks.classList.contains("show") && 
+        !navLinks.contains(e.target) && 
+        !mobileMenuButton.contains(e.target)) {
+      navLinks.classList.remove("show")
+      mobileMenuIcon.classList.remove("fa-times")
+      mobileMenuIcon.classList.add("fa-bars")
+      mobileMenuButton.setAttribute("aria-expanded", "false")
+    }
+  })
 } else {
     if (!mobileMenuButton) console.error("Mobile menu button not found.");
     if (!navLinks) console.error("Nav links container not found.");

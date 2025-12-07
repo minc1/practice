@@ -129,22 +129,21 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
-                <button class="search-toggle" aria-label="Toggle search">
-                    <i class="fas fa-search"></i>
-                </button>
-                <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
-                    <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g. AAPL)" aria-label="Enter Ticker Symbol" required>
-                    <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
-                </form>
-                <ul class="nav-links">
-                    <li><a href="#hero">Home</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#methodology">Methodology</a></li>
-                    <li><a href="#about">About</a></li>
-                </ul>
-                <button class="mobile-menu" aria-label="Toggle menu">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <div class="nav-right">
+                    <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
+                        <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g. AAPL)" aria-label="Enter Ticker Symbol" required>
+                        <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
+                    </form>
+                    <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="nav-links">
+                        <li><a href="#hero"><span>Home</span></a></li>
+                        <li><a href="#features"><span>Features</span></a></li>
+                        <li><a href="#methodology"><span>Methodology</span></a></li>
+                        <li><a href="#about"><span>About</span></a></li>
+                    </ul>
+                </div>
             </nav>
         </div>
     </header>
@@ -322,9 +321,7 @@
                 <form class="search-form" action="analysis.html" method="GET">
                     <input type="text" name="ticker" placeholder="Enter ticker (e.g., AAPL)" required
                            aria-label="Stock ticker symbol">
-                    <button type="submit" aria-label="Analyze">
-                        <i class="fas fa-arrow-right"></i> Analyze
-                    </button>
+                    <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
                 </form>
             </div>
         </section>
