@@ -1175,7 +1175,8 @@ footer {
 }
 
 .footer-logo {
-  font-size: 1rem;
+  /* Match header logo sizing with clamp() */
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
   font-weight: 600;
   color: var(--dark);
   letter-spacing: -0.5px;
@@ -1193,18 +1194,21 @@ footer {
   list-style: none;
   margin: 0 0 20px 0;
   padding: 0;
+  /* Dynamic gap that scales with viewport */
+  gap: clamp(4px, 1vw, 8px);
 }
 
 .footer-links li {
-  margin: 8px 16px;
+  margin: clamp(4px, 1vw, 8px) clamp(8px, 2vw, 16px);
 }
 
 .footer-links a {
   text-decoration: none;
   color: var(--muted);
-  font-size: 0.9rem;
+  /* Match nav-links sizing with clamp() */
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
   transition: color 0.3s;
-  padding: 8px 0;
+  padding: clamp(4px, 1vw, 8px) 0;
   display: inline-block;
   min-height: 44px;
 }
@@ -1215,7 +1219,8 @@ footer {
 
 .copyright {
   color: var(--muted);
-  font-size: 0.8rem;
+  /* Dynamic copyright text size */
+  font-size: clamp(0.65rem, 1.8vw, 0.8rem);
   margin-top: 12px;
 }
 
@@ -1523,11 +1528,6 @@ footer {
     margin-right: 6px;
   }
 
-  .footer-links a {
-    padding: 12px 8px;
-    min-height: 44px;
-  }
-
 
   .chart-wrapper {
     height: 220px;
@@ -1550,29 +1550,22 @@ footer {
 
 
 @media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
   .footer-logo {
-    font-size: 1.1rem;
     margin-bottom: 10px;
   }
 
   .footer-links {
-    gap: 5px;
     margin: 0 0 10px 0;
-  }
-
-  .footer-links li {
-    margin: 3px 8px;
-  }
-
-  .footer-links a {
-    font-size: 0.7rem;
-    padding: 6px 3px;
   }
 
   .copyright {
     text-align: center;
     width: 100%;
-    font-size: 0.7rem;
   }
 }
 
