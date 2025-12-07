@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,11 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-77GZWBEMLF"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-      gtag('config', 'G-77GZWBEMLF');
+        gtag('config', 'G-77GZWBEMLF');
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -44,22 +45,34 @@
                 linear-gradient(rgba(255, 255, 255, 0.09) 2px, transparent 2px),
                 linear-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
             background-size:
-                30px 30px, /* Tightened spacing */
-                60px 60px, /* Tightened spacing */
-                30px 30px, /* Tightened spacing */
-                60px 60px, /* Tightened spacing */
-                120px 120px, /* Tightened spacing */
-                240px 240px, /* Tightened spacing */
-                120px 120px, /* Tightened spacing */
-                240px 240px; /* Tightened spacing */
+                30px 30px,
+                /* Tightened spacing */
+                60px 60px,
+                /* Tightened spacing */
+                30px 30px,
+                /* Tightened spacing */
+                60px 60px,
+                /* Tightened spacing */
+                120px 120px,
+                /* Tightened spacing */
+                240px 240px,
+                /* Tightened spacing */
+                120px 120px,
+                /* Tightened spacing */
+                240px 240px;
+            /* Tightened spacing */
             /* Centered vertical lines */
             background-position:
-                calc(50% - 0px) 0, /* Center thin vertical lines */
-                calc(50% - 15px) 0, /* Offset second set of thin vertical lines */
+                calc(50% - 0px) 0,
+                /* Center thin vertical lines */
+                calc(50% - 15px) 0,
+                /* Offset second set of thin vertical lines */
                 0 0,
                 0 15px,
-                calc(50% - 0px) 0, /* Center thick vertical lines */
-                calc(50% - 60px) 0, /* Offset second set of thick vertical lines */
+                calc(50% - 0px) 0,
+                /* Center thick vertical lines */
+                calc(50% - 60px) 0,
+                /* Offset second set of thick vertical lines */
                 0 0,
                 0 60px;
             z-index: -2;
@@ -74,13 +87,11 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(
-                circle at center,
-                rgba(28, 37, 65, 0.2) 0%,
-                rgba(28, 37, 65, 0.6) 30%,
-                rgba(28, 37, 65, 0.8) 60%,
-                var(--secondary) 100%
-            );
+            background: radial-gradient(circle at center,
+                    rgba(28, 37, 65, 0.2) 0%,
+                    rgba(28, 37, 65, 0.6) 30%,
+                    rgba(28, 37, 65, 0.8) 60%,
+                    var(--secondary) 100%);
             z-index: -1;
             pointer-events: none;
         }
@@ -110,7 +121,8 @@
             align-items: center;
             justify-content: center;
             min-height: calc(100vh - 120px);
-            padding: 60px 30px; /* Increased padding for more space */
+            padding: 60px 30px;
+            /* Increased padding for more space */
             text-align: center;
             position: relative;
             z-index: 1;
@@ -121,7 +133,8 @@
             max-width: 600px;
             width: 100%;
             margin: 0 auto;
-            padding: 48px; /* Increased padding for more space */
+            padding: 48px;
+            /* Increased padding for more space */
             background-color: var(--card-bg);
             border-radius: 12px;
             box-shadow: var(--shadow-lg);
@@ -145,69 +158,25 @@
             line-height: 1.6;
         }
 
-        .search-hero .search-form {
-            display: flex;
-            height: 56px;
-            border-radius: 28px;
-            overflow: hidden;
+        /* Card search - larger version of InputContainer for the modal */
+        .card-search {
+            height: 48px !important;
+            width: 100% !important;
+            max-width: 400px;
+            margin: 0 auto 24px;
+            border-radius: 24px;
             box-shadow: var(--shadow-md);
-            margin-bottom: 24px;
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-            max-width: 100%;
-            margin-left: auto;
-            margin-right: auto;
         }
 
-        .search-hero .search-form:focus-within {
-            box-shadow: 0 0 0 2px rgba(197, 164, 126, 0.3);
-            border-color: var(--primary);
+        .card-search .input {
+            padding: 0 20px !important;
+            font-size: 0.95rem !important;
         }
 
-        .search-hero .search-form input {
-            flex-grow: 1;
-            border: none;
-            padding: 0 24px;
-            font-size: 1rem;
-            outline: none;
-            color: var(--text);
-            background-color: var(--card-bg);
-            border-radius: 0;
-            text-align: left;
-            box-shadow: none;
-            margin-bottom: 0;
-            z-index: auto;
-            border: none;
-        }
-
-        .search-hero .search-form input::placeholder {
-            color: var(--muted);
-            opacity: 0.7;
-        }
-
-        .search-hero .search-form button {
-            background-color: var(--primary);
-            color: var(--dark);
-            border: none;
-            padding: 0 32px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--transition);
-            font-size: 1rem;
-            min-width: 120px;
-            justify-content: center;
-            border-radius: 0;
-            width: auto;
-            box-shadow: none;
-            border: none;
-        }
-
-        .search-hero .search-form button:hover {
-            background-color: #d4b483;
-            transform: none;
+        .card-search button {
+            height: 38px !important;
+            width: 38px !important;
+            font-size: 0.85rem !important;
         }
 
         .search-examples {
@@ -216,7 +185,6 @@
             font-style: italic;
         }
 
-        /* Mobile improvements */
         @media (max-width: 768px) {
             .search-container {
                 padding: 30px 20px;
@@ -233,33 +201,13 @@
                 margin-bottom: 24px;
             }
 
-            .search-hero .search-form {
-                height: 50px;
-                flex-direction: row;
-                height: 50px;
-                border-radius: 25px;
-                overflow: hidden;
-                gap: 0;
-                background: var(--card-bg);
-                box-shadow: var(--shadow-md);
-                border: 1px solid var(--border-color);
+            .card-search {
+                height: 44px !important;
             }
 
-            .search-hero .search-form input {
-                padding: 0 20px;
-                border-radius: 0;
-                border: none;
-                box-shadow: none;
-                min-height: 50px; /* Ensure good tap target */
-            }
-
-            .search-hero .search-form button {
-                padding: 0 24px;
-                border-radius: 0;
-                width: auto;
-                min-width: auto;
-                font-size: 0.95rem;
-                min-height: 50px; /* Ensure good tap target */
+            .card-search button {
+                height: 34px !important;
+                width: 34px !important;
             }
 
             .search-examples {
@@ -269,7 +217,7 @@
             /* Improved tap targets */
             .nav-links a,
             .footer-links a {
-                padding: 12px 8px; /* Larger tap target */
+                padding: 12px 8px;
                 display: inline-block;
             }
         }
@@ -288,61 +236,39 @@
                 font-size: 0.9rem;
             }
 
-            .search-hero .search-form {
-                flex-direction: column;
-                height: auto;
-                border-radius: 8px;
-                overflow: visible;
-                gap: 12px;
-                background: transparent;
-                box-shadow: none;
-                border: none;
+            .card-search {
+                height: 42px !important;
             }
 
-            .search-hero .search-form input {
-                padding: 15px 20px;
-                border-radius: 8px;
-                border: 1px solid var(--border-color);
-                box-shadow: var(--shadow-sm);
-                text-align: center;
-                margin-bottom: 0;
-                z-index: auto;
-                min-height: 50px; /* Ensure good tap target */
-            }
-
-            .search-hero .search-form button {
-                padding: 15px 20px;
-                border-radius: 8px;
-                width: 100%;
-                box-shadow: var(--shadow-sm);
-                border: 1px solid var(--border-color);
-                font-size: 0.95rem;
-                min-height: 50px; /* Ensure good tap target */
+            .card-search button {
+                height: 32px !important;
+                width: 32px !important;
             }
         }
     </style>
 </head>
+
 <body>
     <header id="header">
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
-                <button class="search-toggle" aria-label="Toggle search">
-                    <i class="fas fa-search"></i>
-                </button>
-                <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
-                    <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
-                    <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
-                </form>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#features">Features</a></li>
-                    <li><a href="index.html#methodology">Methodology</a></li>
-                    <li><a href="index.html#about">About</a></li>
-                </ul>
-                <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <div class="nav-right">
+                    <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
+                        <input type="text" name="ticker" class="input" id="headerTickerInput"
+                            placeholder="Enter Ticker (e.g. AAPL)" aria-label="Enter Ticker Symbol" required>
+                        <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
+                    </form>
+                    <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="nav-links">
+                        <li><a href="index.html"><span>Home</span></a></li>
+                        <li><a href="index.html#features"><span>Features</span></a></li>
+                        <li><a href="index.html#methodology"><span>Methodology</span></a></li>
+                        <li><a href="index.html#about"><span>About</span></a></li>
+                    </ul>
+                </div>
             </nav>
         </div>
     </header>
@@ -351,12 +277,12 @@
         <section class="search-hero">
             <div class="search-container">
                 <h1 class="search-title">Forensic Financial Analysis</h1>
-                <p class="search-subtitle">Enter a stock ticker symbol to uncover accounting insights and financial health indicators</p>
-                <form class="search-form" action="analysis.html" method="GET">
-                    <input type="text" name="ticker" placeholder="Examples: AAPL, MSFT, TSLA  " required aria-label="Stock ticker symbol">
-                    <button type="submit" aria-label="Analyze">
-                        <i class="fas fa-search"></i> Analyze
-                    </button>
+                <p class="search-subtitle">Enter a stock ticker symbol to uncover accounting insights and financial
+                    health indicators</p>
+                <form class="InputContainer card-search" id="mainSearchForm" action="analysis.html" method="GET">
+                    <input type="text" name="ticker" class="input" placeholder="Enter Ticker (e.g. AAPL)" required
+                        aria-label="Stock ticker symbol">
+                    <button type="submit" aria-label="Analyze"><i class="fas fa-search"></i></button>
                 </form>
             </div>
         </section>
@@ -383,10 +309,11 @@
     <script>
         const headerSearchFormOnSearchPage = document.querySelector('#headerTickerSearchForm');
         if (headerSearchFormOnSearchPage) {
-            headerSearchFormOnSearchPage.addEventListener('submit', function(e) {
+            headerSearchFormOnSearchPage.addEventListener('submit', function (e) {
             });
         }
     </script>
     <script src="search-toggle.js"></script>
 </body>
+
 </html>

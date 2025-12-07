@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,11 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-77GZWBEMLF"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-      gtag('config', 'G-77GZWBEMLF');
+        gtag('config', 'G-77GZWBEMLF');
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -44,22 +45,34 @@
                 linear-gradient(rgba(255, 255, 255, 0.09) 2px, transparent 2px),
                 linear-gradient(rgba(255, 255, 255, 0.04) 2px, transparent 2px);
             background-size:
-                30px 30px, /* Tightened spacing */
-                60px 60px, /* Tightened spacing */
-                30px 30px, /* Tightened spacing */
-                60px 60px, /* Tightened spacing */
-                120px 120px, /* Tightened spacing */
-                240px 240px, /* Tightened spacing */
-                120px 120px, /* Tightened spacing */
-                240px 240px; /* Tightened spacing */
+                30px 30px,
+                /* Tightened spacing */
+                60px 60px,
+                /* Tightened spacing */
+                30px 30px,
+                /* Tightened spacing */
+                60px 60px,
+                /* Tightened spacing */
+                120px 120px,
+                /* Tightened spacing */
+                240px 240px,
+                /* Tightened spacing */
+                120px 120px,
+                /* Tightened spacing */
+                240px 240px;
+            /* Tightened spacing */
             /* Centered vertical lines */
             background-position:
-                calc(50% - 0px) 0, /* Center thin vertical lines */
-                calc(50% - 15px) 0, /* Offset second set of thin vertical lines */
+                calc(50% - 0px) 0,
+                /* Center thin vertical lines */
+                calc(50% - 15px) 0,
+                /* Offset second set of thin vertical lines */
                 0 0,
                 0 15px,
-                calc(50% - 0px) 0, /* Center thick vertical lines */
-                calc(50% - 60px) 0, /* Offset second set of thick vertical lines */
+                calc(50% - 0px) 0,
+                /* Center thick vertical lines */
+                calc(50% - 60px) 0,
+                /* Offset second set of thick vertical lines */
                 0 0,
                 0 60px;
             z-index: -2;
@@ -74,13 +87,11 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(
-                circle at center,
-                rgba(28, 37, 65, 0.2) 0%,
-                rgba(28, 37, 65, 0.6) 30%,
-                rgba(28, 37, 65, 0.8) 60%,
-                var(--secondary) 100%
-            );
+            background: radial-gradient(circle at center,
+                    rgba(28, 37, 65, 0.2) 0%,
+                    rgba(28, 37, 65, 0.6) 30%,
+                    rgba(28, 37, 65, 0.8) 60%,
+                    var(--secondary) 100%);
             z-index: -1;
             pointer-events: none;
         }
@@ -157,7 +168,8 @@
             box-shadow: var(--shadow-sm);
             border: none;
             cursor: pointer;
-            min-height: 44px; /* Ensure good tap target */
+            min-height: 44px;
+            /* Ensure good tap target */
         }
 
         .btn-primary {
@@ -209,33 +221,35 @@
             }
 
             .btn {
-                width: 100%; /* Full width buttons on small screens */
+                width: 100%;
+                /* Full width buttons on small screens */
                 padding: 14px 20px;
             }
         }
     </style>
 </head>
+
 <body>
     <header id="header">
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">Forensic<span>Financials</span></a>
-                <button class="search-toggle" aria-label="Toggle search">
-                    <i class="fas fa-search"></i>
-                </button>
-                <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
-                    <input type="text" name="ticker" class="input" id="headerTickerInput" placeholder="Enter Ticker (e.g., AAPL)" aria-label="Enter Ticker Symbol" required>
-                    <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
-                </form>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="index.html#features">Features</a></li>
-                    <li><a href="index.html#methodology">Methodology</a></li>
-                    <li><a href="index.html#about">About</a></li>
-                </ul>
-                <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <div class="nav-right">
+                    <form class="InputContainer" id="headerTickerSearchForm" action="analysis.html" method="GET">
+                        <input type="text" name="ticker" class="input" id="headerTickerInput"
+                            placeholder="Enter Ticker (e.g. AAPL)" aria-label="Enter Ticker Symbol" required>
+                        <button type="submit" aria-label="Search Ticker"><i class="fas fa-search"></i></button>
+                    </form>
+                    <button class="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="nav-links">
+                        <li><a href="index.html"><span>Home</span></a></li>
+                        <li><a href="index.html#features"><span>Features</span></a></li>
+                        <li><a href="index.html#methodology"><span>Methodology</span></a></li>
+                        <li><a href="index.html#about"><span>About</span></a></li>
+                    </ul>
+                </div>
             </nav>
         </div>
     </header>
@@ -280,4 +294,5 @@
     <script src="script.js"></script>
     <script src="search-toggle.js"></script>
 </body>
+
 </html>

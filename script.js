@@ -1,18 +1,17 @@
 const DEFAULT_TICKER = "AAPL"
 const DATA_PATH = "data/"
 const DIVERGENCE_THRESHOLD = 30.0
-const DEFAULT_YEARS_TO_SHOW = 10;
+const DEFAULT_YEARS_TO_SHOW = 5;
 const MOBILE_DEFAULT_YEARS = 5;
 const ICON_GAP = '6px';
 const IS_TOUCH_DEVICE = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 const IS_MOBILE = window.innerWidth <= 768;
 
-const MOBILE_YEAR_RANGES = [5, 10, 'full'];
-let mobileYearRangeIndex = 0;
+const YEAR_RANGES = [5, 10, 'full'];
+let yearRangeIndex = 0;
 
 let currentTicker = null
 let currentData = null
-let showFullHistory = false
 let revenueChartInstance = null
 let arChartInstance = null
 let cashFlowChartInstance = null
@@ -110,7 +109,7 @@ const populateTable = (tbodyId, tableRowData) => {
     return
   }
   if (!Array.isArray(tableRowData)) {
-     console.error(`Invalid table data for #${tbodyId}: Expected array, got ${typeof tableRowData}`);
+    console.error(`Invalid table data for #${tbodyId}: Expected array, got ${typeof tableRowData}`);
     tbody.innerHTML =
       '<tr><td colspan="3" class="error-message" style="color: var(--danger); text-align: center;">Error loading table data.</td></tr>'
     return
@@ -135,7 +134,7 @@ const populateTable = (tbodyId, tableRowData) => {
 const populateList = (ulId, listItems, useInnerHTML = false) => {
   const ul = select(`#${ulId}`)
   if (!ul) {
-     console.error(`List container not found: #${ulId}`);
+    console.error(`List container not found: #${ulId}`);
     return
   }
   if (!Array.isArray(listItems)) {
@@ -198,14 +197,14 @@ const destroyCharts = () => {
 const showSkeletons = (show) => {
   const skeletonIds = [
     'revenueChartSkeleton',
-    'arChartSkeleton', 
+    'arChartSkeleton',
     'cashFlowChartSkeleton',
     'trendsCardsSkeleton',
     'financialsCardsSkeleton',
     'opportunitiesTableSkeleton',
     'verdictSkeleton'
   ];
-  
+
   const contentIds = [
     { canvas: 'revenueChart', skeleton: 'revenueChartSkeleton' },
     { canvas: 'arChart', skeleton: 'arChartSkeleton' },
@@ -213,13 +212,13 @@ const showSkeletons = (show) => {
     { table: 'opportunitiesTable', skeleton: 'opportunitiesTableSkeleton' },
     { content: 'verdictContent', skeleton: 'verdictSkeleton' }
   ];
-  
+
   if (show) {
     skeletonIds.forEach(id => {
       const el = document.getElementById(id);
       if (el) el.style.display = 'block';
     });
-    
+
     contentIds.forEach(item => {
       if (item.canvas) {
         const canvas = document.getElementById(item.canvas);
@@ -239,7 +238,7 @@ const showSkeletons = (show) => {
       const el = document.getElementById(id);
       if (el) el.style.display = 'none';
     });
-    
+
     contentIds.forEach(item => {
       if (item.canvas) {
         const canvas = document.getElementById(item.canvas);
@@ -314,9 +313,9 @@ if (mobileMenuButton && navLinks && mobileMenuIcon) {
 
   // Close menu when clicking outside
   document.addEventListener("click", (e) => {
-    if (navLinks.classList.contains("show") && 
-        !navLinks.contains(e.target) && 
-        !mobileMenuButton.contains(e.target)) {
+    if (navLinks.classList.contains("show") &&
+      !navLinks.contains(e.target) &&
+      !mobileMenuButton.contains(e.target)) {
       navLinks.classList.remove("show")
       mobileMenuIcon.classList.remove("fa-times")
       mobileMenuIcon.classList.add("fa-bars")
@@ -324,9 +323,9 @@ if (mobileMenuButton && navLinks && mobileMenuIcon) {
     }
   })
 } else {
-    if (!mobileMenuButton) console.error("Mobile menu button not found.");
-    if (!navLinks) console.error("Nav links container not found.");
-    if (!mobileMenuIcon) console.error("Mobile menu icon not found.");
+  if (!mobileMenuButton) console.error("Mobile menu button not found.");
+  if (!navLinks) console.error("Nav links container not found.");
+  if (!mobileMenuIcon) console.error("Mobile menu icon not found.");
 }
 
 // --- Form Handling Logic (Page Specific) ---
@@ -390,47 +389,47 @@ if (stickySectionNav && isAnalysisPage) {
   const sections = ['trends', 'financials', 'opportunities', 'conclusion']
   const sectionElements = sections.map(id => document.getElementById(id)).filter(Boolean)
   const navLinks = stickySectionNav.querySelectorAll('a[data-section]')
-  
+
   let ticking = false
-  
+
   const showStickyNav = () => {
     stickySectionNav.classList.add('visible')
   }
-  
+
   const hideStickyNav = () => {
     stickySectionNav.classList.remove('visible')
   }
-  
+
   const updateStickyNav = () => {
     const scrollY = window.scrollY
     const windowHeight = window.innerHeight
-    
+
     const exploreBtn = document.getElementById('exploreAnalysisBtn')
-    
+
     if (exploreBtn) {
       const btnBottomFromTop = exploreBtn.offsetTop + exploreBtn.offsetHeight
-      
+
       if (scrollY > btnBottomFromTop) {
         showStickyNav()
       } else {
         hideStickyNav()
       }
     }
-    
+
     let currentSection = null
     const scrollPosition = scrollY + windowHeight / 3
-    
+
     sectionElements.forEach(section => {
       if (section) {
         const sectionTop = section.offsetTop
         const sectionBottom = sectionTop + section.offsetHeight
-        
+
         if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
           currentSection = section.id
         }
       }
     })
-    
+
     navLinks.forEach(link => {
       const sectionId = link.getAttribute('data-section')
       if (sectionId === currentSection) {
@@ -439,46 +438,46 @@ if (stickySectionNav && isAnalysisPage) {
         link.classList.remove('active')
       }
     })
-    
+
     ticking = false
   }
-  
+
   const onScrollHandler = () => {
     if (!ticking) {
       window.requestAnimationFrame(updateStickyNav)
       ticking = true
     }
   }
-  
+
   window.addEventListener('scroll', onScrollHandler, { passive: true })
-  
+
   window.addEventListener('load', () => {
     hideStickyNav()
     setTimeout(updateStickyNav, 100)
   })
-  
+
   const backToTopBtn = select('.back-to-top')
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {
       hideStickyNav()
     })
   }
-  
+
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault()
       const sectionId = link.getAttribute('data-section')
       const targetSection = document.getElementById(sectionId)
-      
+
       if (targetSection) {
         const stickyNavHeight = stickySectionNav.offsetHeight || 60
         const targetPosition = targetSection.offsetTop - stickyNavHeight - 10
-        
+
         window.scrollTo({
           top: targetPosition,
           behavior: 'smooth'
         })
-        
+
         navLinks.forEach(l => l.classList.remove('active'))
         link.classList.add('active')
       }
@@ -494,10 +493,10 @@ if (isAnalysisPage) {
       showMessage('<i class="fas fa-exclamation-triangle"></i> Chart library failed to load. Please refresh.', "error")
       return
     }
-    
+
     console.log(`Chart.js version: ${Chart.version || 'unknown'}`)
     let isAnnotationPluginAvailable = false;
-    
+
     if (Chart.registry && Chart.registry.plugins && Chart.registry.plugins.get('annotation')) {
       isAnnotationPluginAvailable = true;
       console.log("ChartAnnotation plugin detected via Chart.registry");
@@ -515,7 +514,7 @@ if (isAnalysisPage) {
         console.warn("Failed to register ChartAnnotation:", e);
       }
     }
-    
+
     if (!isAnnotationPluginAvailable) {
       console.warn("Chartjs-plugin-annotation not loaded. Annotations will not be displayed.");
       console.warn("Please check Network tab to verify the plugin CDN is loading correctly.");
@@ -525,62 +524,62 @@ if (isAnalysisPage) {
     // --- Chart Configuration ---
 
     const createGradient = (ctx, colorStart, colorEnd) => {
-        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-        gradient.addColorStop(0, colorStart);
-        gradient.addColorStop(1, colorEnd);
-        return gradient;
+      const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+      gradient.addColorStop(0, colorStart);
+      gradient.addColorStop(1, colorEnd);
+      return gradient;
     };
 
     const createConditionalGradient = (ctx, chart, datasetIndex, positiveColor, negativeColor) => {
-        const dataset = chart.data.datasets[datasetIndex];
-        const yScale = chart.scales.y;
-        const chartArea = chart.chartArea;
-        
-        if (!chartArea || !yScale) {
-            return positiveColor;
-        }
+      const dataset = chart.data.datasets[datasetIndex];
+      const yScale = chart.scales.y;
+      const chartArea = chart.chartArea;
 
-        const hasNegative = dataset.data.some(val => val < 0);
-        const hasPositive = dataset.data.some(val => val >= 0);
-        
-        if (!hasNegative) {
-            return positiveColor;
-        }
-        
-        if (!hasPositive) {
-            return negativeColor;
-        }
+      if (!chartArea || !yScale) {
+        return positiveColor;
+      }
 
-        const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
-        
-        const zeroPixel = yScale.getPixelForValue(0);
-        const topPixel = chartArea.top;
-        const bottomPixel = chartArea.bottom;
-        const chartHeight = bottomPixel - topPixel;
-        
-        let zeroPosition = (zeroPixel - topPixel) / chartHeight;
-        zeroPosition = Math.max(0, Math.min(1, zeroPosition));
-        
-        if (zeroPosition > 0) {
-            gradient.addColorStop(0, positiveColor);
-        }
-        if (zeroPosition > 0 && zeroPosition < 1) {
-            gradient.addColorStop(zeroPosition, positiveColor);
-            gradient.addColorStop(zeroPosition, negativeColor);
-        }
-        if (zeroPosition < 1) {
-            gradient.addColorStop(1, negativeColor);
-        }
-        
-        return gradient;
+      const hasNegative = dataset.data.some(val => val < 0);
+      const hasPositive = dataset.data.some(val => val >= 0);
+
+      if (!hasNegative) {
+        return positiveColor;
+      }
+
+      if (!hasPositive) {
+        return negativeColor;
+      }
+
+      const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+
+      const zeroPixel = yScale.getPixelForValue(0);
+      const topPixel = chartArea.top;
+      const bottomPixel = chartArea.bottom;
+      const chartHeight = bottomPixel - topPixel;
+
+      let zeroPosition = (zeroPixel - topPixel) / chartHeight;
+      zeroPosition = Math.max(0, Math.min(1, zeroPosition));
+
+      if (zeroPosition > 0) {
+        gradient.addColorStop(0, positiveColor);
+      }
+      if (zeroPosition > 0 && zeroPosition < 1) {
+        gradient.addColorStop(zeroPosition, positiveColor);
+        gradient.addColorStop(zeroPosition, negativeColor);
+      }
+      if (zeroPosition < 1) {
+        gradient.addColorStop(1, negativeColor);
+      }
+
+      return gradient;
     };
 
     const createChartOptions = () => ({
       responsive: true,
       maintainAspectRatio: false,
-      animation: { 
+      animation: {
         duration: IS_MOBILE ? 600 : 1000,
-        easing: 'easeOutQuart' 
+        easing: 'easeOutQuart'
       },
       plugins: {
         legend: { display: false },
@@ -643,15 +642,15 @@ if (isAnalysisPage) {
             color: "#6c757d",
             padding: 8
           },
-          grid: { 
-            drawBorder: false, 
+          grid: {
+            drawBorder: false,
             color: "rgba(0, 0, 0, 0.04)",
             borderDash: [5, 5]
           },
         },
       },
-      interaction: { 
-        mode: IS_TOUCH_DEVICE ? 'nearest' : 'index', 
+      interaction: {
+        mode: IS_TOUCH_DEVICE ? 'nearest' : 'index',
         intersect: IS_TOUCH_DEVICE ? true : false,
         axis: 'x'
       },
@@ -672,39 +671,39 @@ if (isAnalysisPage) {
     // --- Chart Helper Functions ---
 
     const createAnnotationLabel = (xVal, yVal, content, yAdj = -15, xAdj = 0) => ({
-        type: 'label',
-        xValue: xVal,
-        yValue: yVal,
-        content: content,
-        color: mutedColor,
-        font: { size: 11, weight: '500', family: "'Inter', sans-serif" },
-        position: 'start',
-        yAdjust: yAdj,
-        xAdjust: xAdj,
-        backgroundColor: 'rgba(255,255,255,0.9)',
-        padding: { top: 6, bottom: 6, left: 10, right: 10 },
-        borderRadius: 6,
-        callout: {
-            display: true,
-            position: 'bottom',
-            borderWidth: 1,
-            borderColor: 'rgba(0,0,0,0.1)',
-            margin: 5
-        }
+      type: 'label',
+      xValue: xVal,
+      yValue: yVal,
+      content: content,
+      color: mutedColor,
+      font: { size: 11, weight: '500', family: "'Inter', sans-serif" },
+      position: 'start',
+      yAdjust: yAdj,
+      xAdjust: xAdj,
+      backgroundColor: 'rgba(255,255,255,0.9)',
+      padding: { top: 6, bottom: 6, left: 10, right: 10 },
+      borderRadius: 6,
+      callout: {
+        display: true,
+        position: 'bottom',
+        borderWidth: 1,
+        borderColor: 'rgba(0,0,0,0.1)',
+        margin: 5
+      }
     });
 
     const createDivergenceLegend = () => ({
-        label: 'Divergence',
-        pointStyle: 'rectRot',
-        pointRadius: 5,
-        borderColor: divergenceColor,
-        backgroundColor: divergenceColor,
-        borderWidth: 1,
-        data: [],
+      label: 'Divergence',
+      pointStyle: 'rectRot',
+      pointRadius: 5,
+      borderColor: divergenceColor,
+      backgroundColor: divergenceColor,
+      borderWidth: 1,
+      data: [],
     });
 
     const pointStyleCallback = (indices = [], normalColor, highlightColor) => (context) => {
-        return indices.includes(context.dataIndex) ? highlightColor : normalColor;
+      return indices.includes(context.dataIndex) ? highlightColor : normalColor;
     };
 
 
@@ -713,26 +712,19 @@ if (isAnalysisPage) {
     const getSliceStart = () => {
       const totalLength = currentData.chartData?.labels?.length || 0;
       
-      if (IS_MOBILE) {
-        const currentRange = MOBILE_YEAR_RANGES[mobileYearRangeIndex];
-        if (currentRange === 'full') {
-          return 0;
-        }
-        if (totalLength > currentRange) {
-          return totalLength - currentRange;
-        }
-        return 0;
-      } else {
-        if (!showFullHistory && totalLength > DEFAULT_YEARS_TO_SHOW) {
-          return totalLength - DEFAULT_YEARS_TO_SHOW;
-        }
+      const currentRange = YEAR_RANGES[yearRangeIndex];
+      if (currentRange === 'full') {
         return 0;
       }
+      if (totalLength > currentRange) {
+        return totalLength - currentRange;
+      }
+      return 0;
     }
-    
-    const getMobileButtonLabel = () => {
-      const nextIndex = (mobileYearRangeIndex + 1) % MOBILE_YEAR_RANGES.length;
-      const nextRange = MOBILE_YEAR_RANGES[nextIndex];
+
+    const getButtonLabel = () => {
+      const nextIndex = (yearRangeIndex + 1) % YEAR_RANGES.length;
+      const nextRange = YEAR_RANGES[nextIndex];
       if (nextRange === 'full') {
         return `View Full`;
       }
@@ -788,9 +780,9 @@ if (isAnalysisPage) {
                 const ctx = chart.ctx;
                 const dataset = chart.data.datasets[0];
                 dataset.backgroundColor = createConditionalGradient(
-                  ctx, 
-                  chart, 
-                  0, 
+                  ctx,
+                  chart,
+                  0,
                   'rgba(197, 164, 126, 0.18)',
                   'rgba(197, 129, 126, 0.28)'
                 );
@@ -798,7 +790,7 @@ if (isAnalysisPage) {
             }]
           })
         } catch (error) {
-            console.error("Error creating Revenue Chart:", error);
+          console.error("Error creating Revenue Chart:", error);
         }
       }
 
@@ -806,24 +798,24 @@ if (isAnalysisPage) {
       const arLabels = originalLabels.slice(arSliceStart);
       const arRevenueGrowthData = originalRevenueGrowth.slice(arSliceStart);
       const arGrowthData = originalArGrowth.slice(arSliceStart);
-      
+
       const arDivergenceIndices = calculateDivergenceIndices(arRevenueGrowthData, arGrowthData, DIVERGENCE_THRESHOLD);
 
       const arCtx = select("#arChart")?.getContext("2d")
       if (arCtx && arRevenueGrowthData.length > 0 && arGrowthData.length > 0) {
         try {
           const arChartOptions = createChartOptions();
-          
+
           arChartOptions.plugins.annotation = { annotations: {} };
           if (isAnnotationPluginAvailable && chartData.annotations?.arChart && Array.isArray(chartData.annotations.arChart)) {
-              chartData.annotations.arChart.forEach((anno, index) => {
-                  if (typeof anno.xVal === 'number' && anno.xVal >= 0 && anno.xVal < originalLabels.length && typeof anno.yVal === 'number' && anno.content) {
-                      const adjustedXVal = anno.xVal - arSliceStart;
-                      if (adjustedXVal >= 0 && adjustedXVal < arLabels.length) {
-                          arChartOptions.plugins.annotation.annotations[`arLabel${index + 1}`] = createAnnotationLabel(adjustedXVal, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
-                      }
-                  }
-              });
+            chartData.annotations.arChart.forEach((anno, index) => {
+              if (typeof anno.xVal === 'number' && anno.xVal >= 0 && anno.xVal < originalLabels.length && typeof anno.yVal === 'number' && anno.content) {
+                const adjustedXVal = anno.xVal - arSliceStart;
+                if (adjustedXVal >= 0 && adjustedXVal < arLabels.length) {
+                  arChartOptions.plugins.annotation.annotations[`arLabel${index + 1}`] = createAnnotationLabel(adjustedXVal, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
+                }
+              }
+            });
           }
 
           arChartInstance = new Chart(arCtx, {
@@ -893,24 +885,24 @@ if (isAnalysisPage) {
       const cfLabels = originalLabels.slice(cfSliceStart);
       const cfCfoGrowthData = originalCfoGrowth.slice(cfSliceStart);
       const cfNiGrowthData = originalNiGrowth.slice(cfSliceStart);
-      
+
       const cfDivergenceIndices = calculateDivergenceIndices(cfCfoGrowthData, cfNiGrowthData, DIVERGENCE_THRESHOLD);
 
       const cashFlowCtx = select("#cashFlowChart")?.getContext("2d")
       if (cashFlowCtx && cfCfoGrowthData.length > 0 && cfNiGrowthData.length > 0) {
         try {
           const cashFlowChartOptions = createChartOptions();
-          
+
           cashFlowChartOptions.plugins.annotation = { annotations: {} };
           if (isAnnotationPluginAvailable && chartData.annotations?.cashFlowChart && Array.isArray(chartData.annotations.cashFlowChart)) {
-              chartData.annotations.cashFlowChart.forEach((anno, index) => {
-                  if (typeof anno.xVal === 'number' && anno.xVal >= 0 && anno.xVal < originalLabels.length && typeof anno.yVal === 'number' && anno.content) {
-                      const adjustedXVal = anno.xVal - cfSliceStart;
-                      if (adjustedXVal >= 0 && adjustedXVal < cfLabels.length) {
-                          cashFlowChartOptions.plugins.annotation.annotations[`cfLabel${index + 1}`] = createAnnotationLabel(adjustedXVal, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
-                      }
-                  }
-              });
+            chartData.annotations.cashFlowChart.forEach((anno, index) => {
+              if (typeof anno.xVal === 'number' && anno.xVal >= 0 && anno.xVal < originalLabels.length && typeof anno.yVal === 'number' && anno.content) {
+                const adjustedXVal = anno.xVal - cfSliceStart;
+                if (adjustedXVal >= 0 && adjustedXVal < cfLabels.length) {
+                  cashFlowChartOptions.plugins.annotation.annotations[`cfLabel${index + 1}`] = createAnnotationLabel(adjustedXVal, anno.yVal, anno.content, anno.yAdj, anno.xAdj);
+                }
+              }
+            });
           }
 
           cashFlowChartInstance = new Chart(cashFlowCtx, {
@@ -975,7 +967,7 @@ if (isAnalysisPage) {
           console.error("Error creating Cash Flow Chart:", error);
         }
       }
-      
+
       handleResize();
     };
 
@@ -987,12 +979,11 @@ if (isAnalysisPage) {
       }
 
       showMessage(`<i class="fas fa-spinner fa-spin"></i> Loading analysis for ${ticker}...`, "loading")
-      
+
       showSkeletons(true);
-      
-      showFullHistory = false;
-      mobileYearRangeIndex = 0;
-      
+
+      yearRangeIndex = 0;
+
       document.querySelectorAll('.chart-toggle-btn').forEach(btn => btn.remove());
       document.querySelectorAll('.chart-custom-legend').forEach(legend => legend.remove());
 
@@ -1037,12 +1028,12 @@ if (isAnalysisPage) {
         populateElement('[data-dynamic="conclusion-subtitle"]', currentData.conclusion?.sectionSubtitle || "")
         populateElement('[data-dynamic="verdict-title"]', currentData.conclusion?.verdictTitle || `Verdict for ${ticker}`)
         populateElement('[data-dynamic="verdict-rating"]', currentData.conclusion?.verdictRating || "N/A")
-        
+
         const paragraphsContainer = select("#verdict-paragraphs")
         if (paragraphsContainer && Array.isArray(currentData.conclusion?.paragraphs)) {
-            paragraphsContainer.innerHTML = currentData.conclusion.paragraphs.map(p => `<p>${p || ""}</p>`).join('');
+          paragraphsContainer.innerHTML = currentData.conclusion.paragraphs.map(p => `<p>${p || ""}</p>`).join('');
         } else if (paragraphsContainer) {
-            paragraphsContainer.innerHTML = "<p>Conclusion details not available.</p>";
+          paragraphsContainer.innerHTML = "<p>Conclusion details not available.</p>";
         }
         populateElement('[data-dynamic="monitoring-title"]', currentData.conclusion?.monitoringPointsTitle || "Key Monitoring Points")
         populateList("monitoring-points-list", currentData.conclusion?.monitoringPoints || [], true)
@@ -1050,147 +1041,133 @@ if (isAnalysisPage) {
         // --- Add Legends and Optional Toggle Buttons for Each Chart ---
         const chartLabels = currentData.chartData?.labels || [];
         const totalYears = chartLabels.length;
-        const hasToggleOption = IS_MOBILE 
-            ? totalYears > MOBILE_DEFAULT_YEARS 
-            : totalYears > DEFAULT_YEARS_TO_SHOW;
-        
+        const hasToggleOption = totalYears > DEFAULT_YEARS_TO_SHOW;
+
         const allToggleBtns = [];
-        
+
         const updateAllToggleBtns = () => {
-            allToggleBtns.forEach(btn => {
-                if (IS_MOBILE) {
-                    btn.textContent = getMobileButtonLabel();
-                } else {
-                    btn.textContent = showFullHistory ? "View 10Y" : "View Full";
-                }
-            });
+          allToggleBtns.forEach(btn => {
+            btn.textContent = getButtonLabel();
+          });
         };
-        
+
         const createChartHeaderElements = (canvasId, legendItems) => {
-            const canvas = document.getElementById(canvasId);
-            const chartContainer = canvas?.closest('.chart-container');
-            const chartHeader = chartContainer?.querySelector('.chart-header');
-            
-            if (chartHeader) {
-                chartHeader.style.display = "grid";
-                chartHeader.style.gridTemplateColumns = hasToggleOption ? "auto 1fr auto" : "auto 1fr";
-                chartHeader.style.alignItems = "center";
-                chartHeader.style.gap = "16px";
-                chartHeader.style.marginBottom = "12px";
-                
-                const titleEl = chartHeader.querySelector("h3");
-                if (titleEl) {
-                    titleEl.style.margin = "0";
-                    titleEl.style.justifySelf = "start";
-                }
-                
-                const legendContainer = document.createElement("div");
-                legendContainer.className = "chart-custom-legend";
-                legendContainer.style.display = "flex";
-                legendContainer.style.alignItems = "center";
-                legendContainer.style.gap = "16px";
-                legendContainer.style.justifySelf = "end";
-                legendContainer.style.fontSize = "0.75rem";
-                legendContainer.style.fontFamily = "'Inter', sans-serif";
-                legendContainer.style.color = "#6c757d";
-                
-                legendItems.forEach(item => {
-                    const legendItem = document.createElement("div");
-                    legendItem.style.display = "flex";
-                    legendItem.style.alignItems = "center";
-                    legendItem.style.gap = "6px";
-                    
-                    const dot = document.createElement("span");
-                    dot.style.width = "10px";
-                    dot.style.height = "10px";
-                    dot.style.borderRadius = "50%";
-                    dot.style.backgroundColor = item.color;
-                    
-                    const label = document.createElement("span");
-                    label.textContent = item.label;
-                    
-                    legendItem.appendChild(dot);
-                    legendItem.appendChild(label);
-                    legendContainer.appendChild(legendItem);
-                });
-                
-                chartHeader.appendChild(legendContainer);
-                
-                if (hasToggleOption) {
-                    const toggleBtn = document.createElement("button");
-                    toggleBtn.className = "chart-toggle-btn";
-                    toggleBtn.style.fontSize = "0.7rem";
-                    toggleBtn.style.padding = "5px 12px";
-                    toggleBtn.style.backgroundColor = "#1c2541";
-                    toggleBtn.style.color = "#ffffff";
-                    toggleBtn.style.border = "none";
-                    toggleBtn.style.borderRadius = "4px";
-                    toggleBtn.style.cursor = "pointer";
-                    toggleBtn.style.fontFamily = "'Inter', sans-serif";
-                    toggleBtn.style.fontWeight = "500";
-                    toggleBtn.style.transition = "all 0.2s ease";
-                    toggleBtn.style.justifySelf = "end";
-                    
-                    if (IS_MOBILE) {
-                        toggleBtn.textContent = getMobileButtonLabel();
-                    } else {
-                        toggleBtn.textContent = "View Full";
-                    }
-                    
-                    if (!IS_MOBILE) {
-                        toggleBtn.addEventListener("mouseenter", () => {
-                            toggleBtn.style.backgroundColor = "#2d3f5f";
-                            toggleBtn.style.transform = "translateY(-1px)";
-                        });
-                        toggleBtn.addEventListener("mouseleave", () => {
-                            toggleBtn.style.backgroundColor = "#1c2541";
-                            toggleBtn.style.transform = "translateY(0)";
-                        });
-                    }
-                    
-                    toggleBtn.addEventListener("click", () => {
-                        if (IS_MOBILE) {
-                            mobileYearRangeIndex = (mobileYearRangeIndex + 1) % MOBILE_YEAR_RANGES.length;
-                        } else {
-                            showFullHistory = !showFullHistory;
-                        }
-                        updateAllToggleBtns();
-                        renderCharts();
-                    });
-                    
-                    chartHeader.appendChild(toggleBtn);
-                    allToggleBtns.push(toggleBtn);
-                }
+          const canvas = document.getElementById(canvasId);
+          const chartContainer = canvas?.closest('.chart-container');
+          const chartHeader = chartContainer?.querySelector('.chart-header');
+
+          if (chartHeader) {
+            chartHeader.style.display = "grid";
+            chartHeader.style.gridTemplateColumns = hasToggleOption ? "auto 1fr auto" : "auto 1fr";
+            chartHeader.style.alignItems = "center";
+            chartHeader.style.gap = "16px";
+            chartHeader.style.marginBottom = "12px";
+
+            const titleEl = chartHeader.querySelector("h3");
+            if (titleEl) {
+              titleEl.style.margin = "0";
+              titleEl.style.justifySelf = "start";
             }
+
+            const legendContainer = document.createElement("div");
+            legendContainer.className = "chart-custom-legend";
+            legendContainer.style.display = "flex";
+            legendContainer.style.alignItems = "center";
+            legendContainer.style.gap = "16px";
+            legendContainer.style.justifySelf = "end";
+            legendContainer.style.fontSize = "0.75rem";
+            legendContainer.style.fontFamily = "'Inter', sans-serif";
+            legendContainer.style.color = "#6c757d";
+
+            legendItems.forEach(item => {
+              const legendItem = document.createElement("div");
+              legendItem.style.display = "flex";
+              legendItem.style.alignItems = "center";
+              legendItem.style.gap = "6px";
+
+              const dot = document.createElement("span");
+              dot.style.width = "10px";
+              dot.style.height = "10px";
+              dot.style.borderRadius = "50%";
+              dot.style.backgroundColor = item.color;
+
+              const label = document.createElement("span");
+              label.textContent = item.label;
+
+              legendItem.appendChild(dot);
+              legendItem.appendChild(label);
+              legendContainer.appendChild(legendItem);
+            });
+
+            chartHeader.appendChild(legendContainer);
+
+            if (hasToggleOption) {
+              const toggleBtn = document.createElement("button");
+              toggleBtn.className = "chart-toggle-btn";
+              toggleBtn.style.fontSize = "0.7rem";
+              toggleBtn.style.padding = "5px 12px";
+              toggleBtn.style.backgroundColor = "#1c2541";
+              toggleBtn.style.color = "#ffffff";
+              toggleBtn.style.border = "none";
+              toggleBtn.style.borderRadius = "4px";
+              toggleBtn.style.cursor = "pointer";
+              toggleBtn.style.fontFamily = "'Inter', sans-serif";
+              toggleBtn.style.fontWeight = "500";
+              toggleBtn.style.transition = "all 0.2s ease";
+              toggleBtn.style.justifySelf = "end";
+
+              toggleBtn.textContent = getButtonLabel();
+
+              if (!IS_MOBILE) {
+                toggleBtn.addEventListener("mouseenter", () => {
+                  toggleBtn.style.backgroundColor = "#2d3f5f";
+                  toggleBtn.style.transform = "translateY(-1px)";
+                });
+                toggleBtn.addEventListener("mouseleave", () => {
+                  toggleBtn.style.backgroundColor = "#1c2541";
+                  toggleBtn.style.transform = "translateY(0)";
+                });
+              }
+
+              toggleBtn.addEventListener("click", () => {
+                yearRangeIndex = (yearRangeIndex + 1) % YEAR_RANGES.length;
+                updateAllToggleBtns();
+                renderCharts();
+              });
+
+              chartHeader.appendChild(toggleBtn);
+              allToggleBtns.push(toggleBtn);
+            }
+          }
         };
-        
+
         createChartHeaderElements(
-            "revenueChart",
-            [{ label: "Revenue Growth", color: primaryColor }]
+          "revenueChart",
+          [{ label: "Revenue Growth", color: primaryColor }]
         );
-        
+
         createChartHeaderElements(
-            "arChart",
-            [
-                { label: "Revenue", color: primaryColor },
-                { label: "A/R", color: secondaryColor },
-                { label: "Divergence", color: divergenceColor }
-            ]
+          "arChart",
+          [
+            { label: "Revenue", color: primaryColor },
+            { label: "A/R", color: secondaryColor },
+            { label: "Divergence", color: divergenceColor }
+          ]
         );
-        
+
         createChartHeaderElements(
-            "cashFlowChart",
-            [
-                { label: "CFO", color: primaryColor },
-                { label: "Net Income", color: secondaryColor },
-                { label: "Divergence", color: divergenceColor }
-            ]
+          "cashFlowChart",
+          [
+            { label: "CFO", color: primaryColor },
+            { label: "Net Income", color: secondaryColor },
+            { label: "Divergence", color: divergenceColor }
+          ]
         );
 
         showSkeletons(false);
-        
+
         renderCharts();
-        
+
         showMessage(null)
         window.scrollTo({ top: 0, behavior: "smooth" })
 
@@ -1217,7 +1194,7 @@ if (isAnalysisPage) {
         } else if (!newTicker) {
           console.warn("Ticker input is empty.")
         } else {
-            console.log(`Ticker ${newTicker} is already loaded.`);
+          console.log(`Ticker ${newTicker} is already loaded.`);
         }
       })
     } else {
