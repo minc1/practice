@@ -1,0 +1,221 @@
+{
+  "company": {
+    "name": "General Electric",
+    "ticker": "GE",
+    "analysisTitle": "Forensic Financial Analysis",
+    "heroSubtitle": "QoE TL;DR: Q3 2025 shows costs rising faster than sales (COGS +13.4% vs Revenue +10.9%), a 2.5pp margin squeeze. This negative operating leverage, despite healthy cash flow, signals pricing power erosion in the core Aerospace business.",
+    "pageTitle": "ForensicFinancials | General Electric (GE) Analysis"
+  },
+  "trendAnalysis": {
+    "sectionSubtitle": "GE's post-spin-off recovery narrative is challenged by emerging margin pressure, contrasting with stabilizing revenue quality and improving cash conversion.",
+    "cards": [
+      {
+        "title": "Revenue Trajectory",
+        "iconClass": "fas fa-chart-line neutral",
+        "points": [
+          "<strong>Long-Term Trend:</strong> Historically plagued by aggressive revenue recognition (e.g., A/R grew 12.5x faster than revenue in 2005), GE's top line has been volatile due to massive divestitures and restructuring.",
+          "<strong>Recent Performance:</strong> FY2024 marked a potential turning point with +9.5% revenue growth, signaling a stabilized base for the new, more focused industrial company after years of contraction and portfolio reshaping.",
+          "<strong>Quality Signal:</strong> Q3 2025 collections appear healthy, with revenue growing +10.9% while receivables (money owed by customers) grew only +1.6%. However, a critical flag was raised in Q1 2025 when revenue fell -8.1% while receivables rose +2.3%."
+        ],
+        "footer": "Revenue quality has stabilized in mid-2025, but the Q1 2025 divergence warrants monitoring for any renewed weakness in collections."
+      },
+      {
+        "title": "Profitability Trends",
+        "iconClass": "fas fa-chart-pie negative",
+        "points": [
+          "<strong>Margin Trajectory:</strong> After a decade of compression (FY2008-2018) driven by the Power segment and GE Capital's unwind, the company entered a period of expanding margins post-2022, focusing on its Aerospace core.",
+          "<strong>Recent Pressure:</strong> FY2024 demonstrated strong positive operating leverage (how costs amplify profit swings), with operating income surging +43.3% on just +9.5% revenue growth, indicating excellent cost discipline.",
+          "<strong>Operating Leverage:</strong> A significant reversal occurred in Q3 2025, with Cost of Revenue (+13.4%) outpacing Revenue growth (+10.9%). This negative leverage suggests GE is losing pricing power or facing inflation it cannot pass on."
+        ],
+        "footer": "The emerging negative operating leverage in Q3 2025 is a critical red flag, threatening the recent narrative of margin expansion."
+      },
+      {
+        "title": "Cash Flow & Earnings Quality",
+        "iconClass": "fas fa-chart-bar warning",
+        "points": [
+          "<strong>OCF/NI Ratio:</strong> GE has a history of 'paper profits' (earnings not backed by cash), with major gaps where Net Income grew while Operating Cash Flow fell, notably in FY2023 (40pt gap) and FY2011 (50pt gap).",
+          "<strong>Working Capital:</strong> The FY2023 divergence was driven by a working capital build (cash tied up in operations), where cash was consumed by unfavorable timing in receivables and inventory, despite high reported profits.",
+          "<strong>Quality Grade:</strong> Earnings quality has improved significantly in the latest period. In Q3 2025, Operating Cash Flow grew +13.8%, more than double the Net Income growth of +6.4%, indicating strong cash backing for recent profits."
+        ],
+        "footer": "Earnings Quality Grade: Adequate. Recent cash generation is strong, but the company's history of volatile cash conversion remains a concern."
+      }
+    ]
+  },
+  "financialMetrics": {
+    "sectionSubtitle": "Forensic checks reveal a concerning inventory build-up and rising financing costs, which offset the benefits of an aggressively repaired balance sheet.",
+    "cards": [
+      {
+        "title": "Forensic Checks",
+        "iconClass": "fas fa-search negative",
+        "points": [
+          "<strong>A/R vs Revenue:</strong> A critical flag was raised in Q1 2025 when revenue declined -8.1% while receivables (money owed by customers) grew +2.3%, suggesting sales were pulled forward on extended payment terms to mask a weak quarter.",
+          "<strong>Inventory vs COGS:</strong> In FY2024, inventory grew +17.9% while Cost of Goods Sold only grew +6.0%\u2014a 3x divergence. This indicates potential overproduction, risking future margin pressure from discounting or write-offs.",
+          "<strong>OCF vs NI Gap:</strong> The historical gap between cash flow and net income has been driven by working capital (cash tied up in operations). The 2023 gap was due to receivables and inventory, while the 2011 gap was from a massive inventory build."
+        ],
+        "footer": "The most actionable concern is the inventory build-up, which grew 3x faster than costs in FY2024, signaling a risk of future obsolescence."
+      },
+      {
+        "title": "Solvency & Capital",
+        "iconClass": "fas fa-balance-scale neutral",
+        "points": [
+          "<strong>Debt Trajectory:</strong> The company has executed a massive deleveraging, cutting total debt by -51% in 2021 and another -8% in 2024. This has fundamentally repaired a balance sheet that was once a major source of risk.",
+          "<strong>Coverage & Liquidity:</strong> Despite lower debt, pressure is re-emerging. In Q3 2025, interest expense surged +42.4%, significantly outpacing operating income growth and suggesting exposure to higher interest rates.",
+          "<strong>Capital Returns:</strong> Capital allocation has prioritized debt reduction over shareholder returns, a disciplined approach necessary to regain investor confidence. Future capital returns will depend on sustaining cash flow generation."
+        ],
+        "footer": "Solvency risk is low due to deleveraging, but rising interest expense is a new headwind that is eroding bottom-line profitability."
+      }
+    ]
+  },
+  "investmentConsiderations": {
+    "sectionSubtitle": "Investors must weigh GE's streamlined focus on the high-moat Aerospace market against clear signals of deteriorating margins and working capital inefficiencies.",
+    "tableData": [
+      {
+        "factor": "<strong>Market Position & Moat</strong>",
+        "opportunities": "As a pure-play industrial, GE's focus on Aerospace provides a strong, long-cycle backlog with significant barriers to entry and a lucrative services revenue stream.",
+        "risks": "The aerospace industry is subject to cyclical demand, intense supply chain pressures, and significant R&D investment requirements to maintain a competitive edge against rivals."
+      },
+      {
+        "factor": "<strong>Innovation & Strategy</strong>",
+        "opportunities": "A renewed focus allows for concentrated R&D spending on next-generation engine technology (e.g., sustainable aviation fuel compatibility), which could secure long-term market share.",
+        "risks": "Historical R&D stagnation (2012-2017) and recent volatility in spending (Q1-Q3 2025) suggest investment in innovation can be sacrificed for short-term earnings targets."
+      },
+      {
+        "factor": "<strong>Financial Structure & Capital</strong>",
+        "opportunities": "A deleveraged balance sheet provides flexibility for strategic investments, bolt-on acquisitions, and the potential for meaningful future capital returns to shareholders.",
+        "risks": "The recent surge in interest expense (+42.4% in Q3 2025) indicates that even with lower debt, the company is not immune to the higher-rate environment, which pressures earnings."
+      },
+      {
+        "factor": "<strong>Forensic & Earnings Quality</strong>",
+        "opportunities": "Sustaining the strong cash conversion seen in mid-2025 (OCF growth > NI growth) would prove that historical 'paper profit' issues are resolved and earnings are high quality.",
+        "risks": "Persistent inventory growth outpacing sales and the re-emergence of negative operating leverage are classic red flags that suggest underlying operational problems."
+      }
+    ]
+  },
+  "conclusion": {
+    "sectionSubtitle": "GE's transformation into a leaner industrial powerhouse is credible, but the latest quarterly results reveal that operational execution is not yet consistent.",
+    "verdictTitle": "Mixed Signals: Stronger Balance Sheet, Weaker Margins",
+    "verdictRating": "Mixed Signals / Medium Risk",
+    "paragraphs": [
+      "General Electric, now primarily an aerospace and energy pure-play, has made significant strides in simplifying its business and strengthening its balance sheet. However, the quality of its recent earnings is mixed. The most critical finding is the <strong>margin compression in Q3 2025</strong>, where the cost of revenue grew +13.4% versus only +10.9% revenue growth. This indicates that for every new dollar of sales, profitability is shrinking, a concerning trend that undermines the growth story.",
+      "<strong>What this means for you:</strong> The good news is that GE is generating real cash, a welcome change from its past. The bad news is that its core business is becoming less profitable on new sales. You should view the current situation with caution. The stock's future performance depends on whether this margin squeeze is a temporary blip from inflation or a permanent loss of pricing power. <strong>Focus on the gross margin trend</strong> in the next earnings report; if it worsens, the foundation of the recovery story is at risk."
+    ],
+    "monitoringPointsTitle": "Key Monitoring Points",
+    "monitoringPoints": [
+      "<strong>Gross Margin Spread (Revenue Growth vs. COGS Growth):</strong> In Q3 2025, this was negative by -2.5 percentage points. Watch for this spread to turn positive in the next quarter, which would signal that GE has regained control over its costs or pricing.",
+      "<strong>Inventory Growth vs. Revenue Growth:</strong> A major flag was raised in FY2024 and Q1 2025 when inventory grew much faster than sales. Monitor Q4 2025 inventory levels; another quarter of inventory outpacing revenue would confirm a demand problem.",
+      "<strong>Cash Conversion (OCF Growth vs. NI Growth):</strong> Q3 2025 was strong, with OCF growing 2x faster than NI. Ensure this continues. A return to NI growth significantly outpacing OCF growth would indicate a relapse into 'paper profit' territory."
+    ]
+  },
+  "chartData": {
+    "labels": [
+      "2005",
+      "2006",
+      "2007",
+      "2008",
+      "2009",
+      "2010",
+      "2011",
+      "2012",
+      "2013",
+      "2014",
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ],
+    "revenueGrowth": [
+      1.71,
+      10.97,
+      13.8,
+      5.27,
+      -14.49,
+      -4.42,
+      -4.67,
+      1.87,
+      -23.58,
+      5.69,
+      -1.07,
+      3.74,
+      -16.9,
+      -2.28,
+      -7.0,
+      -15.95,
+      -25.54,
+      -48.4,
+      21.31,
+      9.49
+    ],
+    "arGrowth": [
+      21.26,
+      15.28,
+      14.02,
+      -3.95,
+      -10.04,
+      -6.18,
+      -8.93,
+      -6.5,
+      -5.23,
+      -84.24,
+      6.78,
+      -7.84,
+      -3.35,
+      -27.81,
+      -6.16,
+      -18.85,
+      -8.7,
+      -15.62,
+      -33.07,
+      6.31
+    ],
+    "cfoGrowth": [
+      -10.09,
+      -15.3,
+      49.99,
+      5.73,
+      -49.4,
+      46.88,
+      -29.08,
+      -19.57,
+      -8.78,
+      -3.04,
+      -28.22,
+      1.51,
+      4.65,
+      -24.05,
+      76.22,
+      -59.0,
+      -3.23,
+      69.95,
+      -12.46,
+      -9.06
+    ],
+    "niGrowth": [
+      -2.56,
+      24.06,
+      7.07,
+      -21.61,
+      -36.67,
+      5.62,
+      21.53,
+      -3.6,
+      -4.28,
+      16.67,
+      -1.4,
+      2.22,
+      -2.13,
+      -1.64,
+      77.73,
+      2.15,
+      -2.11,
+      1.05,
+      27.22,
+      -30.86
+    ]
+  }
+}

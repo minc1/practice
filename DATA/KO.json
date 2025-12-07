@@ -1,111 +1,221 @@
 {
-    "company": {
-      "name": "The Coca-Cola Company",
-      "ticker": "KO",
-      "analysisTitle": "Forensic Financial Analysis",
-      "heroSubtitle": "Analysis of KO's resilient organic growth, fluctuating reported metrics, and significant cash flow divergences.",
-      "pageTitle": "ForensicFinancials | The Coca-Cola Company (KO) Analysis"
-    },
-    "trendAnalysis": {
-      "sectionSubtitle": "Examining KO's long-term trends, recent performance variations, and organic vs. reported growth dynamics (FY2015-FY2024 & Recent Quarters)",
-      "cards": [
-        {
-          "title": "Revenue Trajectory",
-          "iconClass": "fas fa-chart-line neutral",
-          "points": [
-            "<strong>Long-Term Fluctuations:</strong> Annual revenue shows periods of decline (2015-18, 2020) and recovery (2019, 2021-23), with modest growth in 2024 (+2.9%).",
-            "<strong>Organic vs. Reported:</strong> External sources highlight stronger *organic* revenue growth driven by price/mix, often contrasting with more modest or negative *reported* net revenue growth influenced by currency and refranchising.",
-            "<strong>Quarterly Volatility:</strong> Recent quarters show mixed reported revenue growth (e.g., Q4 2024 -2.6%, Q3 2024 -4.1%, Q2 2024 +9.4%), indicating sensitivity to short-term factors.",
-            "<strong>Pricing Power:</strong> Demonstrated ability to drive growth through price/mix strategies, contributing to organic revenue resilience."
-          ],
-          "footer": "Inconsistent reported revenue growth, but stronger underlying organic performance driven by pricing."
-        },
-        {
-          "title": "Profitability Trends",
-          "iconClass": "fas fa-chart-pie neutral",
-          "points": [
-            "<strong>Variable Net Income:</strong> Annual Net Income growth has been volatile, including significant swings (-80.9% in 2017, +38.6% in 2019, +26.1% in 2021) and recent near-flat performance (-0.8% in 2024).",
-            "<strong>Margin Pressures:</strong> Profitability influenced by currency headwinds, comparability items, marketing investments, and input costs.",
-            "<strong>Quarterly EPS Performance:</strong> Recent quarters show mixed EPS results (e.g., Q4 2024 NI -22.9%, Q3 2024 NI +18.1%, Q2 2024 NI -24.1%), sometimes diverging from revenue trends.",
-            "<strong>Dividend Aristocrat:</strong> Long history of increasing dividends supported by underlying profitability, though payout ratio is relatively high."
-          ],
-          "footer": "Volatile net income growth; profitability impacted by various external and internal factors."
-        },
-        {
-          "title": "Cash Flow Generation",
-          "iconClass": "fas fa-chart-bar negative",
-          "points": [
-            "<strong>Major 2024 OCF Decline:</strong> Significant concern - Annual Operating Cash Flow (OCF) dropped sharply (-41.3%) in 2024 despite relatively flat Net Income (-0.8%).",
-            "<strong>Quarterly OCF Weakness:</strong> Specific quarters also showed substantial OCF declines (e.g., Q1 2024 -80.2%, Q4 2023 -37.9%), often diverging significantly from Net Income.",
-            "<strong>Cited Reasons:</strong> Declines attributed partly to higher tax payments (including IRS litigation deposits) and changes/cycling in working capital benefits.",
-            "<strong>Historical Divergence:</strong> While OCF often tracked NI historically (e.g., 2021), recent periods show a marked negative divergence, raising earnings quality questions."
-          ],
-          "footer": "Significant recent decline in Operating Cash Flow, diverging sharply from Net Income trends."
-        }
-      ]
-    },
-    "financialMetrics": {
-      "sectionSubtitle": "Investigating cross-statement divergences, forensic flags, and solvency indicators",
-      "cards": [
-         {
-          "title": "Forensic Checks",
-          "iconClass": "fas fa-search negative",
-          "points": [
-              "<strong>OCF vs NI Divergence (Critical):</strong> Major flag in FY2024 (NI -0.8% vs OCF -41.3%) and specific quarters (e.g., Q1 2024: NI +61.0% vs OCF -80.2%). Warrants deep scrutiny regarding earnings quality and cash conversion.",
-              "<strong>Working Capital Volatility:</strong> Significant swings noted in working capital's contribution to OCF (e.g., +92% change in 2021, large negative impacts cited in recent quarters/year).",
-              "<strong>Revenue vs. AR:</strong> Annual data shows inconsistent correlation (e.g., 2020 Rev -11.4% vs AR -20.8%; 2024 Rev +2.9% vs AR +4.7%). Receivables turnover appears healthy (avg 12.0x, peak 13.5x in 2024).",
-              "<strong>Inventory vs. COGS:</strong> Annual data shows periods where inventory growth didn't align with COGS changes (e.g., 2018 Inv +15.7% vs COGS -1.4%).",
-              "<strong>Factoring Use:</strong> Company utilizes accounts receivable factoring, which can impact reported cash flows and receivables timing."
-          ],
-          "footer": "Critical OCF vs NI divergence flag; notable working capital volatility."
-        },
-        {
-          "title": "Solvency & Liquidity",
-          "iconClass": "fas fa-balance-scale neutral",
-          "points": [
-              "<strong>Fluctuating Leverage:</strong> Debt-to-Equity ratio has varied (e.g., Macrotrends: 1.65 in 2021 -> 1.29 in 2023; Finbox: ~1.7-1.9 range recently).",
-              "<strong>Interest Coverage:</strong> Varies with EBIT and interest expense; requires monitoring.",
-              "<strong>Funding Mix:</strong> Relies on operating cash flow (recently weakened), debt issuance, and equity.",
-              "<strong>Shareholder Returns:</strong> Consistent dividend increases ('Dividend Aristocrat') and share repurchases significantly impact cash allocation and potentially leverage.",
-              "<strong>Risk Profile:</strong> External analysis suggests KO is less risky than peers, despite financial fluctuations."
-          ],
-          "footer": "Manageable but fluctuating leverage; strong commitment to shareholder returns impacts cash."
-        }
-      ]
-    },
-    "investmentConsiderations": {
-      "sectionSubtitle": "Balancing KO's brand strength against financial inconsistencies and market factors",
-      "tableData": [
-        { "factor": "<strong>Market Position</strong>", "opportunities": "Iconic global brand, extensive distribution network, strong competitive moat", "risks": "Intense competition (PepsiCo, others), changing consumer preferences (health focus)" },
-        { "factor": "<strong>Revenue</strong>", "opportunities": "Strong organic growth via pricing/mix, growth in emerging markets/categories (coffee, hydration)", "risks": "Reported revenue volatility due to FX/refranchising, potential slowdown in pricing power" },
-        { "factor": "<strong>Profitability</strong>", "opportunities": "Revenue growth management initiatives, cost efficiencies", "risks": "Margin pressure from input costs, currency headwinds, marketing investments" },
-        { "factor": "<strong>Cash Flow</strong>", "opportunities": "Potential normalization of tax/working capital impacts", "risks": "Significant recent OCF decline and divergence from NI, sustainability of cash generation for dividends/buybacks" },
-        { "factor": "<strong>Financial Health</strong>", "opportunities": "Manageable leverage historically, access to capital markets", "risks": "Fluctuating debt levels, impact of rising rates, reliance on potentially weakening OCF" },
-        { "factor": "<strong>Shareholder Returns</strong>", "opportunities": "Long track record of dividend growth, commitment to buybacks", "risks": "High payout ratio, sustainability dependent on future cash flow generation" },
-        { "factor": "<strong>Outlook</strong>", "opportunities": "'All-weather strategy' resilience, focus on innovation", "risks": "Global economic uncertainty, regulatory pressures (sugar taxes), FX volatility" }
-      ]
-    },
-    "conclusion": {
-      "sectionSubtitle": "Synthesizing KO's financial trajectory and investment profile",
-      "verdictTitle": "Resilient Brand Facing Cash Flow Headwinds",
-      "verdictRating": "Cautious / Medium Risk",
-      "paragraphs": [
-          "Coca-Cola leverages its iconic brand and global reach to deliver resilient <strong>organic revenue growth</strong>, primarily through effective pricing strategies. However, reported results often show volatility due to currency impacts and strategic shifts like refranchising.",
-          "Despite underlying operational strength, recent financial performance raises significant concerns, headlined by a sharp <strong>decline in Operating Cash Flow (-41.3% in FY2024)</strong> that starkly contrasts with relatively stable Net Income. This divergence, attributed partly to tax payments and working capital swings, demands close scrutiny regarding earnings quality and cash conversion efficiency.",
-          "While KO remains a 'Dividend Aristocrat' with a strong market position, the combination of inconsistent reported growth, profitability pressures, and particularly the significant OCF deterioration warrants a <strong>cautious outlook</strong>. Investors must monitor the normalization of cash flows to ensure the sustainability of shareholder returns and validate the quality of reported earnings."
-      ],
-      "monitoringPointsTitle": "Key Monitoring Points",
-      "monitoringPoints": [
-        "<strong>Operating Cash Flow vs. Net Income:</strong> Track the normalization of this relationship; persistent divergence is a major red flag.",
-        "<strong>Organic vs. Reported Revenue Drivers:</strong> Understand the impact of price/mix, volume, currency, and acquisitions/divestitures on top-line growth.",
-        "<strong>Working Capital Management:</strong> Monitor trends in receivables, inventory, and payables relative to sales and their impact on operating cash flow."
-      ]
-    },
-    "chartData": {
-      "labels": ["FY2015", "FY2016", "FY2017", "FY2018", "FY2019", "FY2020", "FY2021", "FY2022", "FY2023", "FY2024"],
-      "revenueGrowth": [-3.7, -5.5, -15.4, -3.1, 8.6, -11.4, 17.1, 11.3, 6.4, 2.9],
-      "arGrowth": [-11.8, -2.2, -4.9, 0.5, 7.8, -20.8, 11.7, -0.7, -2.2, 4.7],
-      "cfoGrowth": [-0.8, -16.5, -19.2, 7.3, 37.3, -6.0, 28.3, -12.7, 5.3, -41.3],
-      "niGrowth": [3.6, -11.2, -80.9, 4.2, 38.6, -13.1, 26.1, -2.3, 12.3, -0.8]
-    }
+  "company": {
+    "name": "The Coca-Cola Company",
+    "ticker": "KO",
+    "analysisTitle": "Forensic Financial Analysis",
+    "heroSubtitle": "QoE TL;DR: Q3 2025 Net Income was saved by a -49.6% tax drop, masking a -12.8% operational profit decline. This follows a critical FY2024 where Operating Cash Flow collapsed -41.3%, signaling persistent earnings quality issues.",
+    "pageTitle": "ForensicFinancials | The Coca-Cola Company (KO) Analysis"
+  },
+  "trendAnalysis": {
+    "sectionSubtitle": "Analysis reveals a mature business relying on pricing power and aggressive channel management to mask decelerating organic volume and deteriorating cash conversion.",
+    "cards": [
+      {
+        "title": "Revenue Trajectory",
+        "iconClass": "fas fa-chart-line negative",
+        "points": [
+          "<strong>Long-Term Trend:</strong> As a mature consumer staple, KO exhibits low single-digit organic growth, punctuated by large M&A-driven swings, such as the 32.5% surge in FY2011 from bottling acquisitions.",
+          "<strong>Recent Performance:</strong> FY2024 revenue grew a modest 2.9%, a sharp deceleration from 6.4% in FY2023 and 11.3% in FY2022, indicating that pricing power may be reaching its limit in driving top-line growth.",
+          "<strong>Quality Signal:</strong> A recurring pattern of Q1 channel stuffing (inflating sales by pushing inventory to distributors) is evident, with a critical flag in Q1 2025 where revenue fell -3.6% while receivables surged +14.6%."
+        ],
+        "footer": "Growth quality is low, heavily dependent on price hikes and pulling sales forward rather than sustainable volume increases."
+      },
+      {
+        "title": "Profitability Trends",
+        "iconClass": "fas fa-chart-pie negative",
+        "points": [
+          "<strong>Margin Trajectory:</strong> Historically, KO has maintained strong gross margins through its powerful brand and pricing power. However, operating margins have shown signs of compression in recent years due to rising overhead.",
+          "<strong>Recent Pressure:</strong> In FY2024, strong pricing led to a 5.5% increase in gross profit, but this was entirely erased by a 17.7% surge in operating expenses, causing operating income to fall by -11.7%.",
+          "<strong>Operating Leverage:</strong> Q3 2025 showed severe negative operating leverage (how costs amplify profit swings), with a -0.6% revenue dip causing a -12.8% drop in pre-tax income, which was masked by a large tax benefit."
+        ],
+        "footer": "Strong pricing power is being completely eroded by a breakdown in operating cost discipline, making margins fragile."
+      },
+      {
+        "title": "Cash Flow & Earnings Quality",
+        "iconClass": "fas fa-chart-bar negative",
+        "points": [
+          "<strong>OCF/NI Ratio:</strong> The ratio of OCF/NI (how much profit turned into actual cash) has been historically strong but collapsed in FY2024, with OCF falling -41.3% while Net Income was nearly flat (-0.8%).",
+          "<strong>Working Capital:</strong> The FY2024 cash drain was driven by a 54% spike in 'Other Non-Current Assets' and a multi-year trend of inventory growing faster than sales, trapping cash on the balance sheet.",
+          "<strong>Quality Grade:</strong> Q1 2025 earnings were pure 'paper profits' (recorded on paper, not yet cash), with Net Income surging +51.7% while OCF fell -2.3%. This indicates a heavy reliance on accrual accounting to hit targets."
+        ],
+        "footer": "Earnings Quality Grade: Concerning. Profits reported in FY2024 and early 2025 are not being backed by actual cash generation."
+      }
+    ]
+  },
+  "financialMetrics": {
+    "sectionSubtitle": "Forensic checks reveal critical flags in receivables and inventory management, pointing to potential demand issues and aggressive accounting to meet sales targets.",
+    "cards": [
+      {
+        "title": "Forensic Checks",
+        "iconClass": "fas fa-search negative",
+        "points": [
+          "<strong>A/R vs Revenue:</strong> A critical negative divergence occurred in Q1 2025, where Net Receivables (money owed by customers) grew +14.6% while revenue declined -3.6%, implying sales were booked without corresponding cash collection.",
+          "<strong>Inventory vs COGS:</strong> For three straight years (2022-2024), inventory has grown faster than Cost of Goods Sold. The FY2024 divergence was most severe (Inventory +6.9% vs COGS -1.1%), suggesting unsold products are piling up.",
+          "<strong>OCF vs NI Gap:</strong> The massive 40.5 percentage point gap in FY2024 was driven by non-operational cash outflows, specifically a large increase in 'Other Non-Current Assets', making reported earnings a poor proxy for cash performance."
+        ],
+        "footer": "The primary concern is the multi-year inventory build, suggesting a potential mismatch between production and consumer demand."
+      },
+      {
+        "title": "Solvency & Capital",
+        "iconClass": "fas fa-balance-scale neutral",
+        "points": [
+          "<strong>Debt Trajectory:</strong> After a period of deleveraging, the company has been re-leveraging in FY2023 and FY2024, with debt growing faster than equity to fund operations and capital returns.",
+          "<strong>Coverage & Liquidity:</strong> In Q1 2025, a +24.6% explosion in short-term debt was used to fund the working capital (cash tied up in operations) gap created by weak cash flow and surging receivables, a low-quality funding source.",
+          "<strong>Capital Returns:</strong> As a dividend aristocrat, KO prioritizes shareholder returns. However, recent increases in borrowing appear directed at plugging operational cash shortfalls rather than solely funding strategic growth or returns."
+        ],
+        "footer": "Solvency is not an immediate risk, but the trend of borrowing to fund operational working capital is a notable yellow flag."
+      }
+    ]
+  },
+  "investmentConsiderations": {
+    "sectionSubtitle": "Investors must weigh Coca-Cola's unparalleled brand moat and pricing power against clear evidence of deteriorating earnings quality and operational inefficiencies.",
+    "tableData": [
+      {
+        "factor": "<strong>Market Position & Moat</strong>",
+        "opportunities": "Iconic global brand with unmatched distribution network provides significant pricing power and a durable competitive advantage against rivals.",
+        "risks": "Operates in mature, slow-growth markets. Faces persistent headwinds from consumer shifts towards healthier beverage options and intense private-label competition."
+      },
+      {
+        "factor": "<strong>Innovation & Strategy</strong>",
+        "opportunities": "Ability to leverage its distribution system for new products (e.g., Costa Coffee, BodyArmor). Strategic price increases have successfully offset inflation.",
+        "risks": "Core product portfolio shows little volume growth. Innovation in healthier categories has yet to meaningfully offset the scale of the legacy soda business."
+      },
+      {
+        "factor": "<strong>Financial Structure & Capital</strong>",
+        "opportunities": "Long history of strong cash generation and a commitment to its dividend provide income stability. Access to cheap debt allows for financial flexibility.",
+        "risks": "Recent trend of re-leveraging. Using debt to fund working capital shortfalls is unsustainable and signals operational weakness."
+      },
+      {
+        "factor": "<strong>Forensic & Earnings Quality</strong>",
+        "opportunities": "A return to an OCF/NI ratio above 1.0x and inventory growth aligning with COGS would signal a significant improvement in operational health and earnings quality.",
+        "risks": "Persistent channel stuffing (A/R growth >> revenue growth) and inventory builds suggest demand issues and aggressive accounting that could lead to future write-downs."
+      }
+    ]
+  },
+  "conclusion": {
+    "sectionSubtitle": "The financial narrative shows a high-quality business resorting to low-quality accounting methods to bridge the gap between its targets and slowing fundamentals.",
+    "verdictTitle": "Elite Franchise, Eroding Quality",
+    "verdictRating": "Elevated Concerns / Medium-High Risk",
+    "paragraphs": [
+      "Coca-Cola's powerful brand allows it to pass on price increases, but this strength is being undermined by deteriorating financial discipline. The most alarming signal is the <strong>FY2024 operating cash flow collapse of -41.3%</strong>, a stark contrast to nearly flat net income. This demonstrates that reported profits are not converting to cash. This issue is compounded by a recurring pattern of aggressive Q1 channel stuffing, where sales are booked far in advance of collection, creating a fragile, accrual-driven earnings profile.",
+      "<strong>What this means for you:</strong> The 'profit' you see on the income statement may be an illusion not backed by cash in the bank. The company appears to be pushing products to distributors and borrowing money to cover the resulting cash shortfall. Be cautious of 'earnings beats' that are not accompanied by strong operating cash flow. For now, this is a significant yellow flag. You should demand to see <strong>inventory levels fall and cash flow consistently exceed net income</strong> before trusting that the reported earnings are real."
+    ],
+    "monitoringPointsTitle": "Key Monitoring Points",
+    "monitoringPoints": [
+      "<strong>A/R vs. Revenue Growth:</strong> In Q1 2025, receivables surged +14.6% as revenue fell -3.6%. Watch for this ratio of A/R growth to revenue growth to stay below 1.5x to ensure sales are being collected in a timely manner.",
+      "<strong>Cash Conversion (OCF/NI Ratio):</strong> After collapsing in FY2024, the ratio of cash from operations to net income must return to and sustain above 1.0x. Another year below 0.8x would signal a severe structural problem.",
+      "<strong>Inventory vs. Sales (COGS):</strong> In FY2024, inventory grew +6.9% while COGS fell -1.1%. Watch for inventory growth to fall below COGS growth for two straight quarters, which would indicate the company is clearing its backlog of unsold products."
+    ]
+  },
+  "chartData": {
+    "labels": [
+      "2005",
+      "2006",
+      "2007",
+      "2008",
+      "2009",
+      "2010",
+      "2011",
+      "2012",
+      "2013",
+      "2014",
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ],
+    "revenueGrowth": [
+      6.26,
+      4.26,
+      19.8,
+      10.7,
+      -2.99,
+      13.32,
+      32.53,
+      3.17,
+      -2.42,
+      -1.83,
+      -3.71,
+      -5.49,
+      -13.5,
+      -5.28,
+      8.65,
+      -11.41,
+      17.09,
+      11.25,
+      6.4,
+      2.86
+    ],
+    "arGrowth": [
+      1.65,
+      13.42,
+      28.22,
+      -6.84,
+      21.62,
+      17.88,
+      11.06,
+      -3.27,
+      2.4,
+      -8.35,
+      -11.76,
+      -2.16,
+      -4.9,
+      0.49,
+      7.76,
+      -20.83,
+      11.71,
+      -0.71,
+      -2.21,
+      4.66
+    ],
+    "cfoGrowth": [
+      -19.07,
+      -56.51,
+      20.03,
+      -19.42,
+      -1.27,
+      16.44,
+      -0.61,
+      12.36,
+      -0.97,
+      0.69,
+      -0.82,
+      -16.45,
+      -19.21,
+      7.33,
+      37.29,
+      -5.99,
+      28.25,
+      -12.73,
+      5.27,
+      -41.33
+    ],
+    "niGrowth": [
+      0.52,
+      4.27,
+      17.74,
+      -2.91,
+      17.51,
+      72.73,
+      -27.17,
+      5.07,
+      -4.82,
+      -17.31,
+      3.56,
+      -11.21,
+      -80.88,
+      4.16,
+      38.64,
+      -13.15,
+      26.13,
+      -2.34,
+      12.28,
+      -0.78
+    ]
   }
+}

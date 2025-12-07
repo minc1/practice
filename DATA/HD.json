@@ -1,112 +1,221 @@
 {
-    "company": {
-      "name": "The Home Depot, Inc.",
-      "ticker": "HD",
-      "analysisTitle": "Forensic Financial Analysis",
-      "heroSubtitle": "Analysis of HD's post-pandemic normalization, recent revenue stabilization, margin pressures, rising leverage, and significant working capital anomalies.",
-      "pageTitle": "ForensicFinancials | Home Depot (HD) Analysis"
-    },
-    "trendAnalysis": {
-      "sectionSubtitle": "Examining HD's journey: Pandemic boom, normalization slowdown, FY23 dip, and FY24 mixed recovery (FY2020-FY2024)",
-      "cards": [
-        {
-          "title": "Revenue Trajectory",
-          "iconClass": "fas fa-chart-line neutral",
-          "points": [
-            "<strong>Pandemic Surge (FY20-FY21):</strong> Exceptional growth (+19.9%, +14.4%) driven by increased home improvement spending.",
-            "<strong>Normalization & Dip (FY22-FY23):</strong> Sharp deceleration (FY22 +4.1%) followed by a decline (FY23 -3.0%) as demand normalized and macro pressures emerged.",
-            "<strong>Modest Recovery (FY24):</strong> Revenue grew +4.5%, aided slightly by an extra week, indicating potential stabilization but far from peak growth.",
-            "<strong>Seasonality:</strong> Quarterly data shows clear seasonality, with Q2 typically strongest and Q3/Q4 sequentially weaker."
-          ],
-          "footer": "Pandemic boom followed by normalization, a dip in FY23, and modest FY24 recovery; seasonality evident."
-        },
-        {
-          "title": "Profitability Trends",
-          "iconClass": "fas fa-chart-pie negative",
-          "points": [
-            "<strong>Strong Growth (FY20-FY21):</strong> Net Income grew significantly (+14.4%, +27.7%) alongside revenue during the pandemic boom.",
-            "<strong>Deceleration & Decline (FY22-FY24):</strong> Profit growth slowed sharply in FY22 (+4.1%), turned negative in FY23 (-11.5%), and remained negative in FY24 (-2.2%) despite revenue recovery.",
-            "<strong>Margin Pressure:</strong> Operating Income growth also turned negative in FY23 (-9.8%) and FY24 (-0.8%), indicating persistent margin compression.",
-            "<strong>Quarterly Volatility:</strong> Significant QoQ swings in profitability reflect operational leverage and seasonal demand shifts."
-          ],
-          "footer": "Strong pandemic-era profit growth reversed; recent years show significant margin pressure and declining net income."
-        },
-        {
-          "title": "Cash Flow Generation",
-          "iconClass": "fas fa-chart-bar neutral",
-          "points": [
-            "<strong>Highly Volatile OCF:</strong> Operating Cash Flow growth shows large annual swings (+37% FY20, -12% FY21, -12% FY22, +45% FY23, -6% FY24).",
-            "<strong>Working Capital Driven:</strong> OCF significantly impacted by large changes in working capital (Inventory, A/R, A/P).",
-            "<strong>Divergence from Net Income:</strong> OCF growth often diverges significantly from Net Income growth due to these WC swings (e.g., FY23 OCF +45% vs NI -11%; FY24 OCF -6% vs NI -2%).",
-            "<strong>FCF Trend:</strong> Free Cash Flow growth mirrors OCF volatility, declining in FY24 (-9.0%) after a strong FY23 rebound."
-          ],
-          "footer": "Highly volatile OCF driven primarily by large working capital swings, often diverging from Net Income trends."
-        }
-      ]
-    },
-    "financialMetrics": {
-      "sectionSubtitle": "Investigating significant working capital anomalies, rising leverage, and declining coverage",
-      "cards": [
-         {
-          "title": "Forensic Checks",
-          "iconClass": "fas fa-search negative",
-          "points": [
-              "<strong>Major A/R vs Revenue Divergence (FY2024):</strong> Key red flag: Net Receivables grew <strong>+47.3%</strong> while Revenue grew only <strong>+4.5%</strong>. Potentially linked to SRS acquisition integration, but raises significant concerns about credit terms/quality.",
-              "<strong>Inventory vs COGS Divergence (FY2024):</strong> Inventory growth (<strong>+11.8%</strong>) outpaced COGS growth (<strong>+4.4%</strong>), suggesting potential overstocking or slowing velocity relative to purchasing, though turnover reportedly improved.",
-              "<strong>OCF vs NI Divergence (Working Capital Driven):</strong> Significant divergences driven by large WC swings (e.g., FY24 OCF underperformed NI due to WC cash usage; FY23 OCF outperformed NI due to WC cash source).",
-              "<strong>Margin Compression (FY2024):</strong> Negative correlation: Revenue grew +4.5% while Operating Income fell -0.8%, confirming margin pressure."
-          ],
-          "footer": "Major red flag: FY24 Accounts Receivable growth vastly outpacing revenue. Inventory growth also faster than COGS."
-        },
-        {
-          "title": "Solvency & Liquidity",
-          "iconClass": "fas fa-balance-scale negative",
-          "points": [
-              "<strong>Increasing Leverage:</strong> Debt growth outpaced equity growth in FY23/FY24. Significant debt increase in FY24 (Long-Term Debt +22%) partly to fund SRS acquisition.",
-              "<strong>Declining Interest Coverage:</strong> EBIT Interest Coverage ratio shows a clear downward trend (from ~17x in FY22 towards ~10x-11x in FY24/FY25), reflecting higher debt/interest expense and flat/declining EBIT.",
-              "<strong>Liability-Funded Growth (FY2024):</strong> Asset growth (+25.6%) primarily funded by increased liabilities (Debt +22%, Payables +19%) rather than equity.",
-              "<strong>Volatile Equity Base:</strong> Equity significantly impacted by share buybacks often exceeding net income (e.g., FY23 equity shrank -33%).",
-              "<strong>Buybacks Paused:</strong> Share repurchases paused mid-FY2024 due to debt taken on for SRS acquisition, removing prior EPS support."
-          ],
-          "footer": "Increasing leverage, driven by acquisition debt, leading to a concerning decline in interest coverage ratios."
-        }
-      ]
-    },
-    "investmentConsiderations": {
-      "sectionSubtitle": "Balancing HD's market strength against macroeconomic headwinds, rising debt, and working capital risks",
-      "tableData": [
-        { "factor": "<strong>Market Position</strong>", "opportunities": "Dominant player in home improvement retail, strong brand loyalty", "risks": "Mature market, sensitivity to housing market trends and consumer spending" },
-        { "factor": "<strong>Revenue Growth</strong>", "opportunities": "Focus on Pro customer segment, potential boost from SRS acquisition integration, eventual housing market recovery", "risks": "Macroeconomic pressures (interest rates, inflation), slowing demand for big-ticket items, execution risk on acquisition" },
-        { "factor": "<strong>Profitability</strong>", "opportunities": "Potential for operational efficiencies, cost control initiatives", "risks": "Persistent margin compression, initial margin dilution from SRS, rising operating expenses" },
-        { "factor": "<strong>Cash Flow</strong>", "opportunities": "Historically strong OCF generation potential", "risks": "High volatility driven by WC swings, negative impact from large A/R increase if collections lag" },
-        { "factor": "<strong>Financial Health</strong>", "opportunities": "Investment grade rating, access to capital markets", "risks": "Significantly increased leverage post-acquisition, declining interest coverage trend, large A/R balance risk" },
-        { "factor": "<strong>Shareholder Returns</strong>", "opportunities": "Consistent dividend payments, new buyback authorization for future use", "risks": "Buybacks currently paused due to debt, dividend growth slowed, sustainability depends on earnings/FCF recovery" },
-        { "factor": "<strong>Strategy/Execution</strong>", "opportunities": "Strategic acquisition of SRS Distribution to enhance Pro capabilities", "risks": "Successful integration of large acquisition, managing increased debt load, navigating uncertain demand environment" }
-      ]
-    },
-    "conclusion": {
-      "sectionSubtitle": "Synthesizing HD's financial trajectory amid market normalization and strategic shifts",
-      "verdictTitle": "Market Leader Faces Margin Pressure, Rising Debt, and A/R Concerns",
-      "verdictRating": "Cautious / Medium Risk",
-      "paragraphs": [
-          "Home Depot navigated the pandemic boom successfully but now faces challenges from market normalization, macroeconomic pressures, and strategic shifts. While FY2024 saw a modest revenue recovery, <strong>profitability remained under pressure</strong>, with both Operating and Net Income declining, indicating persistent margin compression.",
-          "Forensic analysis reveals significant concerns, most notably a massive <strong>47% surge in Accounts Receivable in FY2024</strong>, vastly outpacing revenue growth. While likely impacted by the large SRS Distribution acquisition, this anomaly requires close scrutiny regarding credit quality and cash conversion. Furthermore, the company took on substantial debt for the acquisition, leading to <strong>increased leverage</strong> and a concerning <strong>decline in interest coverage ratios</strong>.",
-          "While HD retains market leadership and the SRS acquisition offers long-term strategic potential, the near-term financial profile carries increased risk. Investors should carefully monitor the integration progress, management of the expanded receivables balance, efforts to restore margins, and the trajectory of leverage and coverage ratios. The pause in share buybacks also removes a previous tailwind."
-      ],
-      "monitoringPointsTitle": "Key Monitoring Points",
-      "monitoringPoints": [
-        "<strong>Accounts Receivable Quality:</strong> Track Days Sales Outstanding (DSO), allowance for doubtful accounts, and cash collections relative to the high A/R balance.",
-        "<strong>Margin Performance:</strong> Monitor Gross and Operating Margins for stabilization or improvement, considering SRS integration impact.",
-        "<strong>Leverage & Coverage:</strong> Track Debt-to-EBITDA ratios and Interest Coverage ratios for signs of improvement or further deterioration.",
-        "<strong>Working Capital Efficiency:</strong> Assess overall cash conversion cycle trends, including inventory turnover and payable days.",
-        "<strong>SRS Integration Synergies:</strong> Look for evidence of successful integration and realization of expected benefits from the acquisition."
-      ]
-    },
-    "chartData": {
-      "labels": ["FY2020", "FY2021", "FY2022", "FY2023", "FY2024"],
-      "revenueGrowth": [19.86, 14.42, 4.13, -3.01, 4.48],
-      "arGrowth": [42.07, 14.51, -3.18, 0.33, 47.33],
-      "cfoGrowth": [37.28, -12.04, -11.80, 44.87, -6.43],
-      "niGrowth": [14.45, 27.72, 4.09, -11.47, -2.23]
-    }
+  "company": {
+    "name": "The Home Depot, Inc.",
+    "ticker": "HD",
+    "analysisTitle": "Forensic Financial Analysis",
+    "heroSubtitle": "QoE TL;DR: Q3 2025 revenue collapsed -8.7% while receivables surged +15.1%, a critical negative divergence. This signals customers are buying less but owing more, suggesting aggressive sales booking or severe collection issues.",
+    "pageTitle": "ForensicFinancials | The Home Depot, Inc. (HD) Analysis"
+  },
+  "trendAnalysis": {
+    "sectionSubtitle": "Analysis reveals a shift from steady, cash-backed growth to volatile, accrual-driven results, with recent quarters showing significant earnings quality degradation.",
+    "cards": [
+      {
+        "title": "Revenue Trajectory",
+        "iconClass": "fas fa-chart-line negative",
+        "points": [
+          "<strong>Long-Term Trend:</strong> Historically a mature, cyclical grower, HD demonstrated consistent mid-single-digit growth post-2009, benefiting from housing market strength and a strong brand moat in the home improvement sector.",
+          "<strong>Recent Performance:</strong> FY2024 revenue grew +4.5%, but this was distorted by the SRS Distribution acquisition, which inflated Net Receivables (money owed by customers) by a staggering +47.3%, masking organic trends.",
+          "<strong>Quality Signal:</strong> In Q3 2025, revenue fell -8.7% while receivables grew +15.1%. This negative divergence is a major red flag, suggesting sales are being booked on paper without corresponding cash collection."
+        ],
+        "footer": "Recent top-line performance is highly volatile and appears increasingly reliant on extending credit rather than genuine demand."
+      },
+      {
+        "title": "Profitability Trends",
+        "iconClass": "fas fa-chart-pie negative",
+        "points": [
+          "<strong>Margin Trajectory:</strong> Gross margins have been in a steady compression trend since FY2021, indicating a loss of pricing power or a shift towards lower-margin Pro customers, eroding profitability at the product level.",
+          "<strong>Recent Pressure:</strong> In FY2024, operating margin contracted -5.0% as operating expenses (+8.6%) grew nearly twice as fast as revenue (+4.5%), pointing to significant cost control issues and SG&A bloat.",
+          "<strong>Operating Leverage:</strong> Q3 2025 showed severe negative operating leverage (how costs amplify profit swings), with operating income falling -18.3% on just an -8.7% revenue decline, confirming a rigid cost structure."
+        ],
+        "footer": "Profitability is deteriorating due to both weaker gross margins and a failure to control operating costs during downturns."
+      },
+      {
+        "title": "Cash Flow & Earnings Quality",
+        "iconClass": "fas fa-chart-bar warning",
+        "points": [
+          "<strong>OCF/NI Ratio:</strong> Historically a cash-generating machine, HD's cash conversion (how much profit turned into actual cash) has become erratic, falling sharply in FY2021-2022 before a FY2023 rebound.",
+          "<strong>Working Capital:</strong> Massive inventory builds were the primary drain on cash in FY2021-2022. In FY2024, the SRS acquisition caused a +47% surge in receivables, shifting the working capital (cash tied up in operations) burden.",
+          "<strong>Quality Grade:</strong> Q2 2024 and Q2 2025 were clear 'paper profit' quarters, with Net Income growth (+26.7% and +32.6%) far outpacing Operating Cash Flow growth (-1.6% and +7.4%), indicating earnings are not cash-backed."
+        ],
+        "footer": "Earnings Quality Grade: Weak. Recent profits are heavily accrual-driven (recorded on paper, not yet cash), not backed by cash."
+      }
+    ]
+  },
+  "financialMetrics": {
+    "sectionSubtitle": "Forensic checks reveal critical red flags in receivables and inventory management, suggesting operational stress and potentially aggressive accounting practices.",
+    "cards": [
+      {
+        "title": "Forensic Checks",
+        "iconClass": "fas fa-search negative",
+        "points": [
+          "<strong>A/R vs Revenue:</strong> Critical flag. In Q1 2025, Net Receivables (money owed by customers) grew +20.1% while revenue was flat (+0.4%), a 52x ratio. This pattern suggests aggressive quarter-end sales booking to meet targets.",
+          "<strong>Inventory vs COGS:</strong> In Q3 2025, inventory grew +5.5% while revenue fell -8.7%. This 'death cross' divergence signals a severe overstocking problem, creating high risk of future margin-crushing markdowns.",
+          "<strong>OCF vs NI Gap:</strong> The Q2 2024 gap, where Net Income grew +26.7% but OCF fell -1.6%, was primarily caused by a 34% surge in receivables, meaning reported profits were used to fund customer credit, not generate cash."
+        ],
+        "footer": "The most urgent concern is the recurring, extreme growth of receivables over sales, a classic sign of channel stuffing."
+      },
+      {
+        "title": "Solvency & Capital",
+        "iconClass": "fas fa-balance-scale neutral",
+        "points": [
+          "<strong>Debt Trajectory:</strong> The company has a long history of aggressive leverage, often using debt to finance share buybacks, which has resulted in a thin or negative equity base. Total debt grew another +19.2% in FY2024.",
+          "<strong>Coverage & Liquidity:</strong> A liquidity stress signal appeared in Q4 2024 when short-term debt exploded +94.9% during a negative revenue quarter, suggesting a need to tap credit lines to fund working capital gaps.",
+          "<strong>Capital Returns:</strong> Capital allocation has prioritized shareholder returns via buybacks, funded significantly by debt issuance rather than purely by internally generated free cash flow, increasing financial risk."
+        ],
+        "footer": "Solvency is not an immediate crisis, but the balance sheet is highly leveraged, making it vulnerable to operational cash shortfalls."
+      }
+    ]
+  },
+  "investmentConsiderations": {
+    "sectionSubtitle": "Investors must weigh Home Depot's dominant market position and brand against clear evidence of deteriorating earnings quality and operational strain.",
+    "tableData": [
+      {
+        "factor": "<strong>Market Position & Moat</strong>",
+        "opportunities": "HD's immense scale, strong brand recognition, and extensive store network create a powerful competitive advantage in the fragmented home improvement market, providing a durable customer base.",
+        "risks": "The business is highly cyclical and sensitive to the housing market and consumer discretionary spending. Intense competition from Lowe's and specialty retailers creates constant pricing pressure."
+      },
+      {
+        "factor": "<strong>Innovation & Strategy</strong>",
+        "opportunities": "The focus on growing the 'Pro' customer segment and the acquisition of SRS Distribution could unlock significant new revenue streams and market share gains over the long term.",
+        "risks": "The shift to Pro customers carries lower gross margins. Integrating the large SRS acquisition brings significant execution risk and has already distorted the balance sheet and credit profile."
+      },
+      {
+        "factor": "<strong>Financial Structure & Capital</strong>",
+        "opportunities": "Historically, the company has been a prodigious cash flow generator, allowing for consistent capital returns to shareholders through dividends and buybacks, supporting the stock price.",
+        "risks": "An aggressive leverage policy, with debt frequently used to fund buybacks, has created a thin equity buffer. This strategy becomes risky if cash flows falter, as seen in recent quarters."
+      },
+      {
+        "factor": "<strong>Forensic & Earnings Quality</strong>",
+        "opportunities": "A return to normalcy would involve receivables growth aligning with revenue growth (<1.5x ratio) and inventory levels declining, which would restore confidence in cash flow generation.",
+        "risks": "Persistent high receivables growth suggests channel stuffing (inflating sales). The inventory glut risks future margin write-downs. Poor cash conversion indicates profits are not real."
+      }
+    ]
+  },
+  "conclusion": {
+    "sectionSubtitle": "The financial narrative shows a high-quality market leader resorting to low-quality accounting tactics to mask slowing demand and operational inefficiencies.",
+    "verdictTitle": "Significant Flags: Paper Profits Mask Operational Strain",
+    "verdictRating": "Significant Flags / High Risk",
+    "paragraphs": [
+      "Home Depot remains a dominant force in retail, but its recent financial reporting raises serious questions about the quality of its earnings. The most glaring issue is the <strong>critical divergence in Q3 2025, where revenue fell 8.7% while accounts receivable grew 15.1%</strong>. This suggests the company is either struggling to collect cash from its customers or is aggressively booking future sales to meet current-quarter targets\u2014a practice that is unsustainable and often precedes earnings disappointments.",
+      "<strong>What this means for you:</strong> The profits HD is reporting may not be real, cash-in-the-bank profits. They are increasingly 'paper profits' tied up in uncollected bills and unsold inventory. Be cautious of earnings beats driven by these metrics. Before considering an investment, you should demand to see <strong>cash flow from operations growing in line with net income and receivables growth slowing to match sales growth</strong>. The current trends are yellow flags turning red, signaling potential future write-downs and earnings misses."
+    ],
+    "monitoringPointsTitle": "Key Monitoring Points",
+    "monitoringPoints": [
+      "<strong>Receivables vs. Revenue Growth:</strong> In Q3 2025, receivables grew while revenue shrank. Watch for this ratio in the next report. If receivables growth again outpaces revenue growth by more than 2x, it confirms aggressive accounting.",
+      "<strong>Inventory vs. Sales Growth:</strong> In Q3 2025, inventory grew +5.5% as sales fell -8.7%. This signals a product glut. If inventory does not decline in the next quarter, expect significant discounts that will crush profit margins.",
+      "<strong>Cash Conversion (OCF/NI Ratio):</strong> Recent quarters showed poor conversion of profit to cash. Watch if Operating Cash Flow growth can match or exceed Net Income growth. If it lags again, the 'paper profits' problem is getting worse."
+    ]
+  },
+  "chartData": {
+    "labels": [
+      "2005",
+      "2006",
+      "2007",
+      "2008",
+      "2009",
+      "2010",
+      "2011",
+      "2012",
+      "2013",
+      "2014",
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ],
+    "revenueGrowth": [
+      11.52,
+      -3.05,
+      -2.12,
+      -7.84,
+      -7.17,
+      2.75,
+      3.53,
+      6.19,
+      5.43,
+      5.54,
+      6.42,
+      6.86,
+      6.67,
+      7.23,
+      1.87,
+      19.86,
+      14.42,
+      4.13,
+      -3.01,
+      4.48
+    ],
+    "arGrowth": [
+      59.84,
+      34.52,
+      -60.94,
+      -22.8,
+      -0.82,
+      12.55,
+      14.75,
+      12.05,
+      0.22,
+      6.15,
+      27.36,
+      7.35,
+      -3.8,
+      -0.82,
+      8.78,
+      42.07,
+      14.51,
+      -3.18,
+      0.33,
+      47.33
+    ],
+    "cfoGrowth": [
+      -0.18,
+      15.71,
+      -25.24,
+      -3.48,
+      -7.29,
+      -10.54,
+      45.06,
+      4.87,
+      9.36,
+      8.05,
+      13.72,
+      4.37,
+      22.98,
+      9.43,
+      3.97,
+      37.64,
+      -12.04,
+      -11.8,
+      44.87,
+      -6.43
+    ],
+    "niGrowth": [
+      16.74,
+      -1.32,
+      -23.71,
+      -48.58,
+      17.74,
+      25.44,
+      16.33,
+      16.79,
+      18.74,
+      17.83,
+      10.47,
+      13.53,
+      8.46,
+      28.86,
+      1.09,
+      14.45,
+      27.72,
+      4.09,
+      -11.47,
+      -2.23
+    ]
   }
+}
