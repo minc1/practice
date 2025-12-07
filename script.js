@@ -289,12 +289,6 @@ if (mobileMenuButton && navLinks && mobileMenuIcon) {
     mobileMenuIcon.classList.toggle("fa-bars")
     mobileMenuIcon.classList.toggle("fa-times")
     mobileMenuButton.setAttribute("aria-expanded", navLinks.classList.contains("show"))
-    
-    // Set nav position on mobile
-    if (window.innerWidth <= 768) {
-      const headerHeight = select("#header")?.offsetHeight || 61
-      navLinks.style.top = `${headerHeight}px`
-    }
   })
 
   // Close menu when clicking a nav link
