@@ -1,0 +1,222 @@
+{
+  "company": {
+    "name": "Lululemon Athletica Inc.",
+    "ticker": "LULU",
+    "analysisTitle": "Forensic Financial Analysis",
+    "heroSubtitle": "QoE TL;DR: Q3 2025 A/R surged +79.7% vs revenue +1.6% (49x ratio), signaling aggressive revenue timing. FY2024 showed a 17% NI spike unbacked by cash, continuing a historical pattern of working capital volatility.",
+    "pageTitle": "ForensicFinancials | Lululemon Athletica Inc. (LULU) Analysis"
+  },
+  "trendAnalysis": {
+    "sectionSubtitle": "Analyzing the disconnect between Lululemon's premium brand growth and its deteriorating cash conversion metrics over the last 20 years.",
+    "cards": [
+      {
+        "title": "Revenue Trajectory",
+        "iconClass": "fas fa-chart-line negative",
+        "points": [
+          "<strong>Long-Term Trend:</strong> Lululemon has maintained a high-growth CAGR for two decades, though innovation efficiency is obscured by a data artifact where R&D is embedded in SG&A (overhead costs).",
+          "<strong>Recent Performance:</strong> FY2024 revenue growth decelerated to 10.07%, a sharp drop from the 18.6% seen in FY2023, indicating the brand is entering a more mature, slower-growth phase.",
+          "<strong>Quality Signal:</strong> Q3 2025 revenue growth stalled at 1.61% while A/R (money owed by customers) exploded by 79.74%, suggesting potential channel stuffing (inflating sales by pushing inventory to distributors)."
+        ],
+        "footer": "Revenue quality is at its lowest point since 2015 as receivables growth vastly outpaces actual sales."
+      },
+      {
+        "title": "Profitability Trends",
+        "iconClass": "fas fa-chart-pie negative",
+        "points": [
+          "<strong>Margin Trajectory:</strong> Historically stable margins saw a 'broken correlation' in 2022, where 29% revenue growth failed to produce any operating income growth, signaling a loss of pricing power.",
+          "<strong>Recent Pressure:</strong> FY2024 operating leverage (how costs amplify profit swings) remained positive at +6.7%, but rising logistics and input costs are beginning to erode the premium margin cushion.",
+          "<strong>Operating Leverage:</strong> Q3 2025 Gross Profit fell -3.47% because COGS (cost of goods) surged 8.78%, outstripping revenue by 5x and indicating heavy markdowns to move stagnant inventory."
+        ],
+        "footer": "Margin sustainability is under threat as the cost to generate each dollar of sales is rising faster than prices."
+      },
+      {
+        "title": "Cash Flow & Earnings Quality",
+        "iconClass": "fas fa-chart-bar warning",
+        "points": [
+          "<strong>OCF/NI Ratio:</strong> The cash conversion ratio (how much profit turned into actual cash) collapsed in FY2023 with an 80-point gap between 81% profit growth and 1% cash flow growth.",
+          "<strong>Working Capital:</strong> FY2024 results confirmed a trend of cash trapped in operations, with Net Income (NI) rising 17% while Operating Cash Flow (OCF) actually declined by -1%.",
+          "<strong>Quality Grade:</strong> Q3 2025 earnings are primarily 'paper profits' (recorded on paper, not yet cash) as a massive inventory build and uncollected receivables drained nearly all operational liquidity."
+        ],
+        "footer": "Earnings quality is currently weak, characterized by high reported profits that are not being realized as cash."
+      }
+    ]
+  },
+  "financialMetrics": {
+    "sectionSubtitle": "Forensic deep-dive into the Q3 2025 working capital surge and the resulting pressure on the company's balance sheet.",
+    "cards": [
+      {
+        "title": "Forensic Checks",
+        "iconClass": "fas fa-search negative",
+        "points": [
+          "<strong>A/R vs Revenue:</strong> Q3 2025 A/R growth was 49.5x higher than revenue growth, a 'Critical' flag suggesting a significant expansion in DSO (days to collect payment) or aggressive shipping.",
+          "<strong>Inventory vs COGS:</strong> Q3 2025 inventory grew 15.9% while revenue grew only 1.6%, signaling a massive demand overestimation that will likely require future margin-killing discounts.",
+          "<strong>OCF vs NI Gap:</strong> The Q3 2025 gap was driven by a 19.8% surge in Net Debt used to fund working capital (cash tied up in operations) as organic cash generation from sales stalled."
+        ],
+        "footer": "Critical forensic flags in both receivables and inventory suggest imminent pressure on future earnings."
+      },
+      {
+        "title": "Solvency & Capital",
+        "iconClass": "fas fa-balance-scale neutral",
+        "points": [
+          "<strong>Debt Trajectory:</strong> Total debt grew 12.3% in FY2024, outpacing equity growth as the company shifted toward using leverage to fund operations amid slowing cash flow.",
+          "<strong>Coverage & Liquidity:</strong> Q3 2025 saw a 19.8% surge in net debt to bridge the working capital gap, though interest coverage remains healthy due to a historically clean balance sheet.",
+          "<strong>Capital Returns:</strong> Growth is becoming more capital-intensive, with FY2024 asset growth driven by a 13.7% increase in property and equipment rather than cash reserves.",
+          "<strong>Capital Returns:</strong> Growth is becoming more capital-intensive, with FY2024 asset growth driven by a 13.7% increase in property and equipment rather than cash reserves."
+        ],
+        "footer": "Solvency is not an immediate risk, but the trend toward higher capital intensity and debt usage warrants caution."
+      }
+    ]
+  },
+  "investmentConsiderations": {
+    "sectionSubtitle": "Balancing Lululemon's dominant market position against the most severe earnings quality flags seen in a decade.",
+    "tableData": [
+      {
+        "factor": "<strong>Market Position & Moat</strong>",
+        "opportunities": "Lululemon maintains a powerful premium brand with high customer loyalty and successful expansion into international markets and new product categories like footwear.",
+        "risks": "Rising competition from niche players and a potential saturation of the domestic yoga-wear market are challenging the company's historical pricing power."
+      },
+      {
+        "factor": "<strong>Innovation & Strategy</strong>",
+        "opportunities": "Strategic focus on the 'Power of Three x2' plan aims to double men's and digital revenue, providing a clear roadmap for long-term top-line expansion.",
+        "risks": "Execution risk is high as the company manages a more complex global supply chain, evidenced by recent inventory and demand calibration failures."
+      },
+      {
+        "factor": "<strong>Financial Structure & Capital</strong>",
+        "opportunities": "The company still possesses a relatively under-leveraged balance sheet compared to retail peers, providing a buffer for strategic M&A or buybacks.",
+        "risks": "Increasing reliance on debt to fund working capital (cash tied up in operations) suggests that internal cash generation is no longer sufficient to fuel growth."
+      },
+      {
+        "factor": "<strong>Forensic & Earnings Quality</strong>",
+        "opportunities": "A significant reduction in A/R (money owed by customers) and a return to OCF/NI ratios above 1.1x would signal a return to high-quality growth.",
+        "risks": "The 49x A/R-to-revenue ratio in Q3 2025 is a classic forensic warning of aggressive revenue recognition that often precedes an earnings restatement or miss."
+      }
+    ]
+  },
+  "conclusion": {
+    "sectionSubtitle": "Synthesis of decelerating growth and aggressive accounting signals suggests a period of high volatility ahead.",
+    "verdictTitle": "Elevated Concerns: Paper Profits Mask Operational Friction",
+    "verdictRating": "Elevated Concerns / Medium-High Risk",
+    "paragraphs": [
+      "Lululemon is currently exhibiting a classic forensic 'red flag' pattern where reported profits are diverging sharply from cash reality. In <strong>Q3 2025, A/R growth of 79.7%</strong> against a mere 1.6% revenue gain suggests that the company is either struggling to collect cash from wholesale partners or is pulling forward future sales to meet targets. This is compounded by an <strong>inventory build that is 10x faster than sales growth</strong>, creating a high risk of future markdowns that will impair gross margins.",
+      "<strong>What this means for you:</strong> If you are an investor, you should prioritize <strong>cash flow over reported earnings</strong> in the coming quarters. The current disconnect suggests that Lululemon's 'beats' may be driven by accounting adjustments rather than selling more products. <strong>Exercise caution</strong> and watch for a significant contraction in receivables; until cash collection aligns with sales, the stock carries a higher risk of a sudden valuation correction."
+    ],
+    "monitoringPointsTitle": "Key Monitoring Points",
+    "monitoringPoints": [
+      "<strong>A/R-to-Revenue Ratio (Revenue Quality):</strong> Q3 2025 stands at 49.5x. Watch for this to drop below 2.0x for two quarters to signal that the company is actually collecting cash for its reported sales.",
+      "<strong>Inventory-to-Revenue Gap (Margin Risk):</strong> Q3 2025 inventory grew 14.3% faster than sales. If this gap does not close, expect a significant hit to gross margins as the company liquidates excess stock.",
+      "<strong>OCF/NI Ratio (Cash Conversion):</strong> FY2024 was 0.85x (less than $1 of cash for every $1 of profit). A return to >1.1x is required to validate that reported earnings are high-quality and sustainable."
+    ]
+  },
+  "chartData": {
+    "labels": [
+      "2005",
+      "2006",
+      "2007",
+      "2008",
+      "2009",
+      "2010",
+      "2011",
+      "2012",
+      "2013",
+      "2014",
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ],
+    "revenueGrowth": [
+      1.07,
+      76.97,
+      84.51,
+      28.68,
+      28.12,
+      57.14,
+      40.63,
+      36.92,
+      16.12,
+      12.95,
+      14.65,
+      13.78,
+      13.0,
+      24.13,
+      21.01,
+      10.62,
+      42.14,
+      29.63,
+      18.6,
+      10.07
+    ],
+    "arGrowth": [
+      0.0,
+      76.17,
+      87.82,
+      -6.36,
+      1.05,
+      10.66,
+      -42.94,
+      22.09,
+      87.42,
+      3.56,
+      92.59,
+      -13.55,
+      -24.64,
+      25.03,
+      47.21,
+      -39.62,
+      1.59,
+      62.58,
+      -3.15,
+      -1.97
+    ],
+    "cfoGrowth": [
+      0.0,
+      3.48,
+      43.35,
+      27.3,
+      1.54,
+      52.59,
+      13.12,
+      37.57,
+      -0.63,
+      12.97,
+      -5.38,
+      29.86,
+      26.64,
+      51.79,
+      -9.89,
+      20.02,
+      72.92,
+      -30.43,
+      1.38,
+      -1.02
+    ],
+    "niGrowth": [
+      0.0,
+      4.5,
+      3.02,
+      27.63,
+      48.06,
+      1.1,
+      51.37,
+      46.75,
+      2.99,
+      -14.49,
+      11.3,
+      14.03,
+      -14.74,
+      87.04,
+      33.44,
+      -8.78,
+      65.61,
+      -12.36,
+      81.35,
+      17.06
+    ]
+  }
+}
